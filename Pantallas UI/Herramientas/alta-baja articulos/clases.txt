@@ -1,0 +1,19 @@
+--sector herramientas--
+
+he_btn_option_1
+he_btn_option_2
+he_btn_option_3
+he_btn_option_4
+he_btn_option_5
+he_btn_option_6
+he_btn_option_7
+
+he_btn_cancelar
+
+
+
+--alta/baja de articulos--
+
+he_btn_option_1
+he_btn_option_2
+
