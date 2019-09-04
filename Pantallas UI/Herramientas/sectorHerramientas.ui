@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">background-color:white;</string>
   </property>
-  <widget class="QPushButton" name="he_btn_option_3">
+  <widget class="QPushButton" name="he_btn_3">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -44,7 +44,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="he_btn_option_2">
+  <widget class="QPushButton" name="he_btn_2">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -72,7 +72,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="he_btn_option_5">
+  <widget class="QPushButton" name="he_btn_5">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -100,7 +100,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="he_btn_option_7">
+  <widget class="QPushButton" name="he_btn_7">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -128,7 +128,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="he_btn_option_6">
+  <widget class="QPushButton" name="he_btn_6">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -156,7 +156,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="he_btn_option_1">
+  <widget class="QPushButton" name="he_btn_1">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -202,7 +202,7 @@ border:none;</string>
     <string>Cancelar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="he_btn_option_4">
+  <widget class="QPushButton" name="he_btn_4">
    <property name="geometry">
     <rect>
      <x>80</x>

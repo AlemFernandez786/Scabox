@@ -32,7 +32,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:15pt;&quot;&gt;Alta/Baja de Articulos&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="he_btn_option_1">
+  <widget class="QPushButton" name="he_btn_1">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -51,7 +51,7 @@ font-size:15px;</string>
     <string>ALTA</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="he_btn_option_2">
+  <widget class="QPushButton" name="he_btn_2">
    <property name="geometry">
     <rect>
      <x>190</x>

@@ -33,7 +33,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="he_input_2">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -68,7 +68,7 @@ text-align:center;</string>
     <string>Cantidad Minima</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_4">
+  <widget class="QLineEdit" name="he_input_4">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -120,7 +120,7 @@ text-align:center;</string>
     <string>Material</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="he_input_1">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -155,7 +155,7 @@ text-align:center;</string>
     <string>Codigo material</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
+  <widget class="QLineEdit" name="he_input_3">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -173,7 +173,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="he_btn_confirmar">
    <property name="geometry">
     <rect>
      <x>90</x>
@@ -192,7 +192,7 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="he_btn_cancelar">
    <property name="geometry">
     <rect>
      <x>250</x>

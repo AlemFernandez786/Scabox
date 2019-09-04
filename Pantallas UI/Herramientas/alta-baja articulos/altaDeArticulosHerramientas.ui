@@ -102,7 +102,7 @@ text-align:center;</string>
     <string>Cantidad minima</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="he_btn_confirmar">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -121,7 +121,7 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="he_btn_confirmar">
+  <widget class="QPushButton" name="he_btn_cancelar">
    <property name="geometry">
     <rect>
      <x>450</x>
