@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTreeWidget" name="treeWidget">
+  <widget class="QTreeWidget" name="se_tabla">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -232,7 +232,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="se_btn_volver">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -268,7 +268,7 @@ text-align:center;</string>
     <string>Ingrese código del articulo</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="se_btn_buscar">
    <property name="geometry">
     <rect>
      <x>610</x>
@@ -287,7 +287,7 @@ border:none;</string>
     <string>Buscar</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="se_input_buscar">
    <property name="geometry">
     <rect>
      <x>350</x>

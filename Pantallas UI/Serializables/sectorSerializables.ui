@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">background-color:white;</string>
   </property>
-  <widget class="QPushButton" name="pushButton_8">
+  <widget class="QPushButton" name="se_btn_cancelar">
    <property name="geometry">
     <rect>
      <x>270</x>
@@ -34,7 +34,7 @@ border:none;</string>
     <string>Cancelar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QPushButton" name="se_btn_5">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -62,7 +62,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="se_btn_2">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -110,7 +110,7 @@ font-size:15px;</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_6">
+  <widget class="QPushButton" name="se_btn_6">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -138,7 +138,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="se_btn_4">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -166,7 +166,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="se_btn_1">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -194,7 +194,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="se_btn_3">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -222,7 +222,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_7">
+  <widget class="QPushButton" name="se_btn_7">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -250,7 +250,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_9">
+  <widget class="QPushButton" name="se_btn_8">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -278,7 +278,7 @@ font-size:15px;</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_10">
+  <widget class="QPushButton" name="se_btn_9">
    <property name="geometry">
     <rect>
      <x>70</x>

@@ -64,12 +64,12 @@ text-align:center;</string>
     <string>Cantidad Maxima:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_7">
+  <widget class="QLabel" name="se_label_1">
    <property name="geometry">
     <rect>
      <x>170</x>
      <y>20</y>
-     <width>71</width>
+     <width>241</width>
      <height>31</height>
     </rect>
    </property>
@@ -81,12 +81,12 @@ text-align:center;</string>
     <string>Lorem</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_8">
+  <widget class="QLabel" name="se_label_2">
    <property name="geometry">
     <rect>
      <x>170</x>
      <y>60</y>
-     <width>71</width>
+     <width>251</width>
      <height>31</height>
     </rect>
    </property>
@@ -98,12 +98,12 @@ text-align:center;</string>
     <string>00</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_9">
+  <widget class="QLabel" name="se_label_3">
    <property name="geometry">
     <rect>
      <x>170</x>
      <y>100</y>
-     <width>71</width>
+     <width>241</width>
      <height>31</height>
     </rect>
    </property>
@@ -149,7 +149,7 @@ text-align:center;</string>
     <string>Cantidad Minima</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="se_btn_confirmar">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -168,7 +168,7 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="se_btn_cancelar">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -187,7 +187,7 @@ background-color:#ff4e4e;</string>
     <string>Cancelar</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox_2">
+  <widget class="QSpinBox" name="se_input_2">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -202,7 +202,7 @@ background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox_3">
+  <widget class="QSpinBox" name="se_input_1">
    <property name="geometry">
     <rect>
      <x>160</x>

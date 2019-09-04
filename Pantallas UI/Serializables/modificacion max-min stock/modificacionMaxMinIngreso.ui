@@ -33,7 +33,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="se_input_1">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -68,7 +68,7 @@ text-align:center;</string>
     <string>Codigo material</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="se_btn_confirmar">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -87,7 +87,7 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="se_btn_cancelar">
    <property name="geometry">
     <rect>
      <x>240</x>

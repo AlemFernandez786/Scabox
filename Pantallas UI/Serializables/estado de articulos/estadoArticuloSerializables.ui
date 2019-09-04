@@ -33,7 +33,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="se_input_buscar">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -68,7 +68,7 @@ text-align:center;</string>
     <string>Código Artículo</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="se_btn_confirmar">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -87,7 +87,7 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="se_btn_cancelar">
    <property name="geometry">
     <rect>
      <x>400</x>
@@ -106,7 +106,7 @@ background-color:#ff4e4e;</string>
     <string>Cancelar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="se_btn_buscar">
    <property name="geometry">
     <rect>
      <x>480</x>
@@ -159,7 +159,7 @@ text-align:center;</string>
     <string>Estado</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="se_label_1">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -179,7 +179,7 @@ text-align:center;</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_6">
+  <widget class="QLabel" name="se_label_2">
    <property name="geometry">
     <rect>
      <x>440</x>
@@ -199,7 +199,7 @@ text-align:center;</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="se_btn_estado">
    <property name="geometry">
     <rect>
      <x>500</x>
@@ -235,7 +235,7 @@ text-align:center;</string>
     <string>Estado</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="se_select_1">
    <property name="geometry">
     <rect>
      <x>220</x>

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="se_input_buscar">
    <property name="geometry">
     <rect>
      <x>310</x>
@@ -31,7 +31,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="se_btn_buscar">
    <property name="geometry">
     <rect>
      <x>570</x>
@@ -87,7 +87,7 @@ text-align:center;</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QTreeWidget" name="treeWidget">
+  <widget class="QTreeWidget" name="se_tabla">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -247,7 +247,7 @@ text-align:center;</string>
     </property>
    </item>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="se_volver">
    <property name="geometry">
     <rect>
      <x>360</x>

@@ -17,7 +17,7 @@
    <string notr="true">background-color: rgb(99, 206, 104);
 color:white;</string>
   </property>
-  <widget class="QTextEdit" name="textEdit">
+  <widget class="QTextEdit" name="se_aviso">
    <property name="geometry">
     <rect>
      <x>40</x>
