@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTreeWidget" name="treeWidget">
+  <widget class="QTreeWidget" name="ma_tabla">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -213,7 +213,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="ma_btn_volver">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -249,7 +249,7 @@ text-align:center;</string>
     <string>Ingrese código del articulo</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="ma_input_buscar">
    <property name="geometry">
     <rect>
      <x>360</x>
@@ -267,7 +267,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="ma_btn_buscar">
    <property name="geometry">
     <rect>
      <x>620</x>

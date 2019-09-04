@@ -33,7 +33,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="ma_input_1">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -102,7 +102,7 @@ text-align:center;</string>
     <string>Cantidad minima</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="ma_btn_confirmar">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -121,7 +121,7 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="ma_btn_cancelar">
    <property name="geometry">
     <rect>
      <x>450</x>
@@ -174,7 +174,7 @@ text-align:center;</string>
     <string>Fecha de ingreso </string>
    </property>
   </widget>
-  <widget class="QDateEdit" name="dateEdit">
+  <widget class="QDateEdit" name="ma_input_5">
    <property name="geometry">
     <rect>
      <x>570</x>
@@ -189,7 +189,7 @@ background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox">
+  <widget class="QSpinBox" name="ma_input_2">
    <property name="geometry">
     <rect>
      <x>210</x>
@@ -204,7 +204,7 @@ background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox_2">
+  <widget class="QSpinBox" name="ma_input_3">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -219,7 +219,7 @@ background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox_3">
+  <widget class="QSpinBox" name="ma_input_4">
    <property name="geometry">
     <rect>
      <x>570</x>
@@ -251,7 +251,7 @@ text-align:center;</string>
     <string>Descripcion</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
+  <widget class="QPlainTextEdit" name="ma_input_6">
    <property name="geometry">
     <rect>
      <x>530</x>

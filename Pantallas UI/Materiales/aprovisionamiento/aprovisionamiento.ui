@@ -33,7 +33,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="ma_btn_cancelar">
    <property name="geometry">
     <rect>
      <x>430</x>
@@ -52,7 +52,7 @@ background-color:#ff4e4e;</string>
     <string>Cancelar</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="ma_btn_confirmar">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -71,7 +71,7 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QTreeWidget" name="treeWidget">
+  <widget class="QTreeWidget" name="ma_tabla">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -140,7 +140,7 @@ border:none;</string>
     </property>
    </item>
   </widget>
-  <widget class="QSpinBox" name="spinBox_3">
+  <widget class="QSpinBox" name="ma_input_1">
    <property name="geometry">
     <rect>
      <x>230</x>
@@ -158,12 +158,12 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
     <number>1000</number>
    </property>
   </widget>
-  <widget class="QLabel" name="label_6">
+  <widget class="QLabel" name="ma_label">
    <property name="geometry">
     <rect>
      <x>230</x>
      <y>250</y>
-     <width>191</width>
+     <width>381</width>
      <height>31</height>
     </rect>
    </property>
