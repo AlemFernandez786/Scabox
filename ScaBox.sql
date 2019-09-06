@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 29-08-2019 a las 00:09:49
+-- Tiempo de generación: 06-09-2019 a las 20:37:19
 -- Versión del servidor: 5.7.21
 -- Versión de PHP: 5.6.35
 
@@ -35,6 +35,8 @@ CREATE TABLE IF NOT EXISTS `articulo` (
   `art_fecha_ultimo_ingreso` date NOT NULL COMMENT 'Fecha último ingreso del artículo',
   `tip_id` int(2) NOT NULL COMMENT 'ID del tipo',
   `art_cantidad` int(4) NOT NULL COMMENT 'Cantidad del articulo',
+  `art_cant_min` int(8) NOT NULL COMMENT 'Cantidad minima aceptada',
+  `art_cant_max` int(8) NOT NULL COMMENT 'Cantidad maxima aceptada',
   PRIMARY KEY (`art_id`),
   KEY `tip_id` (`tip_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
@@ -147,14 +149,38 @@ CREATE TABLE IF NOT EXISTS `empleados` (
   PRIMARY KEY (`emp_legajo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`emp_legajo`, `emp_documento`, `emp_nombre`, `emp_apellido`) VALUES
+(123, 1234123, 'asdqwe', 'zxcsd');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `historial`
+-- Estructura de tabla para la tabla `historial_sectores`
 --
 
-DROP TABLE IF EXISTS `historial`;
-CREATE TABLE IF NOT EXISTS `historial` (
+DROP TABLE IF EXISTS `historial_sectores`;
+CREATE TABLE IF NOT EXISTS `historial_sectores` (
+  `fecha_cambio_sector` datetime NOT NULL COMMENT 'Fecha del cambio',
+  `emp_legajo` int(8) NOT NULL COMMENT 'Legajo del empleado',
+  `emp_sector` int(2) NOT NULL COMMENT 'Sector en el que se encuentra el empleado',
+  `motivo_cambio` varchar(255) NOT NULL COMMENT 'Motivo del cambio de sector',
+  PRIMARY KEY (`fecha_cambio_sector`),
+  KEY `emp_legajo` (`emp_legajo`),
+  KEY `emp_sector` (`emp_sector`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial_serializables`
+--
+
+DROP TABLE IF EXISTS `historial_serializables`;
+CREATE TABLE IF NOT EXISTS `historial_serializables` (
   `his_id` int(4) NOT NULL COMMENT 'ID del historial',
   `ser_mac` varchar(12) NOT NULL COMMENT 'MAC de serializables',
   `ser_estado` varchar(10) NOT NULL COMMENT 'Estado del serializable',
@@ -186,6 +212,26 @@ CREATE TABLE IF NOT EXISTS `movil` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sectores`
+--
+
+DROP TABLE IF EXISTS `sectores`;
+CREATE TABLE IF NOT EXISTS `sectores` (
+  `emp_sector` int(2) NOT NULL COMMENT 'Id del sector',
+  `desc_sector` varchar(50) NOT NULL COMMENT 'Nombre del sector',
+  PRIMARY KEY (`emp_sector`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sectores`
+--
+
+INSERT INTO `sectores` (`emp_sector`, `desc_sector`) VALUES
+(1, 'supervisor');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `serializable`
 --
 
@@ -195,6 +241,8 @@ CREATE TABLE IF NOT EXISTS `serializable` (
   `ser_nombre` varchar(30) NOT NULL COMMENT 'Nombre del serializable',
   `ser_fecha_ultimo_ingreso` date NOT NULL COMMENT 'Fecha último ingreso del serializable',
   `tip_id` int(2) NOT NULL COMMENT 'ID del tipo',
+  `ser_cant_minima` int(8) NOT NULL COMMENT 'Cantidad minima aceptada',
+  `ser_cant_maxima` int(8) NOT NULL COMMENT 'Cantidad maxima aceptada',
   PRIMARY KEY (`ser_mac`),
   KEY `tip_id` (`tip_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -291,10 +339,17 @@ ALTER TABLE `dupla_movil`
   ADD CONSTRAINT `dupla_movil_ibfk_1` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`);
 
 --
--- Filtros para la tabla `historial`
+-- Filtros para la tabla `historial_sectores`
 --
-ALTER TABLE `historial`
-  ADD CONSTRAINT `historial_ibfk_1` FOREIGN KEY (`ser_mac`) REFERENCES `serializable` (`ser_mac`);
+ALTER TABLE `historial_sectores`
+  ADD CONSTRAINT `historial_sectores_ibfk_1` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`),
+  ADD CONSTRAINT `historial_sectores_ibfk_2` FOREIGN KEY (`emp_sector`) REFERENCES `sectores` (`emp_sector`);
+
+--
+-- Filtros para la tabla `historial_serializables`
+--
+ALTER TABLE `historial_serializables`
+  ADD CONSTRAINT `historial_serializables_ibfk_1` FOREIGN KEY (`ser_mac`) REFERENCES `serializable` (`ser_mac`);
 
 --
 -- Filtros para la tabla `movil`
