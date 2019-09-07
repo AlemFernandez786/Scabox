@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from Pantallas.Materiales import altaBajaArticulosMaterialesOption
 from Pantallas.Materiales import sectorMateriales
 from Pantallas.Materiales import modificacionMaxMinIngreso
@@ -7,6 +7,7 @@ from Pantallas.Materiales import consultarStockMateriales
 from Pantallas.Materiales import conteoDeInventarioPorMovil
 from Pantallas.Materiales import modificarStockMateriales
 from Pantallas.Materiales import stockPorMovilMateriales
+from ABMHerramientas import ABM
 import sys
 
 
@@ -97,7 +98,26 @@ class StockMateriales(QtWidgets.QDialog):
         super(StockMateriales, self).__init__(*args, **kwargs)
         self.ui = consultarStockMateriales.Ui_Form()
         self.ui.setupUi(self)
+        self.ui.ma_btn_buscar.clicked.connect(self.consulta)
+        self.ui.ma_btn_volver.clicked.connect(self.salir)
 
+    def salir(self):
+        self.close()
+
+    def consulta(self):
+        codigo = int(self.ui.ma_input_buscar.text())
+        consultar = ABM()
+        resultado = consultar.consulta_materiales(str(codigo))
+        posicion = 0
+        resultados=resultado[0]
+        _translate = QtCore.QCoreApplication.translate
+        print(resultados)
+
+        for i in resultados:
+            if posicion==3:
+                posicion = posicion + 1
+            self.ui.ma_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
+            posicion += 1
 
 class MaximaMinima(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
