@@ -7,7 +7,8 @@ from Pantallas.Materiales import consultarStockMateriales
 from Pantallas.Materiales import conteoDeInventarioPorMovil
 from Pantallas.Materiales import modificarStockMateriales
 from Pantallas.Materiales import stockPorMovilMateriales
-from ABMHerramientas import ABM
+from ABM import ABM_materiales
+
 import sys
 
 
@@ -106,7 +107,7 @@ class StockMateriales(QtWidgets.QDialog):
 
     def consulta(self):
         codigo = int(self.ui.ma_input_buscar.text())
-        consultar = ABM()
+        consultar = ABM_materiales()
         resultado = consultar.consulta_materiales(str(codigo))
         posicion = 0
         resultados=resultado[0]

@@ -59,8 +59,18 @@ class ABM():
         # sector fnal int
         # motivo varchar
 
+    def consulta_articulo(self, valor):
+        self.valor=valor
+        self.sql= 'SELECT * FROM articulo WHERE tip_id = ' + self.valor
+        self.cursor.execute(self.sql)
+        art_info=self.cursor.fetchall()
+        #print(art_info)
+        for i in range (len(art_info)):
+            print (art_info[i])
+
 
 
 
 a=ABM()
-a.cambio_sector('1234','1','reverervre')
+#a.cambio_sector('1234','1','reverervre')
+a.consulta_articulo('2')

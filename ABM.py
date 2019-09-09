@@ -1,6 +1,6 @@
 import mysql.connector
 
-class ABM:
+class ABM_herramientas:
     def __init__(self):
         self.conexion = mysql.connector.connect(user = 'root',password = '',host = 'localhost',database = 'ScaBox')
         self.cursor = self.conexion.cursor()
@@ -11,7 +11,7 @@ class ABM:
         self.cursor.execute (self.sql)
         self.conexion.commit()
 
-    def alta_herramienta(self, valores):
+    def alta_herramientas(self, valores):
         from datetime import date
         #Transforma fecha para meterla en bd
         today = date.today()
@@ -71,6 +71,11 @@ class ABM:
                    '= ' + str(cantidad) + ' WHERE art_id = ' + self.valor[0] + ' AND tip_id=1'
         self.cursor.execute(self.sql)
         self.conexion.commit()
+
+class ABM_serializables:
+    def __init__(self):
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.cursor = self.conexion.cursor()
 
     def baja_serializables(self, identificador):
         self.identificador=identificador
@@ -138,6 +143,11 @@ class ABM:
                    '= ' + str(cantidad) + ' WHERE art_id = ' + self.valor[0] + ' AND tip_id=2'
         self.cursor.execute(self.sql)
         self.conexion.commit()
+
+class ABM_materiales:
+    def __init__(self):
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.cursor = self.conexion.cursor()
 
     def baja_materiales(self, identificador):
         self.identificador=identificador
@@ -208,19 +218,20 @@ class ABM:
         self.conexion.commit()
 
 
-test=ABM()
+mat=ABM_materiales()
+her=ABM_herramientas()
 #test.baja_serializables('8585')
 #test.alta_serializables(('HD', '40'))
-#test.alta_herramienta(('Grimpa','50'))
+#her.alta_herramientas(('Destorplano','50', '5','15'))
 #test.consulta_herramientas('2')
 #test.modificacion_herramientas(('85','50'))
 #test.consulta_herramientas('85')
 #test.baja_herramientas('4')
 #test.modificacion_serializables(('8585','145'))
 #test.consulta_serializables('8585')
-#test.alta_materiales(('Divisor x4', '100'))
+#mat.alta_materiales(('Divisorx3', '100','50','200'))
 #test.baja_materiales('4')
 #test.consulta_materiales('4')
 #test.modificacion_materiales(('4','50'))
-asd=ABM()
-asd.consulta_materiales("123")
+#asd=ABM()
+#asd.consulta_materiales("123")
