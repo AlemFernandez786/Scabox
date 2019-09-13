@@ -112,6 +112,10 @@ class ModificarStock(QtWidgets.QDialog):
         super(ModificarStock, self).__init__(*args, **kwargs)
         self.ui = modificarStockMateriales.Ui_Form()
         self.ui.setupUi(self)
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+
+    def salir(self):
+        self.close()
 
 
 class InventarioMovil(QtWidgets.QDialog):
@@ -119,6 +123,10 @@ class InventarioMovil(QtWidgets.QDialog):
         super(InventarioMovil, self).__init__(*args, **kwargs)
         self.ui = conteoDeInventarioPorMovil.Ui_Form()
         self.ui.setupUi(self)
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+
+    def salir(self):
+        self.close()
 
 
 class Aprovisionamiento(QtWidgets.QDialog):
@@ -126,6 +134,10 @@ class Aprovisionamiento(QtWidgets.QDialog):
         super(Aprovisionamiento, self).__init__(*args, **kwargs)
         self.ui = aprovisionamiento.Ui_Form()
         self.ui.setupUi(self)
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+
+    def salir(self):
+        self.close()
 
 
 class StockMateriales(QtWidgets.QDialog):
@@ -153,11 +165,16 @@ class StockMateriales(QtWidgets.QDialog):
             self.ui.ma_tabla.topLevelItem(0).setText(posicion, str(i))
             posicion += 1
 
+
 class MaximaMinima(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
         super(MaximaMinima, self).__init__(*args, **kwargs)
         self.ui = modificacionMaxMinIngreso.Ui_Form()
         self.ui.setupUi(self)
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+
+    def salir(self):
+        self.close()
 
 
 if __name__ == '__main__':
