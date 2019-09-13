@@ -7,6 +7,8 @@ from Pantallas.Materiales import consultarStockMateriales
 from Pantallas.Materiales import conteoDeInventarioPorMovil
 from Pantallas.Materiales import modificarStockMateriales
 from Pantallas.Materiales import stockPorMovilMateriales
+from Pantallas.Materiales import altaDeArticulosMateriales
+from Pantallas.Materiales import bajaDeArticulosMateriales
 from ABM import ABM_materiales
 
 import sys
@@ -36,8 +38,8 @@ class VentanaMateriales(QtWidgets.QMainWindow):
         ventanamodificacionstock.exec_()
 
     def alta_baja_stock(self):
-        ventanaalta = AltaBaja(self)
-        ventanaalta.exec_()
+        ventanaaltabaja = VentanaAltaBaja(self)
+        ventanaaltabaja.exec_()
 
     def maxima_minima_stock(self):
         ventanamaxmin = MaximaMinima(self)
@@ -59,11 +61,43 @@ class VentanaMateriales(QtWidgets.QMainWindow):
         self.close()
 
 
-class AltaBaja(QtWidgets.QDialog):
+class VentanaAltaBaja(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
-        super(AltaBaja, self).__init__(*args, **kwargs)
+        super(VentanaAltaBaja, self).__init__(*args, **kwargs)
         self.ui = altaBajaArticulosMaterialesOption.Ui_Form()
         self.ui.setupUi(self)
+        self.ui.ma_btn_1.pressed.connect(self.alta)
+        self.ui.ma_btn_2.pressed.connect(self.baja)
+
+    def alta(self):
+        ventanaalta = Alta(self)
+        ventanaalta.exec_()
+
+    def baja(self):
+        ventanabaja = Baja(self)
+        ventanabaja.exec_()
+
+
+class Alta(QtWidgets.QDialog):
+    def __init__(self, *args, **kwargs):
+        super(Alta, self).__init__(*args, **kwargs)
+        self.ui = altaDeArticulosMateriales.Ui_Form()
+        self.ui.setupUi(self)
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+
+    def salir(self):
+        self.close()
+
+
+class Baja(QtWidgets.QDialog):
+    def __init__(self, *args, **kwargs):
+        super(Baja, self).__init__(*args, **kwargs)
+        self.ui = bajaDeArticulosMateriales.Ui_Form()
+        self.ui.setupUi(self)
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+
+    def salir(self):
+        self.close()
 
 
 class StockPorMovil(QtWidgets.QDialog):
@@ -113,11 +147,10 @@ class StockMateriales(QtWidgets.QDialog):
         resultados=resultado[0]
         _translate = QtCore.QCoreApplication.translate
         print(resultados)
-
         for i in resultados:
             if posicion==3:
                 posicion = posicion + 1
-            self.ui.ma_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
+            self.ui.ma_tabla.topLevelItem(0).setText(posicion, str(i))
             posicion += 1
 
 class MaximaMinima(QtWidgets.QDialog):
