@@ -218,8 +218,8 @@ class ABM_materiales:
         self.conexion.commit()
 
 
-mat=ABM_materiales()
-her=ABM_herramientas()
+# mat=ABM_materiales()
+# her=ABM_herramientas()
 #test.baja_serializables('8585')
 #test.alta_serializables(('HD', '40'))
 #her.alta_herramientas(('Destorplano','50', '5','15'))
