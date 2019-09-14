@@ -2,7 +2,7 @@ import mysql.connector
 
 class ABM_herramientas:
     def __init__(self):
-        self.conexion = mysql.connector.connect(user = 'root',password = '',host = 'localhost',database = 'ScaBox')
+        self.conexion = mysql.connector.connect(user = 'root',password = '',host = 'localhost',database = 'scabox')
         self.cursor = self.conexion.cursor()
 
     def baja_herramientas(self, identificador):
@@ -146,7 +146,7 @@ class ABM_serializables:
 
 class ABM_materiales:
     def __init__(self):
-        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='scabox')
         self.cursor = self.conexion.cursor()
 
     def baja_materiales(self, identificador):

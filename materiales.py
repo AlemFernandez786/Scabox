@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QMessageBox
 from Pantallas.Materiales import altaBajaArticulosMaterialesOption
 from Pantallas.Materiales import sectorMateriales
 from Pantallas.Materiales import modificacionMaxMinIngreso
@@ -9,7 +10,7 @@ from Pantallas.Materiales import modificarStockMateriales
 from Pantallas.Materiales import stockPorMovilMateriales
 from Pantallas.Materiales import altaDeArticulosMateriales
 from Pantallas.Materiales import bajaDeArticulosMateriales
-from ABM import ABM_materiales
+from abm import ABM_materiales
 
 import sys
 
@@ -152,11 +153,19 @@ class StockMateriales(QtWidgets.QDialog):
         self.close()
 
     def consulta(self):
-        codigo = int(self.ui.ma_input_buscar.text())
+        try:
+            codigo = int(self.ui.ma_input_buscar.text())
+        except ValueError:
+            QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
+            return
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales(str(codigo))
         posicion = 0
-        resultados=resultado[0]
+        try:
+            resultados=resultado[0]
+        except IndexError:
+            QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
+            return
         _translate = QtCore.QCoreApplication.translate
         print(resultados)
         for i in resultados:
