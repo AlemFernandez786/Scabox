@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 from Pantallas.Materiales import altaBajaArticulosMaterialesOption
 from Pantallas.Materiales import sectorMateriales
@@ -10,7 +10,7 @@ from Pantallas.Materiales import modificarStockMateriales
 from Pantallas.Materiales import stockPorMovilMateriales
 from Pantallas.Materiales import altaDeArticulosMateriales
 from Pantallas.Materiales import bajaDeArticulosMateriales
-from abm import ABM_materiales
+from ABM import ABM_materiales
 
 import sys
 
@@ -114,9 +114,45 @@ class ModificarStock(QtWidgets.QDialog):
         self.ui = modificarStockMateriales.Ui_Form()
         self.ui.setupUi(self)
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+        self.ui.ma_btn_buscar.clicked.connect(self.busqueda)
+        self.ui.ma_btn_confirmar.clicked.connect(self.modificacion)
 
     def salir(self):
         self.close()
+
+    def busqueda(self):
+        try:
+            codigo = int(self.ui.ma_input_buscar.text())
+        except ValueError:
+            QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
+            return
+        consultar = ABM_materiales()
+        resultado = consultar.consulta_materiales(str(codigo))
+
+        try:
+            resultados = resultado[0]
+        except IndexError:
+            QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
+            return
+        print(resultados[0])
+        print(resultados[1])
+        self.ui.ma_input_1.setText(str(resultados[2]))
+        self.ui.ma_input_2.setText(str(resultados[4]))
+        self.ui.ma_input_3.setText(str(resultados[3]))
+        self.ui.ma_input_4.setText(str(resultados[1]))
+
+    def modificacion(self):
+        pass
+        # codigo = int(self.ui.ma_input_buscar.text())
+        # try:
+        #     cantidad = int(self.ui.ma_input_1.text())
+        # except ValueError:
+        #     QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
+        #     return
+        # modificar = ABM_materiales()
+        # resultado = modificar.modificacion_materiales(str(codigo))
+        # TODO
+        #  falla aca
 
 
 class InventarioMovil(QtWidgets.QDialog):
@@ -162,14 +198,12 @@ class StockMateriales(QtWidgets.QDialog):
         resultado = consultar.consulta_materiales(str(codigo))
         posicion = 0
         try:
-            resultados=resultado[0]
+            resultados = resultado[0]
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             return
-        _translate = QtCore.QCoreApplication.translate
-        print(resultados)
         for i in resultados:
-            if posicion==3:
+            if posicion == 3:
                 posicion = posicion + 1
             self.ui.ma_tabla.topLevelItem(0).setText(posicion, str(i))
             posicion += 1
