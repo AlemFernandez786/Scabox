@@ -85,10 +85,15 @@ class Alta(QtWidgets.QDialog):
         self.ui = altaDeArticulosMateriales.Ui_Form()
         self.ui.setupUi(self)
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+        self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
 
     def salir(self):
         self.close()
 
+    def confirmar(self):
+        valores=(str(self.ui.ma_input_6.toPlainText()),str(self.ui.ma_input_2.text()),str(self.ui.ma_input_3.text()),str(self.ui.ma_input_4.text()))
+        agregar=ABM_materiales()
+        agregar.alta_materiales(valores)
 
 class Baja(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
