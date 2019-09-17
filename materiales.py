@@ -134,25 +134,29 @@ class ModificarStock(QtWidgets.QDialog):
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             return
-        print(resultados[0])
-        print(resultados[1])
+        # self.ui.ma_input_1.setDisabled(True)
         self.ui.ma_input_1.setText(str(resultados[2]))
+        self.ui.ma_input_2.setDisabled(True)
         self.ui.ma_input_2.setText(str(resultados[4]))
+        self.ui.ma_input_3.setDisabled(True)
         self.ui.ma_input_3.setText(str(resultados[3]))
+        self.ui.ma_input_4.setDisabled(True)
         self.ui.ma_input_4.setText(str(resultados[1]))
 
     def modificacion(self):
-        pass
-        # codigo = int(self.ui.ma_input_buscar.text())
-        # try:
-        #     cantidad = int(self.ui.ma_input_1.text())
-        # except ValueError:
-        #     QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
-        #     return
-        # modificar = ABM_materiales()
-        # resultado = modificar.modificacion_materiales(str(codigo))
-        # TODO
-        #  falla aca
+        valor = ["",""]
+        valor[0] = str(self.ui.ma_input_buscar.text())
+        try:
+            cantidad = int(self.ui.ma_input_1.text())
+        except ValueError:
+            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+            return
+        valor[1]=str(cantidad)
+        modificar = ABM_materiales()
+        modificar.modificacion_materiales(valor)
+        codigo=(int(valor[0]))
+        self.busqueda()
+
 
 
 class InventarioMovil(QtWidgets.QDialog):
@@ -184,6 +188,7 @@ class StockMateriales(QtWidgets.QDialog):
         self.ui.setupUi(self)
         self.ui.ma_btn_buscar.clicked.connect(self.consulta)
         self.ui.ma_btn_volver.clicked.connect(self.salir)
+
 
     def salir(self):
         self.close()
