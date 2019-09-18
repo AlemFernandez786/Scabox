@@ -190,7 +190,18 @@ class ABM_materiales:
         self.sql= 'SELECT art_id, art_nombre, art_cantidad, art_cant_min, art_cant_max FROM articulo WHERE art_id = ' + self.valor +' AND tip_id = 3'
         self.cursor.execute(self.sql)
         art_info=self.cursor.fetchall()
-        # print(art_info)
+        return art_info
+
+    def consulta_materiales_gral(self):
+        self.sql = 'SELECT art_id, art_nombre, art_cantidad, art_cant_min, art_cant_max FROM articulo WHERE tip_id = 3'
+        self.cursor.execute(self.sql)
+        art_info = self.cursor.fetchall()
+        lista = []
+        for i in range(0, len(art_info)):
+            lista.append(list(art_info[i]))
+        for i in range(0, len(art_info)):
+            lista[i].insert(3, 'NULL')
+        art_info = tuple(lista)
         return art_info
 
     def modificacion_materiales(self, valor):
@@ -216,6 +227,7 @@ class ABM_materiales:
                    '= ' + str(cantidad) + ' WHERE art_id = ' + self.valor[0] + ' AND tip_id=3'
         self.cursor.execute(self.sql)
         self.conexion.commit()
+
 
 
 # mat=ABM_materiales()

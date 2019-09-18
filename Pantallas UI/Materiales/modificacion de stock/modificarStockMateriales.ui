@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Modificación de stock</string>
   </property>
   <widget class="QLineEdit" name="ma_input_buscar">
    <property name="geometry">
@@ -88,6 +88,9 @@ text-align:center;</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="ma_input_3">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>330</x>
@@ -99,13 +102,17 @@ text-align:center;</string>
    <property name="styleSheet">
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(0, 0, 0);</string>
    </property>
    <property name="text">
     <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="ma_input_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>330</x>
@@ -117,13 +124,17 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    <property name="styleSheet">
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(0, 0, 0);</string>
    </property>
    <property name="text">
     <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="ma_input_1">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>330</x>
@@ -135,7 +146,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    <property name="styleSheet">
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(0, 0, 0);</string>
    </property>
    <property name="text">
     <string/>
@@ -172,7 +184,7 @@ text-align:center;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>Cantidad minima</string>
+    <string>Cantidad mínima</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
@@ -189,7 +201,7 @@ text-align:center;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>Cantidad maxima</string>
+    <string>Cantidad máxima</string>
    </property>
   </widget>
   <widget class="QPushButton" name="ma_btn_confirmar">
@@ -244,22 +256,26 @@ background-color:#ff4e4e;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>Descripcion</string>
+    <string>Descripción</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="ma_input_4">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>330</x>
      <y>470</y>
      <width>251</width>
-     <height>71</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(0, 0, 0);</string>
    </property>
   </widget>
   <widget class="QTreeWidget" name="ma_tabla">
@@ -331,96 +347,44 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
      </font>
     </property>
    </column>
-   <item>
-    <property name="text">
-     <string>New Item  </string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-   </item>
+  </widget>
+  <widget class="QLineEdit" name="ma_input_5">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>520</y>
+     <width>251</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;
+background-color: rgb(255, 255, 255);
+font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>520</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;
+text-align:center;</string>
+   </property>
+   <property name="text">
+    <string>Ingreso</string>
+   </property>
   </widget>
  </widget>
  <resources/>

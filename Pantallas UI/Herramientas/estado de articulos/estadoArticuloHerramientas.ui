@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Stado de artículo</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -173,7 +173,7 @@ text-align:center;</string>
 </string>
    </property>
    <property name="text">
-    <string>Lorem Ipsum</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

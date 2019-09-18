@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string/>
   </property>
   <widget class="QRadioButton" name="he_radiobutton_1">
    <property name="geometry">
@@ -26,7 +26,7 @@
     <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
    <property name="text">
-    <string>Devolucion</string>
+    <string>Devo&amp;lucion</string>
    </property>
   </widget>
   <widget class="QRadioButton" name="he_radiobutton_2">
@@ -42,7 +42,7 @@
     <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
    <property name="text">
-    <string>Entrega</string>
+    <string>Ent&amp;rega</string>
    </property>
   </widget>
   <widget class="QPushButton" name="he_btn_confirmar">

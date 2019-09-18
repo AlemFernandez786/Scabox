@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'modificarStockMateriales.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -38,24 +40,27 @@ class Ui_Form(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.ma_input_3 = QtWidgets.QLineEdit(Form)
+        self.ma_input_3.setEnabled(False)
         self.ma_input_3.setGeometry(QtCore.QRect(330, 420, 251, 31))
         self.ma_input_3.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
+"font: 11pt \"MS Shell Dlg 2\";color:black;")
         self.ma_input_3.setText("")
         self.ma_input_3.setObjectName("ma_input_3")
         self.ma_input_2 = QtWidgets.QLineEdit(Form)
+        self.ma_input_2.setEnabled(False)
         self.ma_input_2.setGeometry(QtCore.QRect(330, 370, 251, 31))
         self.ma_input_2.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
+"font: 11pt \"MS Shell Dlg 2\";color:black;")
         self.ma_input_2.setText("")
         self.ma_input_2.setObjectName("ma_input_2")
         self.ma_input_1 = QtWidgets.QLineEdit(Form)
+        self.ma_input_1.setEnabled(False)
         self.ma_input_1.setGeometry(QtCore.QRect(330, 320, 251, 31))
         self.ma_input_1.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
+"font: 11pt \"MS Shell Dlg 2\";color:black;")
         self.ma_input_1.setText("")
         self.ma_input_1.setObjectName("ma_input_1")
         self.label_3 = QtWidgets.QLabel(Form)
@@ -93,10 +98,11 @@ class Ui_Form(object):
 "text-align:center;")
         self.label_6.setObjectName("label_6")
         self.ma_input_4 = QtWidgets.QTextEdit(Form)
-        self.ma_input_4.setGeometry(QtCore.QRect(330, 470, 251, 71))
+        self.ma_input_4.setEnabled(False)
+        self.ma_input_4.setGeometry(QtCore.QRect(330, 470, 251, 31))
         self.ma_input_4.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
+"font: 11pt \"MS Shell Dlg 2\";color:black;")
         self.ma_input_4.setObjectName("ma_input_4")
         self.ma_tabla = QtWidgets.QTreeWidget(Form)
         self.ma_tabla.setGeometry(QtCore.QRect(10, 130, 821, 171))
@@ -119,70 +125,42 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.ma_tabla.headerItem().setFont(5, font)
-        item_0 = QtWidgets.QTreeWidgetItem(self.ma_tabla)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(0, font)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(4, font)
-        item_0 = QtWidgets.QTreeWidgetItem(self.ma_tabla)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(0, font)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(4, font)
-        item_0 = QtWidgets.QTreeWidgetItem(self.ma_tabla)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(0, font)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(4, font)
+        self.ma_input_5 = QtWidgets.QLineEdit(Form)
+        self.ma_input_5.setEnabled(True)
+        self.ma_input_5.setGeometry(QtCore.QRect(330, 520, 251, 31))
+        self.ma_input_5.setStyleSheet("border:none;\n"
+"background-color: rgb(255, 255, 255);\n"
+"font: 11pt \"MS Shell Dlg 2\";")
+        self.ma_input_5.setText("")
+        self.ma_input_5.setObjectName("ma_input_5")
+        self.label_7 = QtWidgets.QLabel(Form)
+        self.label_7.setGeometry(QtCore.QRect(200, 520, 111, 31))
+        self.label_7.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+"text-align:center;")
+        self.label_7.setObjectName("label_7")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Modificación de stock"))
         self.ma_btn_buscar.setText(_translate("Form", "Buscar"))
         self.label.setText(_translate("Form", "Ingrese código del articulo"))
         self.label_2.setText(_translate("Form", "Modificacion de Stock (Materiales)"))
         self.label_3.setText(_translate("Form", "Cantidad actual"))
-        self.label_5.setText(_translate("Form", "Cantidad minima"))
-        self.label_4.setText(_translate("Form", "Cantidad maxima"))
+        self.label_5.setText(_translate("Form", "Cantidad mínima"))
+        self.label_4.setText(_translate("Form", "Cantidad máxima"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
-        self.label_6.setText(_translate("Form", "Descripcion"))
+        self.label_6.setText(_translate("Form", "Descripción"))
         self.ma_tabla.headerItem().setText(0, _translate("Form", "Codigo"))
         self.ma_tabla.headerItem().setText(1, _translate("Form", "Descripcion"))
         self.ma_tabla.headerItem().setText(2, _translate("Form", "Cantidad de Stock disponible"))
         self.ma_tabla.headerItem().setText(3, _translate("Form", "Stock utilizado en los ultimos 30 dias"))
         self.ma_tabla.headerItem().setText(4, _translate("Form", "Stock Minimo permitido"))
         self.ma_tabla.headerItem().setText(5, _translate("Form", "Stock Maximo permitido"))
-        __sortingEnabled = self.ma_tabla.isSortingEnabled()
-        self.ma_tabla.setSortingEnabled(False)
-        self.ma_tabla.topLevelItem(0).setText(0, _translate("Form", "New Item  "))
-        self.ma_tabla.topLevelItem(0).setText(1, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(0).setText(2, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(0).setText(3, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(0).setText(4, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(0).setText(5, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(0, _translate("Form", "New Item"))
-        self.ma_tabla.topLevelItem(1).setText(1, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(2, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(3, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(4, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(5, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(0, _translate("Form", "New Item"))
-        self.ma_tabla.topLevelItem(2).setText(1, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(2, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(3, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(4, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(5, _translate("Form", "lorem"))
-        self.ma_tabla.setSortingEnabled(__sortingEnabled)
+        self.label_7.setText(_translate("Form", "Ingreso"))
 
 
 if __name__ == "__main__":
@@ -193,4 +171,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-

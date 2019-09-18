@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'bajaDeArticulosMateriales.ui'
+# Form implementation generated from reading ui file 'bajaDeArticulosHerramientas.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -14,13 +14,13 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(462, 328)
-        self.ma_btn_cancelar = QtWidgets.QPushButton(Form)
-        self.ma_btn_cancelar.setGeometry(QtCore.QRect(260, 260, 131, 31))
-        self.ma_btn_cancelar.setStyleSheet("color:white;\n"
+        self.he_btn_cancelar = QtWidgets.QPushButton(Form)
+        self.he_btn_cancelar.setGeometry(QtCore.QRect(260, 260, 131, 31))
+        self.he_btn_cancelar.setStyleSheet("color:white;\n"
 "font-size:10pt;\n"
 "border:none;\n"
 "background-color:#ff4e4e;")
-        self.ma_btn_cancelar.setObjectName("ma_btn_cancelar")
+        self.he_btn_cancelar.setObjectName("he_btn_cancelar")
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(40, 110, 71, 31))
         self.label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -32,20 +32,20 @@ class Ui_Form(object):
 "")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
-        self.ma_input_1 = QtWidgets.QLineEdit(Form)
-        self.ma_input_1.setGeometry(QtCore.QRect(120, 110, 301, 31))
-        self.ma_input_1.setStyleSheet("border:none;\n"
+        self.he_input_1 = QtWidgets.QLineEdit(Form)
+        self.he_input_1.setGeometry(QtCore.QRect(120, 110, 301, 31))
+        self.he_input_1.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_1.setText("")
-        self.ma_input_1.setObjectName("ma_input_1")
-        self.ma_btn_confirmar = QtWidgets.QPushButton(Form)
-        self.ma_btn_confirmar.setGeometry(QtCore.QRect(60, 260, 131, 31))
-        self.ma_btn_confirmar.setStyleSheet("background-color: rgb(99, 206, 104);\n"
+        self.he_input_1.setText("")
+        self.he_input_1.setObjectName("he_input_1")
+        self.he_btn_confirmar = QtWidgets.QPushButton(Form)
+        self.he_btn_confirmar.setGeometry(QtCore.QRect(60, 260, 131, 31))
+        self.he_btn_confirmar.setStyleSheet("background-color: rgb(99, 206, 104);\n"
 "color:white;\n"
 "font-size:10pt;\n"
 "border:none;")
-        self.ma_btn_confirmar.setObjectName("ma_btn_confirmar")
+        self.he_btn_confirmar.setObjectName("he_btn_confirmar")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -53,10 +53,10 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Baja"))
-        self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
+        self.he_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.label.setText(_translate("Form", "Código"))
         self.label_2.setText(_translate("Form", "Baja de Artículos"))
-        self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
+        self.he_btn_confirmar.setText(_translate("Form", "Confirmar"))
 
 
 if __name__ == "__main__":

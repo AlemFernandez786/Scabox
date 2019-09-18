@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Stock por móvil</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -79,60 +79,6 @@ text-align:center;</string>
      </font>
     </property>
    </column>
-   <item>
-    <property name="text">
-     <string>New Item lorem ipsum </string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-   </item>
   </widget>
   <widget class="QPushButton" name="he_btn_confirmar">
    <property name="geometry">
@@ -201,7 +147,7 @@ text-align:center;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>Lorem</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="he_label_2">
@@ -218,7 +164,7 @@ text-align:center;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>00</string>
+    <string/>
    </property>
   </widget>
   <widget class="QSpinBox" name="he_input_1">
