@@ -11,6 +11,7 @@ from Pantallas.Supervisor import consultarStock
 from Pantallas.Supervisor import supervisor
 from Pantallas.Materiales import consultarStockMateriales
 from ABM import ABM_materiales
+import mysql.connector
 
 import sys
 
@@ -80,6 +81,10 @@ class StockMateriales(QtWidgets.QDialog):
                 posicion += 1
 
         self.ui.ma_btn_buscar.clicked.connect(self.consulta)
+        self.ui.ma_btn_volver.clicked.connect(self.salir)
+
+    def salir(self):
+        self.close()
 
     def consulta(self):
         try:
