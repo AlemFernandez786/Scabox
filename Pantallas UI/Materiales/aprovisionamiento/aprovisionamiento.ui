@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Aprovisionamiento</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -100,45 +100,6 @@ border:none;</string>
      </font>
     </property>
    </column>
-   <item>
-    <property name="text">
-     <string>New Item  </string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-   </item>
   </widget>
   <widget class="QSpinBox" name="ma_input_1">
    <property name="geometry">
@@ -155,7 +116,7 @@ background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
    <property name="maximum">
-    <number>1000</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QLabel" name="ma_label">

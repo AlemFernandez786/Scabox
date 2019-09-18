@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Inventario por móvil</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -208,6 +208,9 @@ text-align:center;</string>
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+   </property>
+   <property name="maximum">
+    <number>9999</number>
    </property>
   </widget>
  </widget>

@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'modificacionMaxMin.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -71,12 +73,14 @@ class Ui_Form(object):
         self.ma_input_2.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
+        self.ma_input_2.setMaximum(9999)
         self.ma_input_2.setObjectName("ma_input_2")
         self.ma_input_1 = QtWidgets.QSpinBox(Form)
         self.ma_input_1.setGeometry(QtCore.QRect(160, 180, 251, 31))
         self.ma_input_1.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
+        self.ma_input_1.setMaximum(9999)
         self.ma_input_1.setObjectName("ma_input_1")
 
         self.retranslateUi(Form)
@@ -84,7 +88,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Modificación de stock máximo y mÍnimo"))
         self.label_4.setText(_translate("Form", "Material:"))
         self.label_5.setText(_translate("Form", "Cantidad Minima:"))
         self.label_6.setText(_translate("Form", "Cantidad Maxima:"))
@@ -105,4 +109,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-
