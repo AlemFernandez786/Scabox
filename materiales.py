@@ -11,6 +11,7 @@ from Pantallas.Materiales import stockPorMovilMateriales
 from Pantallas.Materiales import altaDeArticulosMateriales
 from Pantallas.Materiales import bajaDeArticulosMateriales
 from Pantallas.Materiales import  modificacionMaxMin
+import mysql.connector
 from ABM import ABM_materiales
 
 import sys
@@ -98,7 +99,7 @@ class Alta(QtWidgets.QDialog):
         agregar = ABM_materiales()
         agregar.alta_materiales(valores)
 
-        QMessageBox.about(self,, "Confirmación", "\nConfirmado!!\n")
+        QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
         self.close()
 
 
@@ -303,12 +304,14 @@ class StockMateriales(QtWidgets.QDialog):
 class MaximaMinima(QtWidgets.QDialog):
     datos = []
     valor = []
+
     def __init__(self, *args, **kwargs):
         super(MaximaMinima, self).__init__(*args, **kwargs)
         self.ui = modificacionMaxMinIngreso.Ui_Form()
         self.ui.setupUi(self)
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
+
     def salir(self):
         self.close()
 
@@ -323,21 +326,53 @@ class MaximaMinima(QtWidgets.QDialog):
             QMessageBox.about(self, "Error", "Ingrese un código válido")
             return
         else:
-            # self.datos.append(self.valor[1])
-            # self.datos.append(valor[3])
-            # self.datos.append(valor[4])
-            # print(valor[0][4])
-            ventanamodificacionmaxmin = ModificacionMaximaMinima(self, str(valor[0][1]), str(valor[0][3]), str(valor[0][4]))
+            ventanamodificacionmaxmin = ModificacionMaximaMinima(self)
+            ventanamodificacionmaxmin.capturarvalor(valor[0][0], valor[0][1], valor[0][3], valor[0][4])
             ventanamodificacionmaxmin.exec_()
-            #TODO
+
 
 class ModificacionMaximaMinima(QtWidgets.QDialog):
-    def __init__(self, nombre, maxi, mini, *args):
+    codigo = ""
+
+    def __init__(self, *args):
         super(ModificacionMaximaMinima, self).__init__(*args)
         self.ui = modificacionMaxMin.Ui_Form()
         self.ui.setupUi(self)
-        nombre1 = nombre
-        self.ui.label_4.setText(nombre1)
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.cursor = self.conexion.cursor()
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+        self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
+
+    def confirmar(self):
+        minima = str(self.ui.ma_input_1.text())
+        maxima = str(self.ui.ma_input_2.text())
+
+        war = QMessageBox.warning(self, "Advertencia",
+                                  '''El artículo ha sido modificado.\n
+                            Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
+        if war == QMessageBox.Ok:
+            self.sql = 'UPDATE articulo SET art_cant_min ' \
+                       '= ' + minima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
+            self.cursor.execute(self.sql)
+            self.sql = 'UPDATE articulo SET art_cant_max ' \
+                       '= ' + maxima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
+            self.cursor.execute(self.sql)
+            self.conexion.commit()
+            self.ui.ma_label_2.setText(minima)
+            self.ui.ma_label_3.setText(maxima)
+            self.ui.ma_input_1.clear()
+            self.ui.ma_input_2.clear()
+        else:
+            return
+
+    def salir(self):
+        self.close()
+
+    def capturarvalor(self, id, nom, min, max):
+        self.codigo = str(id)
+        self.ui.ma_label_1.setText(str(nom))
+        self.ui.ma_label_2.setText(str(min))
+        self.ui.ma_label_3.setText(str(max))
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
