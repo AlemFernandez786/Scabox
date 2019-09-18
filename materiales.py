@@ -169,6 +169,18 @@ class ModificarStock(QtWidgets.QDialog):
                 posicion = posicion + 1
             self.ui.ma_tabla.topLevelItem(0).setText(posicion, str(i))
             posicion += 1
+        consultar = ABM_materiales()
+        resultado = consultar.consulta_materiales_gral()
+        _translate = QtCore.QCoreApplication.translate
+        len_resultado = (len(resultado))
+        for i in range(1, len_resultado):
+            # print(resultado[i])
+            posicion = 0
+            for a in range(0, len(resultado[i])):
+                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+                test = ''
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                posicion += 1
 
         self.ui.ma_input_1.setText(str(resultados[2]))
         self.ui.ma_input_2.setDisabled(True)
