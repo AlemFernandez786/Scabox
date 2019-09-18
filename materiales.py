@@ -91,14 +91,15 @@ class Alta(QtWidgets.QDialog):
         self.close()
 
     def confirmar(self):
-        valores=(str(self.ui.ma_input_6.toPlainText()),str(self.ui.ma_input_2.text()),str(self.ui.ma_input_3.text()),str(self.ui.ma_input_4.text()))
-        agregar=ABM_materiales()
+        valores = (
+        str(self.ui.ma_input_6.toPlainText()), str(self.ui.ma_input_2.text()), str(self.ui.ma_input_3.text()),
+        str(self.ui.ma_input_4.text()))
+        agregar = ABM_materiales()
         agregar.alta_materiales(valores)
-<<<<<<< HEAD
-=======
+
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
         self.close()
->>>>>>> d561756018ebca0a95ba0cd59f8549452c5dcff5
+
 
 class Baja(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
@@ -108,13 +109,12 @@ class Baja(QtWidgets.QDialog):
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
 
-
     def salir(self):
         self.close()
 
     def confirmar(self):
-        codigo=(str(self.ui.ma_input_1.text()))
-        borrar=ABM_materiales()
+        codigo = (str(self.ui.ma_input_1.text()))
+        borrar = ABM_materiales()
         borrar.baja_materiales(codigo)
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
 
@@ -195,10 +195,10 @@ class ModificarStock(QtWidgets.QDialog):
 
     def modificacion(self):
         war = QMessageBox.warning(self, "Advertencia",
-                            '''El artículo ha sido modificado.\n
+                                  '''El artículo ha sido modificado.\n
                             Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
         if war == QMessageBox.Ok:
-            valor = ["",""]
+            valor = ["", ""]
             valor[0] = str(self.ui.ma_input_buscar.text())
             try:
                 cantidad = int(self.ui.ma_input_5.text())
@@ -293,7 +293,6 @@ class StockMateriales(QtWidgets.QDialog):
                 test = ''
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
                 posicion += 1
-
 
 
 class MaximaMinima(QtWidgets.QDialog):
