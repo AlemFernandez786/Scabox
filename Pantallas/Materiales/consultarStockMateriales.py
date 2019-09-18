@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'consultarStockMateriales.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -79,13 +77,16 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Consulta de Stock"))
+        Form.setWindowTitle(_translate("Form", "Form"))
         self.ma_tabla.headerItem().setText(0, _translate("Form", "Codigo"))
         self.ma_tabla.headerItem().setText(1, _translate("Form", "Descripcion"))
         self.ma_tabla.headerItem().setText(2, _translate("Form", "Cantidad de Stock disponible"))
         self.ma_tabla.headerItem().setText(3, _translate("Form", "Stock utilizado en los ultimos 30 dias"))
         self.ma_tabla.headerItem().setText(4, _translate("Form", "Stock Minimo permitido"))
         self.ma_tabla.headerItem().setText(5, _translate("Form", "Stock Maximo permitido"))
+        __sortingEnabled = self.ma_tabla.isSortingEnabled()
+        self.ma_tabla.setSortingEnabled(False)
+        self.ma_tabla.setSortingEnabled(__sortingEnabled)
         self.label_2.setText(_translate("Form", "Consulta Stock"))
         self.label_3.setText(_translate("Form", "Materiales"))
         self.ma_btn_volver.setText(_translate("Form", "Volver"))

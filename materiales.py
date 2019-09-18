@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QMessageBox
 from Pantallas.Materiales import altaBajaArticulosMaterialesOption
 from Pantallas.Materiales import sectorMateriales
@@ -128,6 +128,19 @@ class ModificarStock(QtWidgets.QDialog):
         super(ModificarStock, self).__init__(*args, **kwargs)
         self.ui = modificarStockMateriales.Ui_Form()
         self.ui.setupUi(self)
+        consultar = ABM_materiales()
+        resultado = consultar.consulta_materiales_gral()
+        _translate = QtCore.QCoreApplication.translate
+        len_resultado = (len(resultado))
+        for i in range(0, len_resultado):
+            # resultado[i].insert(3, str(999))
+            posicion = 0
+            for a in range(0, len(resultado[i])):
+                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+                test = resultado[i][a]
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                posicion += 1
+
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
         self.ui.ma_btn_buscar.clicked.connect(self.busqueda)
         self.ui.ma_btn_confirmar.clicked.connect(self.modificacion)
@@ -156,6 +169,7 @@ class ModificarStock(QtWidgets.QDialog):
                 posicion = posicion + 1
             self.ui.ma_tabla.topLevelItem(0).setText(posicion, str(i))
             posicion += 1
+
         self.ui.ma_input_1.setText(str(resultados[2]))
         self.ui.ma_input_2.setDisabled(True)
         self.ui.ma_input_2.setText(str(resultados[4]))
@@ -211,6 +225,19 @@ class StockMateriales(QtWidgets.QDialog):
         super(StockMateriales, self).__init__(*args, **kwargs)
         self.ui = consultarStockMateriales.Ui_Form()
         self.ui.setupUi(self)
+        consultar = ABM_materiales()
+        resultado = consultar.consulta_materiales_gral()
+        _translate = QtCore.QCoreApplication.translate
+        len_resultado = (len(resultado))
+        for i in range(0, len_resultado):
+            # resultado[i].insert(3, str(999))
+            posicion = 0
+            for a in range(0, len(resultado[i])):
+                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+                test = resultado[i][a]
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                posicion += 1
+
         self.ui.ma_btn_buscar.clicked.connect(self.consulta)
         self.ui.ma_btn_volver.clicked.connect(self.salir)
 
@@ -231,12 +258,27 @@ class StockMateriales(QtWidgets.QDialog):
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             return
-        item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+        _translate = QtCore.QCoreApplication.translate
+
         for i in resultados:
             if posicion == 3:
                 posicion = posicion + 1
-            self.ui.ma_tabla.topLevelItem(0).setText(posicion, str(i))
+            self.ui.ma_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
             posicion += 1
+
+        consultar = ABM_materiales()
+        resultado = consultar.consulta_materiales_gral()
+        _translate = QtCore.QCoreApplication.translate
+        len_resultado = (len(resultado))
+        for i in range(1, len_resultado):
+            # print(resultado[i])
+            posicion = 0
+            for a in range(0, len(resultado[i])):
+                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+                test = ''
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                posicion += 1
+
 
 
 class MaximaMinima(QtWidgets.QDialog):
