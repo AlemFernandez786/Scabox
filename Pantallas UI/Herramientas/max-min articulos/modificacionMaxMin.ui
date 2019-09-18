@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Modificación de Máximo y Mínimo</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -45,7 +45,8 @@
    <property name="styleSheet">
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(0, 0, 0);</string>
    </property>
    <property name="text">
     <string/>

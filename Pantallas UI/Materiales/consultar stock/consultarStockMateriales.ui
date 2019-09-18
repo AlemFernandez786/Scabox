@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Consulta de Stock</string>
   </property>
   <widget class="QTreeWidget" name="ma_tabla">
    <property name="geometry">
@@ -82,96 +82,6 @@
      </font>
     </property>
    </column>
-   <item>
-    <property name="text">
-     <string>New Item  </string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>lorem</string>
-    </property>
-   </item>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">

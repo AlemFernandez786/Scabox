@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'altaDeArticulosMateriales.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -18,25 +20,13 @@ class Ui_Form(object):
 "")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
-        self.ma_input_1 = QtWidgets.QLineEdit(Form)
-        self.ma_input_1.setGeometry(QtCore.QRect(120, 110, 301, 31))
-        self.ma_input_1.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_1.setText("")
-        self.ma_input_1.setObjectName("ma_input_1")
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(40, 110, 71, 31))
-        self.label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
-"text-align:center;")
-        self.label.setObjectName("label")
         self.label_4 = QtWidgets.QLabel(Form)
-        self.label_4.setGeometry(QtCore.QRect(40, 160, 171, 31))
+        self.label_4.setGeometry(QtCore.QRect(40, 110, 171, 31))
         self.label_4.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(Form)
-        self.label_5.setGeometry(QtCore.QRect(40, 210, 121, 31))
+        self.label_5.setGeometry(QtCore.QRect(40, 200, 161, 31))
         self.label_5.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_5.setObjectName("label_5")
@@ -55,46 +45,35 @@ class Ui_Form(object):
 "background-color:#ff4e4e;")
         self.ma_btn_cancelar.setObjectName("ma_btn_cancelar")
         self.label_8 = QtWidgets.QLabel(Form)
-        self.label_8.setGeometry(QtCore.QRect(440, 110, 121, 31))
+        self.label_8.setGeometry(QtCore.QRect(440, 200, 121, 31))
         self.label_8.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_8.setObjectName("label_8")
-        self.label_9 = QtWidgets.QLabel(Form)
-        self.label_9.setGeometry(QtCore.QRect(440, 160, 121, 31))
-        self.label_9.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
-"text-align:center;")
-        self.label_9.setObjectName("label_9")
-        self.ma_input_5 = QtWidgets.QDateEdit(Form)
-        self.ma_input_5.setGeometry(QtCore.QRect(570, 160, 251, 31))
-        self.ma_input_5.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_5.setObjectName("ma_input_5")
         self.ma_input_2 = QtWidgets.QSpinBox(Form)
-        self.ma_input_2.setGeometry(QtCore.QRect(210, 160, 211, 31))
+        self.ma_input_2.setGeometry(QtCore.QRect(210, 110, 211, 31))
         self.ma_input_2.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
         self.ma_input_2.setObjectName("ma_input_2")
         self.ma_input_3 = QtWidgets.QSpinBox(Form)
-        self.ma_input_3.setGeometry(QtCore.QRect(160, 210, 261, 31))
+        self.ma_input_3.setGeometry(QtCore.QRect(210, 200, 211, 31))
         self.ma_input_3.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
         self.ma_input_3.setObjectName("ma_input_3")
         self.ma_input_4 = QtWidgets.QSpinBox(Form)
-        self.ma_input_4.setGeometry(QtCore.QRect(570, 110, 251, 31))
+        self.ma_input_4.setGeometry(QtCore.QRect(560, 200, 251, 31))
         self.ma_input_4.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
         self.ma_input_4.setObjectName("ma_input_4")
         self.label_10 = QtWidgets.QLabel(Form)
-        self.label_10.setGeometry(QtCore.QRect(440, 210, 121, 31))
+        self.label_10.setGeometry(QtCore.QRect(440, 110, 121, 31))
         self.label_10.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_10.setObjectName("label_10")
         self.ma_input_6 = QtWidgets.QPlainTextEdit(Form)
-        self.ma_input_6.setGeometry(QtCore.QRect(530, 210, 291, 64))
+        self.ma_input_6.setGeometry(QtCore.QRect(560, 110, 251, 31))
         self.ma_input_6.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
@@ -105,16 +84,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Alta"))
         self.label_2.setText(_translate("Form", "Alta de Artículos"))
-        self.label.setText(_translate("Form", "Código"))
         self.label_4.setText(_translate("Form", "Cantidad que se ingresa"))
         self.label_5.setText(_translate("Form", "Cantidad minima"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.label_8.setText(_translate("Form", "Cantidad maxima"))
-        self.label_9.setText(_translate("Form", "Fecha de ingreso "))
-        self.label_10.setText(_translate("Form", "Descripcion"))
+        self.label_10.setText(_translate("Form", "Descripción"))
 
 
 if __name__ == "__main__":
@@ -125,4 +102,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-

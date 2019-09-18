@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Alta</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -33,46 +33,11 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="ma_input_1">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>110</y>
-     <width>301</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border:none;
-background-color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>110</y>
-     <width>71</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;
-text-align:center;</string>
-   </property>
-   <property name="text">
-    <string>Código</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>160</y>
+     <y>110</y>
      <width>171</width>
      <height>31</height>
     </rect>
@@ -89,8 +54,8 @@ text-align:center;</string>
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>210</y>
-     <width>121</width>
+     <y>200</y>
+     <width>161</width>
      <height>31</height>
     </rect>
    </property>
@@ -144,7 +109,7 @@ background-color:#ff4e4e;</string>
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>110</y>
+     <y>200</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -157,43 +122,11 @@ text-align:center;</string>
     <string>Cantidad maxima</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_9">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>160</y>
-     <width>121</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;
-text-align:center;</string>
-   </property>
-   <property name="text">
-    <string>Fecha de ingreso </string>
-   </property>
-  </widget>
-  <widget class="QDateEdit" name="ma_input_5">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>160</y>
-     <width>251</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border:none;
-background-color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
-   </property>
-  </widget>
   <widget class="QSpinBox" name="ma_input_2">
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>160</y>
+     <y>110</y>
      <width>211</width>
      <height>31</height>
     </rect>
@@ -207,9 +140,9 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
   <widget class="QSpinBox" name="ma_input_3">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>210</y>
-     <width>261</width>
+     <x>210</x>
+     <y>200</y>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
@@ -222,8 +155,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
   <widget class="QSpinBox" name="ma_input_4">
    <property name="geometry">
     <rect>
-     <x>570</x>
-     <y>110</y>
+     <x>560</x>
+     <y>200</y>
      <width>251</width>
      <height>31</height>
     </rect>
@@ -238,7 +171,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>210</y>
+     <y>110</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -248,16 +181,16 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>Descripcion</string>
+    <string>Descripción</string>
    </property>
   </widget>
   <widget class="QPlainTextEdit" name="ma_input_6">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>210</y>
-     <width>291</width>
-     <height>64</height>
+     <x>560</x>
+     <y>110</y>
+     <width>251</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">

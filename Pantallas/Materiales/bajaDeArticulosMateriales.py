@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'bajaDeArticulosMateriales.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -44,29 +46,17 @@ class Ui_Form(object):
 "font-size:10pt;\n"
 "border:none;")
         self.ma_btn_confirmar.setObjectName("ma_btn_confirmar")
-        self.ma_input_2 = QtWidgets.QPlainTextEdit(Form)
-        self.ma_input_2.setGeometry(QtCore.QRect(120, 160, 301, 64))
-        self.ma_input_2.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_2.setObjectName("ma_input_2")
-        self.label_10 = QtWidgets.QLabel(Form)
-        self.label_10.setGeometry(QtCore.QRect(30, 160, 81, 31))
-        self.label_10.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
-"text-align:center;")
-        self.label_10.setObjectName("label_10")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Baja"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.label.setText(_translate("Form", "Código"))
         self.label_2.setText(_translate("Form", "Baja de Artículos"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
-        self.label_10.setText(_translate("Form", "Motivo"))
 
 
 if __name__ == "__main__":
@@ -77,4 +67,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-

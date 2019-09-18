@@ -2,17 +2,19 @@
 
 # Form implementation generated from reading ui file 'sectorMateriales.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(448, 581)
-        # Form.setStyleSheet("background-color:white;")
+        Form.setStyleSheet("")
         self.ma_btn_4 = QtWidgets.QPushButton(Form)
         self.ma_btn_4.setGeometry(QtCore.QRect(70, 280, 311, 41))
         self.ma_btn_4.setStyleSheet("background-color:#5f5fff;\n"
@@ -94,7 +96,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Sector Materiales"))
         self.ma_btn_4.setText(_translate("Form", "Máxima/Mínima de Stock"))
         self.ma_btn_3.setText(_translate("Form", "Alta/Baja de Articulos"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
@@ -114,4 +116,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-

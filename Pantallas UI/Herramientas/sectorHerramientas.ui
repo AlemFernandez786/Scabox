@@ -11,10 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Sector Herramientas</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:white;</string>
+   <string notr="true"/>
   </property>
   <widget class="QPushButton" name="he_btn_3">
    <property name="geometry">

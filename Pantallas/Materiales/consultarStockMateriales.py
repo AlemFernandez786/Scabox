@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'consultarStockMateriales.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -33,27 +35,6 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.ma_tabla.headerItem().setFont(5, font)
-        item_0 = QtWidgets.QTreeWidgetItem(self.ma_tabla)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(0, font)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(4, font)
-        item_0 = QtWidgets.QTreeWidgetItem(self.ma_tabla)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(0, font)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(4, font)
-        item_0 = QtWidgets.QTreeWidgetItem(self.ma_tabla)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(0, font)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        item_0.setFont(4, font)
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(0, 60, 171, 41))
         self.label_2.setStyleSheet("font-size:20px;\n"
@@ -98,34 +79,13 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Consulta de Stock"))
         self.ma_tabla.headerItem().setText(0, _translate("Form", "Codigo"))
         self.ma_tabla.headerItem().setText(1, _translate("Form", "Descripcion"))
         self.ma_tabla.headerItem().setText(2, _translate("Form", "Cantidad de Stock disponible"))
         self.ma_tabla.headerItem().setText(3, _translate("Form", "Stock utilizado en los ultimos 30 dias"))
         self.ma_tabla.headerItem().setText(4, _translate("Form", "Stock Minimo permitido"))
         self.ma_tabla.headerItem().setText(5, _translate("Form", "Stock Maximo permitido"))
-        __sortingEnabled = self.ma_tabla.isSortingEnabled()
-        self.ma_tabla.setSortingEnabled(False)
-        self.ma_tabla.topLevelItem(0).setText(0, _translate("Form", "New Item  "))
-        self.ma_tabla.topLevelItem(0).setText(1, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(0).setText(2, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(0).setText(3, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(0).setText(4, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(0).setText(5, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(0, _translate("Form", "New Item"))
-        self.ma_tabla.topLevelItem(1).setText(1, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(2, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(3, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(4, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(1).setText(5, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(0, _translate("Form", "New Item"))
-        self.ma_tabla.topLevelItem(2).setText(1, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(2, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(3, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(4, _translate("Form", "lorem"))
-        self.ma_tabla.topLevelItem(2).setText(5, _translate("Form", "lorem"))
-        self.ma_tabla.setSortingEnabled(__sortingEnabled)
         self.label_2.setText(_translate("Form", "Consulta Stock"))
         self.label_3.setText(_translate("Form", "Materiales"))
         self.ma_btn_volver.setText(_translate("Form", "Volver"))
@@ -141,4 +101,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Baja</string>
   </property>
   <widget class="QPushButton" name="ma_btn_cancelar">
    <property name="geometry">
