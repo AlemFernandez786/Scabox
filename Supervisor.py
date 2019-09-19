@@ -12,7 +12,6 @@ from Pantallas.Supervisor import supervisor
 from Pantallas.Materiales import consultarStockMateriales
 from ABM import ABM_materiales
 import mysql.connector
-
 import sys
 
 class VentanaSupervisor(QtWidgets.QMainWindow):
