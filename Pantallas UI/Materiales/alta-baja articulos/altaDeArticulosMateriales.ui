@@ -136,6 +136,9 @@ text-align:center;</string>
 background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
+   <property name="maximum">
+    <number>9999</number>
+   </property>
   </widget>
   <widget class="QSpinBox" name="ma_input_3">
    <property name="geometry">
@@ -151,6 +154,9 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
 background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
+   <property name="maximum">
+    <number>9999</number>
+   </property>
   </widget>
   <widget class="QSpinBox" name="ma_input_4">
    <property name="geometry">
@@ -165,6 +171,9 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+   </property>
+   <property name="maximum">
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QLabel" name="label_10">

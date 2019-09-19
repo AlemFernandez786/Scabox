@@ -10,6 +10,8 @@ from Pantallas.Materiales import modificarStockMateriales
 from Pantallas.Materiales import stockPorMovilMateriales
 from Pantallas.Materiales import altaDeArticulosMateriales
 from Pantallas.Materiales import bajaDeArticulosMateriales
+from Pantallas.Materiales import  modificacionMaxMin
+import mysql.connector
 from ABM import ABM_materiales
 
 import sys
@@ -91,11 +93,15 @@ class Alta(QtWidgets.QDialog):
         self.close()
 
     def confirmar(self):
-        valores=(str(self.ui.ma_input_6.toPlainText()),str(self.ui.ma_input_2.text()),str(self.ui.ma_input_3.text()),str(self.ui.ma_input_4.text()))
-        agregar=ABM_materiales()
+        valores = [
+            str(self.ui.ma_input_6.toPlainText()), str(self.ui.ma_input_2.text()), str(self.ui.ma_input_3.text()),
+            str(self.ui.ma_input_4.text())]
+        agregar = ABM_materiales()
         agregar.alta_materiales(valores)
+
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
         self.close()
+
 
 class Baja(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
@@ -105,13 +111,12 @@ class Baja(QtWidgets.QDialog):
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
 
-
     def salir(self):
         self.close()
 
     def confirmar(self):
-        codigo=(str(self.ui.ma_input_1.text()))
-        borrar=ABM_materiales()
+        codigo = (str(self.ui.ma_input_1.text()))
+        borrar = ABM_materiales()
         borrar.baja_materiales(codigo)
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
 
@@ -191,11 +196,20 @@ class ModificarStock(QtWidgets.QDialog):
         self.ui.ma_input_4.setText(str(resultados[1]))
 
     def modificacion(self):
+        try:
+            self.cantidad = int(self.ui.ma_input_5.text())
+        except ValueError:
+            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+            return
+
+        if (self.cantidad < 0) | (self.cantidad > 9999):
+            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+            return
         war = QMessageBox.warning(self, "Advertencia",
-                            '''El artículo ha sido modificado.\n
+                                  '''El artículo ha sido modificado.\n
                             Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
         if war == QMessageBox.Ok:
-            valor = ["",""]
+            valor = ["", ""]
             valor[0] = str(self.ui.ma_input_buscar.text())
             try:
                 cantidad = int(self.ui.ma_input_5.text())
@@ -259,7 +273,7 @@ class StockMateriales(QtWidgets.QDialog):
     def consulta(self):
         try:
             codigo = int(self.ui.ma_input_buscar.text())
-        except ValueError:
+        except (ValueError, TypeError):
             QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
             return
         consultar = ABM_materiales()
@@ -292,17 +306,78 @@ class StockMateriales(QtWidgets.QDialog):
                 posicion += 1
 
 
-
 class MaximaMinima(QtWidgets.QDialog):
+    datos = []
+    valor = []
+
     def __init__(self, *args, **kwargs):
         super(MaximaMinima, self).__init__(*args, **kwargs)
         self.ui = modificacionMaxMinIngreso.Ui_Form()
         self.ui.setupUi(self)
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+        self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
 
     def salir(self):
         self.close()
 
+    def confirmar(self):
+        codigo = int(self.ui.ma_input_1.text())
+        if (codigo < 0) | (codigo > 99999999):
+            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+            return
+        con=ABM_materiales()
+        valor = con.consulta_materiales(str(codigo))
+        if not valor:
+            QMessageBox.about(self, "Error", "Ingrese un código válido")
+            return
+        else:
+            ventanamodificacionmaxmin = ModificacionMaximaMinima(self)
+            ventanamodificacionmaxmin.capturarvalor(valor[0][0], valor[0][1], valor[0][3], valor[0][4])
+            ventanamodificacionmaxmin.exec_()
+
+
+class ModificacionMaximaMinima(QtWidgets.QDialog):
+    codigo = ""
+
+    def __init__(self, *args):
+        super(ModificacionMaximaMinima, self).__init__(*args)
+        self.ui = modificacionMaxMin.Ui_Form()
+        self.ui.setupUi(self)
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.cursor = self.conexion.cursor()
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+        self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
+
+    def confirmar(self):
+        minima = str(self.ui.ma_input_1.text())
+        maxima = str(self.ui.ma_input_2.text())
+
+        war = QMessageBox.warning(self, "Advertencia",
+                                  '''El artículo ha sido modificado.\n
+                            Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
+        if war == QMessageBox.Ok:
+            self.sql = 'UPDATE articulo SET art_cant_min ' \
+                       '= ' + minima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
+            self.cursor.execute(self.sql)
+            self.sql = 'UPDATE articulo SET art_cant_max ' \
+                       '= ' + maxima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
+            self.cursor.execute(self.sql)
+            self.conexion.commit()
+            self.ui.ma_label_2.setText(minima)
+            self.ui.ma_label_3.setText(maxima)
+            self.ui.ma_input_1.clear()
+            self.ui.ma_input_2.clear()
+        else:
+            return
+
+    def salir(self):
+        self.close()
+
+    def capturarvalor(self, id, nom, min, max):
+        self.codigo = str(id)
+        self.ui.ma_label_1.setText(str(nom))
+        self.ui.ma_label_2.setText(str(min))
+        self.ui.ma_label_3.setText(str(max))
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

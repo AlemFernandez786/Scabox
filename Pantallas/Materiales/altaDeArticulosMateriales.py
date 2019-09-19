@@ -54,18 +54,21 @@ class Ui_Form(object):
         self.ma_input_2.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
+        self.ma_input_2.setMaximum(9999)
         self.ma_input_2.setObjectName("ma_input_2")
         self.ma_input_3 = QtWidgets.QSpinBox(Form)
         self.ma_input_3.setGeometry(QtCore.QRect(210, 200, 211, 31))
         self.ma_input_3.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
+        self.ma_input_3.setMaximum(9999)
         self.ma_input_3.setObjectName("ma_input_3")
         self.ma_input_4 = QtWidgets.QSpinBox(Form)
         self.ma_input_4.setGeometry(QtCore.QRect(560, 200, 251, 31))
         self.ma_input_4.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
+        self.ma_input_4.setMaximum(9999)
         self.ma_input_4.setObjectName("ma_input_4")
         self.label_10 = QtWidgets.QLabel(Form)
         self.label_10.setGeometry(QtCore.QRect(440, 110, 121, 31))

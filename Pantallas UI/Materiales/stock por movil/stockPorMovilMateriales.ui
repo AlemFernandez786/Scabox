@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Stock por Movil</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -79,60 +79,6 @@ text-align:center;</string>
      </font>
     </property>
    </column>
-   <item>
-    <property name="text">
-     <string>New Item lorem ipsum </string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>00</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>00</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>New Item</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>00</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-   </item>
   </widget>
   <widget class="QPushButton" name="ma_btn_confirmar">
    <property name="geometry">
@@ -234,6 +180,9 @@ text-align:center;</string>
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+   </property>
+   <property name="maximum">
+    <number>9999</number>
    </property>
   </widget>
  </widget>

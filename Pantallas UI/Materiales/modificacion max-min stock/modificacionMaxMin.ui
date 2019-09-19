@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Modificación de stock máximo y mÍnimo</string>
   </property>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
@@ -201,6 +201,9 @@ background-color:#ff4e4e;</string>
 background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
+   <property name="maximum">
+    <number>9999</number>
+   </property>
   </widget>
   <widget class="QSpinBox" name="ma_input_1">
    <property name="geometry">
@@ -215,6 +218,9 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+   </property>
+   <property name="maximum">
+    <number>9999</number>
    </property>
   </widget>
  </widget>

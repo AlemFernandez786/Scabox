@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'conteoDeInventarioPorMovil.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -77,6 +79,7 @@ class Ui_Form(object):
         self.ma_input_3.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
+        self.ma_input_3.setMaximum(9999)
         self.ma_input_3.setObjectName("ma_input_3")
 
         self.retranslateUi(Form)
@@ -84,7 +87,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Inventario por móvil"))
         self.label_2.setText(_translate("Form", "Conteo de Inventario por Móvil"))
         self.label_5.setText(_translate("Form", "Cantidad de material contado"))
         self.label_4.setText(_translate("Form", "Codigó de Material"))
@@ -103,4 +106,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-
