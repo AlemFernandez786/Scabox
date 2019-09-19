@@ -196,8 +196,13 @@ class ModificarStock(QtWidgets.QDialog):
         self.ui.ma_input_4.setText(str(resultados[1]))
 
     def modificacion(self):
-        cantidad = int(self.ui.ma_input_5.text())
-        if (cantidad < 0) | (cantidad > 9999):
+        try:
+            self.cantidad = int(self.ui.ma_input_5.text())
+        except ValueError:
+            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+            return
+
+        if (self.cantidad < 0) | (self.cantidad > 9999):
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
         war = QMessageBox.warning(self, "Advertencia",
@@ -268,7 +273,7 @@ class StockMateriales(QtWidgets.QDialog):
     def consulta(self):
         try:
             codigo = int(self.ui.ma_input_buscar.text())
-        except ValueError:
+        except (ValueError, TypeError):
             QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
             return
         consultar = ABM_materiales()
