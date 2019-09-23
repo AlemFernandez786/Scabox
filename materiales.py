@@ -10,7 +10,7 @@ from Pantallas.Materiales import modificarStockMateriales
 from Pantallas.Materiales import stockPorMovilMateriales
 from Pantallas.Materiales import altaDeArticulosMateriales
 from Pantallas.Materiales import bajaDeArticulosMateriales
-from Pantallas.Materiales import  modificacionMaxMin
+from Pantallas.Materiales import modificacionMaxMin
 import mysql.connector
 from ABM import ABM_materiales
 
@@ -126,6 +126,62 @@ class StockPorMovil(QtWidgets.QDialog):
         super(StockPorMovil, self).__init__(*args, **kwargs)
         self.ui = stockPorMovilMateriales.Ui_Form()
         self.ui.setupUi(self)
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.cursor = self.conexion.cursor()
+        self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
+        # Inserción de datos en tabla
+        self.sql = 'SELECT art_nombre, art_mov_cantidad, am.art_id FROM articulo_movil am JOIN articulo a ON a.art_id = ' \
+                   'am.art_id WHERE tip_id = 3'
+        self.cursor.execute(self.sql)
+        resultado = self.cursor.fetchall()
+        lista = []
+        for i in range(0, len(resultado)):
+            lista.append(list(resultado[i]))
+        resultado = tuple(lista)
+        len_resultado = (len(resultado))
+        for i in range(0, len_resultado):
+            posicion = 0
+            for a in range(0, len(resultado[i])):
+                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+                test = resultado[i][a]
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
+                posicion += 1
+        # -------------------------------------
+
+# Muestra datos seleccionados
+        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+
+    def info(self):
+        seleccion = self.ui.ma_tabla.selectedItems()
+        if seleccion:
+            datos = seleccion[0]
+            self.nombre = datos.text(1)
+            self.ui.ma_label_1.setText(datos.text(0))
+            self.ui.ma_label_2.setText(datos.text(1))
+# --------------------------------------
+
+    def confirmar(self):
+        try:
+            self.cantidad = int(self.ui.ma_input_1.text())
+        except ValueError:
+            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+            return
+
+        if (self.cantidad < 0) | (self.cantidad > 9999):
+            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+            return
+        war = QMessageBox.warning(self, "Advertencia",
+                                  '''El artículo ha sido modificado.\n
+                            Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
+        if war == QMessageBox.Ok:
+            try:
+                cantidad = int(self.ui.ma_input_1.text())
+            except ValueError:
+                QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+                return
+        else:
+            return
+# TODO reveer ventana stock por movil
 
 
 class ModificarStock(QtWidgets.QDialog):
@@ -378,6 +434,7 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
         self.ui.ma_label_1.setText(str(nom))
         self.ui.ma_label_2.setText(str(min))
         self.ui.ma_label_3.setText(str(max))
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
