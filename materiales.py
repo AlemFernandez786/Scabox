@@ -13,11 +13,8 @@ from Pantallas.Materiales import bajaDeArticulosMateriales
 from Pantallas.Materiales import modificacionMaxMin
 import mysql.connector
 from ABM import ABM_materiales
-
-
+import smtplib # Libreria de servidor SMTP
 from datetime import datetime, date, time, timedelta
-import calendar
-
 import sys
 
 
@@ -294,13 +291,19 @@ class InventarioMovil(QtWidgets.QDialog):
 
 
 class Aprovisionamiento(QtWidgets.QDialog):
+    pedido = ""
+
     def __init__(self, *args, **kwargs):
         super(Aprovisionamiento, self).__init__(*args, **kwargs)
         self.ui = aprovisionamiento.Ui_Form()
         self.ui.setupUi(self)
+
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+        self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
+
         self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
         self.cursor = self.conexion.cursor()
-        fecha1 = str(date.today() + timedelta(days=-23))
+        fecha1 = str(date.today() + timedelta(days=-60))
         fecha2 = str(date.today())
         print("\tFecha2:", fecha1)
         self.sql = 'SELECT a.art_id, a.art_nombre, sum(hm.his_mat_cantidad) FROM articulo a JOIN historial_materiales' \
@@ -309,20 +312,22 @@ class Aprovisionamiento(QtWidgets.QDialog):
         self.cursor.execute(self.sql)
         art_info = self.cursor.fetchall()
         lista = []
+
         for i in range(0, len(art_info)):
             lista.append(list(art_info[i]))
         art_info = tuple(lista)
 
         len_resultado = len(art_info)
         for i in range(0, len_resultado):
-            # print(art_info[i])
+
             posicion = 0
             item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(art_info[i])):
                 test = art_info[i][a]
+                self.pedido += str(test)+"                 "
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
-
+            self.pedido += "\n"
     # Muestra datos seleccionados
         self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
 
@@ -337,7 +342,18 @@ class Aprovisionamiento(QtWidgets.QDialog):
             self.ui.ma_input_1.setValue(int(dato))
     # --------------------------------------
 
-        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+    def confirmar(self):
+        # (sudo) "python -m smtpd -c DebuggingServer -n localhost:1025" para ejecutar un servidor SMTP local
+
+        smtp_server = "localhost"
+        port = 1025
+        remitente = "aprovisionamiento@capsisrl.com.ar"
+        destinatario = "aprovisionamiento@cablevision.com.ar"
+        mensaje = "Subject: Aprovisionamiento\n\nSe solicita aprovisionamiento de los siguientes materiales:\n\n" \
+                  "Codigo               Descripcion               Cantidad\n-----------" \
+                  "--------------------------------------------\n"+self.pedido
+        with smtplib.SMTP("localhost", 1025) as server:
+            server.sendmail(remitente, destinatario, mensaje)
 
     def salir(self):
         self.close()
@@ -477,6 +493,11 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
         self.ui.ma_label_2.setText(str(min))
         self.ui.ma_label_3.setText(str(max))
 
+
+# Compara si el dia es viernes .weekday() retorna los dias como un entero 0 para lunes hasta 6 para domingo
+if date.today().weekday() == 4:
+    aprov_automatico = Aprovisionamiento()
+    aprov_automatico.__init__()
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
