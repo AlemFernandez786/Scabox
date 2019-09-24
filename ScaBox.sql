@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-09-2019 a las 01:22:00
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.11
+-- Tiempo de generación: 24-09-2019 a las 23:49:17
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,8 +43,11 @@ CREATE TABLE `articulo` (
 --
 
 INSERT INTO `articulo` (`art_id`, `art_nombre`, `art_fecha_ultimo_ingreso`, `tip_id`, `art_cantidad`, `art_cant_min`, `art_cant_max`) VALUES
-(123456, 'asd', '2019-09-01', 3, 4567, 10, 100),
-(456789, 'fds', '2019-09-05', 3, 4568, 1, 10);
+(123456, 'asd', '2019-09-18', 3, 110004565, 7, 60),
+(456789, 'fds', '2019-09-18', 3, 74665, 1, 10),
+(456790, 'Divisorx3', '2019-09-16', 3, 49, 50, 200),
+(456791, 'Descripcion', '2019-09-16', 3, 2, 13, 78),
+(456792, 'poi', '2019-09-18', 3, 12, 1, 99);
 
 -- --------------------------------------------------------
 
@@ -57,6 +60,14 @@ CREATE TABLE `articulo_movil` (
   `art_id` int(8) NOT NULL COMMENT 'ID del artículo',
   `art_mov_cantidad` int(3) NOT NULL COMMENT 'Cantidad de articulos en el movil'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `articulo_movil`
+--
+
+INSERT INTO `articulo_movil` (`mov_id`, `art_id`, `art_mov_cantidad`) VALUES
+(4564, 123456, 12),
+(4564, 456791, 123);
 
 -- --------------------------------------------------------
 
@@ -120,6 +131,14 @@ CREATE TABLE `dupla_movil` (
   `emp_legajo` int(4) NOT NULL COMMENT 'Legajo del empleado'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `dupla_movil`
+--
+
+INSERT INTO `dupla_movil` (`dup_mov_id`, `emp_legajo`) VALUES
+(1, 1),
+(2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -138,7 +157,31 @@ CREATE TABLE `empleados` (
 --
 
 INSERT INTO `empleados` (`emp_legajo`, `emp_documento`, `emp_nombre`, `emp_apellido`) VALUES
+(1, 123456, 'gusti', 'canob'),
+(2, 123789, 'fran', 'larosa'),
 (123, 1234123, 'asdqwe', 'zxcsd');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial_materiales`
+--
+
+CREATE TABLE `historial_materiales` (
+  `art_id` int(8) NOT NULL,
+  `his_mat_cantidad` int(4) NOT NULL,
+  `his_mat_fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `historial_materiales`
+--
+
+INSERT INTO `historial_materiales` (`art_id`, `his_mat_cantidad`, `his_mat_fecha`) VALUES
+(456790, 25, '2019-09-18'),
+(456790, 26, '2019-09-11'),
+(456789, 10, '2019-08-01'),
+(456791, 10, '2019-08-01');
 
 -- --------------------------------------------------------
 
@@ -182,6 +225,14 @@ CREATE TABLE `movil` (
   `mov_tarjeta_verde` int(8) NOT NULL COMMENT 'Número de tarjeta verde',
   `mov_licencia` date NOT NULL COMMENT 'Fecha de vencimiento de la Licencia de conducir'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `movil`
+--
+
+INSERT INTO `movil` (`mov_id`, `dup_mov_id`, `mov_patente`, `mov_seguro`, `mov_vtv`, `mov_tarjeta_verde`, `mov_licencia`) VALUES
+(4564, 1, '123asd', 1321564, '2019-09-18', 12313, '2019-09-03'),
+(7676, 2, 'rwerte3', 34545456, '2019-09-03', 234323423, '2019-09-20');
 
 -- --------------------------------------------------------
 
@@ -320,6 +371,12 @@ ALTER TABLE `empleados`
   ADD PRIMARY KEY (`emp_legajo`);
 
 --
+-- Indices de la tabla `historial_materiales`
+--
+ALTER TABLE `historial_materiales`
+  ADD KEY `art_id` (`art_id`);
+
+--
 -- Indices de la tabla `historial_sectores`
 --
 ALTER TABLE `historial_sectores`
@@ -422,6 +479,12 @@ ALTER TABLE `detalle_denuncia_serializables`
 --
 ALTER TABLE `dupla_movil`
   ADD CONSTRAINT `dupla_movil_ibfk_1` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`);
+
+--
+-- Filtros para la tabla `historial_materiales`
+--
+ALTER TABLE `historial_materiales`
+  ADD CONSTRAINT `historial_materiales_ibfk_1` FOREIGN KEY (`art_id`) REFERENCES `articulo` (`art_id`);
 
 --
 -- Filtros para la tabla `historial_sectores`
