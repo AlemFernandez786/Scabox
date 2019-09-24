@@ -82,7 +82,12 @@ border:none;</string>
    </property>
    <column>
     <property name="text">
-     <string>Material</string>
+     <string>Código</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Descripción</string>
     </property>
     <property name="font">
      <font>
@@ -92,7 +97,7 @@ border:none;</string>
    </column>
    <column>
     <property name="text">
-     <string>Cantidad de pedido automatico</string>
+     <string>Cantidad de pedido automático</string>
     </property>
     <property name="font">
      <font>
@@ -133,7 +138,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>lorem</string>
+    <string/>
    </property>
   </widget>
  </widget>

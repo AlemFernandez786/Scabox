@@ -2,10 +2,9 @@
 
 # Form implementation generated from reading ui file 'aprovisionamiento.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -39,10 +38,10 @@ class Ui_Form(object):
         self.ma_tabla.setObjectName("ma_tabla")
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.ma_tabla.headerItem().setFont(0, font)
+        self.ma_tabla.headerItem().setFont(1, font)
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.ma_tabla.headerItem().setFont(1, font)
+        self.ma_tabla.headerItem().setFont(2, font)
         self.ma_input_1 = QtWidgets.QSpinBox(Form)
         self.ma_input_1.setGeometry(QtCore.QRect(230, 290, 381, 31))
         self.ma_input_1.setStyleSheet("border:none;\n"
@@ -54,6 +53,7 @@ class Ui_Form(object):
         self.ma_label.setGeometry(QtCore.QRect(230, 250, 381, 31))
         self.ma_label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
+        self.ma_label.setText("")
         self.ma_label.setObjectName("ma_label")
 
         self.retranslateUi(Form)
@@ -65,9 +65,11 @@ class Ui_Form(object):
         self.label_2.setText(_translate("Form", "Aprovisionamiento"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
-        self.ma_tabla.headerItem().setText(0, _translate("Form", "Material"))
-        self.ma_tabla.headerItem().setText(1, _translate("Form", "Cantidad de pedido automatico"))
-        self.ma_label.setText(_translate("Form", "lorem"))
+        self.ma_tabla.headerItem().setText(0, _translate("Form", "Código"))
+        self.ma_tabla.headerItem().setText(1, _translate("Form", "Descripción"))
+        self.ma_tabla.headerItem().setText(2, _translate("Form", "Cantidad de pedido automático"))
+
+
 
 
 if __name__ == "__main__":
