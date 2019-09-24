@@ -14,6 +14,10 @@ from Pantallas.Materiales import modificacionMaxMin
 import mysql.connector
 from ABM import ABM_materiales
 
+
+from datetime import datetime, date, time, timedelta
+import calendar
+
 import sys
 
 
@@ -141,8 +145,8 @@ class StockPorMovil(QtWidgets.QDialog):
         len_resultado = (len(resultado))
         for i in range(0, len_resultado):
             posicion = 0
+            item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
-                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
                 test = resultado[i][a]
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
@@ -155,7 +159,6 @@ class StockPorMovil(QtWidgets.QDialog):
         seleccion = self.ui.ma_tabla.selectedItems()
         if seleccion:
             datos = seleccion[0]
-            self.nombre = datos.text(1)
             self.ui.ma_label_1.setText(datos.text(0))
             self.ui.ma_label_2.setText(datos.text(1))
 # --------------------------------------
@@ -194,12 +197,11 @@ class ModificarStock(QtWidgets.QDialog):
         _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
         for i in range(0, len_resultado):
-            # resultado[i].insert(3, str(999))
             posicion = 0
+            item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
-                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
                 test = resultado[i][a]
-                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
 
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
@@ -237,8 +239,8 @@ class ModificarStock(QtWidgets.QDialog):
         for i in range(1, len_resultado):
             # print(resultado[i])
             posicion = 0
+            item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
-                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
                 test = ''
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
                 posicion += 1
@@ -296,10 +298,50 @@ class Aprovisionamiento(QtWidgets.QDialog):
         super(Aprovisionamiento, self).__init__(*args, **kwargs)
         self.ui = aprovisionamiento.Ui_Form()
         self.ui.setupUi(self)
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.cursor = self.conexion.cursor()
+        fecha1 = str(date.today() + timedelta(days=-23))
+        fecha2 = str(date.today())
+        print("\tFecha2:", fecha1)
+        self.sql = 'SELECT a.art_id, a.art_nombre, sum(hm.his_mat_cantidad) FROM articulo a JOIN historial_materiales' \
+                   ' hm ON a.art_id=hm.art_id WHERE a.tip_id = 3 AND a.art_cantidad < a.art_cant_min AND ' \
+                   'hm.his_mat_fecha BETWEEN DATE("'+fecha1+'") AND DATE("'+fecha2+'") GROUP BY art_id'
+        self.cursor.execute(self.sql)
+        art_info = self.cursor.fetchall()
+        lista = []
+        for i in range(0, len(art_info)):
+            lista.append(list(art_info[i]))
+        art_info = tuple(lista)
+
+        len_resultado = len(art_info)
+        for i in range(0, len_resultado):
+            # print(art_info[i])
+            posicion = 0
+            item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+            for a in range(0, len(art_info[i])):
+                test = art_info[i][a]
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
+                posicion += 1
+
+    # Muestra datos seleccionados
+        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+
+    def info(self):
+        seleccion = self.ui.ma_tabla.selectedItems()
+        if seleccion:
+            datos = seleccion[0]
+            self.ui.ma_label.setText(datos.text(1))
+            dato = datos.text(2)
+            if dato == '':
+                dato = 0
+            self.ui.ma_input_1.setValue(int(dato))
+    # --------------------------------------
+
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
 
     def salir(self):
         self.close()
+# TODO funcion boton confirmar
 
 
 class StockMateriales(QtWidgets.QDialog):
@@ -314,8 +356,8 @@ class StockMateriales(QtWidgets.QDialog):
         for i in range(0, len_resultado):
             # resultado[i].insert(3, str(999))
             posicion = 0
+            item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
-                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
                 test = resultado[i][a]
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
                 posicion += 1
@@ -355,8 +397,8 @@ class StockMateriales(QtWidgets.QDialog):
         for i in range(1, len_resultado):
             # print(resultado[i])
             posicion = 0
+            item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
-                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
                 test = ''
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
                 posicion += 1
