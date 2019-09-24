@@ -114,11 +114,17 @@ class ABM_serializables:
         self.conexion.commit()
 
     def consulta_serializables(self, valor):
-        self.valor=valor
-        self.sql= 'SELECT * FROM articulo WHERE art_id = ' + self.valor +' AND tip_id = 2'
+        self.valor = valor
+        self.sql = 'SELECT * FROM serializable WHERE ser_mac = "' + str(self.valor) + '"'
         self.cursor.execute(self.sql)
-        art_info=self.cursor.fetchall()
-        print(art_info)
+        ser_info = self.cursor.fetchall()
+        return ser_info
+
+    def consulta_ser_all(self):
+        self.sql = 'SELECT * FROM serializable'
+        self.cursor.execute(self.sql)
+        ser_all = self.cursor.fetchall()
+        return ser_all
 
     def modificacion_serializables(self, valor):
         self.valor=valor
