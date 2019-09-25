@@ -182,9 +182,7 @@ class StockPorMovil(QtWidgets.QDialog):
                 return
         else:
             return
-
-
-# TODO reveer ventana stock por movil
+        # TODO reveer ventana stock por movil
 
 
 class ModificarStock(QtWidgets.QDialog):
@@ -197,8 +195,8 @@ class ModificarStock(QtWidgets.QDialog):
         _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
         for i in range(0, len_resultado):
-            posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+            posicion = 0
             for a in range(0, len(resultado[i])):
                 test = resultado[i][a]
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
@@ -207,6 +205,17 @@ class ModificarStock(QtWidgets.QDialog):
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
         self.ui.ma_btn_buscar.clicked.connect(self.busqueda)
         self.ui.ma_btn_confirmar.clicked.connect(self.modificacion)
+
+        # Muestra datos seleccionados
+        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+
+    def info(self):
+        seleccion = self.ui.ma_tabla.selectedItems()
+        if seleccion:
+            datos = seleccion[0]
+            self.ui.ma_input_buscar.setText(datos.text(0))
+
+    # --------------------------------------
 
     def salir(self):
         self.close()
@@ -234,15 +243,13 @@ class ModificarStock(QtWidgets.QDialog):
             posicion += 1
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()
-        _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
             # print(resultado[i])
             posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
-                test = ''
-                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                self.ui.ma_tabla.topLevelItem(i).setHidden(True)
                 posicion += 1
 
         self.ui.ma_input_1.setText(str(resultados[2]))
@@ -398,6 +405,15 @@ class StockMateriales(QtWidgets.QDialog):
 
         self.ui.ma_btn_buscar.clicked.connect(self.consulta)
         self.ui.ma_btn_volver.clicked.connect(self.salir)
+    # Muestra datos seleccionados
+        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+
+    def info(self):
+        seleccion = self.ui.ma_tabla.selectedItems()
+        if seleccion:
+            datos = seleccion[0]
+            self.ui.ma_input_buscar.setText(datos.text(0))
+    # --------------------------------------
 
     def salir(self):
         self.close()
@@ -426,15 +442,13 @@ class StockMateriales(QtWidgets.QDialog):
 
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()
-        _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
             # print(resultado[i])
             posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
-                test = ''
-                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                self.ui.ma_tabla.topLevelItem(i).setHidden(True)
                 posicion += 1
 
 
