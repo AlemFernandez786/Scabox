@@ -38,7 +38,7 @@
     <rect>
      <x>250</x>
      <y>320</y>
-     <width>171</width>
+     <width>261</width>
      <height>31</height>
     </rect>
    </property>
@@ -47,7 +47,7 @@
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>Cantidad de materiales</string>
+    <string>Cantidad de materiales contados</string>
    </property>
   </widget>
   <widget class="QTreeWidget" name="ma_tabla">
@@ -61,7 +61,17 @@ text-align:center;</string>
    </property>
    <column>
     <property name="text">
-     <string>Móvil</string>
+     <string>Código</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Descripción</string>
     </property>
     <property name="font">
      <font>
@@ -84,7 +94,7 @@ text-align:center;</string>
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>440</y>
+     <y>410</y>
      <width>141</width>
      <height>31</height>
     </rect>
@@ -96,15 +106,15 @@ font-size:10pt;
 border:none;</string>
    </property>
    <property name="text">
-    <string>confirmar</string>
+    <string>Modificar</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>220</x>
      <y>230</y>
-     <width>41</width>
+     <width>81</width>
      <height>31</height>
     </rect>
    </property>
@@ -113,7 +123,7 @@ border:none;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>Móvil</string>
+    <string>Descripción</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">
@@ -147,7 +157,7 @@ text-align:center;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>Lorem</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="ma_label_2">
@@ -164,7 +174,7 @@ text-align:center;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>00</string>
+    <string/>
    </property>
   </widget>
   <widget class="QSpinBox" name="ma_input_1">
@@ -183,6 +193,25 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
    <property name="maximum">
     <number>9999</number>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ma_btn_salir">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>450</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #ff4e4e;
+color:white;
+font-size:10pt;
+border:none;</string>
+   </property>
+   <property name="text">
+    <string>Salir</string>
    </property>
   </widget>
  </widget>

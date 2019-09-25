@@ -2,12 +2,11 @@
 
 # Form implementation generated from reading ui file 'aprovisionamiento.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.1
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -34,7 +33,7 @@ class Ui_Form(object):
 "border:none;")
         self.ma_btn_confirmar.setObjectName("ma_btn_confirmar")
         self.ma_tabla = QtWidgets.QTreeWidget(Form)
-        self.ma_tabla.setGeometry(QtCore.QRect(20, 90, 801, 141))
+        self.ma_tabla.setGeometry(QtCore.QRect(20, 90, 801, 261))
         self.ma_tabla.setObjectName("ma_tabla")
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -42,13 +41,6 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.ma_tabla.headerItem().setFont(2, font)
-        self.ma_input_1 = QtWidgets.QSpinBox(Form)
-        self.ma_input_1.setGeometry(QtCore.QRect(230, 290, 381, 31))
-        self.ma_input_1.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_1.setMaximum(9999)
-        self.ma_input_1.setObjectName("ma_input_1")
         self.ma_label = QtWidgets.QLabel(Form)
         self.ma_label.setGeometry(QtCore.QRect(230, 250, 381, 31))
         self.ma_label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -70,8 +62,6 @@ class Ui_Form(object):
         self.ma_tabla.headerItem().setText(2, _translate("Form", "Cantidad de pedido automático"))
 
 
-
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -80,3 +70,4 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
+

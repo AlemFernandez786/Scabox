@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'conteoDeInventarioPorMovil.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -67,6 +65,7 @@ class Ui_Form(object):
         self.ma_label_1.setGeometry(QtCore.QRect(450, 110, 301, 131))
         self.ma_label_1.setStyleSheet("font: 30pt \"MS Shell Dlg 2\";\n"
 "")
+        self.ma_label_1.setText("")
         self.ma_label_1.setAlignment(QtCore.Qt.AlignCenter)
         self.ma_label_1.setObjectName("ma_label_1")
         self.label_3 = QtWidgets.QLabel(Form)
@@ -81,6 +80,13 @@ class Ui_Form(object):
 "font: 11pt \"MS Shell Dlg 2\";")
         self.ma_input_3.setMaximum(9999)
         self.ma_input_3.setObjectName("ma_input_3")
+        self.ma_btn_siguiente = QtWidgets.QPushButton(Form)
+        self.ma_btn_siguiente.setGeometry(QtCore.QRect(240, 240, 171, 31))
+        self.ma_btn_siguiente.setStyleSheet("background-color: rgb(0, 0, 255);\n"
+"color:white;\n"
+"font-size:10pt;\n"
+"border:none;")
+        self.ma_btn_siguiente.setObjectName("ma_btn_siguiente")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -94,8 +100,8 @@ class Ui_Form(object):
         self.label.setText(_translate("Form", "Móvil"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
-        self.ma_label_1.setText(_translate("Form", "XX"))
         self.label_3.setText(_translate("Form", "Stock por Móvil"))
+        self.ma_btn_siguiente.setText(_translate("Form", "Siguiente"))
 
 
 if __name__ == "__main__":
@@ -106,3 +112,4 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
+

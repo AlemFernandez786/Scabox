@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
-    <height>449</height>
+    <width>464</width>
+    <height>263</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Aprovisionamiento</string>
+   <string>Form</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>-190</x>
      <y>10</y>
-     <width>691</width>
+     <width>831</width>
      <height>41</height>
     </rect>
    </property>
@@ -27,36 +27,52 @@
 </string>
    </property>
    <property name="text">
-    <string>Aprovisionamiento</string>
+    <string>Stock por móvil</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="ma_btn_cancelar">
+  <widget class="QLineEdit" name="ma_input_1">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>380</y>
-     <width>131</width>
+     <x>160</x>
+     <y>100</y>
+     <width>251</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;
-font-size:10pt;
-border:none;
-background-color:#ff4e4e;</string>
+    <string notr="true">border:none;
+background-color: rgb(255, 255, 255);
+font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
    <property name="text">
-    <string>Cancelar</string>
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>100</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;
+text-align:center;</string>
+   </property>
+   <property name="text">
+    <string>Móvil</string>
    </property>
   </widget>
   <widget class="QPushButton" name="ma_btn_confirmar">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>380</y>
+     <x>80</x>
+     <y>190</y>
      <width>131</width>
      <height>31</height>
     </rect>
@@ -71,56 +87,23 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QTreeWidget" name="ma_tabla">
+  <widget class="QPushButton" name="ma_btn_cancelar">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>90</y>
-     <width>801</width>
-     <height>261</height>
-    </rect>
-   </property>
-   <column>
-    <property name="text">
-     <string>Código</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Descripción</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Cantidad de pedido automático</string>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-   </column>
-  </widget>
-  <widget class="QLabel" name="ma_label">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>250</y>
-     <width>381</width>
+     <x>240</x>
+     <y>190</y>
+     <width>131</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;
-text-align:center;</string>
+    <string notr="true">color:white;
+font-size:10pt;
+border:none;
+background-color:#ff4e4e;</string>
    </property>
    <property name="text">
-    <string/>
+    <string>Cancelar</string>
    </property>
   </widget>
  </widget>
