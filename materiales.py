@@ -497,7 +497,12 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
     def confirmar(self):
         minima = str(self.ui.ma_input_1.text())
         maxima = str(self.ui.ma_input_2.text())
-
+        if int(minima) <= 0:
+            QMessageBox.about(self, "Error!!", "\nEl valor mínimo no puede ser menor a 0.\n")
+            return
+        if int(maxima) <= int(minima):
+            QMessageBox.about(self, "Error!!", "\nEl valor máximo no puede ser menor o igual que el valor mínimo.\n")
+            return
         war = QMessageBox.warning(self, "Advertencia",
                                   '''El artículo ha sido modificado.\n
                             Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
