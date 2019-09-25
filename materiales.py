@@ -11,6 +11,7 @@ from Pantallas.Materiales import stockPorMovilMateriales
 from Pantallas.Materiales import altaDeArticulosMateriales
 from Pantallas.Materiales import bajaDeArticulosMateriales
 from Pantallas.Materiales import modificacionMaxMin
+from Pantallas.Materiales import stockPorMovilMaterialesIngreso
 import mysql.connector
 from ABM import ABM_materiales
 import smtplib  # Librería de servidor SMTP
@@ -50,8 +51,8 @@ class VentanaMateriales(QtWidgets.QMainWindow):
         ventanamaxmin.exec_()
 
     def stock_movil(self):
-        ventanastockmovil = StockPorMovil(self)
-        ventanastockmovil.exec_()
+        ventanastockmovilingreso = StockPorMovilIngreso(self)
+        ventanastockmovilingreso.exec_()
 
     def inventario_movil(self):
         ventanainventario = InventarioMovil(self)
@@ -122,6 +123,49 @@ class Baja(QtWidgets.QDialog):
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
 
 
+class StockPorMovilIngreso(QtWidgets.QDialog):
+    datos = []
+    valor = []
+
+    def __init__(self, *args, **kwargs):
+        super(StockPorMovilIngreso, self).__init__(*args, **kwargs)
+        self.ui = stockPorMovilMaterialesIngreso.Ui_Form()
+        self.ui.setupUi(self)
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+        self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.cursor = self.conexion.cursor()
+
+    def salir(self):
+        self.close()
+
+    def confirmar(self):
+        codigo = int(self.ui.ma_input_1.text())
+        if (codigo < 0) | (codigo > 99999):
+            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+            return
+        sql = 'SELECT am.art_id, a.art_nombre, am.art_mov_cantidad FROM articulo_movil am JOIN articulo a ON ' \
+              'am.art_id = a.art_id WHERE mov_id='+str(codigo)+' AND a.tip_id = 3'
+        self.cursor.execute(sql)
+        resultado = self.cursor.fetchall()
+        lista = []
+        for i in range(0, len(resultado)):
+            lista.append(list(resultado[i]))
+        resultado = tuple(lista)
+        print(resultado)
+        ventanastockmovil = StockPorMovil()
+        ventanastockmovil.capturarvalor(resultado)
+        ventanastockmovil.exec_()
+        # valor = con.consulta_materiales(str(codigo))
+        # if not valor:
+        #     QMessageBox.about(self, "Error", "Ingrese un código válido")
+        #     return
+        # else:
+        #     ventanamodificacionmaxmin = ModificacionMaximaMinima(self)
+        #     ventanamodificacionmaxmin.capturarvalor(valor[0][0], valor[0][1], valor[0][3], valor[0][4])
+        #     ventanamodificacionmaxmin.exec_()
+
+
 class StockPorMovil(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
         super(StockPorMovil, self).__init__(*args, **kwargs)
@@ -130,11 +174,12 @@ class StockPorMovil(QtWidgets.QDialog):
         self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
         self.cursor = self.conexion.cursor()
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
+        self.ui.ma_btn_salir.clicked.connect(self.salir)
+
         # Inserción de datos en tabla
-        self.sql = 'SELECT art_nombre, art_mov_cantidad, am.art_id FROM articulo_movil am JOIN articulo a ON' \
-                   ' a.art_id = am.art_id WHERE tip_id = 3'
-        self.cursor.execute(self.sql)
-        resultado = self.cursor.fetchall()
+    def capturarvalor(self, datos):
+
+        resultado = datos
         lista = []
         for i in range(0, len(resultado)):
             lista.append(list(resultado[i]))
@@ -156,12 +201,14 @@ class StockPorMovil(QtWidgets.QDialog):
         seleccion = self.ui.ma_tabla.selectedItems()
         if seleccion:
             datos = seleccion[0]
-            self.ui.ma_label_1.setText(datos.text(0))
-            self.ui.ma_label_2.setText(datos.text(1))
+            self.ui.ma_label_1.setText(datos.text(1))
+            self.ui.ma_label_2.setText(datos.text(2))
 
     # --------------------------------------
 
     def confirmar(self):
+        seleccion = self.ui.ma_tabla.selectedItems()
+        datos = seleccion[0]
         try:
             self.cantidad = int(self.ui.ma_input_1.text())
         except ValueError:
@@ -180,8 +227,17 @@ class StockPorMovil(QtWidgets.QDialog):
             except ValueError:
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
+            self.sql = 'UPDATE articulo_movil SET art_mov_cantidad ' \
+                   '= ' + str(self.cantidad) + ' WHERE art_id = ' + str(datos.text(0))
+            #TODO query no funca aca
+            self.cursor.execute(self.sql)
+            print(datos.text(0))
+            print(self.cantidad)
         else:
             return
+
+    def salir(self):
+        self.close()
         # TODO reveer ventana stock por movil
 
 
