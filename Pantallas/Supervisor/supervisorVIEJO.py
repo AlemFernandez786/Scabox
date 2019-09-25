@@ -13,10 +13,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(448, 405)
+        Form.resize(448, 350)
         Form.setStyleSheet("background-color:white;")
         self.su_btn_cancelar = QtWidgets.QPushButton(Form)
-        self.su_btn_cancelar.setGeometry(QtCore.QRect(270, 350, 111, 31))
+        self.su_btn_cancelar.setGeometry(QtCore.QRect(270, 290, 111, 31))
         self.su_btn_cancelar.setStyleSheet("color:white;\n"
 "background-color:#ff4e4e;\n"
 "border:none;")
@@ -54,15 +54,6 @@ class Ui_Form(object):
         self.su_btn_3.setIconSize(QtCore.QSize(16, 20))
         self.su_btn_3.setFlat(False)
         self.su_btn_3.setObjectName("su_btn_3")
-        self.su_btn_4 = QtWidgets.QPushButton(Form)
-        self.su_btn_4.setGeometry(QtCore.QRect(70, 270, 311, 41))
-        self.su_btn_4.setStyleSheet("background-color:#5f5fff;\n"
-"color:white;\n"
-"border:none;\n"
-"font-size:15px;")
-        self.su_btn_4.setIconSize(QtCore.QSize(16, 20))
-        self.su_btn_4.setFlat(False)
-        self.su_btn_4.setObjectName("su_btn_4")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -75,7 +66,6 @@ class Ui_Form(object):
         self.label.setText(_translate("Form", "Supervisor"))
         self.su_btn_1.setText(_translate("Form", "Consulta de Stock"))
         self.su_btn_3.setText(_translate("Form", "Modificación de sector de personal"))
-        self.su_btn_4.setText(_translate("Form", "Personal"))
 
 
 if __name__ == "__main__":
@@ -86,4 +76,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-#supervisor ven
