@@ -396,7 +396,7 @@ class Aprovisionamiento(QtWidgets.QDialog):
             dato = datos.text(2)
             if dato == '':
                 dato = 0
-            self.ui.ma_input_1.setValue(int(dato))
+            # self.ui.ma_input_1.setValue(int(dato))
 
     # --------------------------------------
 
@@ -424,7 +424,7 @@ class Aprovisionamiento(QtWidgets.QDialog):
     def pedido(self, marca1):
         conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
         cursor = conexion.cursor()
-        fecha1 = str(date.today() + timedelta(days=-60))
+        fecha1 = str(date.today() + timedelta(days=-7))
         fecha2 = str(date.today())
         sql = 'SELECT a.art_id, a.art_nombre, sum(hm.his_mat_cantidad) FROM articulo a JOIN historial_materiales' \
               ' hm ON a.art_id=hm.art_id WHERE a.tip_id = 3 AND a.art_cantidad < a.art_cant_min AND ' \
@@ -589,7 +589,7 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
 
 # Compara si el dia es viernes .weekday() retorna los dias como un entero 0 para lunes hasta 6 para domingo
 marca = 0
-if date.today().weekday() == 2:
+if date.today().weekday() == 4:
     marca = 1
     app = QtWidgets.QApplication([])
     aprov_automatico = Aprovisionamiento()
