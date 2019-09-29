@@ -190,9 +190,9 @@ class StockPorMovil(QtWidgets.QDialog):
         # Inserción de datos en tabla
     def tabla(self, cod):
         self.codigo = cod
-        self.sql = 'SELECT am.art_id, a.art_nombre, am.art_mov_cantidad FROM articulo_movil am JOIN articulo a ON ' \
+        sql = 'SELECT am.art_id, a.art_nombre, am.art_mov_cantidad FROM articulo_movil am JOIN articulo a ON ' \
               'am.art_id = a.art_id WHERE mov_id='+str(self.codigo)+' AND a.tip_id = 3'
-        self.cursor.execute(self.sql)
+        self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         lista = []
         for i in range(0, len(resultado)):
@@ -228,12 +228,12 @@ class StockPorMovil(QtWidgets.QDialog):
             return
         datos = seleccion[0]
         try:
-            self.cantidad = int(self.ui.ma_input_1.text())
+            cantidad = int(self.ui.ma_input_1.text())
         except ValueError:
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
 
-        if (self.cantidad < 0) | (self.cantidad > 9999):
+        if (cantidad < 0) | (cantidad > 9999):
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
         war = QMessageBox.warning(self, "Advertencia",
@@ -241,14 +241,14 @@ class StockPorMovil(QtWidgets.QDialog):
                             Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
         if war == QMessageBox.Ok:
             try:
-                self.cantidad = int(self.ui.ma_input_1.text())
+                cantidad = int(self.ui.ma_input_1.text())
             except ValueError:
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
-            self.sql = str('UPDATE articulo_movil SET art_mov_cantidad ' \
-                           '= ' + str(self.cantidad) + ' WHERE art_id = ' + str(datos.text(0)))
+            sql = str('UPDATE articulo_movil SET art_mov_cantidad ' 
+                      '= ' + str(self.cantidad) + ' WHERE art_id = ' + str(datos.text(0)))
 
-            self.cursor.execute(self.sql)
+            self.cursor.execute(sql)
             self.conexion.commit()
         else:
             return
@@ -281,7 +281,6 @@ class ModificarStock(QtWidgets.QDialog):
                 self.ui.ma_tabla.topLevelItem(i).setHidden(False)
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
-
 
         # Muestra datos seleccionados
         self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
@@ -340,12 +339,12 @@ class ModificarStock(QtWidgets.QDialog):
 
     def modificacion(self):
         try:
-            self.cantidad = int(self.ui.ma_input_5.text())
+            cantidad = int(self.ui.ma_input_5.text())
         except ValueError:
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
 
-        if (self.cantidad < 0) | (self.cantidad > 9999):
+        if (cantidad < 0) | (cantidad > 9999):
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
         war = QMessageBox.warning(self, "Advertencia",
@@ -385,6 +384,8 @@ class Aprovisionamiento(QtWidgets.QDialog):
         super(Aprovisionamiento, self).__init__(*args, **kwargs)
         self.ui = aprovisionamiento.Ui_Form()
         self.ui.setupUi(self)
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.cursor = self.conexion.cursor()
 
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
@@ -419,7 +420,7 @@ class Aprovisionamiento(QtWidgets.QDialog):
             if dato == '':
                 dato = 0
             # self.ui.ma_input_1.setValue(int(dato))
-
+#TODO falta arpovisionamiento
     # --------------------------------------
 
     def confirmar(self):
@@ -444,15 +445,14 @@ class Aprovisionamiento(QtWidgets.QDialog):
         self.close()
 
     def pedido(self, marca1):
-        conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
-        cursor = conexion.cursor()
+
         fecha1 = str(date.today() + timedelta(days=-7))
         fecha2 = str(date.today())
         sql = 'SELECT a.art_id, a.art_nombre, sum(hm.his_mat_cantidad) FROM articulo a JOIN historial_materiales' \
               ' hm ON a.art_id=hm.art_id WHERE a.tip_id = 3 AND a.art_cantidad < a.art_cant_min AND ' \
               'hm.his_mat_fecha BETWEEN DATE("' + fecha1 + '") AND DATE("' + fecha2 + '") GROUP BY art_id'
-        cursor.execute(sql)
-        query = cursor.fetchall()
+        self.cursor.execute(sql)
+        query = self.cursor.fetchall()
         if marca1 == 1:
             return query
         else:
@@ -509,7 +509,6 @@ class StockMateriales(QtWidgets.QDialog):
             return
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales(str(codigo))
-        posicion = 0
         try:
             resultados = resultado[0]
         except IndexError:
@@ -519,12 +518,9 @@ class StockMateriales(QtWidgets.QDialog):
         resultado = consultar.consulta_materiales_gral()
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
-            # print(resultado[i])
-            posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
                 self.ui.ma_tabla.topLevelItem(i).setHidden(True)
-                posicion += 1
 
 
 class MaximaMinima(QtWidgets.QDialog):
@@ -582,12 +578,12 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
                                   '''El artículo ha sido modificado.\n
                             Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
         if war == QMessageBox.Ok:
-            self.sql = 'UPDATE articulo SET art_cant_min ' \
+            sql = 'UPDATE articulo SET art_cant_min ' \
                        '= ' + minima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
-            self.cursor.execute(self.sql)
-            self.sql = 'UPDATE articulo SET art_cant_max ' \
-                       '= ' + maxima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
-            self.cursor.execute(self.sql)
+            self.cursor.execute(sql)
+            sql = 'UPDATE articulo SET art_cant_max ' \
+                  '= ' + maxima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
+            self.cursor.execute(sql)
             self.conexion.commit()
             self.ui.ma_label_2.setText(minima)
             self.ui.ma_label_3.setText(maxima)
@@ -599,11 +595,11 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
     def salir(self):
         self.close()
 
-    def capturarvalor(self, id, nom, min, max):
-        self.codigo = str(id)
+    def capturarvalor(self, cod, nom, mini, maxi):
+        self.codigo = str(cod)
         self.ui.ma_label_1.setText(str(nom))
-        self.ui.ma_label_2.setText(str(min))
-        self.ui.ma_label_3.setText(str(max))
+        self.ui.ma_label_2.setText(str(mini))
+        self.ui.ma_label_3.setText(str(maxi))
 
 
 # Compara si el dia es viernes .weekday() retorna los dias como un entero 0 para lunes hasta 6 para domingo
