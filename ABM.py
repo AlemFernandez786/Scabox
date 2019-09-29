@@ -115,11 +115,17 @@ class ABM_serializables:
         self.conexion.commit()
 
     def consulta_serializables(self, valor):
-        self.valor=valor
-        self.sql= 'SELECT * FROM articulo WHERE art_id = ' + self.valor +' AND tip_id = 2'
+        self.valor = valor
+        self.sql = 'SELECT * FROM serializable WHERE ser_mac = "' + str(self.valor) + '"'
         self.cursor.execute(self.sql)
-        art_info=self.cursor.fetchall()
-        print(art_info)
+        ser_info = self.cursor.fetchall()
+        return ser_info
+
+    def consulta_ser_all(self):
+        self.sql = 'SELECT * FROM serializable'
+        self.cursor.execute(self.sql)
+        ser_all = self.cursor.fetchall()
+        return ser_all
 
     def modificacion_serializables(self, valor):
         self.valor=valor
@@ -248,10 +254,21 @@ class ABM_supervisor:
         self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
         self.cursor = self.conexion.cursor()
 
+    def consulta_empleado(self, valor):
+        self.valor=valor
+        self.sql= 'SELECT * FROM empleados WHERE emp_legajo = ' + self.valor
+        self.cursor.execute(self.sql)
+        consul_legajo=self.cursor.fetchall()
+        return consul_legajo
+
     def baja_personal(self, identificador):
         self.identificador=identificador
-        self.sql = 'DELETE FROM empleados WHERE emp_legajo = ' + identificador
+        self.sql = 'DELETE from historial_sectores where emp_legajo= '+ str(self.identificador)
         self.cursor.execute (self.sql)
+        self.sql = 'DELETE from usuarios where usu_legajo= ' + str(self.identificador)
+        self.cursor.execute(self.sql)
+        self.sql = 'DELETE from empleados where emp_legajo= ' + str(self.identificador)
+        self.cursor.execute(self.sql)
         self.conexion.commit()
 
     def alta_personal(self, valores):
@@ -266,16 +283,16 @@ class ABM_supervisor:
         # Creamos el id
         self.sql = 'SELECT MAX(emp_legajo) from empleados'
         self.cursor.execute(self.sql)
-        art_info = self.cursor.fetchall()
-        art_info = ''.join(e for e in str(art_info[0]) if e.isalnum())
-        if art_info == 'None':
-            art_info = 1
+        emp_info = self.cursor.fetchall()
+        emp_info = ''.join(e for e in str(emp_info[0]) if e.isalnum())
+        if emp_info == 'None':
+            emp_info = 1
         else:
-            art_info = int(art_info)
-            art_info += 1
+            emp_info = int(emp_info)
+            emp_info += 1
         # Transforma la tupla en lista para meter los elementos fijos
         self.valores = []
-        self.valores.insert(0, str(art_info))
+        self.valores.insert(0, str(emp_info))
         self.valores.insert(1, str(valores[0]))
         self.valores.insert(2,'"' + str(valores[1]) + '"')
         self.valores.insert(3,'"' + str(valores[2]) + '"')
@@ -291,12 +308,26 @@ class ABM_supervisor:
         ya = ('{:%Y%m%d%H%M%S}'.format(hoy))
         sector=[]
         sector.insert(0, ya)
-        sector.insert(1, art_info)
-        sector.insert(2,'5')
+        sector.insert(1, emp_info)
+        sector.insert(2,'6')
         sector.insert(3, '"' + 'Alta' + '"')
         # Creamos la query
         self.sql = 'INSERT INTO historial_sectores VALUES (' + ",".join(map(str, sector)) + ')'
         # Ejecutamos la query
+        self.cursor.execute(self.sql)
+        self.conexion.commit()
+
+    def emp_legajo(self):
+        self.sql = 'SELECT MAX(emp_legajo) from empleados'
+        self.cursor.execute(self.sql)
+        emp_info = self.cursor.fetchall()
+        emp_info = ''.join(e for e in str(emp_info[0]) if e.isalnum())
+        if emp_info == 'None':
+            emp_info = 1
+        else:
+            emp_info = int(emp_info)
+            emp_info += 1
+        return (emp_info)
         self.cursor.execute(self.sql)
         self.conexion.commit()
 
@@ -319,24 +350,68 @@ class ABM_supervisor:
         self.cursor.execute(self.sql)
         self.conexion.commit()
 
+    def consulta_dni(self,valor):
+        self.valor = valor
+        self.sql = 'SELECT * FROM empleados WHERE emp_documento = ' + self.valor
+        self.cursor.execute(self.sql)
+        consul_legajo = self.cursor.fetchall()
+        return consul_legajo
 
-# mat=ABM_materiales()
-# her=ABM_herramientas()
-# test.baja_serializables('8585')
-# test.alta_serializables(('HD', '40'))
-# her.alta_herramientas(('Destorplano','50', '5','15'))
-# test.consulta_herramientas('2')
-# test.modificacion_herramientas(('85','50'))
-# test.consulta_herramientas('85')
-# test.baja_herramientas('4')
-# test.modificacion_serializables(('8585','145'))
-# test.consulta_serializables('8585')
-# mat.alta_materiales(('Divisorx3', '100','50','200'))
-# test.baja_materiales('4')
-# test.consulta_materiales('4')
-# test.modificacion_materiales(('4','50'))
-# asd=ABM()
-# asd.consulta_materiales("123")
-#sup=ABM_supervisor()
-# sup.alta_personal(('57152336','ale','logi'))
-#sup.modificacion_sector(('126','1'))
+    def consulta_empleado_sector(self,valor):
+        self.valor = valor
+        self.sql = 'SELECT a.emp_legajo, a.emp_nombre, a.emp_apellido' \
+                   ', (SELECT desc_sector FROM sectores WHERE ' \
+                   'emp_sector=b.emp_sector) FROM empleados a JOIN ' \
+                   'historial_sectores b ON a.emp_legajo=b.emp_legajo WHERE a.emp_legajo=' + str(self.valor)
+        self.cursor.execute(self.sql)
+        consul_legajo = self.cursor.fetchall()
+        return consul_legajo
+
+    def actualizacion_de_claves(self,valor):
+        self.sql = 'SELECT * from usuarios WHERE usu_legajo ='+valor[0][0]
+        self.cursor.execute(self.sql)
+        emp_info = self.cursor.fetchall()
+        legajo_clave=valor[0][0]
+        clave=valor[0][1]
+        le = len(clave) - 1
+        pass2 = ''
+        for i in range(0, len(clave)):
+            la = le - i
+            pass2 += clave[la]
+        if emp_info==[]:
+            self.sql = 'INSERT INTO `usuarios` (`usu_legajo`, `usu_password`, `activo`) VALUES (' + legajo_clave+', "' +pass2+ '", 1 )'
+            self.cursor.execute(self.sql)
+            self.conexion.commit()
+        else:
+            pass3='"'+pass2+'"'
+            self.sql = 'UPDATE usuarios SET usu_password = ' + pass3 +' WHERE usu_legajo='+legajo_clave
+            self.cursor.execute(self.sql)
+            self.conexion.commit()
+
+    def validacion_sector(self,valor):
+        self.sql = 'SELECT emp_sector FROM historial_sectores WHERE emp_legajo = ' + str(valor[0])
+        self.cursor.execute(self.sql)
+        sector = self.cursor.fetchall()
+        sector = ''.join(e for e in str(sector[0]) if e.isalnum())
+        sector = int(sector)
+        confir = False
+        if (sector == valor[1]):
+            confir=True
+        return confir
+
+    def consulta_personal_gral(self):
+        self.sql = 'SELECT a.emp_legajo, a.emp_nombre, a.emp_apellido, '\
+                   '(SELECT a.desc_sector from sectores a JOIN historial_sectores b using (emp_sector) '\
+                   'WHERE b.emp_legajo=a.emp_legajo) FROM empleados a'
+        self.cursor.execute(self.sql)
+        personal = self.cursor.fetchall()
+        return personal
+
+    def consulta_personal(self,valor):
+        self.sql = 'SELECT a.emp_legajo, a.emp_nombre, a.emp_apellido, '\
+                   '(SELECT a.desc_sector from sectores a JOIN historial_sectores b using (emp_sector) '\
+                   'WHERE b.emp_legajo=a.emp_legajo) FROM empleados a WHERE a.emp_apellido= "' + str(valor)+'"'
+        self.cursor.execute(self.sql)
+        consul_personal = self.cursor.fetchall()
+        return consul_personal
+

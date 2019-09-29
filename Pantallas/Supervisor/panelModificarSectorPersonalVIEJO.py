@@ -13,9 +13,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(955, 578)
+        Form.resize(903, 578)
         self.su_tabla = QtWidgets.QTreeWidget(Form)
-        self.su_tabla.setGeometry(QtCore.QRect(10, 90, 935, 161))
+        self.su_tabla.setGeometry(QtCore.QRect(10, 90, 881, 161))
         self.su_tabla.setObjectName("su_tabla")
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -56,38 +56,42 @@ class Ui_Form(object):
         self.su_radiobutton_4 = QtWidgets.QRadioButton(Form)
         self.su_radiobutton_4.setGeometry(QtCore.QRect(600, 280, 121, 17))
         self.su_radiobutton_4.setObjectName("su_radiobutton_4")
-        self.su_radiobutton_5 = QtWidgets.QRadioButton(Form)
-        self.su_radiobutton_5.setGeometry(QtCore.QRect(750, 280, 121, 17))
-        self.su_radiobutton_5.setObjectName("su_radiobutton_5")
-        self.su_radiobutton_6 = QtWidgets.QRadioButton(Form)
-        self.su_radiobutton_6.setGeometry(QtCore.QRect(850, 280, 121, 17))
-        self.su_radiobutton_6.setObjectName("su_radiobutton_6")
         self.label_3 = QtWidgets.QLabel(Form)
         self.label_3.setGeometry(QtCore.QRect(130, 390, 61, 31))
         self.label_3.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_3.setObjectName("label_3")
-        self.su_input_1 = QtWidgets.QTextEdit(Form)
-        self.su_input_1.setGeometry(QtCore.QRect(190, 390, 600, 91))
-        self.su_input_1.setStyleSheet("border:none;\n"
+        self.su_input_2 = QtWidgets.QTextEdit(Form)
+        self.su_input_2.setGeometry(QtCore.QRect(190, 390, 541, 91))
+        self.su_input_2.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.su_input_1.setObjectName("su_input_1")
+        self.su_input_2.setObjectName("su_input_2")
         self.su_btn_confirmar = QtWidgets.QPushButton(Form)
-        self.su_btn_confirmar.setGeometry(QtCore.QRect(330, 510, 131, 31))
+        self.su_btn_confirmar.setGeometry(QtCore.QRect(280, 510, 131, 31))
         self.su_btn_confirmar.setStyleSheet("background-color: rgb(99, 206, 104);\n"
 "color:white;\n"
 "font-size:10pt;\n"
 "border:none;")
         self.su_btn_confirmar.setObjectName("su_btn_confirmar")
         self.su_btn_cancelar = QtWidgets.QPushButton(Form)
-        self.su_btn_cancelar.setGeometry(QtCore.QRect(530, 510, 131, 31))
+        self.su_btn_cancelar.setGeometry(QtCore.QRect(440, 510, 131, 31))
         self.su_btn_cancelar.setStyleSheet("color:white;\n"
 "font-size:10pt;\n"
 "border:none;\n"
 "background-color:#ff4e4e;")
         self.su_btn_cancelar.setObjectName("su_btn_cancelar")
-
+        self.label_4 = QtWidgets.QLabel(Form)
+        self.label_4.setGeometry(QtCore.QRect(130, 320, 61, 31))
+        self.label_4.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+"text-align:center;")
+        self.label_4.setObjectName("label_4")
+        self.su_input_1 = QtWidgets.QDateEdit(Form)
+        self.su_input_1.setGeometry(QtCore.QRect(190, 320, 541, 31))
+        self.su_input_1.setStyleSheet("border:none;\n"
+"background-color: rgb(255, 255, 255);\n"
+"font: 11pt \"MS Shell Dlg 2\";")
+        self.su_input_1.setObjectName("su_input_1")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -112,17 +116,15 @@ class Ui_Form(object):
         self.su_radiobutton_2.setText(_translate("Form", "Herramientas"))
         self.su_radiobutton_3.setText(_translate("Form", "Serializables"))
         self.su_radiobutton_4.setText(_translate("Form", "Control de Calidad"))
-        self.su_radiobutton_5.setText(_translate("Form", "Supervisor"))
-        self.su_radiobutton_6.setText(_translate("Form", "Tecnico"))
         self.label_3.setText(_translate("Form", "Motivo"))
-        self.su_input_1.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.su_input_2.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.su_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.su_btn_cancelar.setText(_translate("Form", "Cancelar"))
-
+        self.label_4.setText(_translate("Form", "Fecha"))
 
 
 if __name__ == "__main__":

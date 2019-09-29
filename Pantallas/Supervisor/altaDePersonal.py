@@ -8,11 +8,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from ABM import ABM_supervisor
+legajo=ABM_supervisor()
+emp_legajo=legajo.emp_legajo()
 
 
 class Ui_Form(object):
+
     def setupUi(self, Form):
-        Form.setObjectName("Form")
+        legajo = ABM_supervisor()
+        emp_legajo = legajo.emp_legajo()
+        Form.setObjectName("Alta de personal")
         Form.resize(464, 418)
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(60, 10, 341, 41))
@@ -28,11 +34,13 @@ class Ui_Form(object):
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.su_input_1 = QtWidgets.QLineEdit(Form)
+        self.su_input_1.setEnabled(False)
         self.su_input_1.setGeometry(QtCore.QRect(120, 110, 301, 31))
         self.su_input_1.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.su_input_1.setText("")
+
+        self.su_input_1.setText(str(emp_legajo))
         self.su_input_1.setObjectName("su_input_1")
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(40, 110, 71, 31))
@@ -95,9 +103,9 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Alta de Personal"))
         self.label_2.setText(_translate("Form", "Alta de Personal"))
-        self.label_3.setText(_translate("Form", "Ingrese datos del individuo"))
+        self.label_3.setText(_translate("Form", "Ingrese datos del personal"))
         self.label.setText(_translate("Form", "Legajo"))
         self.label_4.setText(_translate("Form", "Nombre"))
         self.label_5.setText(_translate("Form", "Apellido"))
@@ -114,3 +122,5 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
+
+#altadeperdonal

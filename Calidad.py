@@ -38,7 +38,7 @@ class ABM():
         self.cursor.execute(self.sql)
         a=self.cursor.fetchall()
 
-a=ABM()
-a.alta('empleados', (1236, 12366479, 'chicho','seri'))
-#a.baja('empleados', 'emp_legajo', '1234')
-a.alta_denuncia((1230,123,321,12,190518,1234,190520))
+# a=ABM()
+# a.alta('empleados', (1236, 12366479, 'chicho','seri'))
+# #a.baja('empleados', 'emp_legajo', '1234')
+# a.alta_denuncia((1230,123,321,12,190518,1234,190520))
