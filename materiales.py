@@ -507,11 +507,11 @@ class StockMateriales(QtWidgets.QDialog):
             return
         _translate = QtCore.QCoreApplication.translate
 
-        for i in resultados:
-            if posicion == 3:
-                posicion = posicion + 1
-            self.ui.ma_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
-            posicion += 1
+        # for i in resultados:
+        #     if posicion == 3:
+        #         posicion = posicion + 1
+        #     self.ui.ma_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
+        #     posicion += 1
 
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()

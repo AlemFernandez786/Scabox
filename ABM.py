@@ -1,4 +1,5 @@
 import mysql.connector
+from datetime import date, timedelta
 
 class ABM_herramientas:
     def __init__(self):
@@ -198,9 +199,23 @@ class ABM_materiales:
         art_info = self.cursor.fetchall()
         lista = []
         for i in range(0, len(art_info)):
+
             lista.append(list(art_info[i]))
         for i in range(0, len(art_info)):
-            lista[i].insert(3, 'NULL')
+            fecha1 = str(date.today() + timedelta(days=-30))
+            fecha2 = str(date.today())
+            sql1 = 'SELECT sum(hm.his_mat_cantidad) FROM historial_materiales hm WHERE hm.art_id = '+str(lista[i][0])+' AND hm.his_mat_fecha BETWEEN DATE("'+fecha1+'") AND DATE("'+fecha2+'")'
+            self.cursor.execute(sql1)
+            datos = self.cursor.fetchall()
+            consumo = []
+            for filas in datos:
+                for filas1 in filas:
+                    if filas1 == None:
+                        filas1 = 0
+                        consumo.append(filas1)
+                    else:
+                        consumo.append(int(filas1))
+                lista[i].insert(3, str(consumo[0]))
         art_info = tuple(lista)
         return art_info
 
