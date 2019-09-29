@@ -263,6 +263,12 @@ class ModificarStock(QtWidgets.QDialog):
         super(ModificarStock, self).__init__(*args, **kwargs)
         self.ui = modificarStockMateriales.Ui_Form()
         self.ui.setupUi(self)
+        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+        self.ui.ma_btn_buscar.clicked.connect(self.busqueda)
+        self.ui.ma_btn_confirmar.clicked.connect(self.modificacion)
+        self.tabla()
+
+    def tabla(self):
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()
         _translate = QtCore.QCoreApplication.translate
@@ -272,12 +278,10 @@ class ModificarStock(QtWidgets.QDialog):
             posicion = 0
             for a in range(0, len(resultado[i])):
                 test = resultado[i][a]
+                self.ui.ma_tabla.topLevelItem(i).setHidden(False)
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
 
-        self.ui.ma_btn_cancelar.clicked.connect(self.salir)
-        self.ui.ma_btn_buscar.clicked.connect(self.busqueda)
-        self.ui.ma_btn_confirmar.clicked.connect(self.modificacion)
 
         # Muestra datos seleccionados
         self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
@@ -298,6 +302,7 @@ class ModificarStock(QtWidgets.QDialog):
             codigo = int(self.ui.ma_input_buscar.text())
         except ValueError:
             QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
+            self.tabla()
             return
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales(str(codigo))
@@ -463,9 +468,13 @@ class StockMateriales(QtWidgets.QDialog):
         super(StockMateriales, self).__init__(*args, **kwargs)
         self.ui = consultarStockMateriales.Ui_Form()
         self.ui.setupUi(self)
+        self.tabla()
+        self.ui.ma_btn_buscar.clicked.connect(self.consulta)
+        self.ui.ma_btn_volver.clicked.connect(self.salir)
+
+    def tabla(self):
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()
-        _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
         for i in range(0, len_resultado):
             # resultado[i].insert(3, str(999))
@@ -473,12 +482,11 @@ class StockMateriales(QtWidgets.QDialog):
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
                 test = resultado[i][a]
-                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                self.ui.ma_tabla.topLevelItem(i).setHidden(False)
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
 
-        self.ui.ma_btn_buscar.clicked.connect(self.consulta)
-        self.ui.ma_btn_volver.clicked.connect(self.salir)
-    # Muestra datos seleccionados
+        # Muestra datos seleccionados
         self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
 
     def info(self):
@@ -495,6 +503,8 @@ class StockMateriales(QtWidgets.QDialog):
         try:
             codigo = int(self.ui.ma_input_buscar.text())
         except (ValueError, TypeError):
+            self.tabla()
+            print("hola")
             QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
             return
         consultar = ABM_materiales()
@@ -505,14 +515,6 @@ class StockMateriales(QtWidgets.QDialog):
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             return
-        _translate = QtCore.QCoreApplication.translate
-
-        # for i in resultados:
-        #     if posicion == 3:
-        #         posicion = posicion + 1
-        #     self.ui.ma_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
-        #     posicion += 1
-
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()
         len_resultado = (len(resultado))
