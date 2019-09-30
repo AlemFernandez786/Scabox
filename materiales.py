@@ -132,20 +132,37 @@ class StockMovilIngreso(QtWidgets.QDialog):
         self.cursor = self.conexion.cursor()
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
         # Inserción de datos en tabla
-        self.sql = 'SELECT m.mov_id, e.emp_nombre, e.emp_apellido FROM empleados e JOIN dupla_movil dm ON' \
-                   ' e.emp_legajo=dm.emp_legajo JOIN movil m ON dm.dup_mov_id = m.dup_mov_id'
+        self.sql = 'SELECT dm.mov_id, e.emp_nombre, e.emp_apellido FROM empleados e JOIN dupla_movil dm ON ' \
+                   'e.emp_legajo=dm.emp_legajo'
         self.cursor.execute(self.sql)
         resultado = self.cursor.fetchall()
         lista = []
+        dupla = []
         for i in range(0, len(resultado)):
             lista.append(list(resultado[i]))
-        resultado = tuple(lista)
-        len_resultado = (len(resultado))
+        resultado = lista
+        # print(resultado)
+
+        for i in range(0, len(resultado)):
+            if i+1 >= len(resultado):
+                break
+            print("asd")
+            print(resultado[i][0])
+            if resultado[i][0] == resultado[i+1][0]:
+                numero = str(resultado[i][0])
+                nombre = list(resultado[i][2])
+                apellido = list(resultado[i+1][2])
+                espacio = list(" ")
+                nombres = "".join(nombre), "".join(apellido)
+                dupla.append([numero, nombres])
+        print(dupla)
+        len_resultado = (len(dupla))
         for i in range(0, len_resultado):
             posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
-            for a in range(0, len(resultado[i])):
-                test = resultado[i][a]
+            for a in range(0, len(dupla[i])):
+                test = dupla[i][a]
+
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
         # -------------------------------------
@@ -191,7 +208,7 @@ class StockPorMovil(QtWidgets.QDialog):
     def tabla(self, cod):
         self.codigo = cod
         sql = 'SELECT am.art_id, a.art_nombre, am.art_mov_cantidad FROM articulo_movil am JOIN articulo a ON ' \
-              'am.art_id = a.art_id WHERE mov_id='+str(self.codigo)+' AND a.tip_id = 3'
+              'am.art_id = a.art_id WHERE mov_id='+str(self.codigo)+' AND a.tip_id = 2'
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         lista = []
@@ -448,8 +465,8 @@ class Aprovisionamiento(QtWidgets.QDialog):
 
         fecha1 = str(date.today() + timedelta(days=-7))
         fecha2 = str(date.today())
-        sql = 'SELECT a.art_id, a.art_nombre, sum(hm.his_mat_cantidad) FROM articulo a JOIN historial_materiales' \
-              ' hm ON a.art_id=hm.art_id WHERE a.tip_id = 3 AND a.art_cantidad < a.art_cant_min AND ' \
+        sql = 'SELECT a.art_id, a.art_nombre, sum(hm.his_mat_cant) FROM articulo a JOIN historial_materiales' \
+              ' hm ON a.art_id=hm.art_id WHERE a.tip_id = 2 AND a.art_cantidad < a.art_cant_min AND ' \
               'hm.his_mat_fecha BETWEEN DATE("' + fecha1 + '") AND DATE("' + fecha2 + '") GROUP BY art_id'
         self.cursor.execute(sql)
         query = self.cursor.fetchall()
@@ -468,9 +485,10 @@ class StockMateriales(QtWidgets.QDialog):
         super(StockMateriales, self).__init__(*args, **kwargs)
         self.ui = consultarStockMateriales.Ui_Form()
         self.ui.setupUi(self)
-        self.tabla()
         self.ui.ma_btn_buscar.clicked.connect(self.consulta)
         self.ui.ma_btn_volver.clicked.connect(self.salir)
+        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+        self.tabla()
 
     def tabla(self):
         consultar = ABM_materiales()
@@ -487,7 +505,7 @@ class StockMateriales(QtWidgets.QDialog):
                 posicion += 1
 
         # Muestra datos seleccionados
-        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+
 
     def info(self):
         seleccion = self.ui.ma_tabla.selectedItems()
