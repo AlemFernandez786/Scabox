@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'supervisor.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -14,7 +5,6 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(448, 405)
-        Form.setStyleSheet("background-color:white;")
         self.su_btn_cancelar = QtWidgets.QPushButton(Form)
         self.su_btn_cancelar.setGeometry(QtCore.QRect(270, 350, 111, 31))
         self.su_btn_cancelar.setStyleSheet("color:white;\n"

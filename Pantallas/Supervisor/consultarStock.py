@@ -2,19 +2,17 @@
 
 # Form implementation generated from reading ui file 'consultarStock.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(542, 209)
-        Form.setStyleSheet("background-color:white;")
+        Form.setStyleSheet("")
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(10, 30, 171, 51))
         self.label.setStyleSheet("font-size:20px;")
@@ -67,3 +65,4 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
+
