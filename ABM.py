@@ -158,7 +158,7 @@ class ABM_materiales:
 
     def baja_materiales(self, identificador):
         self.identificador=identificador
-        self.sql = 'DELETE FROM articulo WHERE art_id = ' + identificador +' AND tip_id=3'
+        self.sql = 'DELETE FROM articulo WHERE art_id = ' + identificador +' AND tip_id = 2'
         self.cursor.execute (self.sql)
         self.conexion.commit()
 
@@ -184,7 +184,7 @@ class ABM_materiales:
         self.valores.insert(0, str(art_info))
         self.valores[1] = '"' + str(valores[0]) + '"'
         self.valores.insert(2, today)
-        self.valores.insert(3, str('3'))
+        self.valores.insert(3, str('2'))
         self.valores = tuple(self.valores)
         # Creamos la query
         self.sql = 'INSERT INTO articulo VALUES (' + ",".join(map(str, self.valores)) + ')'
@@ -194,13 +194,13 @@ class ABM_materiales:
 
     def consulta_materiales(self, valor):
         self.valor=valor
-        self.sql= 'SELECT art_id, art_nombre, art_cantidad, art_cant_min, art_cant_max FROM articulo WHERE art_id = ' + self.valor +' AND tip_id = 3'
+        self.sql= 'SELECT art_id, art_nombre, art_cantidad, art_cant_min, art_cant_max FROM articulo WHERE art_id = ' + self.valor +' AND tip_id = 2'
         self.cursor.execute(self.sql)
         art_info=self.cursor.fetchall()
         return art_info
 
     def consulta_materiales_gral(self):
-        self.sql = 'SELECT art_id, art_nombre, art_cantidad, art_cant_min, art_cant_max FROM articulo WHERE tip_id = 3'
+        self.sql = 'SELECT art_id, art_nombre, art_cantidad, art_cant_min, art_cant_max FROM articulo WHERE tip_id = 2'
         self.cursor.execute(self.sql)
         art_info = self.cursor.fetchall()
         lista = []
@@ -210,7 +210,8 @@ class ABM_materiales:
         for i in range(0, len(art_info)):
             fecha1 = str(date.today() + timedelta(days=-30))
             fecha2 = str(date.today())
-            sql1 = 'SELECT sum(hm.his_mat_cantidad) FROM historial_materiales hm WHERE hm.art_id = '+str(lista[i][0])+' AND hm.his_mat_fecha BETWEEN DATE("'+fecha1+'") AND DATE("'+fecha2+'")'
+            sql1 = 'SELECT sum(hm.his_mat_cant) FROM historial_materiales hm WHERE hm.art_id = '+str(lista[i][0])\
+                   + ' AND hm.his_mat_fecha BETWEEN DATE("'+fecha1+'") AND DATE("'+fecha2+'")'
             self.cursor.execute(sql1)
             datos = self.cursor.fetchall()
             consumo = []
@@ -228,7 +229,7 @@ class ABM_materiales:
     def modificacion_materiales(self, valor):
         self.valor=valor
         # Obtenemos la cantidad actual y creamos la variable modificada
-        self.sql = 'SELECT art_cantidad FROM articulo WHERE art_id = ' + self.valor[0] + ' AND tip_id = 3'
+        self.sql = 'SELECT art_cantidad FROM articulo WHERE art_id = ' + self.valor[0] + ' AND tip_id = 2'
         self.cursor.execute(self.sql)
         cant_actual = self.cursor.fetchall()
         cant_actual = ''.join(e for e in str(cant_actual[0]) if e.isalnum())
@@ -242,10 +243,10 @@ class ABM_materiales:
         today = ''.join(e for e in today if e.isalnum())
         # Ejecutamos las querys de modificacion en DB
         self.sql = 'UPDATE articulo SET art_fecha_ultimo_ingreso ' \
-                   '= ' + today + ' WHERE art_id = ' + self.valor[0]+' AND tip_id=3'
+                   '= ' + today + ' WHERE art_id = ' + self.valor[0]+' AND tip_id = 2'
         self.cursor.execute(self.sql)
         self.sql = 'UPDATE articulo SET art_cantidad ' \
-                   '= ' + str(cantidad) + ' WHERE art_id = ' + self.valor[0] + ' AND tip_id=3'
+                   '= ' + str(cantidad) + ' WHERE art_id = ' + self.valor[0] + ' AND tip_id = 2'
         self.cursor.execute(self.sql)
         self.conexion.commit()
 
