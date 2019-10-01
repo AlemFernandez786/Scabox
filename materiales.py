@@ -132,12 +132,12 @@ class StockMovilIngreso(QtWidgets.QDialog):
         self.cursor = self.conexion.cursor()
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
         # Inserción de datos en tabla
-        self.sql = 'SELECT dm.mov_id, e.emp_nombre, e.emp_apellido FROM empleados e JOIN dupla_movil dm ON ' \
-                   'e.emp_legajo=dm.emp_legajo'
+        self.sql = 'SELECT dm.mov_id, e.emp_nombre, e.emp_apellido FROM empleados e JOIN dupla_movil dm ON' \
+                   ' e.emp_legajo=dm.emp_legajo ORDER BY dm.mov_id ASC'
         self.cursor.execute(self.sql)
         resultado = self.cursor.fetchall()
         lista = []
-        dupla = []
+        duplas = []
         for i in range(0, len(resultado)):
             lista.append(list(resultado[i]))
         resultado = lista
@@ -146,22 +146,21 @@ class StockMovilIngreso(QtWidgets.QDialog):
         for i in range(0, len(resultado)):
             if i+1 >= len(resultado):
                 break
-            print("asd")
-            print(resultado[i][0])
             if resultado[i][0] == resultado[i+1][0]:
+                dupla = []
                 numero = str(resultado[i][0])
-                nombre = list(resultado[i][2])
-                apellido = list(resultado[i+1][2])
-                espacio = list(" ")
-                nombres = "".join(nombre), "".join(apellido)
-                dupla.append([numero, nombres])
-        print(dupla)
-        len_resultado = (len(dupla))
+                dupla.append(numero)
+                wachos = (str(resultado[i][1]) + " " + str(resultado[i][2]) + ", " + str(resultado[i+1][1]) + " " +
+                          str(resultado[i+1][2]))
+
+                dupla.append(wachos)
+                duplas.append(dupla)
+        len_resultado = (len(duplas))
         for i in range(0, len_resultado):
             posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
-            for a in range(0, len(dupla[i])):
-                test = dupla[i][a]
+            for a in range(0, len(duplas[i])):
+                test = duplas[i][a]
 
                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
@@ -169,6 +168,7 @@ class StockMovilIngreso(QtWidgets.QDialog):
 
         # Muestra datos seleccionados
         self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+        self.ui.ma_tabla.doubleClicked.connect(self.confirmar)
 
     def info(self):
         seleccion = self.ui.ma_tabla.selectedItems()
@@ -263,7 +263,7 @@ class StockPorMovil(QtWidgets.QDialog):
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
             sql = str('UPDATE articulo_movil SET art_mov_cantidad ' 
-                      '= ' + str(self.cantidad) + ' WHERE art_id = ' + str(datos.text(0)))
+                      '= ' + str(cantidad) + ' WHERE art_id = ' + str(datos.text(0)))
 
             self.cursor.execute(sql)
             self.conexion.commit()
@@ -462,14 +462,15 @@ class Aprovisionamiento(QtWidgets.QDialog):
         self.close()
 
     def pedido(self, marca1):
-
-        fecha1 = str(date.today() + timedelta(days=-7))
+        print("hola")
+        fecha1 = str(date.today() + timedelta(days=-30))
         fecha2 = str(date.today())
         sql = 'SELECT a.art_id, a.art_nombre, sum(hm.his_mat_cant) FROM articulo a JOIN historial_materiales' \
               ' hm ON a.art_id=hm.art_id WHERE a.tip_id = 2 AND a.art_cantidad < a.art_cant_min AND ' \
               'hm.his_mat_fecha BETWEEN DATE("' + fecha1 + '") AND DATE("' + fecha2 + '") GROUP BY art_id'
         self.cursor.execute(sql)
         query = self.cursor.fetchall()
+        print(query)
         if marca1 == 1:
             return query
         else:
@@ -532,13 +533,31 @@ class StockMateriales(QtWidgets.QDialog):
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             return
+        # consultar = ABM_materiales()
+        # resultado = consultar.consulta_materiales_gral()
+        # len_resultado = (len(resultado))
+        # for i in range(1, len_resultado):
+        #     QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+        #     for a in range(0, len(resultado[i])):
+        #         self.ui.ma_tabla.topLevelItem(i).setHidden(True)
+        #         posicion += 1
+        QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+        posicion = 0
+        for i in resultados:
+            if posicion == 3:
+                posicion = posicion + 1
+            self.ui.ma_tabla.topLevelItem(0).setText(posicion, str(i))
+            posicion += 1
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
+            # print(resultado[i])
+            posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
                 self.ui.ma_tabla.topLevelItem(i).setHidden(True)
+                posicion += 1
 
 
 class MaximaMinima(QtWidgets.QDialog):
@@ -556,7 +575,11 @@ class MaximaMinima(QtWidgets.QDialog):
         self.close()
 
     def confirmar(self):
-        codigo = int(self.ui.ma_input_1.text())
+        try:
+            codigo = int(self.ui.ma_input_1.text())
+        except ValueError:
+            return
+
         if (codigo < 0) | (codigo > 99999999):
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
@@ -622,7 +645,7 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
 
 # Compara si el dia es viernes .weekday() retorna los dias como un entero 0 para lunes hasta 6 para domingo
 marca = 0
-if date.today().weekday() == 4:
+if date.today().weekday() == 0:
     marca = 1
     app = QtWidgets.QApplication([])
     aprov_automatico = Aprovisionamiento()
