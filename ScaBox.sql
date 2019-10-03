@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 29-09-2019 a las 19:38:13
+-- Tiempo de generación: 03-10-2019 a las 01:47:36
 -- Versión del servidor: 5.7.21
 -- Versión de PHP: 5.6.35
 
@@ -49,7 +49,8 @@ INSERT INTO `articulo` (`art_id`, `art_nombre`, `art_fecha_ultimo_ingreso`, `tip
 (1, 'Tornillo', '2019-09-26', 2, 2000, 1200, 5000),
 (2, 'Cable', '2019-09-26', 2, 1500, 1000, 4000),
 (3, 'Destornillador', '2019-09-26', 1, 120, 70, 150),
-(4, 'Martillo', '2019-09-26', 1, 120, 70, 150);
+(4, 'Martillo', '2019-09-26', 1, 120, 70, 150),
+(5, 'Clavo', '2019-08-03', 2, 1000, 2000, 5000);
 
 -- --------------------------------------------------------
 
@@ -100,6 +101,30 @@ INSERT INTO `articulo_tecnico` (`emp_legajo`, `art_id`, `art_tec_cantidad`) VALU
 (123, 1, 50),
 (124, 1, 50),
 (124, 2, 50);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `consumo_serializable`
+--
+
+DROP TABLE IF EXISTS `consumo_serializable`;
+CREATE TABLE IF NOT EXISTS `consumo_serializable` (
+  `ser_id` int(2) NOT NULL COMMENT 'Id del tipo de serializable',
+  `ser_cant` int(10) NOT NULL COMMENT 'Cantidad utilizada',
+  `ser_fecha_consumo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha en que se realizo el consumo',
+  PRIMARY KEY (`ser_fecha_consumo`),
+  KEY `ser_id` (`ser_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `consumo_serializable`
+--
+
+INSERT INTO `consumo_serializable` (`ser_id`, `ser_cant`, `ser_fecha_consumo`) VALUES
+(3, 5, '2019-08-15 00:00:30'),
+(3, 15, '2019-09-30 00:42:00'),
+(4, 10, '2019-09-30 00:53:25');
 
 -- --------------------------------------------------------
 
@@ -159,10 +184,7 @@ DROP TABLE IF EXISTS `dupla_movil`;
 CREATE TABLE IF NOT EXISTS `dupla_movil` (
   `emp_legajo` int(4) NOT NULL COMMENT 'Legajo del empleado',
   `mov_id` int(5) NOT NULL COMMENT 'Id del movil',
-  `fecha_dup_mov` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de validez de la dupla',
-  PRIMARY KEY (`fecha_dup_mov`),
   UNIQUE KEY `emp_legajo` (`emp_legajo`),
-  KEY `usu_legajo` (`emp_legajo`),
   KEY `mov_id` (`mov_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -170,9 +192,11 @@ CREATE TABLE IF NOT EXISTS `dupla_movil` (
 -- Volcado de datos para la tabla `dupla_movil`
 --
 
-INSERT INTO `dupla_movil` (`emp_legajo`, `mov_id`, `fecha_dup_mov`) VALUES
-(123, 1, '2019-09-29 16:14:04'),
-(124, 1, '2019-09-29 16:15:37');
+INSERT INTO `dupla_movil` (`emp_legajo`, `mov_id`) VALUES
+(123, 1),
+(124, 1),
+(125, 2),
+(126, 2);
 
 -- --------------------------------------------------------
 
@@ -196,7 +220,25 @@ CREATE TABLE IF NOT EXISTS `empleados` (
 
 INSERT INTO `empleados` (`emp_legajo`, `emp_documento`, `emp_nombre`, `emp_apellido`, `fecha_ingreso`) VALUES
 (123, 1234123, 'asdqwe', 'zxcsd', NULL),
-(124, 37102639, 'Nicolas', 'Campos', '2019-09-25');
+(124, 37102639, 'Nicolas', 'Campos', '2019-09-25'),
+(125, 37103556, 'adolfo', 'h', '2019-10-02'),
+(126, 31789556, 'rodrigo', 'b', '2019-10-02');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial_dupla`
+--
+
+DROP TABLE IF EXISTS `historial_dupla`;
+CREATE TABLE IF NOT EXISTS `historial_dupla` (
+  `his_dup_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del historial',
+  `emp_legajo` int(4) NOT NULL,
+  `mov_id` int(5) NOT NULL,
+  PRIMARY KEY (`his_dup_id`),
+  KEY `emp_legajo` (`emp_legajo`,`mov_id`),
+  KEY `mov_id` (`mov_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -208,10 +250,19 @@ DROP TABLE IF EXISTS `historial_materiales`;
 CREATE TABLE IF NOT EXISTS `historial_materiales` (
   `art_id` int(8) NOT NULL,
   `his_mat_cant` int(4) NOT NULL,
-  `his_mat_fecha` date NOT NULL,
+  `his_mat_fecha` datetime NOT NULL,
   PRIMARY KEY (`his_mat_fecha`),
   KEY `art_id` (`art_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `historial_materiales`
+--
+
+INSERT INTO `historial_materiales` (`art_id`, `his_mat_cant`, `his_mat_fecha`) VALUES
+(2, 10, '2019-09-20 00:00:00'),
+(1, 15, '2019-09-30 00:00:00'),
+(5, 15, '2019-09-30 20:08:02');
 
 -- --------------------------------------------------------
 
@@ -317,6 +368,9 @@ CREATE TABLE IF NOT EXISTS `serializable` (
 --
 
 INSERT INTO `serializable` (`ser_mac`, `ser_fecha_ultimo_ingreso`, `tip_id`) VALUES
+('112233445566', '2019-09-30', 4),
+('1234567890ab', '2019-09-30', 3),
+('aabb1122cc33', '2019-09-30', 4),
 ('ser1', '2019-09-03', 3),
 ('ser2', '2019-09-04', 4),
 ('ser3', '2019-09-05', 5),
@@ -334,9 +388,18 @@ DROP TABLE IF EXISTS `serializable_movil`;
 CREATE TABLE IF NOT EXISTS `serializable_movil` (
   `mov_id` int(5) NOT NULL COMMENT 'ID del movil',
   `ser_mac` varchar(12) NOT NULL COMMENT 'MAC de serializables',
+  UNIQUE KEY `ser_mac_2` (`ser_mac`),
   KEY `mov_id` (`mov_id`,`ser_mac`),
   KEY `ser_mac` (`ser_mac`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `serializable_movil`
+--
+
+INSERT INTO `serializable_movil` (`mov_id`, `ser_mac`) VALUES
+(1, '112233445566'),
+(2, '1234567890ab');
 
 -- --------------------------------------------------------
 
@@ -372,7 +435,8 @@ CREATE TABLE IF NOT EXISTS `tipo_serializable` (
   `cant_serializable` int(7) NOT NULL DEFAULT '0' COMMENT 'Cantidad actual en stock',
   `cant_min_ser` int(7) NOT NULL COMMENT 'Stock minimo',
   `cant_max_ser` int(7) NOT NULL COMMENT 'Stock maximo',
-  PRIMARY KEY (`tipo_serializable`)
+  PRIMARY KEY (`tipo_serializable`),
+  UNIQUE KEY `desc_serializable` (`desc_serializable`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -380,9 +444,9 @@ CREATE TABLE IF NOT EXISTS `tipo_serializable` (
 --
 
 INSERT INTO `tipo_serializable` (`tipo_serializable`, `desc_serializable`, `cant_serializable`, `cant_min_ser`, `cant_max_ser`) VALUES
-(3, 'Modem WiFi', 0, 10, 100),
-(4, 'Decodificador', 250, 150, 500),
-(5, 'Decodificador HD', 150, 250, 800);
+(3, 'Modem WiFi', 5, 25, 125),
+(4, 'Decodificador', 3, 150, 500),
+(5, 'Decodificador HD', 1, 250, 800);
 
 -- --------------------------------------------------------
 
@@ -447,6 +511,12 @@ ALTER TABLE `articulo_tecnico`
   ADD CONSTRAINT `articulo_tecnico_ibfk_2` FOREIGN KEY (`art_id`) REFERENCES `articulo` (`art_id`);
 
 --
+-- Filtros para la tabla `consumo_serializable`
+--
+ALTER TABLE `consumo_serializable`
+  ADD CONSTRAINT `consumo_serializable_ibfk_1` FOREIGN KEY (`ser_id`) REFERENCES `tipo_serializable` (`tipo_serializable`);
+
+--
 -- Filtros para la tabla `denuncias`
 --
 ALTER TABLE `denuncias`
@@ -470,8 +540,15 @@ ALTER TABLE `detalle_denuncia_serializables`
 -- Filtros para la tabla `dupla_movil`
 --
 ALTER TABLE `dupla_movil`
-  ADD CONSTRAINT `dupla_movil_ibfk_1` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`),
-  ADD CONSTRAINT `dupla_movil_ibfk_2` FOREIGN KEY (`mov_id`) REFERENCES `movil` (`mov_id`);
+  ADD CONSTRAINT `dupla_movil_ibfk_2` FOREIGN KEY (`mov_id`) REFERENCES `movil` (`mov_id`),
+  ADD CONSTRAINT `dupla_movil_ibfk_3` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`);
+
+--
+-- Filtros para la tabla `historial_dupla`
+--
+ALTER TABLE `historial_dupla`
+  ADD CONSTRAINT `historial_dupla_ibfk_1` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `historial_dupla_ibfk_2` FOREIGN KEY (`mov_id`) REFERENCES `movil` (`mov_id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `historial_materiales`
@@ -491,6 +568,12 @@ ALTER TABLE `historial_sectores`
 --
 ALTER TABLE `historial_serializables`
   ADD CONSTRAINT `historial_serializables_ibfk_1` FOREIGN KEY (`ser_mac`) REFERENCES `serializable` (`ser_mac`);
+
+--
+-- Filtros para la tabla `serializable`
+--
+ALTER TABLE `serializable`
+  ADD CONSTRAINT `serializable_ibfk_1` FOREIGN KEY (`tip_id`) REFERENCES `tipo_serializable` (`tipo_serializable`);
 
 --
 -- Filtros para la tabla `serializable_movil`
