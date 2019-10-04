@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 03-10-2019 a las 01:47:36
+-- Tiempo de generación: 03-10-2019 a las 23:59:40
 -- Versión del servidor: 5.7.21
 -- Versión de PHP: 5.6.35
 
@@ -227,6 +227,30 @@ INSERT INTO `empleados` (`emp_legajo`, `emp_documento`, `emp_nombre`, `emp_apell
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `estados_serializables`
+--
+
+DROP TABLE IF EXISTS `estados_serializables`;
+CREATE TABLE IF NOT EXISTS `estados_serializables` (
+  `id_estado_ser` int(2) NOT NULL AUTO_INCREMENT,
+  `des_estado` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_estado_ser`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `estados_serializables`
+--
+
+INSERT INTO `estados_serializables` (`id_estado_ser`, `des_estado`) VALUES
+(1, 'Listo para entregar'),
+(2, 'Entregado'),
+(3, 'Instalado'),
+(4, 'Devolucion'),
+(5, 'Extraviado');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `historial_dupla`
 --
 
@@ -291,11 +315,12 @@ DROP TABLE IF EXISTS `historial_serializables`;
 CREATE TABLE IF NOT EXISTS `historial_serializables` (
   `his_id` int(4) NOT NULL COMMENT 'ID del historial',
   `ser_mac` varchar(12) NOT NULL COMMENT 'MAC de serializables',
-  `ser_estado` varchar(10) NOT NULL COMMENT 'Estado del serializable',
-  `ser_fecha_entrega` date NOT NULL COMMENT 'Fecha de entrega del serializable',
+  `ser_estado` int(2) NOT NULL COMMENT 'Estado del serializable',
+  `ser_fecha_entrega` date DEFAULT NULL COMMENT 'Fecha de entrega del serializable',
   `ser_fecha_ultimo_estado` date NOT NULL COMMENT 'Fecha del ultimo estado',
   PRIMARY KEY (`his_id`),
-  KEY `ser_mac` (`ser_mac`)
+  KEY `ser_mac` (`ser_mac`),
+  KEY `ser_estado` (`ser_estado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -399,6 +424,7 @@ CREATE TABLE IF NOT EXISTS `serializable_movil` (
 
 INSERT INTO `serializable_movil` (`mov_id`, `ser_mac`) VALUES
 (1, '112233445566'),
+(1, 'aabb1122cc33'),
 (2, '1234567890ab');
 
 -- --------------------------------------------------------
@@ -445,7 +471,7 @@ CREATE TABLE IF NOT EXISTS `tipo_serializable` (
 
 INSERT INTO `tipo_serializable` (`tipo_serializable`, `desc_serializable`, `cant_serializable`, `cant_min_ser`, `cant_max_ser`) VALUES
 (3, 'Modem WiFi', 5, 25, 125),
-(4, 'Decodificador', 3, 150, 500),
+(4, 'Decodificador', 3, 140, 500),
 (5, 'Decodificador HD', 1, 250, 800);
 
 -- --------------------------------------------------------
@@ -567,7 +593,8 @@ ALTER TABLE `historial_sectores`
 -- Filtros para la tabla `historial_serializables`
 --
 ALTER TABLE `historial_serializables`
-  ADD CONSTRAINT `historial_serializables_ibfk_1` FOREIGN KEY (`ser_mac`) REFERENCES `serializable` (`ser_mac`);
+  ADD CONSTRAINT `historial_serializables_ibfk_1` FOREIGN KEY (`ser_mac`) REFERENCES `serializable` (`ser_mac`),
+  ADD CONSTRAINT `historial_serializables_ibfk_2` FOREIGN KEY (`ser_estado`) REFERENCES `estados_serializables` (`id_estado_ser`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `serializable`
