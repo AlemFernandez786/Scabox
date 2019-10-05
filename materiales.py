@@ -141,7 +141,6 @@ class StockMovilIngreso(QtWidgets.QDialog):
         for i in range(0, len(resultado)):
             lista.append(list(resultado[i]))
         resultado = lista
-        # print(resultado)
 
         for i in range(0, len(resultado)):
             if i+1 >= len(resultado):
@@ -243,7 +242,6 @@ class StockPorMovil(QtWidgets.QDialog):
             datos = seleccion[0]
         except IndexError:
             return
-        datos = seleccion[0]
         try:
             cantidad = int(self.ui.ma_input_1.text())
         except ValueError:
@@ -301,6 +299,7 @@ class ModificarStock(QtWidgets.QDialog):
 
         # Muestra datos seleccionados
         self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+        self.ui.ma_tabla.doubleClicked.connect(self.busqueda)
 
     def info(self):
         seleccion = self.ui.ma_tabla.selectedItems()
@@ -339,7 +338,6 @@ class ModificarStock(QtWidgets.QDialog):
         resultado = consultar.consulta_materiales_gral()
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
-            # print(resultado[i])
             posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
@@ -433,11 +431,11 @@ class Aprovisionamiento(QtWidgets.QDialog):
         if seleccion:
             datos = seleccion[0]
             self.ui.ma_label.setText(datos.text(1))
-            dato = datos.text(2)
-            if dato == '':
-                dato = 0
+            # dato = datos.text(2)
+            # if dato == '':
+            #     dato = 0
             # self.ui.ma_input_1.setValue(int(dato))
-#TODO falta arpovisionamiento
+# TODO falta arpovisionamiento
     # --------------------------------------
 
     def confirmar(self):
@@ -462,7 +460,6 @@ class Aprovisionamiento(QtWidgets.QDialog):
         self.close()
 
     def pedido(self, marca1):
-        print("hola")
         fecha1 = str(date.today() + timedelta(days=-30))
         fecha2 = str(date.today())
         sql = 'SELECT a.art_id, a.art_nombre, sum(hm.his_mat_cant) FROM articulo a JOIN historial_materiales' \
@@ -470,7 +467,6 @@ class Aprovisionamiento(QtWidgets.QDialog):
               'hm.his_mat_fecha BETWEEN DATE("' + fecha1 + '") AND DATE("' + fecha2 + '") GROUP BY art_id'
         self.cursor.execute(sql)
         query = self.cursor.fetchall()
-        print(query)
         if marca1 == 1:
             return query
         else:
@@ -489,6 +485,7 @@ class StockMateriales(QtWidgets.QDialog):
         self.ui.ma_btn_buscar.clicked.connect(self.consulta)
         self.ui.ma_btn_volver.clicked.connect(self.salir)
         self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+        self.ui.ma_tabla.doubleClicked.connect(self.consulta)
         self.tabla()
 
     def tabla(self):
@@ -506,8 +503,6 @@ class StockMateriales(QtWidgets.QDialog):
                 posicion += 1
 
         # Muestra datos seleccionados
-
-
     def info(self):
         seleccion = self.ui.ma_tabla.selectedItems()
         if seleccion:
@@ -523,7 +518,6 @@ class StockMateriales(QtWidgets.QDialog):
             codigo = int(self.ui.ma_input_buscar.text())
         except (ValueError, TypeError):
             self.tabla()
-            print("hola")
             QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
             return
         consultar = ABM_materiales()
@@ -552,7 +546,6 @@ class StockMateriales(QtWidgets.QDialog):
         resultado = consultar.consulta_materiales_gral()
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
-            # print(resultado[i])
             posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
             for a in range(0, len(resultado[i])):
@@ -645,7 +638,7 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
 
 # Compara si el dia es viernes .weekday() retorna los dias como un entero 0 para lunes hasta 6 para domingo
 marca = 0
-if date.today().weekday() == 0:
+if date.today().weekday() == 4:
     marca = 1
     app = QtWidgets.QApplication([])
     aprov_automatico = Aprovisionamiento()
