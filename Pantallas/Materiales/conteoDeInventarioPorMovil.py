@@ -36,6 +36,7 @@ class Ui_Form(object):
 "text-align:center;")
         self.label_4.setObjectName("label_4")
         self.ma_input_movil = QtWidgets.QLineEdit(Form)
+        self.ma_input_movil.setFocus()
         self.ma_input_movil.setGeometry(QtCore.QRect(160, 100, 251, 31))
         self.ma_input_movil.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
