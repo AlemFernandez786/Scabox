@@ -95,6 +95,16 @@ class Alta(QtWidgets.QDialog):
         self.close()
 
     def confirmar(self):
+        if self.ui.ma_input_descripcion == "":
+            QMessageBox.about(self, "Error", "\nIngrese descripción\n del artículo!!\n")
+            return
+        if self.ui.ma_input_maxima.value() == 0 or self.ui.ma_input_minima.value() == 0 \
+                or self.ui.ma_input_ingreso == 0:
+            QMessageBox.about(self, "Error", "\nIngrese un valor!!\n")
+            return
+        if self.ui.ma_input_minima.value() > self.ui.ma_input_maxima.value():
+            QMessageBox.about(self, "Error", "\nLa cantidad mínima no puede \n superar a la máxima!!\n")
+            return
         valores = [
             str(self.ui.ma_input_descripcion.toPlainText()), str(self.ui.ma_input_ingreso.text()),
             str(self.ui.ma_input_minima.text()), str(self.ui.ma_input_maxima.text())]
@@ -118,8 +128,16 @@ class Baja(QtWidgets.QDialog):
 
     def confirmar(self):
         codigo = (str(self.ui.ma_input_codigo.text()))
-        borrar = ABM_materiales()
-        borrar.baja_materiales(codigo)
+
+        instanciaabm = ABM_materiales()
+        busqueda = instanciaabm.consulta_materiales(codigo)
+        if not busqueda:
+            QMessageBox.about(self, "Error", "\nArtículo inexistente!!\n")
+            return
+        try:
+            instanciaabm.baja_materiales(codigo)
+        except mysql.connector.Error:
+            return
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
 
 
@@ -367,12 +385,15 @@ class ModificarStock(QtWidgets.QDialog):
             valor[0] = str(self.ui.ma_input_buscar.text())
             try:
                 cantidad = int(self.ui.ma_input_cantidad.text())
-            except ValueError:
+            except (ValueError):
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
             valor[1] = str(cantidad)
             modificar = ABM_materiales()
-            modificar.modificacion_materiales(valor)
+            try:
+                modificar.modificacion_materiales(valor)
+            except mysql.connector.Error:
+                return
             self.busqueda()
         else:
             return
@@ -600,7 +621,7 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
         minima = str(self.ui.ma_input_minimo.text())
         maxima = str(self.ui.ma_input_maximo.text())
         if int(minima) <= 0:
-            QMessageBox.about(self, "Error!!", "\nEl valor mínimo no puede ser menor a 0.\n")
+            QMessageBox.about(self, "Error!!", "\nEl valor mínimo no puede ser menor o igual 0.\n")
             return
         if int(maxima) <= int(minima):
             QMessageBox.about(self, "Error!!", "\nEl valor máximo no puede ser menor o igual que el valor mínimo.\n")
