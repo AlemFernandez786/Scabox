@@ -25,13 +25,13 @@ class VentanaMateriales(QtWidgets.QMainWindow):
         super(VentanaMateriales, self).__init__(*args, **kwargs)
         self.ui = sectorMateriales.Ui_Form()
         self.ui.setupUi(self)
-        self.ui.ma_btn_1.clicked.connect(self.consulta_stock)
-        self.ui.ma_btn_2.clicked.connect(self.modificacion_stock)
-        self.ui.ma_btn_3.clicked.connect(self.alta_baja_stock)
-        self.ui.ma_btn_4.clicked.connect(self.maxima_minima_stock)
-        self.ui.ma_btn_5.clicked.connect(self.stock_movil)
-        self.ui.ma_btn_6.clicked.connect(self.inventario_movil)
-        self.ui.ma_btn_7.clicked.connect(self.aprovisionamiento_stock)
+        self.ui.ma_btn_consulta.clicked.connect(self.consulta_stock)
+        self.ui.ma_btn_modificacion.clicked.connect(self.modificacion_stock)
+        self.ui.ma_btn_altabaja.clicked.connect(self.alta_baja_stock)
+        self.ui.ma_btn_maxmin.clicked.connect(self.maxima_minima_stock)
+        self.ui.ma_btn_stockmovil.clicked.connect(self.stock_movil)
+        self.ui.ma_btn_inventario.clicked.connect(self.inventario_movil)
+        self.ui.ma_btn_aprovisionamiento.clicked.connect(self.aprovisionamiento_stock)
         self.ui.ma_btn_cancelar.clicked.connect(self.cancelar)
 
     def consulta_stock(self):
@@ -71,8 +71,8 @@ class VentanaAltaBaja(QtWidgets.QDialog):
         super(VentanaAltaBaja, self).__init__(*args, **kwargs)
         self.ui = altaBajaArticulosMaterialesOption.Ui_Form()
         self.ui.setupUi(self)
-        self.ui.ma_btn_1.pressed.connect(self.alta)
-        self.ui.ma_btn_2.pressed.connect(self.baja)
+        self.ui.ma_btn_alta.pressed.connect(self.alta)
+        self.ui.ma_btn_baja.pressed.connect(self.baja)
 
     def alta(self):
         ventanaalta = Alta(self)
@@ -96,8 +96,8 @@ class Alta(QtWidgets.QDialog):
 
     def confirmar(self):
         valores = [
-            str(self.ui.ma_input_6.toPlainText()), str(self.ui.ma_input_2.text()), str(self.ui.ma_input_3.text()),
-            str(self.ui.ma_input_4.text())]
+            str(self.ui.ma_input_descripcion.toPlainText()), str(self.ui.ma_input_ingreso.text()),
+            str(self.ui.ma_input_minima.text()), str(self.ui.ma_input_maxima.text())]
         agregar = ABM_materiales()
         agregar.alta_materiales(valores)
 
@@ -117,7 +117,7 @@ class Baja(QtWidgets.QDialog):
         self.close()
 
     def confirmar(self):
-        codigo = (str(self.ui.ma_input_1.text()))
+        codigo = (str(self.ui.ma_input_codigo.text()))
         borrar = ABM_materiales()
         borrar.baja_materiales(codigo)
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
@@ -157,30 +157,30 @@ class StockMovilIngreso(QtWidgets.QDialog):
         len_resultado = (len(duplas))
         for i in range(0, len_resultado):
             posicion = 0
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
             for a in range(0, len(duplas[i])):
                 test = duplas[i][a]
 
-                self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
         # -------------------------------------
 
         # Muestra datos seleccionados
-        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
-        self.ui.ma_tabla.doubleClicked.connect(self.confirmar)
+        self.ui.ma_tabla_datos.itemSelectionChanged.connect(self.info)
+        self.ui.ma_tabla_datos.doubleClicked.connect(self.confirmar)
 
     def info(self):
-        seleccion = self.ui.ma_tabla.selectedItems()
+        seleccion = self.ui.ma_tabla_datos.selectedItems()
         if seleccion:
             datos = seleccion[0]
-            self.ui.ma_label_1.setText(datos.text(0))
-            self.ui.ma_label_2.setText(datos.text(1))
+            self.ui.ma_label_movil.setText(datos.text(0))
+            self.ui.ma_label_tecnicos.setText(datos.text(1))
 
     # --------------------------------------
 
     def confirmar(self):
         datos = 0
-        seleccion = self.ui.ma_tabla.selectedItems()
+        seleccion = self.ui.ma_tabla_datos.selectedItems()
         if seleccion:
             datos = seleccion[0]
         ventanastockmovil = StockPorMovil()
@@ -217,33 +217,33 @@ class StockPorMovil(QtWidgets.QDialog):
         len_resultado = (len(resultado))
         for i in range(0, len_resultado):
             posicion = 0
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
             for a in range(0, len(resultado[i])):
                 test = resultado[i][a]
-                self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
         # -------------------------------------
 
         # Muestra datos seleccionados
-        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+        self.ui.ma_tabla_datos.itemSelectionChanged.connect(self.info)
 
     def info(self):
-        seleccion = self.ui.ma_tabla.selectedItems()
+        seleccion = self.ui.ma_tabla_datos.selectedItems()
         if seleccion:
             datos = seleccion[0]
-            self.ui.ma_label_1.setText(datos.text(0))
-            self.ui.ma_label_2.setText(datos.text(1))
+            self.ui.ma_label_descripcion.setText(datos.text(0))
+            self.ui.ma_label_stock.setText(datos.text(1))
 
     # --------------------------------------
 
     def confirmar(self):
-        seleccion = self.ui.ma_tabla.selectedItems()
+        seleccion = self.ui.ma_tabla_datos.selectedItems()
         try:
             datos = seleccion[0]
         except IndexError:
             return
         try:
-            cantidad = int(self.ui.ma_input_1.text())
+            cantidad = int(self.ui.ma_input_cantidad.text())
         except ValueError:
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
@@ -256,7 +256,7 @@ class StockPorMovil(QtWidgets.QDialog):
                             Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
         if war == QMessageBox.Ok:
             try:
-                cantidad = int(self.ui.ma_input_1.text())
+                cantidad = int(self.ui.ma_input_cantidad.text())
             except ValueError:
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
@@ -289,20 +289,20 @@ class ModificarStock(QtWidgets.QDialog):
         _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
         for i in range(0, len_resultado):
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
             posicion = 0
             for a in range(0, len(resultado[i])):
                 test = resultado[i][a]
-                self.ui.ma_tabla.topLevelItem(i).setHidden(False)
-                self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
+                self.ui.ma_tabla_datos.topLevelItem(i).setHidden(False)
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
 
         # Muestra datos seleccionados
-        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
-        self.ui.ma_tabla.doubleClicked.connect(self.busqueda)
+        self.ui.ma_tabla_datos.itemSelectionChanged.connect(self.info)
+        self.ui.ma_tabla_datos.doubleClicked.connect(self.busqueda)
 
     def info(self):
-        seleccion = self.ui.ma_tabla.selectedItems()
+        seleccion = self.ui.ma_tabla_datos.selectedItems()
         if seleccion:
             datos = seleccion[0]
             self.ui.ma_input_buscar.setText(datos.text(0))
@@ -327,34 +327,31 @@ class ModificarStock(QtWidgets.QDialog):
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             return
-        QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+        QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
         posicion = 0
         for i in resultados:
             if posicion == 3:
                 posicion = posicion + 1
-            self.ui.ma_tabla.topLevelItem(0).setText(posicion, str(i))
+            self.ui.ma_tabla_datos.topLevelItem(0).setText(posicion, str(i))
             posicion += 1
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
             posicion = 0
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
             for a in range(0, len(resultado[i])):
-                self.ui.ma_tabla.topLevelItem(i).setHidden(True)
+                self.ui.ma_tabla_datos.topLevelItem(i).setHidden(True)
                 posicion += 1
 
-        self.ui.ma_input_1.setText(str(resultados[2]))
-        self.ui.ma_input_2.setDisabled(True)
-        self.ui.ma_input_2.setText(str(resultados[4]))
-        self.ui.ma_input_3.setDisabled(True)
-        self.ui.ma_input_3.setText(str(resultados[3]))
-        self.ui.ma_input_4.setDisabled(True)
-        self.ui.ma_input_4.setText(str(resultados[1]))
+        self.ui.ma_input_actual.setText(str(resultados[2]))
+        self.ui.ma_input_maximo.setText(str(resultados[4]))
+        self.ui.ma_input_minimo.setText(str(resultados[3]))
+        self.ui.ma_input_descripcion.setText(str(resultados[1]))
 
     def modificacion(self):
         try:
-            cantidad = int(self.ui.ma_input_5.text())
+            cantidad = int(self.ui.ma_input_cantidad.text())
         except ValueError:
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
@@ -369,7 +366,7 @@ class ModificarStock(QtWidgets.QDialog):
             valor = ["", ""]
             valor[0] = str(self.ui.ma_input_buscar.text())
             try:
-                cantidad = int(self.ui.ma_input_5.text())
+                cantidad = int(self.ui.ma_input_cantidad.text())
             except ValueError:
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
@@ -416,18 +413,18 @@ class Aprovisionamiento(QtWidgets.QDialog):
         for i in range(0, len_resultado):
 
             posicion = 0
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
             for a in range(0, len(art_info[i])):
                 test = art_info[i][a]
                 self.articulos += str(test) + "                 "
-                self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
             self.articulos += "\n"
         # Muestra datos seleccionados
-        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
+        self.ui.ma_tabla_datos.itemSelectionChanged.connect(self.info)
 
     def info(self):
-        seleccion = self.ui.ma_tabla.selectedItems()
+        seleccion = self.ui.ma_tabla_datos.selectedItems()
         if seleccion:
             datos = seleccion[0]
             self.ui.ma_label.setText(datos.text(1))
@@ -484,8 +481,8 @@ class StockMateriales(QtWidgets.QDialog):
         self.ui.setupUi(self)
         self.ui.ma_btn_buscar.clicked.connect(self.consulta)
         self.ui.ma_btn_volver.clicked.connect(self.salir)
-        self.ui.ma_tabla.itemSelectionChanged.connect(self.info)
-        self.ui.ma_tabla.doubleClicked.connect(self.consulta)
+        self.ui.ma_tabla_datos.itemSelectionChanged.connect(self.info)
+        self.ui.ma_tabla_datos.doubleClicked.connect(self.consulta)
         self.tabla()
 
     def tabla(self):
@@ -495,16 +492,16 @@ class StockMateriales(QtWidgets.QDialog):
         for i in range(0, len_resultado):
             # resultado[i].insert(3, str(999))
             posicion = 0
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
             for a in range(0, len(resultado[i])):
                 test = resultado[i][a]
-                self.ui.ma_tabla.topLevelItem(i).setHidden(False)
-                self.ui.ma_tabla.topLevelItem(i).setText(posicion, str(test))
+                self.ui.ma_tabla_datos.topLevelItem(i).setHidden(False)
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
 
         # Muestra datos seleccionados
     def info(self):
-        seleccion = self.ui.ma_tabla.selectedItems()
+        seleccion = self.ui.ma_tabla_datos.selectedItems()
         if seleccion:
             datos = seleccion[0]
             self.ui.ma_input_buscar.setText(datos.text(0))
@@ -533,23 +530,23 @@ class StockMateriales(QtWidgets.QDialog):
         # for i in range(1, len_resultado):
         #     QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
         #     for a in range(0, len(resultado[i])):
-        #         self.ui.ma_tabla.topLevelItem(i).setHidden(True)
+        #         self.ui.ma_tabla_datos.topLevelItem(i).setHidden(True)
         #         posicion += 1
-        QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+        QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
         posicion = 0
         for i in resultados:
             if posicion == 3:
                 posicion = posicion + 1
-            self.ui.ma_tabla.topLevelItem(0).setText(posicion, str(i))
+            self.ui.ma_tabla_datos.topLevelItem(0).setText(posicion, str(i))
             posicion += 1
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
             posicion = 0
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
             for a in range(0, len(resultado[i])):
-                self.ui.ma_tabla.topLevelItem(i).setHidden(True)
+                self.ui.ma_tabla_datos.topLevelItem(i).setHidden(True)
                 posicion += 1
 
 
@@ -569,7 +566,7 @@ class MaximaMinima(QtWidgets.QDialog):
 
     def confirmar(self):
         try:
-            codigo = int(self.ui.ma_input_1.text())
+            codigo = int(self.ui.ma_input_codigo.text())
         except ValueError:
             return
 
@@ -600,8 +597,8 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
 
     def confirmar(self):
-        minima = str(self.ui.ma_input_1.text())
-        maxima = str(self.ui.ma_input_2.text())
+        minima = str(self.ui.ma_input_minimo.text())
+        maxima = str(self.ui.ma_input_maximo.text())
         if int(minima) <= 0:
             QMessageBox.about(self, "Error!!", "\nEl valor mínimo no puede ser menor a 0.\n")
             return
@@ -619,10 +616,10 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
                   '= ' + maxima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
             self.cursor.execute(sql)
             self.conexion.commit()
-            self.ui.ma_label_2.setText(minima)
-            self.ui.ma_label_3.setText(maxima)
-            self.ui.ma_input_1.clear()
-            self.ui.ma_input_2.clear()
+            self.ui.ma_label_minimo.setText(minima)
+            self.ui.ma_label_maximo.setText(maxima)
+            self.ui.ma_input_minimo.clear()
+            self.ui.ma_input_maximo.clear()
         else:
             return
 
@@ -631,9 +628,9 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
 
     def capturarvalor(self, cod, nom, mini, maxi):
         self.codigo = str(cod)
-        self.ui.ma_label_1.setText(str(nom))
-        self.ui.ma_label_2.setText(str(mini))
-        self.ui.ma_label_3.setText(str(maxi))
+        self.ui.ma_label_descripcion.setText(str(nom))
+        self.ui.ma_label_minimo.setText(str(mini))
+        self.ui.ma_label_maximo.setText(str(maxi))
 
 
 # Compara si el dia es viernes .weekday() retorna los dias como un entero 0 para lunes hasta 6 para domingo
