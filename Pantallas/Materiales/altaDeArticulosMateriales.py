@@ -49,38 +49,38 @@ class Ui_Form(object):
         self.label_8.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_8.setObjectName("label_8")
-        self.ma_input_2 = QtWidgets.QSpinBox(Form)
-        self.ma_input_2.setGeometry(QtCore.QRect(210, 110, 211, 31))
-        self.ma_input_2.setStyleSheet("border:none;\n"
+        self.ma_input_ingreso = QtWidgets.QSpinBox(Form)
+        self.ma_input_ingreso.setGeometry(QtCore.QRect(210, 110, 211, 31))
+        self.ma_input_ingreso.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_2.setMaximum(9999)
-        self.ma_input_2.setObjectName("ma_input_2")
-        self.ma_input_3 = QtWidgets.QSpinBox(Form)
-        self.ma_input_3.setGeometry(QtCore.QRect(210, 200, 211, 31))
-        self.ma_input_3.setStyleSheet("border:none;\n"
+        self.ma_input_ingreso.setMaximum(9999)
+        self.ma_input_ingreso.setObjectName("ma_input_ingreso")
+        self.ma_input_minima = QtWidgets.QSpinBox(Form)
+        self.ma_input_minima.setGeometry(QtCore.QRect(210, 200, 211, 31))
+        self.ma_input_minima.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_3.setMaximum(9999)
-        self.ma_input_3.setObjectName("ma_input_3")
-        self.ma_input_4 = QtWidgets.QSpinBox(Form)
-        self.ma_input_4.setGeometry(QtCore.QRect(560, 200, 251, 31))
-        self.ma_input_4.setStyleSheet("border:none;\n"
+        self.ma_input_minima.setMaximum(9999)
+        self.ma_input_minima.setObjectName("ma_input_minima")
+        self.ma_input_maxima = QtWidgets.QSpinBox(Form)
+        self.ma_input_maxima.setGeometry(QtCore.QRect(560, 200, 251, 31))
+        self.ma_input_maxima.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_4.setMaximum(9999)
-        self.ma_input_4.setObjectName("ma_input_4")
+        self.ma_input_maxima.setMaximum(9999)
+        self.ma_input_maxima.setObjectName("ma_input_maxima")
         self.label_10 = QtWidgets.QLabel(Form)
         self.label_10.setGeometry(QtCore.QRect(440, 110, 121, 31))
         self.label_10.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_10.setObjectName("label_10")
-        self.ma_input_6 = QtWidgets.QPlainTextEdit(Form)
-        self.ma_input_6.setGeometry(QtCore.QRect(560, 110, 251, 31))
-        self.ma_input_6.setStyleSheet("border:none;\n"
+        self.ma_input_descripcion = QtWidgets.QPlainTextEdit(Form)
+        self.ma_input_descripcion.setGeometry(QtCore.QRect(560, 110, 251, 31))
+        self.ma_input_descripcion.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_6.setObjectName("ma_input_6")
+        self.ma_input_descripcion.setObjectName("ma_input_descripcion")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

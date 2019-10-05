@@ -18,13 +18,13 @@ class Ui_Form(object):
 "")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
-        self.ma_input_2 = QtWidgets.QLineEdit(Form)
-        self.ma_input_2.setGeometry(QtCore.QRect(160, 150, 251, 31))
-        self.ma_input_2.setStyleSheet("border:none;\n"
+        self.ma_input_codigo = QtWidgets.QLineEdit(Form)
+        self.ma_input_codigo.setGeometry(QtCore.QRect(160, 150, 251, 31))
+        self.ma_input_codigo.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_2.setText("")
-        self.ma_input_2.setObjectName("ma_input_2")
+        self.ma_input_codigo.setText("")
+        self.ma_input_codigo.setObjectName("ma_input_codigo")
         self.label_5 = QtWidgets.QLabel(Form)
         self.label_5.setGeometry(QtCore.QRect(30, 200, 201, 31))
         self.label_5.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -35,13 +35,13 @@ class Ui_Form(object):
         self.label_4.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_4.setObjectName("label_4")
-        self.ma_input_1 = QtWidgets.QLineEdit(Form)
-        self.ma_input_1.setGeometry(QtCore.QRect(160, 100, 251, 31))
-        self.ma_input_1.setStyleSheet("border:none;\n"
+        self.ma_input_movil = QtWidgets.QLineEdit(Form)
+        self.ma_input_movil.setGeometry(QtCore.QRect(160, 100, 251, 31))
+        self.ma_input_movil.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_1.setText("")
-        self.ma_input_1.setObjectName("ma_input_1")
+        self.ma_input_movil.setText("")
+        self.ma_input_movil.setObjectName("ma_input_movil")
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(30, 100, 51, 31))
         self.label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -61,25 +61,25 @@ class Ui_Form(object):
 "border:none;\n"
 "background-color:#ff4e4e;")
         self.ma_btn_cancelar.setObjectName("ma_btn_cancelar")
-        self.ma_label_1 = QtWidgets.QLabel(Form)
-        self.ma_label_1.setGeometry(QtCore.QRect(450, 110, 301, 131))
-        self.ma_label_1.setStyleSheet("font: 30pt \"MS Shell Dlg 2\";\n"
+        self.ma_label_stock = QtWidgets.QLabel(Form)
+        self.ma_label_stock.setGeometry(QtCore.QRect(450, 110, 301, 131))
+        self.ma_label_stock.setStyleSheet("font: 30pt \"MS Shell Dlg 2\";\n"
 "")
-        self.ma_label_1.setText("")
-        self.ma_label_1.setAlignment(QtCore.Qt.AlignCenter)
-        self.ma_label_1.setObjectName("ma_label_1")
+        self.ma_label_stock.setText("")
+        self.ma_label_stock.setAlignment(QtCore.Qt.AlignCenter)
+        self.ma_label_stock.setObjectName("ma_label_stock")
         self.label_3 = QtWidgets.QLabel(Form)
         self.label_3.setGeometry(QtCore.QRect(560, 80, 101, 31))
         self.label_3.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_3.setObjectName("label_3")
-        self.ma_input_3 = QtWidgets.QSpinBox(Form)
-        self.ma_input_3.setGeometry(QtCore.QRect(240, 200, 171, 31))
-        self.ma_input_3.setStyleSheet("border:none;\n"
+        self.ma_input_cantidad = QtWidgets.QSpinBox(Form)
+        self.ma_input_cantidad.setGeometry(QtCore.QRect(240, 200, 171, 31))
+        self.ma_input_cantidad.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_3.setMaximum(9999)
-        self.ma_input_3.setObjectName("ma_input_3")
+        self.ma_input_cantidad.setMaximum(9999)
+        self.ma_input_cantidad.setObjectName("ma_input_cantidad")
         self.ma_btn_siguiente = QtWidgets.QPushButton(Form)
         self.ma_btn_siguiente.setGeometry(QtCore.QRect(240, 240, 171, 31))
         self.ma_btn_siguiente.setStyleSheet("background-color: rgb(0, 0, 255);\n"

@@ -71,13 +71,13 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QTreeWidget" name="ma_tabla">
+  <widget class="QTreeWidget" name="ma_tabla_datos">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>90</y>
      <width>801</width>
-     <height>261</height>
+     <height>141</height>
     </rect>
    </property>
    <column>
@@ -121,6 +121,41 @@ text-align:center;</string>
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="se_label_1">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>250</y>
+     <width>381</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;
+text-align:center;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="ma_input_cantidad">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>290</y>
+     <width>381</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;
+background-color: rgb(255, 255, 255);
+font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+   </property>
+   <property name="maximum">
+    <number>9999</number>
    </property>
   </widget>
  </widget>

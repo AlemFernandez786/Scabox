@@ -32,13 +32,13 @@ class Ui_Form(object):
 "")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
-        self.ma_input_1 = QtWidgets.QLineEdit(Form)
-        self.ma_input_1.setGeometry(QtCore.QRect(120, 110, 301, 31))
-        self.ma_input_1.setStyleSheet("border:none;\n"
+        self.ma_input_codigo = QtWidgets.QLineEdit(Form)
+        self.ma_input_codigo.setGeometry(QtCore.QRect(120, 110, 301, 31))
+        self.ma_input_codigo.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_1.setText("")
-        self.ma_input_1.setObjectName("ma_input_1")
+        self.ma_input_codigo.setText("")
+        self.ma_input_codigo.setObjectName("ma_input_codigo")
         self.ma_btn_confirmar = QtWidgets.QPushButton(Form)
         self.ma_btn_confirmar.setGeometry(QtCore.QRect(60, 260, 131, 31))
         self.ma_btn_confirmar.setStyleSheet("background-color: rgb(99, 206, 104);\n"

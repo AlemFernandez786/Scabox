@@ -18,13 +18,13 @@ class Ui_Form(object):
 "")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
-        self.ma_input_1 = QtWidgets.QLineEdit(Form)
-        self.ma_input_1.setGeometry(QtCore.QRect(160, 100, 251, 31))
-        self.ma_input_1.setStyleSheet("border:none;\n"
+        self.ma_input_codigo = QtWidgets.QLineEdit(Form)
+        self.ma_input_codigo.setGeometry(QtCore.QRect(160, 100, 251, 31))
+        self.ma_input_codigo.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_1.setText("")
-        self.ma_input_1.setObjectName("ma_input_1")
+        self.ma_input_codigo.setText("")
+        self.ma_input_codigo.setObjectName("ma_input_codigo")
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(30, 100, 101, 31))
         self.label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -51,8 +51,8 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_2.setText(_translate("Form", "Modificacion Max/Min"))
-        self.label.setText(_translate("Form", "Codigo material"))
+        self.label_2.setText(_translate("Form", "Modificación Max/Min"))
+        self.label.setText(_translate("Form", "Código material"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
 

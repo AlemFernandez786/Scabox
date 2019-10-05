@@ -2,11 +2,12 @@
 
 # Form implementation generated from reading ui file 'aprovisionamiento.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -32,21 +33,34 @@ class Ui_Form(object):
 "font-size:10pt;\n"
 "border:none;")
         self.ma_btn_confirmar.setObjectName("ma_btn_confirmar")
-        self.ma_tabla = QtWidgets.QTreeWidget(Form)
-        self.ma_tabla.setGeometry(QtCore.QRect(20, 90, 801, 261))
-        self.ma_tabla.setObjectName("ma_tabla")
+        self.ma_tabla_datos = QtWidgets.QTreeWidget(Form)
+        self.ma_tabla_datos.setGeometry(QtCore.QRect(20, 90, 801, 141))
+        self.ma_tabla_datos.setObjectName("ma_tabla_datos")
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.ma_tabla.headerItem().setFont(1, font)
+        self.ma_tabla_datos.headerItem().setFont(1, font)
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.ma_tabla.headerItem().setFont(2, font)
+        self.ma_tabla_datos.headerItem().setFont(2, font)
         self.ma_label = QtWidgets.QLabel(Form)
         self.ma_label.setGeometry(QtCore.QRect(230, 250, 381, 31))
         self.ma_label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.ma_label.setText("")
         self.ma_label.setObjectName("ma_label")
+        self.se_label_1 = QtWidgets.QLabel(Form)
+        self.se_label_1.setGeometry(QtCore.QRect(230, 250, 381, 31))
+        self.se_label_1.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+"text-align:center;")
+        self.se_label_1.setText("")
+        self.se_label_1.setObjectName("se_label_1")
+        self.ma_input_cantidad = QtWidgets.QSpinBox(Form)
+        self.ma_input_cantidad.setGeometry(QtCore.QRect(230, 290, 381, 31))
+        self.ma_input_cantidad.setStyleSheet("border:none;\n"
+"background-color: rgb(255, 255, 255);\n"
+"font: 11pt \"MS Shell Dlg 2\";")
+        self.ma_input_cantidad.setMaximum(9999)
+        self.ma_input_cantidad.setObjectName("ma_input_cantidad")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -57,9 +71,11 @@ class Ui_Form(object):
         self.label_2.setText(_translate("Form", "Aprovisionamiento"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
-        self.ma_tabla.headerItem().setText(0, _translate("Form", "Código"))
-        self.ma_tabla.headerItem().setText(1, _translate("Form", "Descripción"))
-        self.ma_tabla.headerItem().setText(2, _translate("Form", "Cantidad de pedido automático"))
+        self.ma_tabla_datos.headerItem().setText(0, _translate("Form", "Código"))
+        self.ma_tabla_datos.headerItem().setText(1, _translate("Form", "Descripción"))
+        self.ma_tabla_datos.headerItem().setText(2, _translate("Form", "Cantidad de pedido automático"))
+
+
 
 
 if __name__ == "__main__":
@@ -70,4 +86,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-

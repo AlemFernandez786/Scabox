@@ -29,21 +29,21 @@ class Ui_Form(object):
         self.label_6.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_6.setObjectName("label_6")
-        self.ma_label_1 = QtWidgets.QLabel(Form)
-        self.ma_label_1.setGeometry(QtCore.QRect(170, 20, 241, 31))
-        self.ma_label_1.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+        self.ma_label_descripcion = QtWidgets.QLabel(Form)
+        self.ma_label_descripcion.setGeometry(QtCore.QRect(170, 20, 241, 31))
+        self.ma_label_descripcion.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
-        self.ma_label_1.setObjectName("ma_label_1")
-        self.ma_label_2 = QtWidgets.QLabel(Form)
-        self.ma_label_2.setGeometry(QtCore.QRect(170, 60, 251, 31))
-        self.ma_label_2.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+        self.ma_label_descripcion.setObjectName("ma_label_descripcion")
+        self.ma_label_minimo = QtWidgets.QLabel(Form)
+        self.ma_label_minimo.setGeometry(QtCore.QRect(170, 60, 251, 31))
+        self.ma_label_minimo.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
-        self.ma_label_2.setObjectName("ma_label_2")
-        self.ma_label_3 = QtWidgets.QLabel(Form)
-        self.ma_label_3.setGeometry(QtCore.QRect(170, 100, 251, 31))
-        self.ma_label_3.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+        self.ma_label_minimo.setObjectName("ma_label_minimo")
+        self.ma_label_maximo = QtWidgets.QLabel(Form)
+        self.ma_label_maximo.setGeometry(QtCore.QRect(170, 100, 251, 31))
+        self.ma_label_maximo.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
-        self.ma_label_3.setObjectName("ma_label_3")
+        self.ma_label_maximo.setObjectName("ma_label_maximo")
         self.label_10 = QtWidgets.QLabel(Form)
         self.label_10.setGeometry(QtCore.QRect(30, 230, 111, 31))
         self.label_10.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -68,35 +68,35 @@ class Ui_Form(object):
 "border:none;\n"
 "background-color:#ff4e4e;")
         self.ma_btn_cancelar.setObjectName("ma_btn_cancelar")
-        self.ma_input_2 = QtWidgets.QSpinBox(Form)
-        self.ma_input_2.setGeometry(QtCore.QRect(160, 230, 251, 31))
-        self.ma_input_2.setStyleSheet("border:none;\n"
+        self.ma_input_maximo = QtWidgets.QSpinBox(Form)
+        self.ma_input_maximo.setGeometry(QtCore.QRect(160, 230, 251, 31))
+        self.ma_input_maximo.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_2.setMaximum(9999)
-        self.ma_input_2.setObjectName("ma_input_2")
-        self.ma_input_1 = QtWidgets.QSpinBox(Form)
-        self.ma_input_1.setGeometry(QtCore.QRect(160, 180, 251, 31))
-        self.ma_input_1.setStyleSheet("border:none;\n"
+        self.ma_input_maximo.setMaximum(9999)
+        self.ma_input_maximo.setObjectName("ma_input_maximo")
+        self.ma_input_minimo = QtWidgets.QSpinBox(Form)
+        self.ma_input_minimo.setGeometry(QtCore.QRect(160, 180, 251, 31))
+        self.ma_input_minimo.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ma_input_1.setMaximum(9999)
-        self.ma_input_1.setObjectName("ma_input_1")
+        self.ma_input_minimo.setMaximum(9999)
+        self.ma_input_minimo.setObjectName("ma_input_minimo")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Modificación de stock máximo y mÍnimo"))
+        Form.setWindowTitle(_translate("Form", "Modificación de stock máximo y mínimo"))
         self.label_4.setText(_translate("Form", "Material:"))
-        self.label_5.setText(_translate("Form", "Cantidad Minima:"))
-        self.label_6.setText(_translate("Form", "Cantidad Maxima:"))
-        self.ma_label_1.setText(_translate("Form", "Lorem"))
-        self.ma_label_2.setText(_translate("Form", "00"))
-        self.ma_label_3.setText(_translate("Form", "00"))
-        self.label_10.setText(_translate("Form", "Cantidad Maxima"))
-        self.label_11.setText(_translate("Form", "Cantidad Minima"))
+        self.label_5.setText(_translate("Form", "Cantidad Mínima:"))
+        self.label_6.setText(_translate("Form", "Cantidad Máxima:"))
+        self.ma_label_descripcion.setText(_translate("Form", ""))
+        self.ma_label_minimo.setText(_translate("Form", ""))
+        self.ma_label_maximo.setText(_translate("Form", ""))
+        self.label_10.setText(_translate("Form", "Cantidad Máxima"))
+        self.label_11.setText(_translate("Form", "Cantidad Mínima"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
 

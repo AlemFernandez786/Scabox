@@ -19,20 +19,20 @@ class Ui_Form(object):
         self.label.setGeometry(QtCore.QRect(10, 10, 331, 51))
         self.label.setStyleSheet("font-size:20px;")
         self.label.setObjectName("label")
-        self.ma_btn_1 = QtWidgets.QPushButton(Form)
-        self.ma_btn_1.setGeometry(QtCore.QRect(10, 120, 151, 31))
-        self.ma_btn_1.setStyleSheet("background-color:#5f5fff;\n"
+        self.ma_btn_alta = QtWidgets.QPushButton(Form)
+        self.ma_btn_alta.setGeometry(QtCore.QRect(10, 120, 151, 31))
+        self.ma_btn_alta.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
 "font-size:15px;")
-        self.ma_btn_1.setObjectName("ma_btn_1")
-        self.ma_btn_2 = QtWidgets.QPushButton(Form)
-        self.ma_btn_2.setGeometry(QtCore.QRect(190, 120, 151, 31))
-        self.ma_btn_2.setStyleSheet("background-color:#5f5fff;\n"
+        self.ma_btn_alta.setObjectName("ma_btn_alta")
+        self.ma_btn_baja = QtWidgets.QPushButton(Form)
+        self.ma_btn_baja.setGeometry(QtCore.QRect(190, 120, 151, 31))
+        self.ma_btn_baja.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
 "font-size:15px;")
-        self.ma_btn_2.setObjectName("ma_btn_2")
+        self.ma_btn_baja.setObjectName("ma_btn_baja")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -41,8 +41,8 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Alta/Baja de artículos"))
         self.label.setText(_translate("Form", "<html><head/><body><p align=\"center\"><span style=\" font-size:15pt;\">Alta/Baja de Artículos</span></p></body></html>"))
-        self.ma_btn_1.setText(_translate("Form", "ALTA"))
-        self.ma_btn_2.setText(_translate("Form", "BAJA"))
+        self.ma_btn_alta.setText(_translate("Form", "ALTA"))
+        self.ma_btn_baja.setText(_translate("Form", "BAJA"))
 
 
 if __name__ == "__main__":
