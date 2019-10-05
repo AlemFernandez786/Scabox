@@ -39,15 +39,15 @@ class Ui_Form(object):
 "background-color:#ff4e4e;\n"
 "border:none;")
         self.ma_btn_cancelar.setObjectName("ma_btn_cancelar")
-        self.ma_btn_sinventario = QtWidgets.QPushButton(Form)
-        self.ma_btn_sinventario.setGeometry(QtCore.QRect(70, 400, 311, 41))
-        self.ma_btn_sinventario.setStyleSheet("background-color:#5f5fff;\n"
+        self.ma_btn_inventario = QtWidgets.QPushButton(Form)
+        self.ma_btn_inventario.setGeometry(QtCore.QRect(70, 400, 311, 41))
+        self.ma_btn_inventario.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
 "font-size:15px;")
-        self.ma_btn_sinventario.setIconSize(QtCore.QSize(16, 20))
-        self.ma_btn_sinventario.setFlat(False)
-        self.ma_btn_sinventario.setObjectName("ma_btn_sinventario")
+        self.ma_btn_inventario.setIconSize(QtCore.QSize(16, 20))
+        self.ma_btn_inventario.setFlat(False)
+        self.ma_btn_inventario.setObjectName("ma_btn_inventario")
         self.ma_btn_consulta = QtWidgets.QPushButton(Form)
         self.ma_btn_consulta.setGeometry(QtCore.QRect(70, 100, 311, 41))
         self.ma_btn_consulta.setStyleSheet("background-color:#5f5fff;\n"
@@ -100,7 +100,7 @@ class Ui_Form(object):
         self.ma_btn_maxmin.setText(_translate("Form", "Máxima/Mínima de Stock"))
         self.ma_btn_altabaja.setText(_translate("Form", "Alta/Baja de Articulos"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
-        self.ma_btn_sinventario.setText(_translate("Form", "Inventario"))
+        self.ma_btn_inventario.setText(_translate("Form", "Inventario"))
         self.ma_btn_consulta.setText(_translate("Form", "Consulta de Stock"))
         self.ma_btn_modificacion.setText(_translate("Form", "Modificacion de Stock"))
         self.ma_btn_aprovisionamiento.setText(_translate("Form", "Aprovisionamiento"))
