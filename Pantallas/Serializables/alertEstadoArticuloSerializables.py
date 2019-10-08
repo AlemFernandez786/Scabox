@@ -26,17 +26,6 @@ class Ui_Form(object):
         self.label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label.setObjectName("label")
-        self.label_2 = QtWidgets.QLabel(Form)
-        self.label_2.setGeometry(QtCore.QRect(20, 90, 191, 31))
-        self.label_2.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
-"text-align:center;")
-        self.label_2.setObjectName("label_2")
-        self.se_input_2 = QtWidgets.QDateEdit(Form)
-        self.se_input_2.setGeometry(QtCore.QRect(220, 90, 161, 31))
-        self.se_input_2.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.se_input_2.setObjectName("se_input_2")
         self.se_btn_confirmar = QtWidgets.QPushButton(Form)
         self.se_btn_confirmar.setGeometry(QtCore.QRect(130, 160, 131, 31))
         self.se_btn_confirmar.setStyleSheet("background-color: rgb(99, 206, 104);\n"
@@ -51,8 +40,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Motivo"))
-        self.label_2.setText(_translate("Form", "Fecha de cambio de estado "))
+        self.label.setText(_translate("Form", "Movil"))
         self.se_btn_confirmar.setText(_translate("Form", "Confirmar"))
 
 

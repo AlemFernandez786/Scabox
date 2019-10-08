@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'historialDeStock.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -102,7 +93,7 @@ class Ui_Form(object):
         self.se_tabla.headerItem().setText(1, _translate("Form", "Lote de entrega"))
         self.se_tabla.headerItem().setText(2, _translate("Form", "Fecha de ingreso"))
         self.se_tabla.headerItem().setText(3, _translate("Form", "Fecha de entrega"))
-        self.se_tabla.headerItem().setText(4, _translate("Form", "Fecha de colocación o devolución"))
+        self.se_tabla.headerItem().setText(4, _translate("Form", "Fecha de colocaciï¿½n o devoluciï¿½n"))
         self.se_tabla.headerItem().setText(5, _translate("Form", "Estado"))
         __sortingEnabled = self.se_tabla.isSortingEnabled()
         self.se_tabla.setSortingEnabled(False)

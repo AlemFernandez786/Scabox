@@ -46,18 +46,6 @@ class Ui_Form(object):
 "font-size:10pt;\n"
 "border:none;")
         self.se_btn_confirmar.setObjectName("se_btn_confirmar")
-        self.se_input_2 = QtWidgets.QPlainTextEdit(Form)
-        self.se_input_2.setGeometry(QtCore.QRect(120, 160, 301, 64))
-        self.se_input_2.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.se_input_2.setObjectName("se_input_2")
-        self.label_10 = QtWidgets.QLabel(Form)
-        self.label_10.setGeometry(QtCore.QRect(30, 160, 81, 31))
-        self.label_10.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
-"text-align:center;")
-        self.label_10.setObjectName("label_10")
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -68,7 +56,7 @@ class Ui_Form(object):
         self.label.setText(_translate("Form", "Código"))
         self.label_2.setText(_translate("Form", "Baja de Artículos"))
         self.se_btn_confirmar.setText(_translate("Form", "Confirmar"))
-        self.label_10.setText(_translate("Form", "Motivo"))
+        #self.label_10.setText(_translate("Form", "Motivo"))
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 03-10-2019 a las 23:59:40
+-- Tiempo de generación: 08-10-2019 a las 00:23:37
 -- Versión del servidor: 5.7.21
 -- Versión de PHP: 5.6.35
 
@@ -105,6 +105,19 @@ INSERT INTO `articulo_tecnico` (`emp_legajo`, `art_id`, `art_tec_cantidad`) VALU
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `codigo_finalizacion`
+--
+
+DROP TABLE IF EXISTS `codigo_finalizacion`;
+CREATE TABLE IF NOT EXISTS `codigo_finalizacion` (
+  `cod_finalizacion` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de finalizacion de un trabajo',
+  `descripcion` varchar(150) NOT NULL COMMENT 'Nombre de la finalizacion',
+  PRIMARY KEY (`cod_finalizacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `consumo_serializable`
 --
 
@@ -124,7 +137,8 @@ CREATE TABLE IF NOT EXISTS `consumo_serializable` (
 INSERT INTO `consumo_serializable` (`ser_id`, `ser_cant`, `ser_fecha_consumo`) VALUES
 (3, 5, '2019-08-15 00:00:30'),
 (3, 15, '2019-09-30 00:42:00'),
-(4, 10, '2019-09-30 00:53:25');
+(4, 10, '2019-09-30 00:53:25'),
+(3, 15, '2019-10-04 05:09:42');
 
 -- --------------------------------------------------------
 
@@ -251,6 +265,20 @@ INSERT INTO `estados_serializables` (`id_estado_ser`, `des_estado`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `finalizacion_trabajo`
+--
+
+DROP TABLE IF EXISTS `finalizacion_trabajo`;
+CREATE TABLE IF NOT EXISTS `finalizacion_trabajo` (
+  `cod_finalizacion` int(10) NOT NULL COMMENT 'Codigo de finalizacion de un trabajo',
+  `nro_orden` int(10) NOT NULL COMMENT 'Numero de orden del trabajo',
+  KEY `cod_finalizacion` (`cod_finalizacion`),
+  KEY `nro_orden` (`nro_orden`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `historial_dupla`
 --
 
@@ -259,6 +287,7 @@ CREATE TABLE IF NOT EXISTS `historial_dupla` (
   `his_dup_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del historial',
   `emp_legajo` int(4) NOT NULL,
   `mov_id` int(5) NOT NULL,
+  `his_dup_fecha` datetime NOT NULL COMMENT 'Fecha en la que estuvo en dicho movil',
   PRIMARY KEY (`his_dup_id`),
   KEY `emp_legajo` (`emp_legajo`,`mov_id`),
   KEY `mov_id` (`mov_id`)
@@ -313,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `historial_sectores` (
 
 DROP TABLE IF EXISTS `historial_serializables`;
 CREATE TABLE IF NOT EXISTS `historial_serializables` (
-  `his_id` int(4) NOT NULL COMMENT 'ID del historial',
+  `his_id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'ID del historial',
   `ser_mac` varchar(12) NOT NULL COMMENT 'MAC de serializables',
   `ser_estado` int(2) NOT NULL COMMENT 'Estado del serializable',
   `ser_fecha_entrega` date DEFAULT NULL COMMENT 'Fecha de entrega del serializable',
@@ -321,7 +350,15 @@ CREATE TABLE IF NOT EXISTS `historial_serializables` (
   PRIMARY KEY (`his_id`),
   KEY `ser_mac` (`ser_mac`),
   KEY `ser_estado` (`ser_estado`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `historial_serializables`
+--
+
+INSERT INTO `historial_serializables` (`his_id`, `ser_mac`, `ser_estado`, `ser_fecha_entrega`, `ser_fecha_ultimo_estado`) VALUES
+(3, '1122AABB3333', 1, NULL, '2019-10-04'),
+(6, '112233445566', 2, NULL, '2019-10-07');
 
 -- --------------------------------------------------------
 
@@ -394,14 +431,7 @@ CREATE TABLE IF NOT EXISTS `serializable` (
 
 INSERT INTO `serializable` (`ser_mac`, `ser_fecha_ultimo_ingreso`, `tip_id`) VALUES
 ('112233445566', '2019-09-30', 4),
-('1234567890ab', '2019-09-30', 3),
-('aabb1122cc33', '2019-09-30', 4),
-('ser1', '2019-09-03', 3),
-('ser2', '2019-09-04', 4),
-('ser3', '2019-09-05', 5),
-('ser4', '2019-09-06', 3),
-('ser5', '2019-09-06', 3),
-('ser7', '2019-09-06', 3);
+('1122AABB3333', '2019-10-04', 4);
 
 -- --------------------------------------------------------
 
@@ -417,15 +447,6 @@ CREATE TABLE IF NOT EXISTS `serializable_movil` (
   KEY `mov_id` (`mov_id`,`ser_mac`),
   KEY `ser_mac` (`ser_mac`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `serializable_movil`
---
-
-INSERT INTO `serializable_movil` (`mov_id`, `ser_mac`) VALUES
-(1, '112233445566'),
-(1, 'aabb1122cc33'),
-(2, '1234567890ab');
 
 -- --------------------------------------------------------
 
@@ -471,7 +492,7 @@ CREATE TABLE IF NOT EXISTS `tipo_serializable` (
 
 INSERT INTO `tipo_serializable` (`tipo_serializable`, `desc_serializable`, `cant_serializable`, `cant_min_ser`, `cant_max_ser`) VALUES
 (3, 'Modem WiFi', 5, 25, 125),
-(4, 'Decodificador', 3, 140, 500),
+(4, 'Decodificador', 6, 140, 500),
 (5, 'Decodificador HD', 1, 250, 800);
 
 -- --------------------------------------------------------
@@ -487,16 +508,26 @@ CREATE TABLE IF NOT EXISTS `trabajos_realizados` (
   `mov_id` int(5) NOT NULL COMMENT 'Id del movil que realizo el trabajo',
   `observaciones` varchar(255) DEFAULT NULL COMMENT 'Observaciones',
   `fecha_trabajo` date NOT NULL COMMENT 'Fecha en que se realizo',
+  `nom_cliente` varchar(50) NOT NULL COMMENT 'Nombre del abonado',
+  `dni_cliente` int(8) NOT NULL COMMENT 'DNI del abonado',
+  `nro_cliente` int(11) NOT NULL COMMENT 'Numero de cliente',
   PRIMARY KEY (`nro_orden`),
   KEY `mov_id` (`mov_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `trabajos_realizados`
+-- Estructura de tabla para la tabla `trabajo_serializable`
 --
 
-INSERT INTO `trabajos_realizados` (`nro_orden`, `domicilio`, `mov_id`, `observaciones`, `fecha_trabajo`) VALUES
-(1234567890, 'Artigas 934', 1, 'Ninguna', '2019-09-27');
+DROP TABLE IF EXISTS `trabajo_serializable`;
+CREATE TABLE IF NOT EXISTS `trabajo_serializable` (
+  `nro_orden` int(10) NOT NULL COMMENT 'Numero de orden del trabajo',
+  `ser_mac` varchar(12) NOT NULL,
+  KEY `nro_orden` (`nro_orden`),
+  KEY `ser_mac` (`ser_mac`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -570,6 +601,13 @@ ALTER TABLE `dupla_movil`
   ADD CONSTRAINT `dupla_movil_ibfk_3` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`);
 
 --
+-- Filtros para la tabla `finalizacion_trabajo`
+--
+ALTER TABLE `finalizacion_trabajo`
+  ADD CONSTRAINT `finalizacion_trabajo_ibfk_1` FOREIGN KEY (`nro_orden`) REFERENCES `trabajos_realizados` (`nro_orden`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `finalizacion_trabajo_ibfk_2` FOREIGN KEY (`cod_finalizacion`) REFERENCES `codigo_finalizacion` (`cod_finalizacion`) ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `historial_dupla`
 --
 ALTER TABLE `historial_dupla`
@@ -614,6 +652,13 @@ ALTER TABLE `serializable_movil`
 --
 ALTER TABLE `trabajos_realizados`
   ADD CONSTRAINT `trabajos_realizados_ibfk_1` FOREIGN KEY (`mov_id`) REFERENCES `movil` (`mov_id`);
+
+--
+-- Filtros para la tabla `trabajo_serializable`
+--
+ALTER TABLE `trabajo_serializable`
+  ADD CONSTRAINT `trabajo_serializable_ibfk_1` FOREIGN KEY (`nro_orden`) REFERENCES `trabajos_realizados` (`nro_orden`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `trabajo_serializable_ibfk_2` FOREIGN KEY (`ser_mac`) REFERENCES `serializable` (`ser_mac`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`

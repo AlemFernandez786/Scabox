@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'altaDeArticulosSerializables.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -46,35 +37,18 @@ class Ui_Form(object):
 "border:none;\n"
 "background-color:#ff4e4e;")
         self.se_btn_cancelar.setObjectName("se_btn_cancelar")
-        self.label_8 = QtWidgets.QLabel(Form)
-        self.label_8.setGeometry(QtCore.QRect(440, 110, 121, 31))
-        self.label_8.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
-"text-align:center;")
-        self.label_8.setObjectName("label_8")
         self.label_9 = QtWidgets.QLabel(Form)
         self.label_9.setGeometry(QtCore.QRect(440, 160, 121, 31))
         self.label_9.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_9.setObjectName("label_9")
-        self.se_input_4 = QtWidgets.QDateEdit(Form)
-        self.se_input_4.setGeometry(QtCore.QRect(570, 160, 251, 31))
-        self.se_input_4.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.se_input_4.setObjectName("se_input_4")
-        self.se_input_3 = QtWidgets.QLineEdit(Form)
-        self.se_input_3.setGeometry(QtCore.QRect(490, 110, 331, 31))
-        self.se_input_3.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.se_input_3.setText("")
-        self.se_input_3.setObjectName("se_input_3")
-        self.se_input_2 = QtWidgets.QLineEdit(Form)
+        self.se_input_2 = QtWidgets.QComboBox(Form)
         self.se_input_2.setGeometry(QtCore.QRect(150, 160, 271, 31))
         self.se_input_2.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.se_input_2.setText("")
+
+
         self.se_input_2.setObjectName("se_input_2")
         self.label_3 = QtWidgets.QLabel(Form)
         self.label_3.setGeometry(QtCore.QRect(40, 160, 101, 31))
@@ -92,8 +66,8 @@ class Ui_Form(object):
         self.label.setText(_translate("Form", "MAC"))
         self.se_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.se_btn_cancelar.setText(_translate("Form", "Cancelar"))
-        self.label_8.setText(_translate("Form", "Lote"))
-        self.label_9.setText(_translate("Form", "Fecha de ingreso "))
+        #self.label_8.setText(_translate("Form", "Lote"))
+        #self.label_9.setText(_translate("Form", "Fecha de ingreso "))
         self.label_3.setText(_translate("Form", "Tipo de equipo"))
 
 

@@ -1,4 +1,5 @@
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -18,7 +19,7 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.se_tabla.headerItem().setFont(2, font)
-        font = QtGui.QFont()
+        '''font = QtGui.QFont()
         font.setPointSize(11)
         self.se_tabla.headerItem().setFont(3, font)
         font = QtGui.QFont()
@@ -27,15 +28,9 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.se_tabla.headerItem().setFont(5, font)
-
-        ''' item_0 = QtWidgets.QTreeWidgetItem(self.se_tabla)
-            font = QtGui.QFont()
-            font.setPointSize(8)
-            item_0.setFont(0, font)
-            font = QtGui.QFont()
-            font.setPointSize(8)
-            item_0.setFont(5, font)
-            '''
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.se_tabla.headerItem().setFont(6, font)'''
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(0, 60, 171, 41))
         self.label_2.setStyleSheet("font-size:20px;\n"
@@ -83,12 +78,13 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.se_tabla.headerItem().setText(0, _translate("Form", "Codigo MAC"))
         self.se_tabla.headerItem().setText(1, _translate("Form", "Descripcion"))
-        self.se_tabla.headerItem().setText(2, _translate("Form", "Fecha ingreso"))
-        self.se_tabla.headerItem().setText(3, _translate("Form", "Tipo"))
-        self.se_tabla.headerItem().setText(4, _translate("Form", "Stock Minimo permitido"))
-        self.se_tabla.headerItem().setText(5, _translate("Form", "Stock Maximo permitido"))
+        self.se_tabla.headerItem().setText(2, _translate("Form", "Fecha ultimo ingreso"))
+        #self.se_tabla.headerItem().setText(3, _translate("Form", "Lote"))
+        #self.se_tabla.headerItem().setText(5, _translate("Form", "Stock Minimo permitido"))
+        #self.se_tabla.headerItem().setText(6, _translate("Form", "Stock Maximo permitido"))
         __sortingEnabled = self.se_tabla.isSortingEnabled()
         self.se_tabla.setSortingEnabled(True)
+        self.se_tabla.setSortingEnabled(__sortingEnabled)
         self.label_2.setText(_translate("Form", "Consulta Stock"))
         self.label_3.setText(_translate("Form", "Serializables"))
         self.se_btn_volver.setText(_translate("Form", "Volver"))
