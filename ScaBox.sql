@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 08-10-2019 a las 00:43:55
+-- Tiempo de generación: 10-10-2019 a las 01:05:20
 -- Versión del servidor: 5.7.21
 -- Versión de PHP: 5.6.35
 
@@ -123,22 +123,24 @@ CREATE TABLE IF NOT EXISTS `codigo_finalizacion` (
 
 DROP TABLE IF EXISTS `consumo_serializable`;
 CREATE TABLE IF NOT EXISTS `consumo_serializable` (
+  `his_consumo_ser_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del historial de consumo de serializables',
   `ser_id` int(2) NOT NULL COMMENT 'Id del tipo de serializable',
   `ser_cant` int(10) NOT NULL COMMENT 'Cantidad utilizada',
-  `ser_fecha_consumo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha en que se realizo el consumo',
-  PRIMARY KEY (`ser_fecha_consumo`),
+  `ser_fecha_consumo` datetime(4) NOT NULL COMMENT 'Fecha en que se realizo el consumo',
+  PRIMARY KEY (`his_consumo_ser_id`),
   KEY `ser_id` (`ser_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `consumo_serializable`
 --
 
-INSERT INTO `consumo_serializable` (`ser_id`, `ser_cant`, `ser_fecha_consumo`) VALUES
-(3, 5, '2019-08-15 00:00:30'),
-(3, 15, '2019-09-30 00:42:00'),
-(4, 10, '2019-09-30 00:53:25'),
-(3, 15, '2019-10-04 05:09:42');
+INSERT INTO `consumo_serializable` (`his_consumo_ser_id`, `ser_id`, `ser_cant`, `ser_fecha_consumo`) VALUES
+(1, 3, 5, '2019-08-15 00:00:30.0000'),
+(2, 3, 15, '2019-09-30 00:42:00.0000'),
+(3, 4, 10, '2019-09-30 00:53:25.0000'),
+(4, 3, 15, '2019-10-04 05:09:42.0000'),
+(5, 4, 1, '2019-10-09 16:54:26.0000');
 
 -- --------------------------------------------------------
 
@@ -241,6 +243,19 @@ INSERT INTO `empleados` (`emp_legajo`, `emp_documento`, `emp_nombre`, `emp_apell
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `estados`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `estados`;
+CREATE TABLE IF NOT EXISTS `estados` (
+`ser_mac` varchar(12)
+,`ultimo_estado` int(4)
+,`primer_estado` datetime
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `estados_serializables`
 --
 
@@ -287,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `historial_dupla` (
   `his_dup_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del historial',
   `emp_legajo` int(4) NOT NULL,
   `mov_id` int(5) NOT NULL,
-  `his_dup_fecha` datetime NOT NULL COMMENT 'Fecha en la que estuvo en dicho movil',
+  `his_dup_fecha` datetime(4) NOT NULL COMMENT 'Fecha en la que estuvo en dicho movil',
   PRIMARY KEY (`his_dup_id`),
   KEY `emp_legajo` (`emp_legajo`,`mov_id`),
   KEY `mov_id` (`mov_id`)
@@ -301,21 +316,22 @@ CREATE TABLE IF NOT EXISTS `historial_dupla` (
 
 DROP TABLE IF EXISTS `historial_materiales`;
 CREATE TABLE IF NOT EXISTS `historial_materiales` (
+  `his_mat_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del historial de consumo de materiales',
   `art_id` int(8) NOT NULL,
   `his_mat_cant` int(4) NOT NULL,
   `his_mat_fecha` datetime NOT NULL,
-  PRIMARY KEY (`his_mat_fecha`),
+  PRIMARY KEY (`his_mat_id`),
   KEY `art_id` (`art_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `historial_materiales`
 --
 
-INSERT INTO `historial_materiales` (`art_id`, `his_mat_cant`, `his_mat_fecha`) VALUES
-(2, 10, '2019-09-20 00:00:00'),
-(1, 15, '2019-09-30 00:00:00'),
-(5, 15, '2019-09-30 20:08:02');
+INSERT INTO `historial_materiales` (`his_mat_id`, `art_id`, `his_mat_cant`, `his_mat_fecha`) VALUES
+(1, 2, 10, '2019-09-20 00:00:00'),
+(2, 1, 15, '2019-09-30 00:00:00'),
+(3, 5, 15, '2019-09-30 20:08:02');
 
 -- --------------------------------------------------------
 
@@ -325,11 +341,12 @@ INSERT INTO `historial_materiales` (`art_id`, `his_mat_cant`, `his_mat_fecha`) V
 
 DROP TABLE IF EXISTS `historial_sectores`;
 CREATE TABLE IF NOT EXISTS `historial_sectores` (
-  `fecha_cambio_sector` datetime NOT NULL COMMENT 'Fecha del cambio',
+  `his_sec_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del historial de cambio de sector',
+  `fecha_cambio_sector` datetime(4) NOT NULL COMMENT 'Fecha del cambio',
   `emp_legajo` int(8) NOT NULL COMMENT 'Legajo del empleado',
   `emp_sector` int(2) NOT NULL COMMENT 'Sector en el que se encuentra el empleado',
   `motivo_cambio` varchar(255) NOT NULL COMMENT 'Motivo del cambio de sector',
-  PRIMARY KEY (`fecha_cambio_sector`),
+  PRIMARY KEY (`his_sec_id`),
   KEY `emp_legajo` (`emp_legajo`),
   KEY `emp_sector` (`emp_sector`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -346,19 +363,24 @@ CREATE TABLE IF NOT EXISTS `historial_serializables` (
   `ser_mac` varchar(12) NOT NULL COMMENT 'MAC de serializables',
   `ser_estado` int(2) NOT NULL COMMENT 'Estado del serializable',
   `ser_fecha_entrega` date DEFAULT NULL COMMENT 'Fecha de entrega del serializable',
-  `ser_fecha_ultimo_estado` date NOT NULL COMMENT 'Fecha del ultimo estado',
+  `ser_fecha_ultimo_estado` datetime NOT NULL COMMENT 'Fecha del ultimo estado',
   PRIMARY KEY (`his_id`),
   KEY `ser_mac` (`ser_mac`),
   KEY `ser_estado` (`ser_estado`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `historial_serializables`
 --
 
 INSERT INTO `historial_serializables` (`his_id`, `ser_mac`, `ser_estado`, `ser_fecha_entrega`, `ser_fecha_ultimo_estado`) VALUES
-(3, '1122AABB3333', 1, NULL, '2019-10-04'),
-(6, '112233445566', 2, NULL, '2019-10-07');
+(3, '1122AABB3333', 1, NULL, '2019-10-04 00:00:00'),
+(6, '112233445566', 2, '2019-10-08', '2019-10-08 00:00:00'),
+(8, '112233445566', 1, NULL, '2019-10-08 17:21:03'),
+(9, '112233445566', 4, NULL, '2019-10-08 17:35:00'),
+(10, '112233445566', 1, NULL, '2019-10-08 17:35:10'),
+(12, '112233445566', 4, NULL, '2019-10-08 20:24:52'),
+(13, '1122AABB3333', 2, '2019-10-08', '2019-10-08 20:25:45');
 
 -- --------------------------------------------------------
 
@@ -448,6 +470,13 @@ CREATE TABLE IF NOT EXISTS `serializable_movil` (
   KEY `ser_mac` (`ser_mac`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `serializable_movil`
+--
+
+INSERT INTO `serializable_movil` (`mov_id`, `ser_mac`) VALUES
+(1, '1122AABB3333');
+
 -- --------------------------------------------------------
 
 --
@@ -493,7 +522,8 @@ CREATE TABLE IF NOT EXISTS `tipo_serializable` (
 INSERT INTO `tipo_serializable` (`tipo_serializable`, `desc_serializable`, `cant_serializable`, `cant_min_ser`, `cant_max_ser`) VALUES
 (3, 'Modem WiFi', 5, 25, 125),
 (4, 'Decodificador', 6, 140, 500),
-(5, 'Decodificador HD', 1, 250, 800);
+(5, 'Decodificador HD', 1, 250, 800),
+(6, 'Nuevo tipo serializable', 0, 25, 50);
 
 -- --------------------------------------------------------
 
@@ -542,6 +572,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `activo` tinyint(1) NOT NULL COMMENT 'Usuario activo o inactivo',
   KEY `usu_legajo` (`usu_legajo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `estados`
+--
+DROP TABLE IF EXISTS `estados`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `estados`  AS  (select `historial_serializables`.`ser_mac` AS `ser_mac`,max(`historial_serializables`.`his_id`) AS `ultimo_estado`,min(`historial_serializables`.`ser_fecha_ultimo_estado`) AS `primer_estado` from `historial_serializables` group by `historial_serializables`.`ser_mac`) ;
 
 --
 -- Restricciones para tablas volcadas
