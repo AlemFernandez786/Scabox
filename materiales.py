@@ -304,14 +304,13 @@ class ModificarStock(QtWidgets.QDialog):
     def tabla(self):
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales_gral()
-        _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
         for i in range(0, len_resultado):
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
+            self.ui.ma_tabla_datos.takeTopLevelItem(i)
             posicion = 0
+            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
             for a in range(0, len(resultado[i])):
                 test = resultado[i][a]
-                self.ui.ma_tabla_datos.topLevelItem(i).setHidden(False)
                 self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
 
@@ -333,19 +332,22 @@ class ModificarStock(QtWidgets.QDialog):
     def busqueda(self):
         try:
             codigo = int(self.ui.ma_input_buscar.text())
-        except ValueError:
-            QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
+        except (ValueError, TypeError):
             self.tabla()
+            self.ui.ma_input_actual.clear()
+            self.ui.ma_input_maximo.clear()
+            self.ui.ma_input_minimo.clear()
+            self.ui.ma_input_descripcion.clear()
+            QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
             return
         consultar = ABM_materiales()
         resultado = consultar.consulta_materiales(str(codigo))
-
         try:
             resultados = resultado[0]
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             return
-        QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
+
         posicion = 0
         for i in resultados:
             if posicion == 3:
@@ -357,9 +359,10 @@ class ModificarStock(QtWidgets.QDialog):
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
             posicion = 0
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
+
             for a in range(0, len(resultado[i])):
-                self.ui.ma_tabla_datos.topLevelItem(i).setHidden(True)
+                self.ui.ma_tabla_datos.takeTopLevelItem(i)
+
                 posicion += 1
 
         self.ui.ma_input_actual.setText(str(resultados[2]))
@@ -557,12 +560,11 @@ class StockMateriales(QtWidgets.QDialog):
         resultado = consultar.consulta_materiales_gral()
         len_resultado = (len(resultado))
         for i in range(0, len_resultado):
-            # resultado[i].insert(3, str(999))
+            self.ui.ma_tabla_datos.takeTopLevelItem(i)
             posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
             for a in range(0, len(resultado[i])):
                 test = resultado[i][a]
-                self.ui.ma_tabla_datos.topLevelItem(i).setHidden(False)
                 self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
 
@@ -591,15 +593,7 @@ class StockMateriales(QtWidgets.QDialog):
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             return
-        # consultar = ABM_materiales()
-        # resultado = consultar.consulta_materiales_gral()
-        # len_resultado = (len(resultado))
-        # for i in range(1, len_resultado):
-        #     QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
-        #     for a in range(0, len(resultado[i])):
-        #         self.ui.ma_tabla_datos.topLevelItem(i).setHidden(True)
-        #         posicion += 1
-        QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
+
         posicion = 0
         for i in resultados:
             if posicion == 3:
@@ -611,9 +605,11 @@ class StockMateriales(QtWidgets.QDialog):
         len_resultado = (len(resultado))
         for i in range(1, len_resultado):
             posicion = 0
-            QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
+
             for a in range(0, len(resultado[i])):
-                self.ui.ma_tabla_datos.topLevelItem(i).setHidden(True)
+
+                self.ui.ma_tabla_datos.takeTopLevelItem(i)
+
                 posicion += 1
 
 
@@ -702,7 +698,7 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
 
 # Compara si el dia es viernes .weekday() retorna los dias como un entero 0 para lunes hasta 6 para domingo
 marca = 0
-if date.today().weekday() == 6:
+if date.today().weekday() == 4:
     marca = 1
     app = QtWidgets.QApplication([])
     aprov_automatico = Aprovisionamiento()
