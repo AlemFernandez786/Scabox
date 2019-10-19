@@ -404,10 +404,52 @@ class InventarioMovil(QtWidgets.QDialog):
         super(InventarioMovil, self).__init__(*args, **kwargs)
         self.ui = conteoDeInventarioPorMovil.Ui_Form()
         self.ui.setupUi(self)
+        self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
+        self.cursor = self.conexion.cursor()
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
+        self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
+        self.ui.ma_input_movil.returnPressed.connect(self.verificar)
+        self.ui.ma_input_codigo.returnPressed.connect(self.busqueda)
+
+    def verificar(self):
+        id_movil = self.ui.ma_input_movil.text()
+        sql = 'SELECT mov_vtv FROM movil WHERE mov_id= '+ id_movil
+        self.cursor.execute(sql)
+        movil = self.cursor.fetchall()
+        if not movil:
+            QMessageBox.about(self, "Error!!", "Móvil inexistente")
+            self.ui.ma_input_movil.clear()
+            return
+        self.ui.ma_input_codigo.setFocus()
+
+    def busqueda(self):
+        codigo = self.ui.ma_input_codigo.text()
+        sql = 'SELECT am.art_mov_cantidad FROM articulo_movil am JOIN articulo a ON am.art_id = a.art_id ' \
+              'WHERE am.art_id = ' + codigo + ' AND am.mov_id = 1 AND a.tip_id = 2'
+        self.cursor.execute(sql)
+        datos = self.cursor.fetchall()
+        if not datos:
+            QMessageBox.about(self, "Error!!", "Artículo inexistente")
+            self.ui.ma_input_codigo.clear()
+            return
+        self.ui.ma_label_stock.setText(str(datos[0][0]))
+        self.ui.ma_input_cantidad.setFocus()
 
     def salir(self):
         self.close()
+
+    def confirmar(self):
+        cantidad = self.ui.ma_input_cantidad.text()
+        movil = self.ui.ma_input_movil.text()
+        codigo = self.ui.ma_input_codigo.text()
+        sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + cantidad + ' WHERE ' \
+              'mov_id = ' + movil + ' AND art_id = ' + codigo
+        self.cursor.execute(sql)
+        self.conexion.commit()
+        self.ui.ma_input_codigo.clear()
+        self.ui.ma_input_movil.clear()
+        self.ui.ma_input_cantidad.clear()
+        self.ui.ma_label_stock.clear()
 
 
 class Aprovisionamiento(QtWidgets.QDialog):
@@ -422,6 +464,7 @@ class Aprovisionamiento(QtWidgets.QDialog):
 
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
+        self.ui.ma_btn_modificar.clicked.connect(self.modificar)
 
         art_info = self.pedido(marca)
         lista = []
@@ -448,14 +491,17 @@ class Aprovisionamiento(QtWidgets.QDialog):
         seleccion = self.ui.ma_tabla_datos.selectedItems()
         if seleccion:
             datos = seleccion[0]
-            self.ui.ma_label.setText(datos.text(1))
-            # dato = datos.text(2)
-            # if dato == '':
-            #     dato = 0
-            # self.ui.ma_input_1.setValue(int(dato))
-# TODO falta arpovisionamiento
+            self.ui.ma_label_descripcion.setText(datos.text(1))
+            dato = datos.text(2)
+            if dato == '':
+                dato = 0
+            self.ui.ma_input_cantidad.setValue(int(dato))
     # --------------------------------------
 
+    def modificar(self):
+        # perros=self.ui.ma_tabla_datos.selectedItems().index("10")
+        print(perros)
+    # TODO pensar esto
     def confirmar(self):
         # (sudo) "python -m smtpd -c DebuggingServer -n localhost:1025" para ejecutar un servidor SMTP local
         if self.articulos == "":
@@ -656,7 +702,7 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
 
 # Compara si el dia es viernes .weekday() retorna los dias como un entero 0 para lunes hasta 6 para domingo
 marca = 0
-if date.today().weekday() == 4:
+if date.today().weekday() == 6:
     marca = 1
     app = QtWidgets.QApplication([])
     aprov_automatico = Aprovisionamiento()
