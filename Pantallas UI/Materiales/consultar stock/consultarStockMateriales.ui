@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Consulta de Stock</string>
   </property>
-  <widget class="QTreeWidget" name="ma_tabla">
+  <widget class="QTreeWidget" name="ma_tabla_datos">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -197,6 +197,12 @@ border:none;</string>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>ma_input_buscar</tabstop>
+  <tabstop>ma_btn_buscar</tabstop>
+  <tabstop>ma_tabla_datos</tabstop>
+  <tabstop>ma_btn_volver</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -37,7 +37,7 @@
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>380</y>
+     <y>390</y>
      <width>131</width>
      <height>31</height>
     </rect>
@@ -56,7 +56,7 @@ background-color:#ff4e4e;</string>
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>380</y>
+     <y>390</y>
      <width>131</width>
      <height>31</height>
     </rect>
@@ -156,6 +156,25 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
    <property name="maximum">
     <number>9999</number>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ma_btn_modificar">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>340</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 255);
+color:white;
+font-size:10pt;
+border:none;</string>
+   </property>
+   <property name="text">
+    <string>Modificar</string>
    </property>
   </widget>
  </widget>

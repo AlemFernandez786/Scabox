@@ -26,6 +26,13 @@ class Ui_Form(object):
 "border:none;\n"
 "background-color:#ff4e4e;")
         self.ma_btn_cancelar.setObjectName("ma_btn_cancelar")
+        self.ma_btn_modificar = QtWidgets.QPushButton(Form)
+        self.ma_btn_modificar.setGeometry(QtCore.QRect(350, 340, 131, 31))
+        self.ma_btn_modificar.setStyleSheet("background-color: rgb(0, 0, 255);\n"
+"color:white;\n"
+"font-size:10pt;\n"
+"border:none;")
+        self.ma_btn_modificar.setObjectName("ma_btn_modificar")
         self.ma_btn_confirmar = QtWidgets.QPushButton(Form)
         self.ma_btn_confirmar.setGeometry(QtCore.QRect(260, 380, 131, 31))
         self.ma_btn_confirmar.setStyleSheet("background-color: rgb(99, 206, 104);\n"
@@ -42,18 +49,12 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.ma_tabla_datos.headerItem().setFont(2, font)
-        self.ma_label = QtWidgets.QLabel(Form)
-        self.ma_label.setGeometry(QtCore.QRect(230, 250, 381, 31))
-        self.ma_label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+        self.ma_label_descripcion = QtWidgets.QLabel(Form)
+        self.ma_label_descripcion.setGeometry(QtCore.QRect(230, 250, 381, 31))
+        self.ma_label_descripcion.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
-        self.ma_label.setText("")
-        self.ma_label.setObjectName("ma_label")
-        self.se_label_1 = QtWidgets.QLabel(Form)
-        self.se_label_1.setGeometry(QtCore.QRect(230, 250, 381, 31))
-        self.se_label_1.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
-"text-align:center;")
-        self.se_label_1.setText("")
-        self.se_label_1.setObjectName("se_label_1")
+        self.ma_label_descripcion.setText("")
+        self.ma_label_descripcion.setObjectName("ma_label_descripcion")
         self.ma_input_cantidad = QtWidgets.QSpinBox(Form)
         self.ma_input_cantidad.setGeometry(QtCore.QRect(230, 290, 381, 31))
         self.ma_input_cantidad.setStyleSheet("border:none;\n"
@@ -74,6 +75,7 @@ class Ui_Form(object):
         self.ma_tabla_datos.headerItem().setText(0, _translate("Form", "Código"))
         self.ma_tabla_datos.headerItem().setText(1, _translate("Form", "Descripción"))
         self.ma_tabla_datos.headerItem().setText(2, _translate("Form", "Cantidad de pedido automático"))
+        self.ma_btn_modificar.setText(_translate("Form", "Modificar"))
 
 
 
