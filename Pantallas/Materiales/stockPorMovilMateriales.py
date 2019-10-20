@@ -86,7 +86,7 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Stock por Movil"))
         self.label_2.setText(_translate("Form", "Stock por Movil"))
-        self.label_3.setText(_translate("Form", "Cantidad de materiales contados"))
+        self.label_3.setText(_translate("Form", "Ingreso"))
         self.ma_tabla_datos.headerItem().setText(0, _translate("Form", "Código"))
         self.ma_tabla_datos.headerItem().setText(1, _translate("Form", "Descripción"))
         self.ma_tabla_datos.headerItem().setText(2, _translate("Form", "Cantidad de materiales"))

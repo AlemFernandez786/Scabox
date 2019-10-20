@@ -13,26 +13,32 @@
   <property name="windowTitle">
    <string>Baja</string>
   </property>
-  <widget class="QPushButton" name="ma_btn_cancelar">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>260</y>
-     <width>131</width>
-     <height>31</height>
+     <x>60</x>
+     <y>20</y>
+     <width>341</width>
+     <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>-1</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">color:white;
-font-size:10pt;
-border:none;
-background-color:#ff4e4e;</string>
+    <string notr="true">font-size:20px;
+</string>
    </property>
    <property name="text">
-    <string>Cancelar</string>
+    <string>Baja de Artículos</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -49,27 +55,7 @@ text-align:center;</string>
     <string>Código</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>20</y>
-     <width>341</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font-size:20px;
-</string>
-   </property>
-   <property name="text">
-    <string>Baja de Artículos</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="ma_input_1">
+  <widget class="QLineEdit" name="ma_input_codigo">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -82,9 +68,6 @@ text-align:center;</string>
     <string notr="true">border:none;
 background-color: rgb(255, 255, 255);
 font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
-   </property>
-   <property name="text">
-    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="ma_btn_confirmar">
@@ -106,36 +89,23 @@ border:none;</string>
     <string>Confirmar</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="ma_input_2">
+  <widget class="QPushButton" name="ma_btn_cancelar">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>160</y>
-     <width>301</width>
-     <height>64</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border:none;
-background-color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_10">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>160</y>
-     <width>81</width>
+     <x>260</x>
+     <y>260</y>
+     <width>131</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;
-text-align:center;</string>
+    <string notr="true">color:white;
+font-size:10pt;
+border:none;
+background-color:#ff4e4e;</string>
    </property>
    <property name="text">
-    <string>Motivo</string>
+    <string>Cancelar</string>
    </property>
   </widget>
  </widget>

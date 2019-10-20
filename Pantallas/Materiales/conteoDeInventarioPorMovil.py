@@ -66,13 +66,6 @@ class Ui_Form(object):
         self.ma_label_stock.setText("")
         self.ma_label_stock.setAlignment(QtCore.Qt.AlignCenter)
         self.ma_label_stock.setObjectName("ma_label_stock")
-        self.ma_btn_siguiente = QtWidgets.QPushButton(Form)
-        self.ma_btn_siguiente.setGeometry(QtCore.QRect(240, 240, 171, 31))
-        self.ma_btn_siguiente.setStyleSheet("background-color: rgb(0, 0, 255);\n"
-"color:white;\n"
-"font-size:10pt;\n"
-"border:none;")
-        self.ma_btn_siguiente.setObjectName("ma_btn_siguiente")
         self.ma_btn_confirmar = QtWidgets.QPushButton(Form)
         self.ma_btn_confirmar.setGeometry(QtCore.QRect(240, 290, 131, 31))
         self.ma_btn_confirmar.setStyleSheet("background-color: rgb(99, 206, 104);\n"
@@ -102,7 +95,6 @@ class Ui_Form(object):
         self.label_3.setText(_translate("Form", "Móvil"))
         self.label_4.setText(_translate("Form", "Código de Material"))
         self.label_5.setText(_translate("Form", "Cantidad de material contado"))
-        self.ma_btn_siguiente.setText(_translate("Form", "Siguiente"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
 

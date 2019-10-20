@@ -64,7 +64,7 @@ text-align:center;</string>
     <string>Cantidad Maxima:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="ma_label_1">
+  <widget class="QLabel" name="ma_label_descripcion">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -78,10 +78,10 @@ text-align:center;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>Lorem</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="ma_label_2">
+  <widget class="QLabel" name="ma_label_minimo">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -95,10 +95,10 @@ text-align:center;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>00</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="ma_label_3">
+  <widget class="QLabel" name="ma_label_maximo">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -112,7 +112,7 @@ text-align:center;</string>
 text-align:center;</string>
    </property>
    <property name="text">
-    <string>00</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_10">
@@ -187,7 +187,7 @@ background-color:#ff4e4e;</string>
     <string>Cancelar</string>
    </property>
   </widget>
-  <widget class="QSpinBox" name="ma_input_2">
+  <widget class="QSpinBox" name="ma_input_maximo">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -205,7 +205,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
     <number>9999</number>
    </property>
   </widget>
-  <widget class="QSpinBox" name="ma_input_1">
+  <widget class="QSpinBox" name="ma_input_minimo">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -224,6 +224,12 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>ma_input_minimo</tabstop>
+  <tabstop>ma_input_maximo</tabstop>
+  <tabstop>ma_btn_confirmar</tabstop>
+  <tabstop>ma_btn_cancelar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

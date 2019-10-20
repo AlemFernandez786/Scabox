@@ -2,10 +2,9 @@
 
 # Form implementation generated from reading ui file 'modificacionMaxMin.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -33,17 +32,17 @@ class Ui_Form(object):
         self.ma_label_descripcion.setGeometry(QtCore.QRect(170, 20, 241, 31))
         self.ma_label_descripcion.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
-        self.ma_label_descripcion.setObjectName("ma_label_descripcion")
-        self.ma_label_minimo = QtWidgets.QLabel(Form)
-        self.ma_label_minimo.setGeometry(QtCore.QRect(170, 60, 251, 31))
-        self.ma_label_minimo.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
-"text-align:center;")
-        self.ma_label_minimo.setObjectName("ma_label_minimo")
+        self.ma_label_descripcion.setObjectName("ma_label_1")
         self.ma_label_maximo = QtWidgets.QLabel(Form)
-        self.ma_label_maximo.setGeometry(QtCore.QRect(170, 100, 251, 31))
+        self.ma_label_maximo.setGeometry(QtCore.QRect(170, 60, 251, 31))
         self.ma_label_maximo.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
-        self.ma_label_maximo.setObjectName("ma_label_maximo")
+        self.ma_label_maximo.setObjectName("ma_label_2")
+        self.ma_label_minimo = QtWidgets.QLabel(Form)
+        self.ma_label_minimo.setGeometry(QtCore.QRect(170, 100, 251, 31))
+        self.ma_label_minimo.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+"text-align:center;")
+        self.ma_label_minimo.setObjectName("ma_label_3")
         self.label_10 = QtWidgets.QLabel(Form)
         self.label_10.setGeometry(QtCore.QRect(30, 230, 111, 31))
         self.label_10.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -85,20 +84,25 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.ma_input_minimo, self.ma_input_maximo)
+        Form.setTabOrder(self.ma_input_maximo, self.ma_btn_confirmar)
+        Form.setTabOrder(self.ma_btn_confirmar, self.ma_btn_cancelar)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Modificación de stock máximo y mínimo"))
+        Form.setWindowTitle(_translate("Form", "Modificación de stock máximo y mÍnimo"))
         self.label_4.setText(_translate("Form", "Material:"))
-        self.label_5.setText(_translate("Form", "Cantidad Mínima:"))
-        self.label_6.setText(_translate("Form", "Cantidad Máxima:"))
+        self.label_5.setText(_translate("Form", "Cantidad minimo:"))
+        self.label_6.setText(_translate("Form", "Cantidad maximo:"))
         self.ma_label_descripcion.setText(_translate("Form", ""))
-        self.ma_label_minimo.setText(_translate("Form", ""))
         self.ma_label_maximo.setText(_translate("Form", ""))
-        self.label_10.setText(_translate("Form", "Cantidad Máxima"))
-        self.label_11.setText(_translate("Form", "Cantidad Mínima"))
+        self.ma_label_minimo.setText(_translate("Form", ""))
+        self.label_10.setText(_translate("Form", "Cantidad maximo"))
+        self.label_11.setText(_translate("Form", "Cantidad minimo"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
+
+
 
 
 if __name__ == "__main__":

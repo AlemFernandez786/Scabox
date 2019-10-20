@@ -2,10 +2,9 @@
 
 # Form implementation generated from reading ui file 'altaDeArticulosMateriales.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -75,7 +74,7 @@ class Ui_Form(object):
         self.label_10.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_10.setObjectName("label_10")
-        self.ma_input_descripcion = QtWidgets.QPlainTextEdit(Form)
+        self.ma_input_descripcion = QtWidgets.QLineEdit(Form)
         self.ma_input_descripcion.setGeometry(QtCore.QRect(560, 110, 251, 31))
         self.ma_input_descripcion.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
@@ -84,6 +83,11 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.ma_input_ingreso, self.ma_input_descripcion)
+        Form.setTabOrder(self.ma_input_descripcion, self.ma_input_minima)
+        Form.setTabOrder(self.ma_input_minima, self.ma_input_maxima)
+        Form.setTabOrder(self.ma_input_maxima, self.ma_btn_confirmar)
+        Form.setTabOrder(self.ma_btn_confirmar, self.ma_btn_cancelar)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -95,6 +99,8 @@ class Ui_Form(object):
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.label_8.setText(_translate("Form", "Cantidad maxima"))
         self.label_10.setText(_translate("Form", "Descripción"))
+
+
 
 
 if __name__ == "__main__":
