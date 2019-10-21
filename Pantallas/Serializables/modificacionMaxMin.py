@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'modificacionMaxMin.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -74,12 +65,15 @@ class Ui_Form(object):
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
         self.se_input_2.setObjectName("se_input_2")
+        self.se_input_2.setMaximum(9999999)
         self.se_input_1 = QtWidgets.QSpinBox(Form)
         self.se_input_1.setGeometry(QtCore.QRect(160, 180, 251, 31))
         self.se_input_1.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
         self.se_input_1.setObjectName("se_input_1")
+        self.se_input_1.setMaximum(9999999)
+
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -87,12 +81,9 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_4.setText(_translate("Form", "Material:"))
+        self.label_4.setText(_translate("Form", "Serializable:"))
         self.label_5.setText(_translate("Form", "Cantidad Minima:"))
         self.label_6.setText(_translate("Form", "Cantidad Maxima:"))
-        self.se_label_1.setText(_translate("Form", "Lorem"))
-        self.se_label_2.setText(_translate("Form", "00"))
-        self.se_label_3.setText(_translate("Form", "00"))
         self.label_10.setText(_translate("Form", "Cantidad Maxima"))
         self.label_11.setText(_translate("Form", "Cantidad Minima"))
         self.se_btn_confirmar.setText(_translate("Form", "Confirmar"))

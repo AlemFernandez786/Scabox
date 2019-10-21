@@ -117,7 +117,7 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.se_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.se_btn_5.setText(_translate("Form", "Stock por movil"))
-        self.se_btn_2.setText(_translate("Form", "Modificacion de Stock"))
+        self.se_btn_2.setText(_translate("Form", "Stock por tipo"))
         self.label.setText(_translate("Form", "Sector Serializables"))
         self.se_btn_6.setText(_translate("Form", "Inventario"))
         self.se_btn_4.setText(_translate("Form", "Máxima/Mínima de Stock"))
