@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 from Pantallas.Materiales import altaBajaArticulosMaterialesOption
 from Pantallas.Materiales import sectorMateriales
@@ -253,8 +253,6 @@ class StockPorMovil(QtWidgets.QDialog):
                 test = resultado[i][a]
                 self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
                 posicion += 1
-
-
         # -------------------------------------
 
         # Muestra datos seleccionados
@@ -297,7 +295,8 @@ class StockPorMovil(QtWidgets.QDialog):
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
             total = cantidad + int(datos.text(2))
-            sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + str(total) + ' WHERE art_id = ' + str(datos.text(0)) + ' AND mov_id = ' + str(self.codigo)
+            sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + str(total) + ' WHERE art_id = ' + \
+                  str(datos.text(0)) + ' AND mov_id = ' + str(self.codigo)
             self.cursor.execute(sql)
             self.conexion.commit()
         else:
@@ -389,7 +388,6 @@ class ModificarStock(QtWidgets.QDialog):
         self.ui.ma_input_minimo.setText(str(resultados[3]))
         self.ui.ma_input_descripcion.setText(str(resultados[1]))
 
-
     def modificacion(self):
         self.ui.ma_input_cantidad.returnPressed.connect(self.ui.ma_btn_confirmar.setFocus)
         try:
@@ -411,7 +409,7 @@ class ModificarStock(QtWidgets.QDialog):
             valor[0] = str(self.ui.ma_input_buscar.text())
             try:
                 cantidad = int(self.ui.ma_input_cantidad.text())
-            except (ValueError):
+            except ValueError:
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
             valor[1] = str(cantidad)
@@ -500,13 +498,10 @@ class Aprovisionamiento(QtWidgets.QDialog):
         self.ui.setupUi(self)
         self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
         self.cursor = self.conexion.cursor()
-
+        self.index = ""
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
         self.ui.ma_btn_modificar.clicked.connect(self.modificar)
-
-
-
         self.pedido()
 
         # Muestra datos seleccionados
@@ -641,6 +636,7 @@ class StockMateriales(QtWidgets.QDialog):
                 self.ui.ma_tabla_datos.takeTopLevelItem(i)
                 posicion += 1
         self.ui.ma_input_buscar.clear()
+
 
 class MaximaMinima(QtWidgets.QDialog):
     datos = []
