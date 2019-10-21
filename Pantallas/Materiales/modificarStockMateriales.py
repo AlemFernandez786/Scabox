@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'modificarStockMateriales.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -44,7 +42,8 @@ class Ui_Form(object):
         self.ma_input_minimo.setGeometry(QtCore.QRect(330, 420, 251, 31))
         self.ma_input_minimo.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";color:black;")
+"font: 11pt \"MS Shell Dlg 2\";\n"
+"color: rgb(0, 0, 0);")
         self.ma_input_minimo.setText("")
         self.ma_input_minimo.setObjectName("ma_input_minimo")
         self.ma_input_maximo = QtWidgets.QLineEdit(Form)
@@ -52,7 +51,8 @@ class Ui_Form(object):
         self.ma_input_maximo.setGeometry(QtCore.QRect(330, 370, 251, 31))
         self.ma_input_maximo.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";color:black;")
+"font: 11pt \"MS Shell Dlg 2\";\n"
+"color: rgb(0, 0, 0);")
         self.ma_input_maximo.setText("")
         self.ma_input_maximo.setObjectName("ma_input_maximo")
         self.ma_input_actual = QtWidgets.QLineEdit(Form)
@@ -60,7 +60,8 @@ class Ui_Form(object):
         self.ma_input_actual.setGeometry(QtCore.QRect(330, 320, 251, 31))
         self.ma_input_actual.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";color:black;")
+"font: 11pt \"MS Shell Dlg 2\";\n"
+"color: rgb(0, 0, 0);")
         self.ma_input_actual.setText("")
         self.ma_input_actual.setObjectName("ma_input_actual")
         self.label_3 = QtWidgets.QLabel(Form)
@@ -102,7 +103,8 @@ class Ui_Form(object):
         self.ma_input_descripcion.setGeometry(QtCore.QRect(330, 470, 251, 31))
         self.ma_input_descripcion.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";color:black;")
+"font: 11pt \"MS Shell Dlg 2\";\n"
+"color: rgb(0, 0, 0);")
         self.ma_input_descripcion.setObjectName("ma_input_descripcion")
         self.ma_tabla_datos = QtWidgets.QTreeWidget(Form)
         self.ma_tabla_datos.setGeometry(QtCore.QRect(10, 130, 821, 171))
@@ -138,9 +140,24 @@ class Ui_Form(object):
         self.label_7.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_7.setObjectName("label_7")
+        self.label.setBuddy(self.ma_input_buscar)
+        self.label_3.setBuddy(self.ma_input_actual)
+        self.label_5.setBuddy(self.ma_input_minimo)
+        self.label_4.setBuddy(self.ma_input_maximo)
+        self.label_6.setBuddy(self.ma_input_descripcion)
+        self.label_7.setBuddy(self.ma_input_cantidad)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.ma_input_buscar, self.ma_btn_buscar)
+        Form.setTabOrder(self.ma_btn_buscar, self.ma_tabla_datos)
+        Form.setTabOrder(self.ma_tabla_datos, self.ma_input_actual)
+        Form.setTabOrder(self.ma_input_actual, self.ma_input_maximo)
+        Form.setTabOrder(self.ma_input_maximo, self.ma_input_minimo)
+        Form.setTabOrder(self.ma_input_minimo, self.ma_input_descripcion)
+        Form.setTabOrder(self.ma_input_descripcion, self.ma_input_cantidad)
+        Form.setTabOrder(self.ma_input_cantidad, self.ma_btn_confirmar)
+        Form.setTabOrder(self.ma_btn_confirmar, self.ma_btn_cancelar)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -171,3 +188,4 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
+

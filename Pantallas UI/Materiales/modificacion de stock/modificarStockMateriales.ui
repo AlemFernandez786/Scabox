@@ -66,6 +66,9 @@ text-align:center;</string>
    <property name="text">
     <string>Ingrese código del articulo</string>
    </property>
+   <property name="buddy">
+    <cstring>ma_input_buscar</cstring>
+   </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
@@ -87,7 +90,7 @@ text-align:center;</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="ma_input_3">
+  <widget class="QLineEdit" name="ma_input_minimo">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -109,7 +112,7 @@ color: rgb(0, 0, 0);</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLineEdit" name="ma_input_2">
+  <widget class="QLineEdit" name="ma_input_maximo">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -131,7 +134,7 @@ color: rgb(0, 0, 0);</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLineEdit" name="ma_input_1">
+  <widget class="QLineEdit" name="ma_input_actual">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -169,6 +172,9 @@ text-align:center;</string>
    <property name="text">
     <string>Cantidad actual</string>
    </property>
+   <property name="buddy">
+    <cstring>ma_input_actual</cstring>
+   </property>
   </widget>
   <widget class="QLabel" name="label_5">
    <property name="geometry">
@@ -186,6 +192,9 @@ text-align:center;</string>
    <property name="text">
     <string>Cantidad mínima</string>
    </property>
+   <property name="buddy">
+    <cstring>ma_input_minimo</cstring>
+   </property>
   </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
@@ -202,6 +211,9 @@ text-align:center;</string>
    </property>
    <property name="text">
     <string>Cantidad máxima</string>
+   </property>
+   <property name="buddy">
+    <cstring>ma_input_maximo</cstring>
    </property>
   </widget>
   <widget class="QPushButton" name="ma_btn_confirmar">
@@ -258,8 +270,11 @@ text-align:center;</string>
    <property name="text">
     <string>Descripción</string>
    </property>
+   <property name="buddy">
+    <cstring>ma_input_descripcion</cstring>
+   </property>
   </widget>
-  <widget class="QTextEdit" name="ma_input_4">
+  <widget class="QTextEdit" name="ma_input_descripcion">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -278,7 +293,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
 color: rgb(0, 0, 0);</string>
    </property>
   </widget>
-  <widget class="QTreeWidget" name="ma_tabla">
+  <widget class="QTreeWidget" name="ma_tabla_datos">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -348,9 +363,9 @@ color: rgb(0, 0, 0);</string>
     </property>
    </column>
   </widget>
-  <widget class="QLineEdit" name="ma_input_5">
+  <widget class="QLineEdit" name="ma_input_cantidad">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -385,8 +400,23 @@ text-align:center;</string>
    <property name="text">
     <string>Ingreso</string>
    </property>
+   <property name="buddy">
+    <cstring>ma_input_cantidad</cstring>
+   </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>ma_input_buscar</tabstop>
+  <tabstop>ma_btn_buscar</tabstop>
+  <tabstop>ma_tabla_datos</tabstop>
+  <tabstop>ma_input_actual</tabstop>
+  <tabstop>ma_input_maximo</tabstop>
+  <tabstop>ma_input_minimo</tabstop>
+  <tabstop>ma_input_descripcion</tabstop>
+  <tabstop>ma_input_cantidad</tabstop>
+  <tabstop>ma_btn_confirmar</tabstop>
+  <tabstop>ma_btn_cancelar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
