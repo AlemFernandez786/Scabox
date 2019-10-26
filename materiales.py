@@ -102,6 +102,11 @@ class Alta(QtWidgets.QDialog):
         self.close()
 
     def confirmar(self):
+        try:
+            asd=self.ui.ma_input_ingreso.value()
+        except TypeError:
+            QMessageBox.about(self, "Error", "\nIngrese un valor!!\n")
+            return
         if self.ui.ma_input_descripcion.text() == "":
             QMessageBox.about(self, "Error", "\nIngrese descripción\n del artículo!!\n")
             return
@@ -115,9 +120,12 @@ class Alta(QtWidgets.QDialog):
         lcl_valores = [
             str(self.ui.ma_input_descripcion.text()), str(self.ui.ma_input_ingreso.text()),
             str(self.ui.ma_input_minima.text()), str(self.ui.ma_input_maxima.text())]
-        lcl_agregar = ABM_materiales()
-        lcl_agregar.alta_materiales(lcl_valores)
-
+        try:
+            lcl_agregar = ABM_materiales()
+            lcl_agregar.alta_materiales(lcl_valores)
+        except mysql.connector.Error:
+            QMessageBox.about(self, "Error", "Ingrese un valor!!")
+            return
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
         self.close()
 
