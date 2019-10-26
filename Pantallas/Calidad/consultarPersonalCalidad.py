@@ -43,7 +43,7 @@ class Ui_Form(object):
 "border:none;")
         self.ca_btn_volver.setObjectName("ca_btn_volver")
         self.ca_input_buscar = QtWidgets.QLineEdit(Form)
-        self.ca_input_buscar.setGeometry(QtCore.QRect(350, 120, 251, 31))
+        self.ca_input_buscar.setGeometry(QtCore.QRect(380, 120, 230, 31))
         self.ca_input_buscar.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
@@ -57,7 +57,7 @@ class Ui_Form(object):
 "border:none;")
         self.ca_btn_buscar.setObjectName("ca_btn_buscar")
         self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(230, 120, 101, 31))
+        self.label.setGeometry(QtCore.QRect(250, 120, 130, 31))
         self.label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label.setObjectName("label")
@@ -67,7 +67,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Personal"))
         self.ca_tabla.headerItem().setText(0, _translate("Form", "Legajo"))
         self.ca_tabla.headerItem().setText(1, _translate("Form", "Nombre"))
         self.ca_tabla.headerItem().setText(2, _translate("Form", "Apellido"))

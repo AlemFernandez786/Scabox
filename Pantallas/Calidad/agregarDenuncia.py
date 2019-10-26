@@ -14,8 +14,11 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(874, 461)
+        font = QtGui.QFont()
+        font.setPointSize(7)
+        Form.setFont(font)
         self.label_9 = QtWidgets.QLabel(Form)
-        self.label_9.setGeometry(QtCore.QRect(460, 90, 51, 31))
+        self.label_9.setGeometry(QtCore.QRect(460, 90, 161, 31))
         self.label_9.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_9.setObjectName("label_9")
@@ -27,7 +30,7 @@ class Ui_Form(object):
         self.ca_input_3.setText("")
         self.ca_input_3.setObjectName("ca_input_3")
         self.label_11 = QtWidgets.QLabel(Form)
-        self.label_11.setGeometry(QtCore.QRect(40, 210, 121, 31))
+        self.label_11.setGeometry(QtCore.QRect(40, 210, 151, 31))
         self.label_11.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_11.setObjectName("label_11")
@@ -44,7 +47,7 @@ class Ui_Form(object):
         self.ca_input_1.setText("")
         self.ca_input_1.setObjectName("ca_input_1")
         self.label_8 = QtWidgets.QLabel(Form)
-        self.label_8.setGeometry(QtCore.QRect(460, 130, 201, 31))
+        self.label_8.setGeometry(QtCore.QRect(460, 130, 241, 31))
         self.label_8.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_8.setObjectName("label_8")
@@ -56,7 +59,7 @@ class Ui_Form(object):
         self.ca_input_2.setText("")
         self.ca_input_2.setObjectName("ca_input_2")
         self.ca_input_7 = QtWidgets.QLineEdit(Form)
-        self.ca_input_7.setGeometry(QtCore.QRect(520, 90, 321, 31))
+        self.ca_input_7.setGeometry(QtCore.QRect(650, 90, 191, 31))
         self.ca_input_7.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
@@ -78,14 +81,14 @@ class Ui_Form(object):
 "text-align:center;")
         self.label_4.setObjectName("label_4")
         self.ca_input_5 = QtWidgets.QLineEdit(Form)
-        self.ca_input_5.setGeometry(QtCore.QRect(240, 250, 601, 31))
+        self.ca_input_5.setGeometry(QtCore.QRect(260, 250, 581, 31))
         self.ca_input_5.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
         self.ca_input_5.setText("")
         self.ca_input_5.setObjectName("ca_input_5")
         self.label_10 = QtWidgets.QLabel(Form)
-        self.label_10.setGeometry(QtCore.QRect(40, 250, 191, 31))
+        self.label_10.setGeometry(QtCore.QRect(40, 250, 221, 31))
         self.label_10.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_10.setObjectName("label_10")
@@ -109,67 +112,136 @@ class Ui_Form(object):
 "")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
+        self.ca_input_8 = QtWidgets.QDateEdit(Form)
+        self.ca_input_8.setGeometry(QtCore.QRect(710, 130, 131, 31))
+        self.ca_input_8.setStyleSheet("border:none;\n"
+"background-color: rgb(255, 255, 255);\n"
+"font: 11pt \"MS Shell Dlg 2\";")
+        self.ca_input_8.setCalendarPopup(True)
+        self.ca_input_8.setObjectName("ca_input_8")
+        import datetime
+        hoy = datetime.datetime.today()
+        self.ca_input_8.setDate(QtCore.QDate(hoy))
+        self.ca_input_4 = QtWidgets.QDateEdit(Form)
+        self.ca_input_4.setGeometry(QtCore.QRect(210, 210, 221, 31))
+        self.ca_input_4.setStyleSheet("border:none;\n"
+"background-color: rgb(255, 255, 255);\n"
+"font: 11pt \"MS Shell Dlg 2\";")
+        self.ca_input_4.setCalendarPopup(True)
+        self.ca_input_4.setObjectName("ca_input_4")
+        self.ca_input_4.setDate(QtCore.QDate(hoy))
+        self.label_12 = QtWidgets.QLabel(Form)
+        self.label_12.setGeometry(QtCore.QRect(460, 210, 71, 31))
+        self.label_12.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+"text-align:center;")
+        self.label_12.setObjectName("label_12")
         self.label_13 = QtWidgets.QLabel(Form)
-        self.label_13.setGeometry(QtCore.QRect(40, 290, 191, 31))
+        self.label_13.setGeometry(QtCore.QRect(40, 290, 71, 31))
         self.label_13.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label_13.setObjectName("label_13")
-        self.ca_input_6 = QtWidgets.QTextEdit(Form)
-        self.ca_input_6.setGeometry(QtCore.QRect(240, 290, 601, 71))
+        self.ca_input_6 = QtWidgets.QComboBox(Form)
+        self.ca_input_6.setGeometry(QtCore.QRect(230, 290, 200, 25))
         self.ca_input_6.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
         self.ca_input_6.setObjectName("ca_input_6")
-        self.ca_input_8 = QtWidgets.QDateEdit(Form)
-        self.ca_input_8.setGeometry(QtCore.QRect(670, 130, 171, 31))
-        self.ca_input_8.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.ca_input_8.setObjectName("ca_input_8")
-        self.ca_input_9 = QtWidgets.QSpinBox(Form)
-        self.ca_input_9.setGeometry(QtCore.QRect(680, 170, 161, 31))
+        self.ca_input_6.addItem("")
+        self.ca_input_9 = QtWidgets.QComboBox(Form)
+        self.ca_input_9.setGeometry(QtCore.QRect(650, 170, 200, 25))
         self.ca_input_9.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
         self.ca_input_9.setObjectName("ca_input_9")
-        self.ca_input_4 = QtWidgets.QDateEdit(Form)
-        self.ca_input_4.setGeometry(QtCore.QRect(170, 210, 261, 31))
-        self.ca_input_4.setStyleSheet("border:none;\n"
-"background-color: rgb(255, 255, 255);\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.ca_input_4.setObjectName("ca_input_4")
-        self.ca_input_10 = QtWidgets.QLineEdit(Form)
-        self.ca_input_10.setGeometry(QtCore.QRect(520, 210, 321, 31))
+        self.ca_input_9.addItem("")
+        self.ca_input_10 = QtWidgets.QComboBox(Form)
+        self.ca_input_10.setGeometry(QtCore.QRect(650, 210, 200, 25))
         self.ca_input_10.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        self.ca_input_10.setText("")
         self.ca_input_10.setObjectName("ca_input_10")
-        self.label_12 = QtWidgets.QLabel(Form)
-        self.label_12.setGeometry(QtCore.QRect(460, 210, 51, 31))
-        self.label_12.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+        self.ca_input_10.addItem("")
+        self.ca_input_11 = QtWidgets.QComboBox(Form)
+        self.ca_input_11.setGeometry(QtCore.QRect(530, 290, 101, 25))
+        self.ca_input_11.setStyleSheet("border:none;\n"
+"background-color: rgb(255, 255, 255);\n"
+"font: 11pt \"MS Shell Dlg 2\";")
+        self.ca_input_11.setObjectName("ca_input_11")
+        self.ca_input_11.addItem("")
+        self.label_14 = QtWidgets.QLabel(Form)
+        self.label_14.setGeometry(QtCore.QRect(450, 290, 71, 31))
+        self.label_14.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
-        self.label_12.setObjectName("label_12")
+        self.label_14.setObjectName("label_14")
+        self.label_15 = QtWidgets.QLabel(Form)
+        self.label_15.setGeometry(QtCore.QRect(640, 290, 71, 31))
+        self.label_15.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+"text-align:center;")
+        self.label_15.setObjectName("label_15")
+        self.ca_input_12 = QtWidgets.QLineEdit(Form)
+        self.ca_input_12.setGeometry(QtCore.QRect(710, 290, 131, 31))
+        self.ca_input_12.setStyleSheet("border:none;\n"
+"background-color: rgb(255, 255, 255);\n"
+"font: 11pt \"MS Shell Dlg 2\";")
+        self.ca_input_12.setText("")
+        self.ca_input_12.setObjectName("ca_input_12")
+        self.ca_btn_agregar = QtWidgets.QPushButton(Form)
+        self.ca_btn_agregar.setGeometry(QtCore.QRect(712, 330, 131, 28))
+        self.ca_btn_agregar.setStyleSheet("background-color: #5f5fff;\n"
+"color:white;\n"
+"font-size:10pt;\n"
+"border:none;")
+        self.ca_btn_agregar.setObjectName("ca_btn_agregar")
+        self.label = QtWidgets.QLabel(Form)
+        self.label.setEnabled(False)
+        self.label.setGeometry(QtCore.QRect(330, 360, 500, 21))
+        self.label.setText("")
+        self.label.setStyleSheet("font-size:8pt")
+        self.label.setObjectName("label")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.ca_input_1, self.ca_input_2)
+        Form.setTabOrder(self.ca_input_2, self.ca_input_3)
+        Form.setTabOrder(self.ca_input_3, self.ca_input_4)
+        Form.setTabOrder(self.ca_input_4, self.ca_input_5)
+        Form.setTabOrder(self.ca_input_5, self.ca_input_6)
+        Form.setTabOrder(self.ca_input_6, self.ca_input_7)
+        Form.setTabOrder(self.ca_input_7, self.ca_input_8)
+        Form.setTabOrder(self.ca_input_8, self.ca_input_9)
+        Form.setTabOrder(self.ca_input_9, self.ca_input_10)
+        Form.setTabOrder(self.ca_input_10, self.ca_input_11)
+        Form.setTabOrder(self.ca_input_11, self.ca_input_12)
+        Form.setTabOrder(self.ca_input_12, self.ca_btn_agregar)
+        Form.setTabOrder(self.ca_btn_agregar, self.ca_btn_confirmar)
+        Form.setTabOrder(self.ca_btn_confirmar, self.ca_btn_cancelar)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_9.setText(_translate("Form", "Legajo"))
+        Form.setWindowTitle(_translate("Form", "Denuncia"))
+        self.label_9.setText(_translate("Form", "Legajo de denuncia"))
         self.label_11.setText(_translate("Form", "Fecha del siniestro"))
-        self.label_6.setText(_translate("Form", "Cantidad de material extraviado"))
+        self.label_6.setText(_translate("Form", "Técnico 1"))
         self.label_8.setText(_translate("Form", "Fecha de ingreso de denuncia"))
-        self.label_3.setText(_translate("Form", "Numero de folio"))
+        self.label_3.setText(_translate("Form", "Número de folio"))
         self.label_5.setText(_translate("Form", "Comisaria"))
-        self.label_4.setText(_translate("Form", "Numero de acta"))
+        self.label_4.setText(_translate("Form", "Número de acta"))
         self.label_10.setText(_translate("Form", "Mac de equipos extraviados"))
         self.ca_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.ca_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.label_2.setText(_translate("Form", "Agregar Denuncia"))
-        self.label_13.setText(_translate("Form", "Motivo de la falta de articulos"))
-        self.label_12.setText(_translate("Form", "Técnico"))
+        self.label_12.setText(_translate("Form", "Técnico 2"))
+        self.label_13.setText(_translate("Form", "Movil"))
+        self.label_14.setText(_translate("Form", "Articulo"))
+        self.label_15.setText(_translate("Form", "Cantidad"))
+        self.ca_btn_agregar.setText(_translate("Form", "Agergar"))
+        self.ca_input_9.setCurrentText(_translate("Form", "Seleccione un Técnico"))
+        self.ca_input_9.setItemText(0, _translate("Form", "Seleccione un Técnico"))
+        self.ca_input_10.setCurrentText(_translate("Form", "Seleccione un Técnico"))
+        self.ca_input_10.setItemText(0, _translate("Form", "Seleccione un Técnico"))
+        self.ca_input_6.setCurrentText(_translate("Form", "Seleccione un movil"))
+        self.ca_input_6.setItemText(0, _translate("Form", "Seleccione un movil"))
+        self.ca_input_11.setItemText(0, _translate("Form", "Art."))
 
 
 if __name__ == "__main__":

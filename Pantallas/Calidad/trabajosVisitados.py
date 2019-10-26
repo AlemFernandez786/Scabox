@@ -60,12 +60,12 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Trabajos realizados"))
         self.ca_btn_cancelar.setText(_translate("Form", "Cancelar"))
-        self.ca_btn_2.setText(_translate("Form", "Consultar trabajos visitados"))
-        self.label.setText(_translate("Form", "Trabajos Visitados"))
-        self.ca_btn_1.setText(_translate("Form", "Agregar trabajo visitados"))
-        self.ca_btn_3.setText(_translate("Form", "Editar trabajos visitados"))
+        self.ca_btn_2.setText(_translate("Form", "Consultar trabajos realizados"))
+        self.label.setText(_translate("Form", "Trabajos realizados"))
+        self.ca_btn_1.setText(_translate("Form", "Agregar trabajo realizado"))
+        self.ca_btn_3.setText(_translate("Form", "Eliminar trabajos  realizados"))
 
 
 if __name__ == "__main__":

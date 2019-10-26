@@ -51,7 +51,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Denuncias"))
         self.ca_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.ca_btn_2.setText(_translate("Form", "Consultar denuncia"))
         self.label.setText(_translate("Form", "Denuncias"))

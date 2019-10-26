@@ -22,7 +22,7 @@ class Ui_Form(object):
 "border:none;")
         self.se_btn_cancelar.setObjectName("se_btn_cancelar")
         self.se_btn_5 = QtWidgets.QPushButton(Form)
-        self.se_btn_5.setGeometry(QtCore.QRect(70, 330, 311, 41))
+        self.se_btn_5.setGeometry(QtCore.QRect(70, 390, 311, 41))
         self.se_btn_5.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -46,7 +46,7 @@ class Ui_Form(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.se_btn_6 = QtWidgets.QPushButton(Form)
-        self.se_btn_6.setGeometry(QtCore.QRect(70, 390, 311, 41))
+        self.se_btn_6.setGeometry(QtCore.QRect(70, 270, 311, 41))
         self.se_btn_6.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -55,7 +55,7 @@ class Ui_Form(object):
         self.se_btn_6.setFlat(False)
         self.se_btn_6.setObjectName("se_btn_6")
         self.se_btn_4 = QtWidgets.QPushButton(Form)
-        self.se_btn_4.setGeometry(QtCore.QRect(70, 270, 311, 41))
+        self.se_btn_4.setGeometry(QtCore.QRect(70, 330, 311, 41))
         self.se_btn_4.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -119,13 +119,13 @@ class Ui_Form(object):
         self.se_btn_5.setText(_translate("Form", "Stock por movil"))
         self.se_btn_2.setText(_translate("Form", "Stock por tipo"))
         self.label.setText(_translate("Form", "Sector Serializables"))
-        self.se_btn_6.setText(_translate("Form", "Inventario"))
-        self.se_btn_4.setText(_translate("Form", "Máxima/Mínima de Stock"))
-        self.se_btn_1.setText(_translate("Form", "Consulta de Stock"))
-        self.se_btn_3.setText(_translate("Form", "Alta/Baja de Articulos"))
+        self.se_btn_6.setText(_translate("Form", "Alta/Baja de tipo"))
+        self.se_btn_4.setText(_translate("Form", "Máxima/Mínima de stock"))
+        self.se_btn_1.setText(_translate("Form", "Consulta de stock"))
+        self.se_btn_3.setText(_translate("Form", "Alta/Baja de serializable"))
         self.se_btn_7.setText(_translate("Form", "Aprovisionamiento"))
         self.se_btn_8.setText(_translate("Form", "Historial"))
-        self.se_btn_9.setText(_translate("Form", "Estado de Articulo"))
+        self.se_btn_9.setText(_translate("Form", "Estado de serializable"))
 
 
 if __name__ == "__main__":

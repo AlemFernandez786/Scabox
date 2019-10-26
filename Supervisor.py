@@ -1,5 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QMessageBox
+from Pantallas.Supervisor import alerta_confirmacion
+from Pantallas.Supervisor import alerta_error
 from Pantallas.Supervisor import altaBajaPersonalOption
 from Pantallas.Supervisor import altaDePersonal
 from Pantallas.Supervisor import bajaDePersonal
@@ -7,9 +9,10 @@ from Pantallas.Supervisor import modificacionSectorDePersonal
 from Pantallas.Supervisor import panelModificarSectorPersonal
 from Pantallas.Supervisor import consultarStock
 from Pantallas.Supervisor import supervisor
+from Pantallas.Materiales import consultarStockMateriales
 from Pantallas.Supervisor import IngresoContraseña
 from Pantallas.Supervisor import consultarPersonalSupervisor
-from materiales import StockMateriales
+from ABM import ABM_materiales
 from ABM import ABM_supervisor
 import mysql.connector
 import sys
@@ -18,7 +21,6 @@ import sys
 def __init__(self):
     self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
     self.cursor = self.conexion.cursor()
-
 
 class VentanaSupervisor(QtWidgets.QMainWindow):
 
@@ -72,64 +74,63 @@ class Sectordeconsulta(QtWidgets.QDialog):
         ventanaserializables = StockSerializables(self)
         ventanaserializables.exec_()
 
+class StockMateriales(QtWidgets.QDialog):
+    def __init__(self, *args, **kwargs):
+        super(StockMateriales, self).__init__(*args, **kwargs)
+        self.ui = consultarStockMateriales.Ui_Form()
+        self.ui.setupUi(self)
+        consultar = ABM_materiales()
+        resultado = consultar.consulta_materiales_gral()
+        _translate = QtCore.QCoreApplication.translate
+        len_resultado = (len(resultado))
+        for i in range(0, len_resultado):
+            # resultado[i].insert(3, str(999))
+            posicion = 0
+            for a in range(0, len(resultado[i])):
+                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+                test = resultado[i][a]
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                posicion += 1
 
-# class StockMateriales(QtWidgets.QDialog):
-#     def __init__(self, *args, **kwargs):
-#         super(StockMateriales, self).__init__(*args, **kwargs)
-#         self.ui = consultarStockMateriales.Ui_Form()
-#         self.ui.setupUi(self)
-#         consultar = ABM_materiales()
-#         resultado = consultar.consulta_materiales_gral()
-#         _translate = QtCore.QCoreApplication.translate
-#         len_resultado = (len(resultado))
-#         for i in range(0, len_resultado):
-#             # resultado[i].insert(3, str(999))
-#             posicion = 0
-#             for a in range(0, len(resultado[i])):
-#                 item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
-#                 test = resultado[i][a]
-#                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
-#                 posicion += 1
-#
-#         self.ui.ma_btn_buscar.clicked.connect(self.consulta)
-#         self.ui.ma_btn_volver.clicked.connect(self.salir)
-#
-#     def salir(self):
-#         self.close()
-#
-#     def consulta(self):
-#         try:
-#             codigo = int(self.ui.ma_input_buscar.text())
-#         except ValueError:
-#             QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
-#             return
-#         consultar = ABM_materiales()
-#         resultado = consultar.consulta_materiales(str(codigo))
-#         posicion = 0
-#         try:
-#             resultados = resultado[0]
-#         except IndexError:
-#             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
-#             return
-#         _translate = QtCore.QCoreApplication.translate
-#
-#         for i in resultados:
-#             if posicion == 3:
-#                 posicion = posicion + 1
-#             self.ui.ma_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
-#             posicion += 1
-#
-#         consultar = ABM_materiales()
-#         resultado = consultar.consulta_materiales_gral()
-#         _translate = QtCore.QCoreApplication.translate
-#         len_resultado = (len(resultado))
-#         for i in range(1, len_resultado):
-#             posicion = 0
-#             for a in range(0, len(resultado[i])):
-#                 item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
-#                 test = ''
-#                 self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
-#                 posicion += 1
+        self.ui.ma_btn_buscar.clicked.connect(self.consulta)
+        self.ui.ma_btn_volver.clicked.connect(self.salir)
+
+    def salir(self):
+        self.close()
+
+    def consulta(self):
+        try:
+            codigo = int(self.ui.ma_input_buscar.text())
+        except ValueError:
+            QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
+            return
+        consultar = ABM_materiales()
+        resultado = consultar.consulta_materiales(str(codigo))
+        posicion = 0
+        try:
+            resultados = resultado[0]
+        except IndexError:
+            QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
+            return
+        _translate = QtCore.QCoreApplication.translate
+
+        for i in resultados:
+            if posicion == 3:
+                posicion = posicion + 1
+            self.ui.ma_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
+            posicion += 1
+
+        consultar = ABM_materiales()
+        resultado = consultar.consulta_materiales_gral()
+        _translate = QtCore.QCoreApplication.translate
+        len_resultado = (len(resultado))
+        for i in range(1, len_resultado):
+            posicion = 0
+            for a in range(0, len(resultado[i])):
+                item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
+                test = ''
+                self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
+                posicion += 1
 
 class AltaBajaPersonal(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
@@ -146,7 +147,6 @@ class AltaBajaPersonal(QtWidgets.QDialog):
     def baja(self):
         ventanabaja = BajaPersonal(self)
         ventanabaja.exec_()
-
 
 class AltaPersonal(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
@@ -185,7 +185,6 @@ class AltaPersonal(QtWidgets.QDialog):
     def cancelar(self):
         self.close()
 
-
 class BajaPersonal(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
         super(BajaPersonal, self).__init__(*args, **kwargs)
@@ -211,6 +210,7 @@ class BajaPersonal(QtWidgets.QDialog):
             QMessageBox.about(self, "Error", "Ingrese un legajo válido")
             return
 
+
         if (self.legajo < 0) | (self.legajo > 9999):
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
@@ -225,7 +225,7 @@ class BajaPersonal(QtWidgets.QDialog):
             except ValueError:
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
-        if war == QMessageBox.Cancel:
+        if war== QMessageBox.Cancel:
             return
         bajar=ABM_supervisor()
         bajar.baja_personal(legajo)
@@ -233,7 +233,6 @@ class BajaPersonal(QtWidgets.QDialog):
 
     def cancelar(self):
         self.close()
-
 
 class ModificacionSector(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
@@ -276,50 +275,50 @@ class ModificacionSector(QtWidgets.QDialog):
                 len_resultado = (len(resultado))
                 for i in range(0, len_resultado):
                     posicion = 0
-                    QtWidgets.QTreeWidgetItem(self.ui.su_tabla)
                     for a in range(0, len(resultado[i])):
+                        item_0 = QtWidgets.QTreeWidgetItem(self.ui.su_tabla)
                         test = resultado[i][a]
                         self.ui.su_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(test)))
                         posicion += 1
 
             def CambiaSector(self):
-                sector = 0
-                # Herramientas 1
-                if self.ui.su_radiobutton_2.isChecked():
-                    sector = 1
-                # Serializables 2
-                elif self.ui.su_radiobutton_3.isChecked():
-                    sector = 2
-                # Materiales 3
-                elif self.ui.su_radiobutton_1.isChecked():
-                    sector = 3
-                # Supervisor 4
-                elif self.ui.su_radiobutton_5.isChecked():
-                    sector = 4
-                # Control de calidad 5
-                elif self.ui.su_radiobutton_4.isChecked():
+                sector=0
+                #Herramientas 1
+                if self.ui.su_radiobutton_2.isChecked()==True:
+                    sector=1
+                #Serializables 2
+                elif self.ui.su_radiobutton_3.isChecked()==True:
+                    sector=2
+                #Materiales 3
+                elif self.ui.su_radiobutton_1.isChecked()==True:
+                    sector=3
+                #Supervisor 4
+                elif self.ui.su_radiobutton_5.isChecked()==True:
+                    sector=4
+                #Control de calidad 5
+                elif self.ui.su_radiobutton_4.isChecked()==True:
                     sector = 5
-                # Tecnicos 6
-                elif self.ui.su_radiobutton_6.isChecked():
-                    sector = 6
+                #Tecnicos 6
+                elif self.ui.su_radiobutton_6.isChecked()==True:
+                  sector = 6
 
-                class ActualizaContrasenas(QtWidgets.QDialog):
+                class ActualizaContraseñas(QtWidgets.QDialog):
                     def __init__(self, *args, **kwargs):
-                        super(ActualizaContrasenas, self).__init__(*args, **kwargs)
+                        super(ActualizaContraseñas, self).__init__(*args, **kwargs)
                         self.ui = IngresoContraseña.Ui_Form()
                         self.ui.setupUi(self)
                         self.ui.su_btn_confirmar.pressed.connect(self.CambiaSector)
                         self.ui.su_btn_cancelar.pressed.connect(self.cancelar)
 
                     def CambiaSector(self):
-                        clave1 = str(self.ui.su_input_1.text())
-                        clave2 = str(self.ui.su_input_2.text())
-                        if len(clave1) < 5:
+                        clave1= str(self.ui.su_input_1.text())
+                        clave2= str(self.ui.su_input_2.text())
+                        if len(clave1)<5:
                             war = QMessageBox.warning(self, "Advertencia",
                                                       '''Contraseña demasiado corta''', QMessageBox.Cancel)
                             if war == QMessageBox.Cancel:
                                 return
-                        if clave1 == clave2:
+                        if clave1==clave2:
                             passw = str(self.ui.su_input_1.text())
                             pasend = []
                             pasend.append((str(num_legajo), passw))
@@ -340,7 +339,6 @@ class ModificacionSector(QtWidgets.QDialog):
                             self.close()
                         if war == QMessageBox.Cancel:
                             return
-
                     def cancelar(self):
                         self.close()
                         return
