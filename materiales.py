@@ -302,6 +302,9 @@ class StockPorMovil(QtWidgets.QDialog):
             sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + str(lcl_total) + ' WHERE art_id = ' + \
                   str(lcl_datos.text(0)) + ' AND mov_id = ' + str(self.lcl_codigo)
             self.cursor.execute(sql)
+            lcl_valor = [str(lcl_datos.text(0)), str(-1*lcl_cantidad)]
+            instancia.modificacion_materiales(lcl_valor)
+
             self.conexion.commit()
         else:
             return
