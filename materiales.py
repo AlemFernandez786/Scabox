@@ -112,11 +112,11 @@ class Alta(QtWidgets.QDialog):
         if self.ui.ma_input_minima.value() >= self.ui.ma_input_maxima.value():
             QMessageBox.about(self, "Error", "\nLa cantidad mínima no puede \n ser igual o superar a la máxima!!\n")
             return
-        valores = [
+        lcl_valores = [
             str(self.ui.ma_input_descripcion.text()), str(self.ui.ma_input_ingreso.text()),
             str(self.ui.ma_input_minima.text()), str(self.ui.ma_input_maxima.text())]
-        agregar = ABM_materiales()
-        agregar.alta_materiales(valores)
+        lcl_agregar = ABM_materiales()
+        lcl_agregar.alta_materiales(lcl_valores)
 
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
         self.close()
@@ -134,17 +134,19 @@ class Baja(QtWidgets.QDialog):
         self.close()
 
     def confirmar(self):
-        codigo = (str(self.ui.ma_input_codigo.text()))
+        lcl_codigo = (str(self.ui.ma_input_codigo.text()))
         try:
             instanciaabm = ABM_materiales()
-            busqueda = instanciaabm.consulta_materiales(codigo)
+            busqueda = instanciaabm.consulta_materiales(lcl_codigo)
         except mysql.connector.Error:
+            QMessageBox.about(self, "Error!!", "\nIngrese un número!!\n")
+            self.ui.ma_input_codigo.clear()
             return
         if not busqueda:
             QMessageBox.about(self, "Error", "\nArtículo inexistente!!\n")
             return
         try:
-            instanciaabm.baja_materiales(codigo)
+            instanciaabm.baja_materiales(lcl_codigo)
         except mysql.connector.Error:
             return
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
@@ -163,34 +165,34 @@ class StockMovilIngreso(QtWidgets.QDialog):
         self.sql = 'SELECT dm.mov_id, e.emp_nombre, e.emp_apellido FROM empleados e JOIN dupla_movil dm ON' \
                    ' e.emp_legajo=dm.emp_legajo ORDER BY dm.mov_id ASC'
         self.cursor.execute(self.sql)
-        resultado = self.cursor.fetchall()
-        lista = []
-        duplas = []
-        for i in range(0, len(resultado)):
-            lista.append(list(resultado[i]))
-        resultado = lista
+        lcl_resultado = self.cursor.fetchall()
+        lcl_lista = []
+        lcl_duplas = []
+        for i in range(0, len(lcl_resultado)):
+            lcl_lista.append(list(lcl_resultado[i]))
+        lcl_resultado = lcl_lista
 
-        for i in range(0, len(resultado)):
-            if i+1 >= len(resultado):
+        for i in range(0, len(lcl_resultado)):
+            if i+1 >= len(lcl_resultado):
                 break
-            if resultado[i][0] == resultado[i+1][0]:
-                dupla = []
-                numero = str(resultado[i][0])
-                dupla.append(numero)
-                wachos = (str(resultado[i][1]) + " " + str(resultado[i][2]) + ", " + str(resultado[i+1][1]) + " " +
-                          str(resultado[i+1][2]))
+            if lcl_resultado[i][0] == lcl_resultado[i+1][0]:
+                lcl_dupla = []
+                lcl_numero = str(lcl_resultado[i][0])
+                lcl_dupla.append(lcl_numero)
+                lcl_tecnicos = (str(lcl_resultado[i][1]) + " " + str(lcl_resultado[i][2]) + ", "
+                                + str(lcl_resultado[i+1][1]) + " " + str(lcl_resultado[i+1][2]))
 
-                dupla.append(wachos)
-                duplas.append(dupla)
-        len_resultado = (len(duplas))
-        for i in range(0, len_resultado):
-            posicion = 0
+                lcl_dupla.append(lcl_tecnicos)
+                lcl_duplas.append(lcl_dupla)
+        lcl_len_resultado = (len(lcl_duplas))
+        for i in range(0, lcl_len_resultado):
+            lcl_posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
-            for a in range(0, len(duplas[i])):
-                test = duplas[i][a]
+            for a in range(0, len(lcl_duplas[i])):
+                lcl_filas = lcl_duplas[i][a]
 
-                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
-                posicion += 1
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(lcl_posicion, str(lcl_filas))
+                lcl_posicion += 1
         # -------------------------------------
 
         # Muestra datos seleccionados
@@ -198,25 +200,26 @@ class StockMovilIngreso(QtWidgets.QDialog):
         self.ui.ma_tabla_datos.doubleClicked.connect(self.confirmar)
 
     def info(self):
-        seleccion = self.ui.ma_tabla_datos.selectedItems()
-        if seleccion:
-            datos = seleccion[0]
-            self.ui.ma_label_movil.setText(datos.text(0))
-            self.ui.ma_label_tecnicos.setText(datos.text(1))
+        lcl_seleccion = self.ui.ma_tabla_datos.selectedItems()
+        if lcl_seleccion:
+            lcl_datos = lcl_seleccion[0]
+            self.ui.ma_label_movil.setText(lcl_datos.text(0))
+            self.ui.ma_label_tecnicos.setText(lcl_datos.text(1))
 
     # --------------------------------------
 
     def confirmar(self):
-        datos = 0
-        seleccion = self.ui.ma_tabla_datos.selectedItems()
-        if seleccion:
-            datos = seleccion[0]
+        lcl_datos = 0
+        lcl_seleccion = self.ui.ma_tabla_datos.selectedItems()
+        if lcl_seleccion:
+            lcl_datos = lcl_seleccion[0]
         ventanastockmovil = StockPorMovil()
         try:
-            datos.text(0)
+            lcl_datos.text(0)
         except AttributeError:
+            QMessageBox.about(self, "Error!!", "Seleccione un móvil")
             return
-        ventanastockmovil.tabla(datos.text(0))
+        ventanastockmovil.tabla(lcl_datos.text(0))
         ventanastockmovil.exec_()
 
 
@@ -231,77 +234,78 @@ class StockPorMovil(QtWidgets.QDialog):
         self.ui.ma_btn_salir.clicked.connect(self.salir)
         self.ui.ma_tabla_datos.itemSelectionChanged.connect(self.info)
         self.ui.ma_input_cantidad.clear()
-        self.codigo = 0
+        self.lcl_codigo = 0
 
         # Inserción de datos en tabla
     def tabla(self, cod):
-        self.codigo = cod
+        self.lcl_codigo = cod
         sql = 'SELECT am.art_id, a.art_nombre, am.art_mov_cantidad FROM articulo_movil am JOIN articulo a ON ' \
-              'am.art_id = a.art_id WHERE mov_id='+str(self.codigo)+' AND a.tip_id = 2'
+              'am.art_id = a.art_id WHERE mov_id='+str(self.lcl_codigo)+' AND a.tip_id = 2'
         self.cursor.execute(sql)
-        resultado = self.cursor.fetchall()
-        lista = []
-        for i in range(0, len(resultado)):
-            lista.append(list(resultado[i]))
-        resultado = tuple(lista)
-        len_resultado = (len(resultado))
-        for i in range(0, len_resultado):
+        lcl_resultado = self.cursor.fetchall()
+        lcl_lista = []
+        for i in range(0, len(lcl_resultado)):
+            lcl_lista.append(list(lcl_resultado[i]))
+        lcl_resultado = tuple(lcl_lista)
+        lcl_len_resultado = (len(lcl_resultado))
+        for i in range(0, lcl_len_resultado):
             self.ui.ma_tabla_datos.takeTopLevelItem(i)
-            posicion = 0
+            lcl_posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
-            for a in range(0, len(resultado[i])):
-                test = resultado[i][a]
-                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
-                posicion += 1
+            for a in range(0, len(lcl_resultado[i])):
+                lcl_filas = lcl_resultado[i][a]
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(lcl_posicion, str(lcl_filas))
+                lcl_posicion += 1
         # -------------------------------------
 
         # Muestra datos seleccionados
     def info(self):
-        seleccion = self.ui.ma_tabla_datos.selectedItems()
-        if seleccion:
-            datos = seleccion[0]
-            self.ui.ma_label_descripcion.setText(datos.text(0))
-            self.ui.ma_label_stock.setText(datos.text(1))
+        lcl_seleccion = self.ui.ma_tabla_datos.selectedItems()
+        if lcl_seleccion:
+            lcl_datos = lcl_seleccion[0]
+            self.ui.ma_label_descripcion.setText(lcl_datos.text(0))
+            self.ui.ma_label_stock.setText(lcl_datos.text(1))
 
     # --------------------------------------
 
     def confirmar(self):
-        seleccion = self.ui.ma_tabla_datos.selectedItems()
+        lcl_seleccion = self.ui.ma_tabla_datos.selectedItems()
         try:
-            datos = seleccion[0]
+            lcl_datos = lcl_seleccion[0]
         except IndexError:
+            QMessageBox.about(self, "Error!!", "\nSelecciones un artículo!!\n")
             return
         try:
-            cantidad = int(self.ui.ma_input_cantidad.text())
+            lcl_cantidad = int(self.ui.ma_input_cantidad.text())
         except ValueError:
-            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+            QMessageBox.about(self, "Error!!", "\nIngrese un número!!\n")
             return
 
-        if (cantidad < 0) | (cantidad > 9999):
+        if lcl_cantidad == 0:
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
         instancia = ABM_materiales()
-        actual = instancia.consulta_materiales(self.codigo)
-        if cantidad > int(actual[0][2]):
+        actual = instancia.consulta_materiales(self.lcl_codigo)
+        if lcl_cantidad > int(actual[0][2]):
             QMessageBox.about(self, "Error!!", "\nCantidad no disponible!!\n")
             return
-        war = QMessageBox.warning(self, "Advertencia",
-                                  '''El artículo ha sido modificado.\n
-                            Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
-        if war == QMessageBox.Ok:
+        lcl_warning = QMessageBox.warning(self, "Advertencia",
+                                          "El artículo ha sido modificado.\nQuieres guardar los cambios?",
+                                          QMessageBox.Ok, QMessageBox.Cancel)
+        if lcl_warning == QMessageBox.Ok:
             try:
-                cantidad = int(self.ui.ma_input_cantidad.text())
+                lcl_cantidad = int(self.ui.ma_input_cantidad.text())
             except ValueError:
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
-            total = cantidad + int(datos.text(2))
-            sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + str(total) + ' WHERE art_id = ' + \
-                  str(datos.text(0)) + ' AND mov_id = ' + str(self.codigo)
+            lcl_total = lcl_cantidad + int(lcl_datos.text(2))
+            sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + str(lcl_total) + ' WHERE art_id = ' + \
+                  str(lcl_datos.text(0)) + ' AND mov_id = ' + str(self.lcl_codigo)
             self.cursor.execute(sql)
             self.conexion.commit()
         else:
             return
-        self.tabla(self.codigo)
+        self.tabla(self.lcl_codigo)
         self.ui.ma_input_cantidad.clear()
         self.ui.ma_label_stock.clear()
         self.ui.ma_label_descripcion.clear()
@@ -324,24 +328,24 @@ class ModificarStock(QtWidgets.QDialog):
 
     def tabla(self):
         consultar = ABM_materiales()
-        resultado = consultar.consulta_materiales_gral()
-        len_resultado = (len(resultado))
-        for i in range(0, len_resultado):
+        lcl_resultado = consultar.consulta_materiales_gral()
+        lcl_len_resultado = (len(lcl_resultado))
+        for i in range(0, lcl_len_resultado):
             self.ui.ma_tabla_datos.takeTopLevelItem(i)
-            posicion = 0
+            lcl_posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
-            for a in range(0, len(resultado[i])):
-                test = resultado[i][a]
-                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
-                posicion += 1
+            for a in range(0, len(lcl_resultado[i])):
+                lcl_filas = lcl_resultado[i][a]
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(lcl_posicion, str(lcl_filas))
+                lcl_posicion += 1
 
         # Muestra datos seleccionados
 
     def info(self):
-        seleccion = self.ui.ma_tabla_datos.selectedItems()
-        if seleccion:
-            datos = seleccion[0]
-            self.ui.ma_input_buscar.setText(datos.text(0))
+        lcl_seleccion = self.ui.ma_tabla_datos.selectedItems()
+        if lcl_seleccion:
+            lcl_datos = lcl_seleccion[0]
+            self.ui.ma_input_buscar.setText(lcl_datos.text(0))
 
     # --------------------------------------
 
@@ -350,7 +354,7 @@ class ModificarStock(QtWidgets.QDialog):
 
     def busqueda(self):
         try:
-            codigo = int(self.ui.ma_input_buscar.text())
+            lcl_codigo = int(self.ui.ma_input_buscar.text())
         except ValueError:
             self.tabla()
             self.ui.ma_input_actual.clear()
@@ -362,60 +366,60 @@ class ModificarStock(QtWidgets.QDialog):
             self.ui.ma_input_buscar.clear()
             return
         consultar = ABM_materiales()
-        resultado = consultar.consulta_materiales(str(codigo))
+        lcl_resultado = consultar.consulta_materiales(str(lcl_codigo))
         try:
-            resultados = resultado[0]
+            lcl_resultados = lcl_resultado[0]
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             self.ui.ma_input_buscar.clear()
             return
-        posicion = 0
-        for i in resultados:
-            if posicion == 3:
-                posicion = posicion + 1
-            self.ui.ma_tabla_datos.topLevelItem(0).setText(posicion, str(i))
-            posicion += 1
+        lcl_posicion = 0
+        for i in lcl_resultados:
+            if lcl_posicion == 3:
+                lcl_posicion = lcl_posicion + 1
+            self.ui.ma_tabla_datos.topLevelItem(0).setText(lcl_posicion, str(i))
+            lcl_posicion += 1
         consultar = ABM_materiales()
-        resultado = consultar.consulta_materiales_gral()
-        len_resultado = (len(resultado))
-        for i in range(1, len_resultado):
-            posicion = 0
-            for a in range(0, len(resultado[i])):
+        lcl_resultado = consultar.consulta_materiales_gral()
+        lcl_len_resultado = (len(lcl_resultado))
+        for i in range(1, lcl_len_resultado):
+            lcl_posicion = 0
+            for a in range(0, len(lcl_resultado[i])):
                 self.ui.ma_tabla_datos.takeTopLevelItem(i)
-                posicion += 1
-        self.ui.ma_input_actual.setText(str(resultados[2]))
-        self.ui.ma_input_maximo.setText(str(resultados[4]))
-        self.ui.ma_input_minimo.setText(str(resultados[3]))
-        self.ui.ma_input_descripcion.setText(str(resultados[1]))
+                lcl_posicion += 1
+        self.ui.ma_input_actual.setText(str(lcl_resultados[2]))
+        self.ui.ma_input_maximo.setText(str(lcl_resultados[4]))
+        self.ui.ma_input_minimo.setText(str(lcl_resultados[3]))
+        self.ui.ma_input_descripcion.setText(str(lcl_resultados[1]))
 
     def modificacion(self):
         self.ui.ma_input_cantidad.returnPressed.connect(self.ui.ma_btn_confirmar.setFocus)
         try:
-            cantidad = int(self.ui.ma_input_cantidad.text())
+            lcl_cantidad = int(self.ui.ma_input_cantidad.text())
         except ValueError:
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             self.ui.ma_input_cantidad.clear()
             return
 
-        if (cantidad < 0) | (cantidad > 9999):
+        if (lcl_cantidad < 0) | (lcl_cantidad > 9999):
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             self.ui.ma_input_cantidad.clear()
             return
-        war = QMessageBox.warning(self, "Advertencia",
-                                  '''El artículo ha sido modificado.\n
-                            Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
-        if war == QMessageBox.Ok:
-            valor = ["", ""]
-            valor[0] = str(self.ui.ma_input_buscar.text())
+        lcl_warning = QMessageBox.warning(self, "Advertencia",
+                                          "El artículo ha sido modificado.\nQuieres guardar los cambios?",
+                                          QMessageBox.Ok, QMessageBox.Cancel)
+        if lcl_warning == QMessageBox.Ok:
+            lcl_valor = ["", ""]
+            lcl_valor[0] = str(self.ui.ma_input_buscar.text())
             try:
-                cantidad = int(self.ui.ma_input_cantidad.text())
+                lcl_cantidad = int(self.ui.ma_input_cantidad.text())
             except ValueError:
                 QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
                 return
-            valor[1] = str(cantidad)
+            lcl_valor[1] = str(lcl_cantidad)
             modificar = ABM_materiales()
             try:
-                modificar.modificacion_materiales(valor)
+                modificar.modificacion_materiales(lcl_valor)
             except mysql.connector.Error:
                 return
             self.busqueda()
@@ -437,49 +441,52 @@ class InventarioMovil(QtWidgets.QDialog):
         self.ui.ma_input_codigo.returnPressed.connect(self.busqueda)
 
     def verificar(self):
-        id_movil = self.ui.ma_input_movil.text()
-        sql = 'SELECT mov_vtv FROM movil WHERE mov_id = ' + id_movil
+        lcl_id_movil = self.ui.ma_input_movil.text()
+        sql = 'SELECT mov_vtv FROM movil WHERE mov_id = ' + lcl_id_movil
         try:
             self.cursor.execute(sql)
         except mysql.connector.Error:
+            QMessageBox.about(self, "Error!!", "\nIngrese un número de móvil!!\n")
             return
 
-        movil = self.cursor.fetchall()
-        if not movil:
+        lcl_movil = self.cursor.fetchall()
+        if not lcl_movil:
             QMessageBox.about(self, "Error!!", "Móvil inexistente")
             self.ui.ma_input_movil.clear()
             return
         self.ui.ma_input_codigo.setFocus()
 
     def busqueda(self):
-        codigo = self.ui.ma_input_codigo.text()
-        movil = self.ui.ma_input_movil.text()
+        lcl_codigo = self.ui.ma_input_codigo.text()
+        lcl_movil = self.ui.ma_input_movil.text()
         sql = 'SELECT am.art_mov_cantidad FROM articulo_movil am JOIN articulo a ON am.art_id = a.art_id ' \
-              'WHERE am.art_id = ' + codigo + ' AND am.mov_id = ' + movil + ' AND a.tip_id = 2'
+              'WHERE am.art_id = ' + lcl_codigo + ' AND am.mov_id = ' + lcl_movil + ' AND a.tip_id = 2'
         try:
             self.cursor.execute(sql)
         except mysql.connector.Error:
+            QMessageBox.about(self, "Error!!", "\nIngrese un número!!\n")
             return
-        datos = self.cursor.fetchall()
-        if not datos:
+        lcl_datos = self.cursor.fetchall()
+        if not lcl_datos:
             QMessageBox.about(self, "Error!!", "Artículo inexistente")
             self.ui.ma_input_codigo.clear()
             return
-        self.ui.ma_label_stock.setText(str(datos[0][0]))
+        self.ui.ma_label_stock.setText(str(lcl_datos[0][0]))
         self.ui.ma_input_cantidad.setFocus()
 
     def salir(self):
         self.close()
 
     def confirmar(self):
-        cantidad = self.ui.ma_input_cantidad.text()
-        movil = self.ui.ma_input_movil.text()
-        codigo = self.ui.ma_input_codigo.text()
-        sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + cantidad + ' WHERE ' \
-              'mov_id = ' + movil + ' AND art_id = ' + codigo
+        lcl_cantidad = self.ui.ma_input_cantidad.text()
+        lcl_movil = self.ui.ma_input_movil.text()
+        lcl_codigo = self.ui.ma_input_codigo.text()
+        sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + lcl_cantidad + ' WHERE ' \
+              'mov_id = ' + lcl_movil + ' AND art_id = ' + lcl_codigo
         try:
             self.cursor.execute(sql)
         except mysql.connector.Error:
+            QMessageBox.about(self, "Error!!", "\nIngrese un número!!\n")
             return
         self.conexion.commit()
         self.ui.ma_input_codigo.clear()
@@ -490,7 +497,7 @@ class InventarioMovil(QtWidgets.QDialog):
 
 
 class Aprovisionamiento(QtWidgets.QDialog):
-    articulos = ""
+    lcl_articulos = ""
 
     def __init__(self, *args, **kwargs):
         super(Aprovisionamiento, self).__init__(*args, **kwargs)
@@ -498,7 +505,7 @@ class Aprovisionamiento(QtWidgets.QDialog):
         self.ui.setupUi(self)
         self.conexion = mysql.connector.connect(user='root', password='', host='localhost', database='ScaBox')
         self.cursor = self.conexion.cursor()
-        self.index = ""
+        self.lcl_index = ""
         self.ui.ma_btn_cancelar.clicked.connect(self.salir)
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
         self.ui.ma_btn_modificar.clicked.connect(self.modificar)
@@ -508,35 +515,35 @@ class Aprovisionamiento(QtWidgets.QDialog):
         self.ui.ma_tabla_datos.itemSelectionChanged.connect(self.info)
 
     def info(self):
-        self.index = self.ui.ma_tabla_datos.indexOfTopLevelItem(self.ui.ma_tabla_datos.currentItem())
-        seleccion = self.ui.ma_tabla_datos.selectedItems()
-        if seleccion:
-            datos = seleccion[0]
-            self.ui.ma_label_descripcion.setText(datos.text(1))
-            dato = datos.text(2)
-            if dato == '':
-                dato = 0
-            self.ui.ma_input_cantidad.setValue(int(dato))
+        self.lcl_index = self.ui.ma_tabla_datos.indexOfTopLevelItem(self.ui.ma_tabla_datos.currentItem())
+        lcl_seleccion = self.ui.ma_tabla_datos.selectedItems()
+        if lcl_seleccion:
+            lcl_datos = lcl_seleccion[0]
+            self.ui.ma_label_descripcion.setText(lcl_datos.text(1))
+            lcl_dato = lcl_datos.text(2)
+            if lcl_dato == '':
+                lcl_dato = 0
+            self.ui.ma_input_cantidad.setValue(int(lcl_dato))
     # --------------------------------------
 
     def modificar(self):
-        self.ui.ma_tabla_datos.topLevelItem(self.index).setText(2, str(self.ui.ma_input_cantidad.value()))
+        self.ui.ma_tabla_datos.topLevelItem(self.lcl_index).setText(2, str(self.ui.ma_input_cantidad.value()))
 
     def confirmar(self):
         # (sudo) "python -m smtpd -c DebuggingServer -n localhost:1025" para ejecutar un servidor SMTP local
-        if self.articulos == "":
+        if self.lcl_articulos == "":
             QMessageBox.about(self, "Error!!", "\nNo se encuentran artículos!!\n")
             return
-        smtp_server = "localhost"
-        port = 1025
-        remitente = "aprovisionamiento@capsisrl.com.ar"
-        destinatario = "aprovisionamiento@cablevision.com.ar"
-        mensaje = "Subject: Aprovisionamiento\n\nSe solicita aprovisionamiento de los siguientes materiales:\n\n" \
-                  "Codigo               Descripcion               Cantidad\n-----------" \
-                  "--------------------------------------------\n" + self.articulos
+        lcl_smtp_server = "localhost"
+        lcl_port = 1025
+        lcl_remitente = "aprovisionamiento@capsisrl.com.ar"
+        lcl_destinatario = "aprovisionamiento@cablevision.com.ar"
+        lcl_mensaje = "Subject: Aprovisionamiento\n\nSe solicita aprovisionamiento de los siguientes materiales:\n\n" \
+                      "Codigo               Descripcion               Cantidad\n-----------" \
+                      "--------------------------------------------\n" + self.lcl_articulos
         try:
-            with smtplib.SMTP(smtp_server, port) as server:
-                server.sendmail(remitente, destinatario, mensaje)
+            with smtplib.SMTP(lcl_smtp_server, lcl_port) as server:
+                server.sendmail(lcl_remitente, lcl_destinatario, lcl_mensaje)
         except ConnectionError:
             QMessageBox.about(self, "Error!!", "\nNo hay conexión!!\n")
             return
@@ -544,27 +551,27 @@ class Aprovisionamiento(QtWidgets.QDialog):
         self.close()
 
     def pedido(self):
-        fecha1 = str(date.today() + timedelta(days=-7))
-        fecha2 = str(date.today())
+        lcl_fecha1 = str(date.today() + timedelta(days=-7))
+        lcl_fecha2 = str(date.today())
         sql = 'SELECT a.art_id, a.art_nombre, sum(hm.his_mat_cant) FROM articulo a JOIN historial_materiales' \
               ' hm ON a.art_id=hm.art_id WHERE a.tip_id = 2 AND a.art_cantidad < a.art_cant_min AND ' \
-              'hm.his_mat_fecha BETWEEN DATE("' + fecha1 + '") AND DATE("' + fecha2 + '") GROUP BY art_id'
+              'hm.his_mat_fecha BETWEEN DATE("' + lcl_fecha1 + '") AND DATE("' + lcl_fecha2 + '") GROUP BY art_id'
         self.cursor.execute(sql)
-        art_info = self.cursor.fetchall()
-        lista = []
-        for i in range(0, len(art_info)):
-            lista.append(list(art_info[i]))
-        art_info = tuple(lista)
-        len_resultado = len(art_info)
-        for i in range(0, len_resultado):
-            posicion = 0
+        lcl_art_info = self.cursor.fetchall()
+        lcl_lista = []
+        for i in range(0, len(lcl_art_info)):
+            lcl_lista.append(list(lcl_art_info[i]))
+        lcl_art_info = tuple(lcl_lista)
+        lcl_len_resultado = len(lcl_art_info)
+        for i in range(0, lcl_len_resultado):
+            lcl_posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
-            for a in range(0, len(art_info[i])):
-                test = art_info[i][a]
-                self.articulos += str(test) + "                 "
-                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
-                posicion += 1
-            self.articulos += "\n"
+            for a in range(0, len(lcl_art_info[i])):
+                lcl_filas = lcl_art_info[i][a]
+                self.lcl_articulos += str(lcl_filas) + "                 "
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(lcl_posicion, str(lcl_filas))
+                lcl_posicion += 1
+            self.lcl_articulos += "\n"
 
     def salir(self):
         self.close()
@@ -583,23 +590,23 @@ class StockMateriales(QtWidgets.QDialog):
 
     def tabla(self):
         consultar = ABM_materiales()
-        resultado = consultar.consulta_materiales_gral()
-        len_resultado = (len(resultado))
-        for i in range(0, len_resultado):
+        lcl_resultado = consultar.consulta_materiales_gral()
+        lcl_len_resultado = (len(lcl_resultado))
+        for i in range(0, lcl_len_resultado):
             self.ui.ma_tabla_datos.takeTopLevelItem(i)
-            posicion = 0
+            lcl_posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ma_tabla_datos)
-            for a in range(0, len(resultado[i])):
-                test = resultado[i][a]
-                self.ui.ma_tabla_datos.topLevelItem(i).setText(posicion, str(test))
-                posicion += 1
+            for a in range(0, len(lcl_resultado[i])):
+                lcl_filas = lcl_resultado[i][a]
+                self.ui.ma_tabla_datos.topLevelItem(i).setText(lcl_posicion, str(lcl_filas))
+                lcl_posicion += 1
 
         # Muestra datos seleccionados
     def info(self):
-        seleccion = self.ui.ma_tabla_datos.selectedItems()
-        if seleccion:
-            datos = seleccion[0]
-            self.ui.ma_input_buscar.setText(datos.text(0))
+        lcl_seleccion = self.ui.ma_tabla_datos.selectedItems()
+        if lcl_seleccion:
+            lcl_datos = lcl_seleccion[0]
+            self.ui.ma_input_buscar.setText(lcl_datos.text(0))
     # --------------------------------------
 
     def salir(self):
@@ -607,40 +614,40 @@ class StockMateriales(QtWidgets.QDialog):
 
     def consulta(self):
         try:
-            codigo = int(self.ui.ma_input_buscar.text())
+            lcl_codigo = int(self.ui.ma_input_buscar.text())
         except ValueError:
             self.tabla()
             QMessageBox.about(self, "Error!!", "\nIngrese solo números!!\n")
             self.ui.ma_input_buscar.clear()
             return
         consultar = ABM_materiales()
-        resultado = consultar.consulta_materiales(str(codigo))
+        lcl_resultado = consultar.consulta_materiales(str(lcl_codigo))
         try:
-            resultados = resultado[0]
+            lcl_resultados = lcl_resultado[0]
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
             self.ui.ma_input_buscar.clear()
             return
-        posicion = 0
-        for i in resultados:
-            if posicion == 3:
-                posicion = posicion + 1
-            self.ui.ma_tabla_datos.topLevelItem(0).setText(posicion, str(i))
-            posicion += 1
+        lcl_posicion = 0
+        for i in lcl_resultados:
+            if lcl_posicion == 3:
+                lcl_posicion = lcl_posicion + 1
+            self.ui.ma_tabla_datos.topLevelItem(0).setText(lcl_posicion, str(i))
+            lcl_posicion += 1
         consultar = ABM_materiales()
-        resultado = consultar.consulta_materiales_gral()
-        len_resultado = (len(resultado))
-        for i in range(1, len_resultado):
-            posicion = 0
-            for a in range(0, len(resultado[i])):
+        lcl_resultado = consultar.consulta_materiales_gral()
+        lcl_len_resultado = (len(lcl_resultado))
+        for i in range(1, lcl_len_resultado):
+            lcl_posicion = 0
+            for a in range(0, len(lcl_resultado[i])):
                 self.ui.ma_tabla_datos.takeTopLevelItem(i)
-                posicion += 1
+                lcl_posicion += 1
         self.ui.ma_input_buscar.clear()
 
 
 class MaximaMinima(QtWidgets.QDialog):
-    datos = []
-    valor = []
+    lcl_datos = []
+    lcl_valor = []
 
     def __init__(self, *args, **kwargs):
         super(MaximaMinima, self).__init__(*args, **kwargs)
@@ -654,26 +661,27 @@ class MaximaMinima(QtWidgets.QDialog):
 
     def confirmar(self):
         try:
-            codigo = int(self.ui.ma_input_codigo.text())
+            lcl_codigo = int(self.ui.ma_input_codigo.text())
         except ValueError:
+            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
 
-        if (codigo < 0) | (codigo > 99999999):
+        if (lcl_codigo < 0) | (lcl_codigo > 99999999):
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
         con = ABM_materiales()
-        valor = con.consulta_materiales(str(codigo))
-        if not valor:
+        lcl_valor = con.consulta_materiales(str(lcl_codigo))
+        if not lcl_valor:
             QMessageBox.about(self, "Error", "Ingrese un código válido")
             return
         else:
             ventanamodificacionmaxmin = ModificacionMaximaMinima(self)
-            ventanamodificacionmaxmin.capturarvalor(valor[0][0], valor[0][1], valor[0][3], valor[0][4])
+            ventanamodificacionmaxmin.capturarvalor(lcl_valor[0][0], lcl_valor[0][1], lcl_valor[0][3], lcl_valor[0][4])
             ventanamodificacionmaxmin.exec_()
 
 
 class ModificacionMaximaMinima(QtWidgets.QDialog):
-    codigo = ""
+    lcl_codigo = ""
 
     def __init__(self, *args):
         super(ModificacionMaximaMinima, self).__init__(*args)
@@ -685,27 +693,27 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
         self.ui.ma_btn_confirmar.clicked.connect(self.confirmar)
 
     def confirmar(self):
-        minima = str(self.ui.ma_input_minimo.text())
-        maxima = str(self.ui.ma_input_maximo.text())
-        if int(minima) <= 0:
+        lcl_minima = str(self.ui.ma_input_minimo.text())
+        lcl_maxima = str(self.ui.ma_input_maximo.text())
+        if int(lcl_minima) <= 0:
             QMessageBox.about(self, "Error!!", "\nEl valor mínimo no puede ser menor o igual 0.\n")
             return
-        if int(maxima) <= int(minima):
+        if int(lcl_maxima) <= int(lcl_minima):
             QMessageBox.about(self, "Error!!", "\nEl valor máximo no puede ser menor o igual que el valor mínimo.\n")
             return
-        war = QMessageBox.warning(self, "Advertencia",
-                                  '''El artículo ha sido modificado.\n
+        lcl_warning = QMessageBox.warning(self, "Advertencia",
+                                                '''El artículo ha sido modificado.\n
                             Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
-        if war == QMessageBox.Ok:
+        if lcl_warning == QMessageBox.Ok:
             sql = 'UPDATE articulo SET art_cant_min ' \
-                       '= ' + minima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
+                       '= ' + lcl_minima + ' WHERE art_id = ' + self.lcl_codigo + ' AND tip_id=3'
             self.cursor.execute(sql)
             sql = 'UPDATE articulo SET art_cant_max ' \
-                  '= ' + maxima + ' WHERE art_id = ' + self.codigo + ' AND tip_id=3'
+                  '= ' + lcl_maxima + ' WHERE art_id = ' + self.lcl_codigo + ' AND tip_id=3'
             self.cursor.execute(sql)
             self.conexion.commit()
-            self.ui.ma_label_minimo.setText(minima)
-            self.ui.ma_label_maximo.setText(maxima)
+            self.ui.ma_label_minimo.setText(lcl_minima)
+            self.ui.ma_label_maximo.setText(lcl_maxima)
             self.ui.ma_input_minimo.clear()
             self.ui.ma_input_maximo.clear()
         else:
@@ -715,7 +723,7 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
         self.close()
 
     def capturarvalor(self, cod, nom, mini, maxi):
-        self.codigo = str(cod)
+        self.lcl_codigo = str(cod)
         self.ui.ma_label_descripcion.setText(str(nom))
         self.ui.ma_label_minimo.setText(str(mini))
         self.ui.ma_label_maximo.setText(str(maxi))
