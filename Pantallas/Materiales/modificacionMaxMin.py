@@ -33,16 +33,16 @@ class Ui_Form(object):
         self.ma_label_descripcion.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.ma_label_descripcion.setObjectName("ma_label_1")
-        self.ma_label_maximo = QtWidgets.QLabel(Form)
-        self.ma_label_maximo.setGeometry(QtCore.QRect(170, 60, 251, 31))
-        self.ma_label_maximo.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
-"text-align:center;")
-        self.ma_label_maximo.setObjectName("ma_label_2")
         self.ma_label_minimo = QtWidgets.QLabel(Form)
-        self.ma_label_minimo.setGeometry(QtCore.QRect(170, 100, 251, 31))
+        self.ma_label_minimo.setGeometry(QtCore.QRect(170, 60, 251, 31))
         self.ma_label_minimo.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
-        self.ma_label_minimo.setObjectName("ma_label_3")
+        self.ma_label_minimo.setObjectName("ma_label_2")
+        self.ma_label_maximo = QtWidgets.QLabel(Form)
+        self.ma_label_maximo.setGeometry(QtCore.QRect(170, 100, 251, 31))
+        self.ma_label_maximo.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
+"text-align:center;")
+        self.ma_label_maximo.setObjectName("ma_label_3")
         self.label_10 = QtWidgets.QLabel(Form)
         self.label_10.setGeometry(QtCore.QRect(30, 230, 111, 31))
         self.label_10.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -92,13 +92,13 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Modificación de stock máximo y mÍnimo"))
         self.label_4.setText(_translate("Form", "Material:"))
-        self.label_5.setText(_translate("Form", "Cantidad minimo:"))
-        self.label_6.setText(_translate("Form", "Cantidad maximo:"))
+        self.label_5.setText(_translate("Form", "Cantidad mínima:"))
+        self.label_6.setText(_translate("Form", "Cantidad máxima:"))
         self.ma_label_descripcion.setText(_translate("Form", ""))
         self.ma_label_maximo.setText(_translate("Form", ""))
         self.ma_label_minimo.setText(_translate("Form", ""))
-        self.label_10.setText(_translate("Form", "Cantidad maximo"))
-        self.label_11.setText(_translate("Form", "Cantidad minimo"))
+        self.label_10.setText(_translate("Form", "Cantidad máximo"))
+        self.label_11.setText(_translate("Form", "Cantidad mínima"))
         self.ma_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))
 
