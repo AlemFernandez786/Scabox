@@ -102,11 +102,6 @@ class Alta(QtWidgets.QDialog):
         self.close()
 
     def confirmar(self):
-        try:
-            asd=self.ui.ma_input_ingreso.value()
-        except TypeError:
-            QMessageBox.about(self, "Error", "\nIngrese un valor!!\n")
-            return
         if self.ui.ma_input_descripcion.text() == "":
             QMessageBox.about(self, "Error", "\nIngrese descripción\n del artículo!!\n")
             return
@@ -115,7 +110,7 @@ class Alta(QtWidgets.QDialog):
             QMessageBox.about(self, "Error", "\nIngrese un valor!!\n")
             return
         if self.ui.ma_input_minima.value() >= self.ui.ma_input_maxima.value():
-            QMessageBox.about(self, "Error", "\nLa cantidad mínima no puede \n ser igual o superar a la máxima!!\n")
+            QMessageBox.about(self, "Error", "\nLa cantidad mínima no puede \n ser igual o superior a la máxima!!\n")
             return
         lcl_valores = [
             str(self.ui.ma_input_descripcion.text()), str(self.ui.ma_input_ingreso.text()),
@@ -538,7 +533,10 @@ class Aprovisionamiento(QtWidgets.QDialog):
     # --------------------------------------
 
     def modificar(self):
-        self.ui.ma_tabla_datos.topLevelItem(self.lcl_index).setText(2, str(self.ui.ma_input_cantidad.value()))
+        try:
+            self.ui.ma_tabla_datos.topLevelItem(self.lcl_index).setText(2, str(self.ui.ma_input_cantidad.value()))
+        except TypeError:
+            QMessageBox.about(self, "Error", "Seleccione un artículo!!")
 
     def confirmar(self):
         # (sudo) "python -m smtpd -c DebuggingServer -n localhost:1025" para ejecutar un servidor SMTP local
@@ -556,7 +554,7 @@ class Aprovisionamiento(QtWidgets.QDialog):
             with smtplib.SMTP(lcl_smtp_server, lcl_port) as server:
                 server.sendmail(lcl_remitente, lcl_destinatario, lcl_mensaje)
         except ConnectionError:
-            QMessageBox.about(self, "Error!!", "\nNo hay conexión!!\n")
+            QMessageBox.about(self, "Error!!", "\nNo hay conexión \ncon el servidor!!\n")
             return
         QMessageBox.about(self, "Éxito!!", "\nCorreo enviado correctamente!!\n")
         self.close()
