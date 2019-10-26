@@ -285,7 +285,7 @@ class StockPorMovil(QtWidgets.QDialog):
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
         instancia = ABM_materiales()
-        actual = instancia.consulta_materiales(self.lcl_codigo)
+        actual = instancia.consulta_materiales(lcl_datos.text(0))
         if lcl_cantidad > int(actual[0][2]):
             QMessageBox.about(self, "Error!!", "\nCantidad no disponible!!\n")
             return
