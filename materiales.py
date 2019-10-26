@@ -484,22 +484,26 @@ class InventarioMovil(QtWidgets.QDialog):
         self.close()
 
     def confirmar(self):
-        lcl_cantidad = self.ui.ma_input_cantidad.text()
-        lcl_movil = self.ui.ma_input_movil.text()
-        lcl_codigo = self.ui.ma_input_codigo.text()
-        sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + lcl_cantidad + ' WHERE ' \
-              'mov_id = ' + lcl_movil + ' AND art_id = ' + lcl_codigo
-        try:
-            self.cursor.execute(sql)
-        except mysql.connector.Error:
-            QMessageBox.about(self, "Error!!", "\nIngrese un número!!\n")
-            return
-        self.conexion.commit()
-        self.ui.ma_input_codigo.clear()
-        self.ui.ma_input_movil.clear()
-        self.ui.ma_input_cantidad.clear()
-        self.ui.ma_label_stock.clear()
-        self.ui.ma_input_movil.setFocus()
+        lcl_warning = QMessageBox.warning(self, "Advertencia",
+                                          '''El artículo ha sido modificado.\n
+                      Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
+        if lcl_warning == QMessageBox.Ok:
+            lcl_cantidad = self.ui.ma_input_cantidad.text()
+            lcl_movil = self.ui.ma_input_movil.text()
+            lcl_codigo = self.ui.ma_input_codigo.text()
+            sql = 'UPDATE articulo_movil SET art_mov_cantidad = ' + lcl_cantidad + ' WHERE ' \
+                 'mov_id = ' + lcl_movil + ' AND art_id = ' + lcl_codigo
+            try:
+                self.cursor.execute(sql)
+            except mysql.connector.Error:
+               QMessageBox.about(self, "Error!!", "\nIngrese un número!!\n")
+               return
+            self.conexion.commit()
+            self.ui.ma_input_codigo.clear()
+            self.ui.ma_input_movil.clear()
+            self.ui.ma_input_cantidad.clear()
+            self.ui.ma_label_stock.clear()
+            self.ui.ma_input_movil.setFocus()
 
 
 class Aprovisionamiento(QtWidgets.QDialog):
@@ -533,31 +537,38 @@ class Aprovisionamiento(QtWidgets.QDialog):
     # --------------------------------------
 
     def modificar(self):
-        try:
-            self.ui.ma_tabla_datos.topLevelItem(self.lcl_index).setText(2, str(self.ui.ma_input_cantidad.value()))
-        except TypeError:
-            QMessageBox.about(self, "Error", "Seleccione un artículo!!")
+        lcl_warning = QMessageBox.warning(self, "Advertencia",
+                                                '''El artículo ha sido modificado.\n
+                            Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
+        if lcl_warning == QMessageBox.Ok:
+            try:
+                self.ui.ma_tabla_datos.topLevelItem(self.lcl_index).setText(2, str(self.ui.ma_input_cantidad.value()))
+            except TypeError:
+                QMessageBox.about(self, "Error", "Seleccione un artículo!!")
 
     def confirmar(self):
-        # (sudo) "python -m smtpd -c DebuggingServer -n localhost:1025" para ejecutar un servidor SMTP local
-        if self.lcl_articulos == "":
-            QMessageBox.about(self, "Error!!", "\nNo se encuentran artículos!!\n")
-            return
-        lcl_smtp_server = "localhost"
-        lcl_port = 1025
-        lcl_remitente = "aprovisionamiento@capsisrl.com.ar"
-        lcl_destinatario = "aprovisionamiento@cablevision.com.ar"
-        lcl_mensaje = "Subject: Aprovisionamiento\n\nSe solicita aprovisionamiento de los siguientes materiales:\n\n" \
-                      "Codigo               Descripcion               Cantidad\n-----------" \
-                      "--------------------------------------------\n" + self.lcl_articulos
-        try:
-            with smtplib.SMTP(lcl_smtp_server, lcl_port) as server:
-                server.sendmail(lcl_remitente, lcl_destinatario, lcl_mensaje)
-        except ConnectionError:
-            QMessageBox.about(self, "Error!!", "\nNo hay conexión \ncon el servidor!!\n")
-            return
-        QMessageBox.about(self, "Éxito!!", "\nCorreo enviado correctamente!!\n")
-        self.close()
+        lcl_warning = QMessageBox.warning(self, "Advertencia","Desea confirmar el pedido?",
+                                          QMessageBox.Ok, QMessageBox.Cancel)
+        if lcl_warning == QMessageBox.Ok:
+            # (sudo) "python -m smtpd -c DebuggingServer -n localhost:1025" para ejecutar un servidor SMTP local
+            if self.lcl_articulos == "":
+                QMessageBox.about(self, "Error!!", "\nNo se encuentran artículos!!\n")
+                return
+            lcl_smtp_server = "localhost"
+            lcl_port = 1025
+            lcl_remitente = "aprovisionamiento@capsisrl.com.ar"
+            lcl_destinatario = "aprovisionamiento@cablevision.com.ar"
+            lcl_mensaje = "Subject: Aprovisionamiento\n\nSe solicita aprovisionamiento de los siguientes materiales:\n\n" \
+                          "Codigo               Descripcion               Cantidad\n-----------" \
+                          "--------------------------------------------\n" + self.lcl_articulos
+            try:
+                with smtplib.SMTP(lcl_smtp_server, lcl_port) as server:
+                    server.sendmail(lcl_remitente, lcl_destinatario, lcl_mensaje)
+            except ConnectionError:
+                QMessageBox.about(self, "Error!!", "\nNo hay conexión \ncon el servidor!!\n")
+                return
+            QMessageBox.about(self, "Éxito!!", "\nCorreo enviado correctamente!!\n")
+            self.close()
 
     def pedido(self):
         lcl_fecha1 = str(date.today() + timedelta(days=-7))
@@ -715,10 +726,10 @@ class ModificacionMaximaMinima(QtWidgets.QDialog):
                             Quieres guardar los cambios?''', QMessageBox.Ok, QMessageBox.Cancel)
         if lcl_warning == QMessageBox.Ok:
             sql = 'UPDATE articulo SET art_cant_min ' \
-                       '= ' + lcl_minima + ' WHERE art_id = ' + self.lcl_codigo + ' AND tip_id=3'
+                       '= ' + lcl_minima + ' WHERE art_id = ' + self.lcl_codigo + ' AND tip_id=2'
             self.cursor.execute(sql)
             sql = 'UPDATE articulo SET art_cant_max ' \
-                  '= ' + lcl_maxima + ' WHERE art_id = ' + self.lcl_codigo + ' AND tip_id=3'
+                  '= ' + lcl_maxima + ' WHERE art_id = ' + self.lcl_codigo + ' AND tip_id=2'
             self.cursor.execute(sql)
             self.conexion.commit()
             self.ui.ma_label_minimo.setText(lcl_minima)
