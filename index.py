@@ -45,6 +45,13 @@ class InicioSesion(QtWidgets.QMainWindow):
         except IndexError:
             QMessageBox.about(self, "Error!!", "\nUsuario inexistente!!\n")
             return
+        usuario_activo = consultas.obtener_estado(self.usuario)
+        print(usuario_activo)
+        if int(usuario_activo[0][0]) == 1:
+            pass
+        else:
+            QMessageBox.about(self, "Error!!", "\nUsuario inactivo!!\n")
+            return
         pass_correcta = consultas.pass_correcta(self.usuario)
         invertir_pass = pass_correcta[0][1]
         pass_invertida = ""
@@ -111,6 +118,17 @@ class Consultas:
         self.cursor.execute(self.sql_sector)
         sector = self.cursor.fetchall()
         return sector
+
+    def obtener_estado(self, valor):
+        self.valor = valor
+        self.sql_estado = 'SELECT activo ' \
+                          'FROM usuarios ' \
+                          'WHERE usu_legajo = '+str(self.valor)
+        self.cursor.execute(self.sql_estado)
+        estado = self.cursor.fetchall()
+        return estado
+
+
 consultas = Consultas()
 app = QtWidgets.QApplication([])
 application = InicioSesion()

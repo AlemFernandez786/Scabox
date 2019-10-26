@@ -30,6 +30,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
         self.input_pass.setText("")
+        self.input_pass.setEchoMode(QtWidgets.QLineEdit.Password)
         self.label_bienvenido = QtWidgets.QLabel(self.centralwidget)
         self.label_bienvenido.setGeometry(QtCore.QRect(260, 90, 321, 71))
         self.label_bienvenido.setObjectName("label_bienvenido")
