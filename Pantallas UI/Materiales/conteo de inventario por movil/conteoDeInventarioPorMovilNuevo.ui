@@ -16,9 +16,9 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>-30</x>
+     <x>0</x>
      <y>10</y>
-     <width>831</width>
+     <width>860</width>
      <height>41</height>
     </rect>
    </property>
@@ -150,26 +150,6 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
     <number>9999</number>
    </property>
   </widget>
-  <widget class="QLabel" name="ma_label_stock">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>110</y>
-     <width>301</width>
-     <height>131</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 30pt &quot;MS Shell Dlg 2&quot;;
-</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QPushButton" name="ma_btn_confirmar">
    <property name="geometry">
     <rect>
@@ -179,6 +159,11 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(99, 206, 104);
 color:white;
@@ -187,6 +172,12 @@ border:none;</string>
    </property>
    <property name="text">
     <string>Confirmar</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="ma_btn_cancelar">
@@ -211,6 +202,26 @@ background-color:#ff4e4e;</string>
    </property>
    <property name="text">
     <string>Cancelar</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="ma_label_stock">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>110</y>
+     <width>301</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 30pt &quot;MS Shell Dlg 2&quot;;
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>

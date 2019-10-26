@@ -71,7 +71,6 @@ class Ui_Form(object):
         self.ma_btn_confirmar.setAutoDefault(False)
         self.ma_btn_confirmar.setDefault(False)
         self.ma_btn_confirmar.setObjectName("ma_btn_confirmar")
-        self.ma_btn_confirmar.setAutoDefault(False)
         self.ma_btn_cancelar = QtWidgets.QPushButton(Form)
         self.ma_btn_cancelar.setGeometry(QtCore.QRect(400, 290, 131, 31))
         font = QtGui.QFont()
@@ -82,7 +81,6 @@ class Ui_Form(object):
 "border:none;\n"
 "background-color:#ff4e4e;")
         self.ma_btn_cancelar.setObjectName("ma_btn_cancelar")
-        self.ma_btn_cancelar.setAutoDefault(False)
         self.ma_label_stock = QtWidgets.QLabel(Form)
         self.ma_label_stock.setGeometry(QtCore.QRect(450, 110, 301, 131))
         self.ma_label_stock.setStyleSheet("font: 30pt \"MS Shell Dlg 2\";\n"
