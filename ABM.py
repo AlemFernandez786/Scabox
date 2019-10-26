@@ -79,9 +79,23 @@ class ABM_serializables:
         self.cursor = self.conexion.cursor()
 
     def baja_serializables(self, identificador):
-        self.identificador=identificador
-        self.sql = 'DELETE FROM articulo WHERE art_id = ' + identificador +' AND tip_id=2'
-        self.cursor.execute (self.sql)
+        self.identificador = identificador
+        print(self.identificador)
+        # Obtiene el id del tipo de serializable
+        self.sql2 = 'SELECT s.tip_id FROM serializable s WHERE s.ser_mac = ' \
+                    '"' + str(identificador) + '"'
+        self.cursor.execute(self.sql2)
+        tipo = self.cursor.fetchall()
+        print(tipo)
+        self.sql4 = 'DELETE FROM historial_serializables WHERE ser_mac = "' + str(identificador)+'"'
+        self.cursor.execute(self.sql4)
+        self.conexion.commit()
+        self.sql = 'DELETE FROM serializable WHERE ser_mac = "' + str(identificador)+'"'
+        self.cursor.execute(self.sql)
+        self.conexion.commit()
+        self.sql3 = 'UPDATE tipo_serializable SET cant_serializable = (cant_serializable - 1) ' \
+                   'WHERE tipo_serializable = "' + str(tipo[0][0]) + '"'
+        self.cursor.execute(self.sql3)
         self.conexion.commit()
 
     def alta_serializables(self, valores):
@@ -91,41 +105,55 @@ class ABM_serializables:
         today = str(today)
         today = ''.join(e for e in today if e.isalnum())
         self.valores = valores
-        # Creamos el id
-        self.sql = 'SELECT MAX(art_id) from articulo'
-        self.cursor.execute(self.sql)
-        art_info = self.cursor.fetchall()
-        art_info = ''.join(e for e in str(art_info[0]) if e.isalnum())
-        if art_info == 'None':
-            art_info = 1
-        else:
-            art_info = int(art_info)
-            art_info += 1
-        # Transforma la tupla en lista para meter los elementos fijos
-        self.valores = list(self.valores)
-        self.valores.insert(0, str(art_info))
-        self.valores[1] = '"' + str(valores[0]) + '"'
-        self.valores.insert(2, today)
-        self.valores.insert(3, str('2'))
-        self.valores = tuple(self.valores)
+        print(self.valores)
+        # Obtiene el id del tipo de serializable
+        self.sql2 = 'SELECT ts.tipo_serializable FROM tipo_serializable ts WHERE ts.desc_serializable = "'+str(valores[1])+'"'
+        self.cursor.execute(self.sql2)
+        tipo = self.cursor.fetchall()
         # Creamos la query
-        self.sql = 'INSERT INTO articulo VALUES (' + ",".join(map(str, self.valores)) + ')'
+        self.sql = 'INSERT INTO serializable VALUES ("'+str(self.valores[0])+'","'+str(today)+'", '+str(tipo[0][0])+')'
+        # Ejecutamos la query
+        self.cursor.execute(self.sql)
+        self.conexion.commit()
+        self.sql3 = 'UPDATE tipo_serializable SET cant_serializable = (cant_serializable + 1) ' \
+                   'WHERE tipo_serializable = "' + str(tipo[0][0]) + '"'
+        self.cursor.execute(self.sql3)
+        self.conexion.commit()
+        self.sql4 = 'INSERT INTO historial_serializables(ser_mac, ser_estado, ser_fecha_ultimo_estado) ' \
+                    'VALUES ("'+str(self.valores[0])+'", 1, now())'
+        self.cursor.execute(self.sql4)
+        self.conexion.commit()
+
+    def alta_tipo_serializables(self, valor1, valor2, valor3):
+        self.valor1 = valor1
+        self.valor2 = valor2
+        self.valor3 = valor3
+        # Creamos el id
+        self.sql_id = 'SELECT MAX(tipo_serializable) ' \
+                      'FROM tipo_serializable'
+        self.cursor.execute(self.sql_id)
+        tipo_id = self.cursor.fetchall()
+        tipo_id = ''.join(e for e in str(tipo_id[0]) if e.isalnum())
+        if tipo_id == 'None':
+            tipo_id = 1
+        else:
+            tipo_id = int(tipo_id)
+            tipo_id += 1
+        # Creamos la query
+        self.sql = 'INSERT INTO tipo_serializable ' \
+                   'VALUES ('+str(tipo_id)+',"'+str(self.valor1)+'", 0, '+str(self.valor2)+', '+str(self.valor3)+')'
         # Ejecutamos la query
         self.cursor.execute(self.sql)
         self.conexion.commit()
 
-    def consulta_serializables(self, valor):
-        self.valor = valor
-        self.sql = 'SELECT * FROM serializable WHERE ser_mac = "' + str(self.valor) + '"'
+    def modificar_min_max_ser(self, valor1, valor2, valor3):
+        self.valor1 = valor1
+        self.valor2 = valor2
+        self.valor3 = valor3
+        self.sql = 'UPDATE tipo_serializable SET cant_min_ser = '+str(self.valor1)+', ' \
+                    'cant_max_ser = '+str(self.valor2)+' WHERE tipo_serializable = '+str(self.valor3)
         self.cursor.execute(self.sql)
-        ser_info = self.cursor.fetchall()
-        return ser_info
-
-    def consulta_ser_all(self):
-        self.sql = 'SELECT * FROM serializable'
-        self.cursor.execute(self.sql)
-        ser_all = self.cursor.fetchall()
-        return ser_all
+        self.conexion.commit()
 
     def modificacion_serializables(self, valor):
         self.valor=valor
