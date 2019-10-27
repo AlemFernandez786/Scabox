@@ -14,7 +14,6 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(542, 209)
-        Form.setStyleSheet("background-color:white;")
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(10, 30, 171, 51))
         self.label.setStyleSheet("font-size:20px;")
@@ -51,7 +50,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Consultar Stock"))
         self.label.setText(_translate("Form", "Consultar Stock"))
         self.label_2.setText(_translate("Form", "Supervisor"))
         self.su_btn_1.setText(_translate("Form", "Materiales"))

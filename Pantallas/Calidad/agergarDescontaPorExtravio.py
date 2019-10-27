@@ -49,7 +49,6 @@ class Ui_Form(object):
         self.ca_input_2.setStyleSheet("border:none;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 11pt \"MS Shell Dlg 2\";")
-        # self.ca_input_2.setMaximum(10000000000.0)
         self.ca_input_2.setObjectName("ca_input_2")
         self.label_6 = QtWidgets.QLabel(Form)
         self.label_6.setGeometry(QtCore.QRect(30, 200, 91, 31))

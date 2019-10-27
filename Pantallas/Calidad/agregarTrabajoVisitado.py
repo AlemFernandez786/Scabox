@@ -216,7 +216,8 @@ class Ui_Form(object):
         self.label_11.setGeometry(QtCore.QRect(470, 410, 461, 31))
         self.label_11.setText("")
         self.label_11.setObjectName("label_11")
-        self.label_11.setStyleSheet("font-size:8pt")
+        self.label_11.setStyleSheet("font-size:8pt;\n"
+                                 "color:black")
         self.ca_btn_agregar_2 = QtWidgets.QPushButton(Form)
         self.ca_btn_agregar_2.setGeometry(QtCore.QRect(800, 370, 101, 31))
         self.ca_btn_agregar_2.setStyleSheet("background-color: #5f5fff;\n"

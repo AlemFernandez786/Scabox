@@ -14,9 +14,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(874, 461)
-        font = QtGui.QFont()
-        font.setPointSize(7)
-        Form.setFont(font)
+        Form.setStyleSheet("background-color: rgb(243, 243, 243);\n")
         self.label_9 = QtWidgets.QLabel(Form)
         self.label_9.setGeometry(QtCore.QRect(460, 90, 161, 31))
         self.label_9.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -196,7 +194,8 @@ class Ui_Form(object):
         self.label.setEnabled(False)
         self.label.setGeometry(QtCore.QRect(330, 360, 500, 21))
         self.label.setText("")
-        self.label.setStyleSheet("font-size:8pt")
+        self.label.setStyleSheet("font-size:8pt;\n"
+"color:black")
         self.label.setObjectName("label")
 
         self.retranslateUi(Form)

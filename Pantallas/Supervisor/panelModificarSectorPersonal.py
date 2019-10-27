@@ -94,17 +94,13 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Modificación de sector"))
         self.su_tabla.headerItem().setText(0, _translate("Form", "Legajo"))
         self.su_tabla.headerItem().setText(1, _translate("Form", "Nombre"))
         self.su_tabla.headerItem().setText(2, _translate("Form", "Apellido"))
         self.su_tabla.headerItem().setText(3, _translate("Form", "Sector"))
         __sortingEnabled = self.su_tabla.isSortingEnabled()
         self.su_tabla.setSortingEnabled(False)
-        self.su_tabla.topLevelItem(0).setText(0, _translate("Form", "New Item  "))
-        self.su_tabla.topLevelItem(0).setText(1, _translate("Form", "lorem"))
-        self.su_tabla.topLevelItem(0).setText(2, _translate("Form", "lorem"))
-        self.su_tabla.topLevelItem(0).setText(3, _translate("Form", "lorem"))
         self.su_tabla.setSortingEnabled(__sortingEnabled)
         self.label_2.setText(_translate("Form", "Modificar de Sector de Personal"))
         self.label.setText(_translate("Form", "Sector a transferir"))

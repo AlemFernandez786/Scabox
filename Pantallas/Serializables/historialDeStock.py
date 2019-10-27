@@ -65,14 +65,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Historial de equipos"))
         self.se_btn_buscar.setText(_translate("Form", "Buscar"))
-        self.label.setText(_translate("Form", "Ingrese el numero de MAC"))
+        self.label.setText(_translate("Form", "Ingrese el número de MAC"))
         self.label_2.setText(_translate("Form", "Historial de Stock"))
         self.se_tabla.headerItem().setText(0, _translate("Form", "MAC"))
         self.se_tabla.headerItem().setText(1, _translate("Form", "Fecha de ingreso"))
         self.se_tabla.headerItem().setText(2, _translate("Form", "Fecha de entrega"))
-        self.se_tabla.headerItem().setText(3, _translate("Form", "Fecha de colocacion o devolucion"))
+        self.se_tabla.headerItem().setText(3, _translate("Form", "Fecha de colocación o devolución"))
         self.se_tabla.headerItem().setText(4, _translate("Form", "Estado"))
         __sortingEnabled = self.se_tabla.isSortingEnabled()
         self.se_tabla.setSortingEnabled(False)

@@ -96,7 +96,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Sector Materiales"))
+        Form.setWindowTitle(_translate("Form", "ScaBox - Materiales"))
         self.ma_btn_maxmin.setText(_translate("Form", "Máxima/Mínima de Stock"))
         self.ma_btn_altabaja.setText(_translate("Form", "Alta/Baja de Articulos"))
         self.ma_btn_cancelar.setText(_translate("Form", "Cancelar"))

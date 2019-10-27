@@ -14,6 +14,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(538, 486)
+        Form.setStyleSheet("background-color: rgb(243, 243, 243);\n")
         self.ca_btn_buscar = QtWidgets.QPushButton(Form)
         self.ca_btn_buscar.setGeometry(QtCore.QRect(360, 60, 131, 31))
         self.ca_btn_buscar.setStyleSheet("background-color: rgb(199, 199, 199);\n"

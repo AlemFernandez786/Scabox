@@ -80,12 +80,12 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Máximo y Mínimo"))
         self.label_4.setText(_translate("Form", "Serializable:"))
-        self.label_5.setText(_translate("Form", "Cantidad Minima:"))
-        self.label_6.setText(_translate("Form", "Cantidad Maxima:"))
-        self.label_10.setText(_translate("Form", "Cantidad Maxima"))
-        self.label_11.setText(_translate("Form", "Cantidad Minima"))
+        self.label_5.setText(_translate("Form", "Cantidad Mínima:"))
+        self.label_6.setText(_translate("Form", "Cantidad Máxima:"))
+        self.label_10.setText(_translate("Form", "Cantidad Máxima"))
+        self.label_11.setText(_translate("Form", "Cantidad Mínima"))
         self.se_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.se_btn_cancelar.setText(_translate("Form", "Cancelar"))
 

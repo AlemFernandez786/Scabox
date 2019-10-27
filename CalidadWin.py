@@ -9,12 +9,10 @@ from Pantallas.Calidad import consultaDeTrabajosVisitados
 from Pantallas.Calidad import consultarPersonalCalidad
 from Pantallas.Calidad import consultarTrabajoControlado
 from Pantallas.Calidad import denuncias
-from Pantallas.Calidad import descontarPorExtravio
 from Pantallas.Calidad import editarTrabajosControlados
 from Pantallas.Calidad import editarTrabajoVisitado
-from Pantallas.Calidad import modificacionDeStock
+from Pantallas.Calidad import descontarPorExtravio
 from Pantallas.Calidad import modificacionRegistroMovil
-from Pantallas.Calidad import panelModificarStock
 from Pantallas.Calidad import presentismo
 from Pantallas.Calidad import registrarNuevoTrabajoControlado
 from Pantallas.Calidad import registroDeAusencia
@@ -44,7 +42,6 @@ class VentanaCalidad(QtWidgets.QMainWindow):
         super(VentanaCalidad, self).__init__(*args, **kwargs)
         self.ui = sectorControlDeCalidad.Ui_Form()
         self.ui.setupUi(self)
-        self.ui.ca_btn_1.clicked.connect(self.modificacion_Stock)
         self.ui.ca_btn_2.clicked.connect(self.trabajos_realizados)
         self.ui.ca_btn_3.clicked.connect(self.Denuncias)
         self.ui.ca_btn_4.clicked.connect(self.Presentismo)
@@ -53,10 +50,6 @@ class VentanaCalidad(QtWidgets.QMainWindow):
         self.ui.ca_btn_7.clicked.connect(self.trabajoscon)
         self.ui.ca_btn_8.clicked.connect(self.cancelar)
         self.ui.ca_btn_9.clicked.connect(self.personal)
-
-    def modificacion_Stock(self):
-        ventanamodificacionstock = ModificacionStockCali(self)
-        ventanamodificacionstock.exec_()
 
     def trabajos_realizados(self):
         ventanatrabajos_realizados = Trabajos_realizados(self)
@@ -89,80 +82,6 @@ class VentanaCalidad(QtWidgets.QMainWindow):
     def cancelar(self):
         self.close()
 
-class ModificacionStockCali(QtWidgets.QDialog):
-    def __init__(self, *args, **kwargs):
-        super(ModificacionStockCali, self).__init__(*args, **kwargs)
-        self.ui = modificacionDeStock.Ui_Form()
-        self.ui.setupUi(self)
-        self.ui.ca_btn_confirmar.pressed.connect(self.buscar)
-        self.ui.ca_btn_cancelar.pressed.connect(self.cancelar)
-
-    def buscar(self):
-        ventanapanelstock = StockMaterialesCali(self)
-        ventanapanelstock.exec_()
-
-    def cancelar(self):
-        self.close()
-
-class StockMaterialesCali(QtWidgets.QDialog):
-    def __init__(self, *args, **kwargs):
-        super(StockMaterialesCali, self).__init__(*args, **kwargs)
-        self.ui = panelModificarStock.Ui_Form()
-        self.ui.setupUi(self)
-        # consultar = ABM_materiales()
-        # resultado = consultar.consulta_materiales_gral()
-        # _translate = QtCore.QCoreApplication.translate
-        # len_resultado = (len(resultado))
-        # for i in range(0, len_resultado):
-        #     # resultado[i].insert(3, str(999))
-        #     posicion = 0
-        #     for a in range(0, len(resultado[i])):
-        #         item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
-        #         test = resultado[i][a]
-        #         self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
-        #         posicion += 1
-
-        self.ui.ca_btn_buscar.clicked.connect(self.consulta)
-        self.ui.ca_btn_confirmar.clicked.connect(self.salir)
-        self.ui.ca_btn_cancelar.clicked.connect(self.salir)
-
-    def salir(self):
-        self.close()
-
-    def consulta(self):
-        # try:
-        #     codigo = int(self.ui.ma_input_buscar.text())
-        # except ValueError:
-        #     QMessageBox.about(self, "Error!!", "\nIngrese un código!!\n")
-        #     return
-        # consultar = ABM_materiales()
-        # resultado = consultar.consulta_materiales(str(codigo))
-        # posicion = 0
-        # try:
-        #     resultados = resultado[0]
-        # except IndexError:
-        #     QMessageBox.about(self, "Error!!", "\nArtículo inexistente!!\n")
-        #     return
-        # _translate = QtCore.QCoreApplication.translate
-        #
-        # for i in resultados:
-        #     if posicion == 3:
-        #         posicion = posicion + 1
-        #     self.ui.ma_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
-        #     posicion += 1
-        #
-        # consultar = ABM_materiales()
-        # resultado = consultar.consulta_materiales_gral()
-        # _translate = QtCore.QCoreApplication.translate
-        # len_resultado = (len(resultado))
-        # for i in range(1, len_resultado):
-        #     posicion = 0
-        #     for a in range(0, len(resultado[i])):
-        #         item_0 = QtWidgets.QTreeWidgetItem(self.ui.ma_tabla)
-        #         test = ''
-        #         self.ui.ma_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
-        #         posicion += 1
-        print('holi')
 
 class Trabajos_realizados(QtWidgets.QDialog):
     def __init__(self, *args, **kwargs):
@@ -490,6 +409,9 @@ class agregardenuncia(QtWidgets.QDialog):
         contenidonuevo=contenidonuevo+'. '
         contenidolabel=contenidolabel+contenidonuevo
         self.ui.label.setText(str(contenidolabel))
+        self.ui.ca_input_11.setItemText(0, "Art.")
+        self.ui.ca_input_11.setCurrentText("Art.")
+        self.ui.ca_input_12.setText('')
 
     def confirmar(self):
         cali = Calidad()

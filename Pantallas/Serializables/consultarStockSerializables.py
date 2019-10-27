@@ -75,7 +75,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Consulta Stock"))
         self.se_tabla.headerItem().setText(0, _translate("Form", "Codigo MAC"))
         self.se_tabla.headerItem().setText(1, _translate("Form", "Descripcion"))
         self.se_tabla.headerItem().setText(2, _translate("Form", "Fecha ultimo ingreso"))

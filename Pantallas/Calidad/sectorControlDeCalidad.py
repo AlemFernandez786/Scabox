@@ -13,17 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(412, 610)
-        Form.setStyleSheet("background-color:white;")
-        self.ca_btn_1 = QtWidgets.QPushButton(Form)
-        self.ca_btn_1.setGeometry(QtCore.QRect(80, 80, 251, 41))
-        self.ca_btn_1.setStyleSheet("background-color:#5f5fff;\n"
-"color:white;\n"
-"border:none;\n"
-"font-size:15px;")
-        self.ca_btn_1.setIconSize(QtCore.QSize(16, 20))
-        self.ca_btn_1.setFlat(False)
-        self.ca_btn_1.setObjectName("ca_btn_1")
+        Form.resize(412, 570)
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(90, 30, 231, 41))
         self.label.setStyleSheet("font-size:20px;\n"
@@ -31,7 +21,7 @@ class Ui_Form(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.ca_btn_2 = QtWidgets.QPushButton(Form)
-        self.ca_btn_2.setGeometry(QtCore.QRect(80, 140, 251, 41))
+        self.ca_btn_2.setGeometry(QtCore.QRect(80, 90, 251, 41))
         self.ca_btn_2.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -40,7 +30,7 @@ class Ui_Form(object):
         self.ca_btn_2.setFlat(False)
         self.ca_btn_2.setObjectName("ca_btn_2")
         self.ca_btn_3 = QtWidgets.QPushButton(Form)
-        self.ca_btn_3.setGeometry(QtCore.QRect(80, 200, 251, 41))
+        self.ca_btn_3.setGeometry(QtCore.QRect(80, 150, 251, 41))
         self.ca_btn_3.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -49,7 +39,7 @@ class Ui_Form(object):
         self.ca_btn_3.setFlat(False)
         self.ca_btn_3.setObjectName("ca_btn_3")
         self.ca_btn_4 = QtWidgets.QPushButton(Form)
-        self.ca_btn_4.setGeometry(QtCore.QRect(80, 260, 251, 41))
+        self.ca_btn_4.setGeometry(QtCore.QRect(80, 210, 251, 41))
         self.ca_btn_4.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -58,7 +48,7 @@ class Ui_Form(object):
         self.ca_btn_4.setFlat(False)
         self.ca_btn_4.setObjectName("ca_btn_4")
         self.ca_btn_5 = QtWidgets.QPushButton(Form)
-        self.ca_btn_5.setGeometry(QtCore.QRect(80, 320, 251, 41))
+        self.ca_btn_5.setGeometry(QtCore.QRect(80, 270, 251, 41))
         self.ca_btn_5.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -67,7 +57,7 @@ class Ui_Form(object):
         self.ca_btn_5.setFlat(False)
         self.ca_btn_5.setObjectName("ca_btn_5")
         self.ca_btn_6 = QtWidgets.QPushButton(Form)
-        self.ca_btn_6.setGeometry(QtCore.QRect(80, 380, 251, 41))
+        self.ca_btn_6.setGeometry(QtCore.QRect(80, 330, 251, 41))
         self.ca_btn_6.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -76,7 +66,7 @@ class Ui_Form(object):
         self.ca_btn_6.setFlat(False)
         self.ca_btn_6.setObjectName("ca_btn_6")
         self.ca_btn_7 = QtWidgets.QPushButton(Form)
-        self.ca_btn_7.setGeometry(QtCore.QRect(80, 440, 251, 41))
+        self.ca_btn_7.setGeometry(QtCore.QRect(80, 390, 251, 41))
         self.ca_btn_7.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -85,13 +75,13 @@ class Ui_Form(object):
         self.ca_btn_7.setFlat(False)
         self.ca_btn_7.setObjectName("ca_btn_7")
         self.ca_btn_8 = QtWidgets.QPushButton(Form)
-        self.ca_btn_8.setGeometry(QtCore.QRect(230, 560, 101, 31))
+        self.ca_btn_8.setGeometry(QtCore.QRect(230, 510, 101, 31))
         self.ca_btn_8.setStyleSheet("color:white;\n"
 "background-color:#ff4e4e;\n"
 "border:none;")
         self.ca_btn_8.setObjectName("ca_btn_8")
         self.ca_btn_9 = QtWidgets.QPushButton(Form)
-        self.ca_btn_9.setGeometry(QtCore.QRect(80, 500, 251, 41))
+        self.ca_btn_9.setGeometry(QtCore.QRect(80, 450, 251, 41))
         self.ca_btn_9.setStyleSheet("background-color:#5f5fff;\n"
 "color:white;\n"
 "border:none;\n"
@@ -106,7 +96,6 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "ScaBox - Calidad"))
-        self.ca_btn_1.setText(_translate("Form", "Modificacion de Stock"))
         self.label.setText(_translate("Form", "Sector Control de Calidad"))
         self.ca_btn_2.setText(_translate("Form", "Trabajos Realizados"))
         self.ca_btn_3.setText(_translate("Form", "Denuncias"))

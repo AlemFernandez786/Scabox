@@ -14,6 +14,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(842, 594)
+        Form.setStyleSheet("background-color: rgb(243, 243, 243);\n")
         self.ca_input_1 = QtWidgets.QLineEdit(Form)
         self.ca_input_1.setGeometry(QtCore.QRect(310, 80, 251, 31))
         self.ca_input_1.setStyleSheet("border:none;\n"

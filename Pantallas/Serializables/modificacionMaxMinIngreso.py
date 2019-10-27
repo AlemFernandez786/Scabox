@@ -52,8 +52,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_2.setText(_translate("Form", "Modificacion Max/Min"))
+        Form.setWindowTitle(_translate("Form", "Máximo y Mínimo"))
+        self.label_2.setText(_translate("Form", "Modificación Max/Min"))
         self.label.setText(_translate("Form", "MAC del serializable"))
         self.se_btn_confirmar.setText(_translate("Form", "Confirmar"))
         self.se_btn_cancelar.setText(_translate("Form", "Cancelar"))

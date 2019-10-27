@@ -14,7 +14,6 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(448, 713)
-        Form.setStyleSheet("background-color:white;")
         self.se_btn_cancelar = QtWidgets.QPushButton(Form)
         self.se_btn_cancelar.setGeometry(QtCore.QRect(270, 650, 111, 31))
         self.se_btn_cancelar.setStyleSheet("color:white;\n"
@@ -114,7 +113,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "ScaBox - Serializables"))
         self.se_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.se_btn_5.setText(_translate("Form", "Stock por movil"))
         self.se_btn_2.setText(_translate("Form", "Stock por tipo"))

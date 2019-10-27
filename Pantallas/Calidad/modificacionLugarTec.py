@@ -14,6 +14,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(519, 284)
+        Form.setStyleSheet("background-color: rgb(243, 243, 243);\n")
         self.ca_btn_cancelar = QtWidgets.QPushButton(Form)
         self.ca_btn_cancelar.setGeometry(QtCore.QRect(300, 170, 131, 31))
         self.ca_btn_cancelar.setStyleSheet("color:white;\n"

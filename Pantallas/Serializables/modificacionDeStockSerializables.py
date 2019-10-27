@@ -61,7 +61,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Stock por tipo"))
         self.se_btn_buscar.setText(_translate("Form", "Buscar"))
         self.label.setText(_translate("Form", "Código del serializable: "))
         self.se_btn_cancelar.setText(_translate("Form", "Cancelar"))

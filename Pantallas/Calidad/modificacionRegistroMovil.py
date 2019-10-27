@@ -14,6 +14,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(842, 659)
+        Form.setStyleSheet("background-color: rgb(243, 243, 243);\n")
         self.ca_input_buscar = QtWidgets.QComboBox(Form)
         self.ca_input_buscar.setGeometry(QtCore.QRect(280, 60, 251, 31))
         self.ca_input_buscar.setStyleSheet("border:none;\n"

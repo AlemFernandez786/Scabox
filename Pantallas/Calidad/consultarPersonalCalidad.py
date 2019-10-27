@@ -14,6 +14,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(930, 524)
+        Form.setStyleSheet("background-color: rgb(243, 243, 243);\n")
         self.ca_tabla = QtWidgets.QTreeWidget(Form)
         self.ca_tabla.setGeometry(QtCore.QRect(10, 190, 911, 251))
         self.ca_tabla.setObjectName("ca_tabla")

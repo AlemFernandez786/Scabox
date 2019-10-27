@@ -35,7 +35,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Stock por tipo"))
         self.se_btn_cancelar.setText(_translate("Form", "Volver"))
         self.se_tabla.headerItem().setText(0, _translate("Form", "MAC"))
         self.se_tabla.headerItem().setText(1, _translate("Form", "Fecha ingreso"))

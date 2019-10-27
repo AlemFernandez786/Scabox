@@ -96,7 +96,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Estados de equipos"))
         self.label_2.setText(_translate("Form", "Estado Artículo: Sector Serializables"))
         self.label.setText(_translate("Form", "Código Artículo"))
         self.se_btn_cancelar.setText(_translate("Form", "Volver"))
@@ -106,7 +106,7 @@ class Ui_Form(object):
         self.se_btn_estado.setText("Cambiar Estado")
         self.label_7.setText("Estado")
         self.se_cbx_1.setItemText(0, "Listo para entregar")
-        self.se_cbx_1.setItemText(1, "Devolucion")
+        self.se_cbx_1.setItemText(1, "Devolución")
         self.se_cbx_1.setItemText(2, "Entregados")
 
 
