@@ -1,0 +1,25 @@
+trabajos visitados
+
+ca_option_1
+ca_option_2
+ca_option_3
+
+agregar trabajo visitado
+
+ca_input_1
+ca_input_2
+ca_input_3
+ca_input_4
+ca_input_5
+ca_input_6
+ca_input_7
+ca_input_8
+ca_input_9
+
+ca_btn_confirmar
+ca_btn_cancelar
+
+
+consultar trabajo visitado
+
+editar trabajo visitado

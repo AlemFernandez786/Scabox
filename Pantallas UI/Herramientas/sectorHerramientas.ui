@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>411</width>
+    <height>581</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sector Herramientas</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QPushButton" name="he_btn_3">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>210</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#5f5fff;
+color:white;
+border:none;
+font-size:15px;</string>
+   </property>
+   <property name="text">
+    <string>Alta/Baja de Articulos</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="he_btn_2">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>150</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#5f5fff;
+color:white;
+border:none;
+font-size:15px;</string>
+   </property>
+   <property name="text">
+    <string>Modificacion de Stock</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="he_btn_5">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>330</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#5f5fff;
+color:white;
+border:none;
+font-size:15px;</string>
+   </property>
+   <property name="text">
+    <string>Stock por movil</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="he_btn_7">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>450</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#5f5fff;
+color:white;
+border:none;
+font-size:15px;</string>
+   </property>
+   <property name="text">
+    <string>Estado del articulo</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="he_btn_6">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>390</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#5f5fff;
+color:white;
+border:none;
+font-size:15px;</string>
+   </property>
+   <property name="text">
+    <string>Stock por tecnico</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="he_btn_1">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>90</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#5f5fff;
+color:white;
+border:none;
+font-size:15px;</string>
+   </property>
+   <property name="text">
+    <string>Consulta de Stock</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="he_btn_cancelar">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>520</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;
+background-color:#ff4e4e;
+border:none;</string>
+   </property>
+   <property name="text">
+    <string>Cancelar</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="he_btn_4">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>270</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#5f5fff;
+color:white;
+border:none;
+font-size:15px;</string>
+   </property>
+   <property name="text">
+    <string>Máxima/Mínima de Stock</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>16</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>10</y>
+     <width>231</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size:20px;
+</string>
+   </property>
+   <property name="text">
+    <string>Sector Herramientas</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
