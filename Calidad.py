@@ -150,7 +150,7 @@ class Calidad:
             test2.append(test)
         return test2
 
-    def separar_cantidad_ot(self, valor, ot):
+    def separar_cantidad_ot(self, valor, ot, movil):
         numOt = ot
         # dividimos al label obtenido por espacios
         labelDividido = (valor.split())
@@ -180,6 +180,13 @@ class Calidad:
                         codCantIndividual = []
         for i in range(0, len(codCant)):
             self.sql = 'INSERT INTO trabajo_materiales VALUES (' + ",".join(map(str, codCant[i])) + ')'
+            self.cursor.execute(self.sql)
+            self.sql= 'SELECT art_mov_cantidad from articulo_movil where art_id='+str(codCant[i][1])+' AND mov_id='+str(movil)
+            self.cursor.execute(self.sql)
+            cantidad=self.cursor.fetchall()
+            cantidad = ''.join(e for e in str(cantidad) if e.isalnum())
+            cantidadactual= int(cantidad)-int(codCant[i][2])
+            self.sql = 'UPDATE articulo_movil SET art_mov_cantidad='+str(cantidadactual)+' WHERE art_id='+str(codCant[i][1])+' AND mov_id='+str(movil)
             self.cursor.execute(self.sql)
         self.conexion.commit()
 
@@ -403,85 +410,6 @@ class Calidad:
         # Ejecutamos la query
         self.cursor.execute(self.sql)
         self.conexion.commit()
-
-        # #se procede a reigstrar el movil en tabla dupla
-        # # tecnico 1
-        # dupla1=[]
-        # #se busca  y limpia el legajo
-        # self.sql = 'SELECT emp_legajo from empleados WHERE emp_apellido = "' + str(self.valor[5][0]) + '"'
-        # self.cursor.execute(self.sql)
-        # legajo1 = self.cursor.fetchall()
-        # legajo1 = ''.join(e for e in str(legajo1) if e.isalnum())
-        # dupla1.append(str(legajo1))
-        # #se agrega el movil
-        # dupla1.append(str(mov_info))
-        # #se agrega la fecha
-        # hoy = datetime.datetime.today()
-        # ya = ('{:%Y%m%d%H%M%S.%f}'.format(hoy))
-        # # dupla1.append(ya)
-        # #agegamos el registro
-        # #verificamos si se inserta o actualiza
-        # self.sql = 'SELECT * FROM dupla_movil WHERE emp_legajo ='+str(legajo1)
-        # self.cursor.execute(self.sql)
-        # tecinmovil = self.cursor.fetchall()
-        # if tecinmovil:
-        #     self.sql = 'UPDATE dupla_movil SET mov_id ' \
-        #                '= ' + str(mov_info) + ' WHERE emp_legajo = ' +str(legajo1)
-        #     self.cursor.execute(self.sql)
-        #     dupla1.append(ya)
-        #     self.sql = 'INSERT INTO historial_dupla (emp_legajo, mov_id, his_dup_fecha) VALUES (' + ",".join(
-        #         map(str, dupla1)) + ')'
-        #     # Ejecutamos la query
-        #     self.cursor.execute(self.sql)
-        #     self.conexion.commit()
-        #
-        # else:
-        #     self.sql = 'INSERT INTO dupla_movil VALUES (' + ",".join(map(str, dupla1)) + ')'
-        #     # Ejecutamos la query
-        #     self.cursor.execute(self.sql)
-        #     #le agergamos la fecha
-        #     dupla1.append(ya)
-        #     self.sql = 'INSERT INTO historial_dupla (emp_legajo, mov_id, his_dup_fecha) VALUES (' + ",".join(map(str, dupla1)) + ')'
-        #     # Ejecutamos la query
-        #     self.cursor.execute(self.sql)
-        #     self.conexion.commit()
-        #
-        # # tecnico 2
-        # dupla2 = []
-        # self.sql = 'SELECT emp_legajo from empleados WHERE emp_apellido = "' + str(self.valor[5][1]) + '"'
-        # self.cursor.execute(self.sql)
-        # legajo2 = self.cursor.fetchall()
-        # legajo2 = ''.join(e for e in str(legajo2) if e.isalnum())
-        # dupla2.append(str(legajo2))
-        # dupla2.append(str(mov_info))
-        # hoy2 = datetime.datetime.today()
-        # ya2 = ('{:%Y%m%d%H%M%S.%f}'.format(hoy2))
-        # # dupla2.append(ya2)
-        # if legajo2:
-        #     # verificamos si se inserta o actualiza
-        #     self.sql = 'SELECT * FROM dupla_movil WHERE emp_legajo = ' + str(legajo2)
-        #     self.cursor.execute(self.sql)
-        #     tecinmovil2 = self.cursor.fetchall()
-        #
-        #     if tecinmovil2:
-        #         self.sql = 'UPDATE dupla_movil SET mov_id ' \
-        #                    '= ' + str(mov_info) + ' WHERE emp_legajo = ' + str(legajo2)
-        #         self.cursor.execute(self.sql)
-        #         dupla2.append(ya)
-        #         self.sql = 'INSERT INTO historial_dupla (emp_legajo, mov_id, his_dup_fecha) VALUES (' + ",".join(map(str, dupla2)) + ')'
-        #         # Ejecutamos la query
-        #         self.cursor.execute(self.sql)
-        #         self.conexion.commit()
-        #     else:
-        #         self.sql = 'INSERT INTO dupla_movil VALUES (' + ",".join(map(str, dupla2)) + ')'
-        #         # Ejecutamos la query
-        #         self.cursor.execute(self.sql)
-        #         #le agregamos la fecha
-        #         dupla2.append(ya)
-        #         self.sql = 'INSERT INTO historial_dupla (emp_legajo, mov_id, his_dup_fecha) VALUES (' + ",".join(map(str, dupla2)) + ')'
-        #         # Ejecutamos la query
-        #         self.cursor.execute(self.sql)
-        #         self.conexion.commit()
 
     def modificacion_movil(self):
         self.sql='SELECT * FROM movil'

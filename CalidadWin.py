@@ -323,8 +323,9 @@ class registrar_trabajo(QtWidgets.QDialog):
         contenidolabel = self.ui.label_11.text()
         ot = self.ui.ca_input_1.text()
         macs = self.ui.ca_input_8.text()
+        movil= str(self.ui.ca_input_11.currentText())
 
-        con.separar_cantidad_ot(contenidolabel, ot)
+        con.separar_cantidad_ot(contenidolabel, ot, movil)
         con.agregar_ot_mac(ot, macs)
 
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
