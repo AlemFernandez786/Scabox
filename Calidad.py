@@ -182,11 +182,14 @@ class Calidad:
             self.sql = 'INSERT INTO trabajo_materiales VALUES (' + ",".join(map(str, codCant[i])) + ')'
             self.cursor.execute(self.sql)
             self.sql= 'SELECT art_mov_cantidad from articulo_movil where art_id='+str(codCant[i][1])+' AND mov_id='+str(movil)
+            print(self.sql)
             self.cursor.execute(self.sql)
             cantidad=self.cursor.fetchall()
             cantidad = ''.join(e for e in str(cantidad) if e.isalnum())
             cantidadactual= int(cantidad)-int(codCant[i][2])
+            print(cantidadactual)
             self.sql = 'UPDATE articulo_movil SET art_mov_cantidad='+str(cantidadactual)+' WHERE art_id='+str(codCant[i][1])+' AND mov_id='+str(movil)
+            print(self.sql)
             self.cursor.execute(self.sql)
         self.conexion.commit()
 
@@ -242,6 +245,8 @@ class Calidad:
     def consulta_existe_mac_ot(self, valor):
         verificador = True
         labelDividido = (valor.split())
+        if valor=='':
+            verificador = False
         for i in range(0, len(labelDividido)):
             var1 = labelDividido[i]
             var1 = ''.join(e for e in str(var1) if e.isalnum())
@@ -354,8 +359,9 @@ class Calidad:
         #vtv
         vtv=self.valor[2]
         b=len(vtv)
-        ano=(vtv[b-2]+vtv[b-1])
-        vtv=vtv[0:b-3]
+        #para windows
+        ano=(vtv[b-4]+vtv[b-3]+vtv[b-2]+vtv[b-1])
+        vtv=vtv[0:b-5]
         c=len(vtv)
         mes=''
         dia=''
@@ -376,8 +382,12 @@ class Calidad:
         # licencia
         lic = self.valor[4]
         b = len(lic)
-        ano = (lic[b - 2] + lic[b - 1])
-        lic = lic[0:b - 3]
+        # for Linux
+        # ano = (lic[b - 2] + lic[b - 1])
+        # lic = lic[0:b - 3]
+        # for Windows
+        ano = (lic[b - 4] + lic[b - 3] +lic[b - 2] +lic[b - 1])
+        lic = lic[0:b - 5]
         c = len(lic)
         mes = ''
         dia = ''
@@ -409,12 +419,22 @@ class Calidad:
         self.sql = 'INSERT INTO movil VALUES (' + ",".join(map(str, self.valores)) + ')'
         # Ejecutamos la query
         self.cursor.execute(self.sql)
+        # inertamos el movil en la tabla articulos por movil
+        self.sql='SELECT art_id FROM articulo'
+        self.cursor.execute(self.sql)
+        ids=self.cursor.fetchall()
+        if ids:
+            for i in range (0, len(ids)):
+                idsql=''.join(e for e in str(ids[i]) if e.isalnum())
+                self.sql='INSERT INTO articulo_movil VALUES ('+str(mov_info)+', '+idsql+', 0)'
+                self.cursor.execute(self.sql)
         self.conexion.commit()
 
     def modificacion_movil(self):
         self.sql='SELECT * FROM movil'
         self.cursor.execute(self.sql)
         a=self.cursor.fetchall()
+        print(a)
         return a
 
     def movil_por_patente(self,valor):
@@ -525,6 +545,7 @@ class Calidad:
         registracambio.append('"'+str(self.valor[2])+'"')
         self.sql = 'INSERT INTO salidas_diarias (Fecha, emp_legajo, estado_tecnico) VALUES (' + ",".join(map(str, registracambio)) + ')'
         self.cursor.execute(self.sql)
+        print(self.sql)
         self.conexion.commit()
 
     def actualizacion_duplas(self):
@@ -550,6 +571,8 @@ class Calidad:
         self.sql = 'SELECT MAX(Fecha) from salidas_diarias'
         self.cursor.execute(self.sql)
         ultimo_dia = self.cursor.fetchall()
+        if str(ultimo_dia)=='[(None,)]':
+            return
         ultimo_dia = (''.join(e for e in str(ultimo_dia) if e.isalnum()))
         ultimo_dia = ultimo_dia[12:20]
         # buscamos los datos con la fecha obtenida
@@ -1099,7 +1122,7 @@ class Calidad:
         return hora
 
 a=Calidad()
-
+# b=a.alta_movil((['1111111', '3212', '27/10/2021', '12323', '27/10/2022', '124']))
 
 #Buscar trbajos realizados # -----------------------------------------------------------------
 #modiicar alta movil para q ingerse legajos existentes #--------------------------------------
@@ -1163,3 +1186,4 @@ a=Calidad()
 # import datetime
 # ayer = datetime.date.today() - timedelta(1)
 # ayer = ('{:%Y%m%d}'.format(ayer))
+b=a.actualizacion_duplas()

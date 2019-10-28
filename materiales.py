@@ -154,6 +154,7 @@ class Baja(QtWidgets.QDialog):
             return
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
         self.ui.ma_input_codigo.clear()
+        self.close()
 
 
 class StockMovilIngreso(QtWidgets.QDialog):

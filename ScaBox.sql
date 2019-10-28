@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2019 a las 20:09:00
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 7.2.5
+-- Tiempo de generación: 28-10-2019 a las 06:56:21
+-- Versión del servidor: 10.1.35-MariaDB
+-- Versión de PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,11 +43,7 @@ CREATE TABLE `articulo` (
 --
 
 INSERT INTO `articulo` (`art_id`, `art_nombre`, `art_fecha_ultimo_ingreso`, `tip_id`, `art_cantidad`, `art_cant_min`, `art_cant_max`) VALUES
-(1, 'Tornillo', '2019-10-26', 2, 1899, 1200, 5000),
-(2, 'Cable', '2019-09-26', 2, 1500, 1000, 4000),
-(3, 'Destornillador', '2019-09-26', 1, 120, 70, 150),
-(4, 'Martillo', '2019-09-26', 1, 120, 70, 150),
-(5, 'Clavo', '2019-08-03', 2, 1000, 2000, 5000);
+(1, 'Conector Rg6', '2019-10-28', 2, 1200, 1000, 2000);
 
 -- --------------------------------------------------------
 
@@ -66,18 +62,7 @@ CREATE TABLE `articulo_movil` (
 --
 
 INSERT INTO `articulo_movil` (`mov_id`, `art_id`, `art_mov_cantidad`) VALUES
-(1, 1, 1101),
-(1, 2, 10),
-(1, 5, 50),
-(2, 1, 151),
-(2, 2, 10),
-(2, 5, 50),
-(3, 1, 0),
-(3, 2, 10),
-(3, 5, 50),
-(4, 1, 0),
-(4, 2, 10),
-(4, 5, 50);
+(1, 1, 100);
 
 -- --------------------------------------------------------
 
@@ -96,10 +81,25 @@ CREATE TABLE `articulo_tecnico` (
 --
 
 INSERT INTO `articulo_tecnico` (`emp_legajo`, `art_id`, `art_tec_cantidad`) VALUES
-(123, 3, 2),
-(123, 4, 5),
-(124, 3, 4),
-(124, 4, 2);
+(100, 1, 0),
+(101, 1, 0),
+(102, 1, 0),
+(103, 1, 0),
+(104, 1, 0),
+(105, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ausentes`
+--
+
+CREATE TABLE `ausentes` (
+  `aus_id` int(11) NOT NULL COMMENT 'id de la ausencia',
+  `emp_legajo` int(5) NOT NULL COMMENT 'legajo de empleado',
+  `aus_fecha` date NOT NULL COMMENT 'fecha de la ausencia',
+  `aus_justificacion` tinytext COMMENT 'presento justificativo'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -122,7 +122,11 @@ INSERT INTO `codigo_finalizacion` (`cod_finalizacion`, `descripcion`) VALUES
 (122, 'Instalacion boca catv'),
 (123, 'instalacion acometida + boca modem'),
 (124, 'Instalacion acometida + boca catv'),
-(125, 'Instalacion Modem WIfi');
+(125, 'Instalacion Modem WIfi'),
+(400, 'Ausente'),
+(403, 'No lo quiere'),
+(410, 'Impedimento Técnico'),
+(412, 'Zona peligrosa');
 
 -- --------------------------------------------------------
 
@@ -136,16 +140,6 @@ CREATE TABLE `consumo_serializable` (
   `ser_fecha_consumo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha en que se realizo el consumo'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `consumo_serializable`
---
-
-INSERT INTO `consumo_serializable` (`ser_id`, `ser_cant`, `ser_fecha_consumo`) VALUES
-(3, 5, '2019-08-15 00:00:30'),
-(3, 15, '2019-09-30 00:42:00'),
-(4, 10, '2019-09-30 00:53:25'),
-(3, 15, '2019-10-04 05:09:42');
-
 -- --------------------------------------------------------
 
 --
@@ -156,12 +150,25 @@ CREATE TABLE `denuncias` (
   `den_id` int(4) NOT NULL COMMENT 'ID de la denuncia',
   `den_numero_folio` int(30) NOT NULL COMMENT 'Numero de folio de la denuncia',
   `den_numero_acta` int(30) NOT NULL COMMENT 'Numero de acta de la denuncia',
-  `den_numero_legajo` int(10) NOT NULL,
+  `den_numero_legajo` int(10) NOT NULL COMMENT 'Número de legajo de denuncia',
   `den_comisaria` varchar(20) COLLATE latin1_spanish_ci NOT NULL COMMENT 'Nombre de la comisaria',
   `den_fecha_siniestro` date NOT NULL COMMENT 'Fecha del siniestro',
   `den_fecha_ingreso` date NOT NULL COMMENT 'Fecha de ingreso de denuncia',
-  `mov_id` int(5) NOT NULL
+  `mov_id` int(5) NOT NULL COMMENT 'Movil del siniestro'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `descuentos`
+--
+
+CREATE TABLE `descuentos` (
+  `des_id` int(11) NOT NULL COMMENT 'id del descuento',
+  `emp_legajo` int(4) NOT NULL COMMENT 'legajo de empleado',
+  `des_importe` int(8) NOT NULL COMMENT 'importe a descontar',
+  `des_fecha` date NOT NULL COMMENT 'fecha del descuento'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -213,14 +220,8 @@ CREATE TABLE `dupla_movil` (
 --
 
 INSERT INTO `dupla_movil` (`emp_legajo`, `mov_id`) VALUES
-(123, 1),
-(124, 1),
-(125, 2),
-(126, 2),
-(127, 3),
-(131, 3),
-(129, 4),
-(130, 4);
+(101, 1),
+(104, 1);
 
 -- --------------------------------------------------------
 
@@ -241,15 +242,38 @@ CREATE TABLE `empleados` (
 --
 
 INSERT INTO `empleados` (`emp_legajo`, `emp_documento`, `emp_nombre`, `emp_apellido`, `fecha_ingreso`) VALUES
-(123, 1234123, 'asdqwe', 'zxcsd', NULL),
-(124, 37102639, 'Nicolas', 'Campos', '2019-09-25'),
-(125, 37103556, 'adolfo', 'h', '2019-10-02'),
-(126, 31789556, 'rodrigo', 'b', '2019-10-02'),
-(127, 11111, 'pri', 'pri', '2019-10-09'),
-(128, 22222, 'sec', 'seg', '2019-10-09'),
-(129, 3333, 'tre', 'ter', '2019-10-09'),
-(130, 444, 'cuarrr', 'cua', '2019-10-09'),
-(131, 8528, 'cuchu', 'cambiasso', '2019-10-09');
+(100, 32987654, 'Juan', 'Supervisor', '2015-07-10'),
+(101, 32654987, 'Luis', 'Tecnico', '2019-10-27'),
+(102, 31326985, 'Alejandro ', 'Fernandez', '2019-10-27'),
+(103, 38321654, 'Nicolas', 'Campos', '2019-10-27'),
+(104, 12345678, 'Marcos', 'Perez', '2019-10-28'),
+(105, 12345679, 'Marcos', 'Perez', '2019-10-28');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `entradas_salidas`
+--
+
+CREATE TABLE `entradas_salidas` (
+  `eys_id` int(11) NOT NULL COMMENT 'id de entrada y salida',
+  `emp_legajo` int(4) NOT NULL COMMENT 'legajo de empleado',
+  `eys_fecha` date NOT NULL COMMENT 'Fecha',
+  `eys_entrada` time NOT NULL COMMENT 'horario de entrada',
+  `eys_salida` time NOT NULL COMMENT 'horario de salida'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `estados`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `estados` (
+`ser_mac` varchar(12)
+,`ultimo_estado` int(4)
+,`primer_estado` date
+);
 
 -- --------------------------------------------------------
 
@@ -284,22 +308,6 @@ CREATE TABLE `finalizacion_trabajo` (
   `nro_orden` int(10) NOT NULL COMMENT 'Numero de orden del trabajo'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `finalizacion_trabajo`
---
-
-INSERT INTO `finalizacion_trabajo` (`cod_finalizacion`, `nro_orden`) VALUES
-('120, 121', 11111111),
-('122', 22222222),
-('123, 125', 33333333),
-('121, 122, 121', 44444444),
-('123,123', 32132121),
-('120, 121', 11111111),
-('122', 22222222),
-('123, 125', 33333333),
-('121, 122, 121', 44444444),
-('123,123', 32132121);
-
 -- --------------------------------------------------------
 
 --
@@ -313,15 +321,6 @@ CREATE TABLE `historial_dupla` (
   `his_dup_fecha` datetime NOT NULL COMMENT 'Fecha en la que estuvo en dicho movil'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `historial_dupla`
---
-
-INSERT INTO `historial_dupla` (`his_dup_id`, `emp_legajo`, `mov_id`, `his_dup_fecha`) VALUES
-(1, 128, 3, '2019-10-09 22:24:16'),
-(2, 130, 4, '2019-10-09 22:25:04'),
-(3, 129, 4, '2019-10-15 22:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -333,15 +332,6 @@ CREATE TABLE `historial_materiales` (
   `his_mat_cant` int(4) NOT NULL,
   `his_mat_fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `historial_materiales`
---
-
-INSERT INTO `historial_materiales` (`art_id`, `his_mat_cant`, `his_mat_fecha`) VALUES
-(2, 10, '2019-09-20 00:00:00'),
-(1, 15, '2019-09-30 00:00:00'),
-(5, 15, '2019-09-30 20:08:02');
 
 -- --------------------------------------------------------
 
@@ -361,11 +351,12 @@ CREATE TABLE `historial_sectores` (
 --
 
 INSERT INTO `historial_sectores` (`fecha_cambio_sector`, `emp_legajo`, `emp_sector`, `motivo_cambio`) VALUES
-('2019-10-09 14:49:40', 127, 6, 'Alta'),
-('2019-10-09 14:49:52', 128, 6, 'Alta'),
-('2019-10-09 14:50:01', 129, 6, 'Alta'),
-('2019-10-09 14:50:08', 130, 6, 'Alta'),
-('2019-10-09 14:50:57', 131, 1, 'Cambio');
+('2019-10-27 00:00:00', 100, 4, 'ALTA'),
+('2019-10-27 22:31:28', 101, 6, 'Alta'),
+('2019-10-27 23:34:11', 102, 3, 'Cambio'),
+('2019-10-27 23:34:24', 103, 2, 'Cambio'),
+('2019-10-28 02:10:31', 104, 6, 'Alta'),
+('2019-10-28 02:11:58', 105, 5, 'Cambio');
 
 -- --------------------------------------------------------
 
@@ -386,8 +377,8 @@ CREATE TABLE `historial_serializables` (
 --
 
 INSERT INTO `historial_serializables` (`his_id`, `ser_mac`, `ser_estado`, `ser_fecha_entrega`, `ser_fecha_ultimo_estado`) VALUES
-(3, '1122AABB3333', 1, NULL, '2019-10-04'),
-(6, '112233445566', 2, NULL, '2019-10-07');
+(7, '1122334455AA', 1, NULL, '2019-10-28'),
+(8, '1122334455AA', 3, NULL, '2019-10-28');
 
 -- --------------------------------------------------------
 
@@ -410,11 +401,7 @@ CREATE TABLE `movil` (
 --
 
 INSERT INTO `movil` (`mov_id`, `mov_patente`, `mov_seguro`, `mov_vtv`, `mov_tarjeta_verde`, `mov_licencia`, `emp_legajo`) VALUES
-(1, 'abc123', 12345678, '2019-09-26', 11112222, '2019-09-26', 123),
-(2, 'abc124', 11223344, '2019-11-26', 22221111, '2019-11-26', 124),
-(3, 'w23e4r', 2344321, '2020-07-11', 2345, '2025-07-16', 125),
-(4, 'w2e3r4', 444, '2020-03-14', 2345555, '2020-03-14', 131),
-(5, 'qwe123', 123321, '2019-10-21', 213321, '2019-10-21', 128);
+(1, 'ABC123', 1234567, '2020-01-17', 123123123, '2021-04-16', 101);
 
 -- --------------------------------------------------------
 
@@ -434,29 +421,12 @@ CREATE TABLE `salidas_diarias` (
 --
 
 INSERT INTO `salidas_diarias` (`saldias_id`, `Fecha`, `emp_legajo`, `estado_tecnico`) VALUES
-(1, '2019-10-11', 124, '2'),
-(2, '2019-10-14', 123, '4'),
-(5, '2019-10-16', 129, '3'),
-(6, '2019-10-16', 131, '3'),
-(9, '2019-10-16', 124, 'Vacaciones'),
-(18, '2019-10-16', 130, 'Enfermedad'),
-(19, '2019-10-17', 130, 'En Base'),
-(43, '2019-10-17', 129, '3'),
-(44, '2019-10-17', 131, '3'),
-(45, '2019-10-17', 124, 'Vacaciones'),
-(146, '2019-10-17', 129, '3'),
-(147, '2019-10-17', 131, '3'),
-(148, '2019-10-17', 124, 'Vacaciones'),
-(149, '2019-10-17', 130, 'Enfermedad'),
-(150, '2019-10-15', 125, '1'),
-(151, '2019-10-10', 123, '2'),
-(152, '2019-10-22', 123, '1'),
-(153, '2019-10-22', 124, '1'),
-(154, '2019-10-22', 125, '2'),
-(155, '2019-10-22', 126, '2'),
-(156, '2019-10-22', 129, '4'),
-(157, '2019-10-22', 130, '4'),
-(160, '2019-10-22', 131, '3');
+(17, '2019-10-28', 100, 'Supervisor'),
+(18, '2019-10-28', 101, '1'),
+(19, '2019-10-28', 102, 'Materiales'),
+(20, '2019-10-28', 103, 'Serializable'),
+(22, '2019-10-28', 105, 'Calidad'),
+(24, '2019-10-28', 104, '1');
 
 -- --------------------------------------------------------
 
@@ -498,8 +468,7 @@ CREATE TABLE `serializable` (
 --
 
 INSERT INTO `serializable` (`ser_mac`, `ser_fecha_ultimo_ingreso`, `tip_id`) VALUES
-('112233445566', '2019-09-30', 4),
-('1122AABB3333', '2019-10-04', 4);
+('1122334455AA', '2019-10-28', 1);
 
 -- --------------------------------------------------------
 
@@ -550,9 +519,20 @@ CREATE TABLE `tipo_serializable` (
 --
 
 INSERT INTO `tipo_serializable` (`tipo_serializable`, `desc_serializable`, `cant_serializable`, `cant_min_ser`, `cant_max_ser`) VALUES
-(3, 'Modem WiFi', 5, 25, 125),
-(4, 'Decodificador', 6, 140, 500),
-(5, 'Decodificador HD', 1, 250, 800);
+(1, 'Modem WiFi', 1, 20, 50),
+(2, 'Decodificador FLOW', 0, 20, 50);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajos_controlados`
+--
+
+CREATE TABLE `trabajos_controlados` (
+  `nro_orden` int(10) NOT NULL COMMENT 'nro de orden de trabajo',
+  `con_fecha` date NOT NULL COMMENT 'fecha de control',
+  `con_observaciones` varchar(255) DEFAULT NULL COMMENT 'observaciones dle trabajo realizado'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -576,11 +556,26 @@ CREATE TABLE `trabajos_realizados` (
 --
 
 INSERT INTO `trabajos_realizados` (`nro_orden`, `domicilio`, `mov_id`, `observaciones`, `fecha_trabajo`, `nom_cliente`, `dni_cliente`, `nro_cliente`) VALUES
-(11111111, 'calle uno 111', 1, 'poste roto', '2019-10-15', 'Primerisimo', 11111111, 1111111),
-(22222222, 'calle dos 222', 2, '	', '2019-10-10', 'Segundisimo', 222222222, 22222222),
-(32132121, 'nose 234', 3, NULL, '2019-10-16', 'elpibito', 32659814, 3216548),
-(33333333, 'calle 3', 3, '', '2019-10-14', 'Terceri', 0, 0),
-(44444444, 'Calle 4 444', 4, 'El sandaime', '2019-10-14', 'El Cuaro Hokage', 4444444, 0);
+(123456789, 'Paraguay 2233', 1, NULL, '2019-10-28', 'Ramiro Sanchez', 34483118, 34483118);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajo_materiales`
+--
+
+CREATE TABLE `trabajo_materiales` (
+  `nro_orden` int(10) NOT NULL COMMENT 'numero de orden',
+  `art_id` int(8) NOT NULL COMMENT 'id del articulo',
+  `ot_art_cantidad` int(10) NOT NULL COMMENT 'cantidad consumida'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trabajo_materiales`
+--
+
+INSERT INTO `trabajo_materiales` (`nro_orden`, `art_id`, `ot_art_cantidad`) VALUES
+(123456789, 1, 20);
 
 -- --------------------------------------------------------
 
@@ -592,6 +587,13 @@ CREATE TABLE `trabajo_serializable` (
   `nro_orden` int(10) NOT NULL COMMENT 'Numero de orden del trabajo',
   `ser_mac` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trabajo_serializable`
+--
+
+INSERT INTO `trabajo_serializable` (`nro_orden`, `ser_mac`) VALUES
+(123456789, '1122334455AA');
 
 -- --------------------------------------------------------
 
@@ -610,7 +612,19 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`usu_legajo`, `usu_password`, `activo`) VALUES
-(131, '565656', 1);
+(100, '565656', 1),
+(102, '565656', 1),
+(103, '565656', 1),
+(105, '565656', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `estados`
+--
+DROP TABLE IF EXISTS `estados`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `estados`  AS  (select `historial_serializables`.`ser_mac` AS `ser_mac`,max(`historial_serializables`.`his_id`) AS `ultimo_estado`,min(`historial_serializables`.`ser_fecha_ultimo_estado`) AS `primer_estado` from `historial_serializables` group by `historial_serializables`.`ser_mac`) ;
 
 --
 -- Índices para tablas volcadas
@@ -639,6 +653,13 @@ ALTER TABLE `articulo_tecnico`
   ADD KEY `art_id` (`art_id`);
 
 --
+-- Indices de la tabla `ausentes`
+--
+ALTER TABLE `ausentes`
+  ADD PRIMARY KEY (`aus_id`),
+  ADD KEY `emp_legajo` (`emp_legajo`);
+
+--
 -- Indices de la tabla `codigo_finalizacion`
 --
 ALTER TABLE `codigo_finalizacion`
@@ -659,6 +680,13 @@ ALTER TABLE `denuncias`
   ADD KEY `mov_id` (`mov_id`);
 
 --
+-- Indices de la tabla `descuentos`
+--
+ALTER TABLE `descuentos`
+  ADD PRIMARY KEY (`des_id`),
+  ADD KEY `emp_legajo` (`emp_legajo`);
+
+--
 -- Indices de la tabla `detalle_denuncia_empleados`
 --
 ALTER TABLE `detalle_denuncia_empleados`
@@ -669,8 +697,8 @@ ALTER TABLE `detalle_denuncia_empleados`
 -- Indices de la tabla `detalle_denuncia_materiales`
 --
 ALTER TABLE `detalle_denuncia_materiales`
-  ADD PRIMARY KEY (`den_id`),
-  ADD KEY `art_id` (`art_id`);
+  ADD KEY `art_id` (`art_id`),
+  ADD KEY `den_id` (`den_id`);
 
 --
 -- Indices de la tabla `detalle_denuncia_serializables`
@@ -691,6 +719,13 @@ ALTER TABLE `dupla_movil`
 --
 ALTER TABLE `empleados`
   ADD PRIMARY KEY (`emp_legajo`);
+
+--
+-- Indices de la tabla `entradas_salidas`
+--
+ALTER TABLE `entradas_salidas`
+  ADD PRIMARY KEY (`eys_id`),
+  ADD KEY `emp_legajo` (`emp_legajo`);
 
 --
 -- Indices de la tabla `estados_serializables`
@@ -784,11 +819,24 @@ ALTER TABLE `tipo_serializable`
   ADD UNIQUE KEY `desc_serializable` (`desc_serializable`);
 
 --
+-- Indices de la tabla `trabajos_controlados`
+--
+ALTER TABLE `trabajos_controlados`
+  ADD KEY `nro_orden` (`nro_orden`);
+
+--
 -- Indices de la tabla `trabajos_realizados`
 --
 ALTER TABLE `trabajos_realizados`
   ADD PRIMARY KEY (`nro_orden`),
   ADD KEY `mov_id` (`mov_id`);
+
+--
+-- Indices de la tabla `trabajo_materiales`
+--
+ALTER TABLE `trabajo_materiales`
+  ADD KEY `nro_orden` (`nro_orden`),
+  ADD KEY `art_id` (`art_id`);
 
 --
 -- Indices de la tabla `trabajo_serializable`
@@ -808,10 +856,34 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `ausentes`
+--
+ALTER TABLE `ausentes`
+  MODIFY `aus_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de la ausencia';
+
+--
 -- AUTO_INCREMENT de la tabla `codigo_finalizacion`
 --
 ALTER TABLE `codigo_finalizacion`
-  MODIFY `cod_finalizacion` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de finalizacion de un trabajo', AUTO_INCREMENT=126;
+  MODIFY `cod_finalizacion` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de finalizacion de un trabajo', AUTO_INCREMENT=413;
+
+--
+-- AUTO_INCREMENT de la tabla `denuncias`
+--
+ALTER TABLE `denuncias`
+  MODIFY `den_id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'ID de la denuncia';
+
+--
+-- AUTO_INCREMENT de la tabla `descuentos`
+--
+ALTER TABLE `descuentos`
+  MODIFY `des_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id del descuento';
+
+--
+-- AUTO_INCREMENT de la tabla `entradas_salidas`
+--
+ALTER TABLE `entradas_salidas`
+  MODIFY `eys_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de entrada y salida', AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `estados_serializables`
@@ -823,19 +895,19 @@ ALTER TABLE `estados_serializables`
 -- AUTO_INCREMENT de la tabla `historial_dupla`
 --
 ALTER TABLE `historial_dupla`
-  MODIFY `his_dup_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del historial', AUTO_INCREMENT=4;
+  MODIFY `his_dup_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id del historial';
 
 --
 -- AUTO_INCREMENT de la tabla `historial_serializables`
 --
 ALTER TABLE `historial_serializables`
-  MODIFY `his_id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'ID del historial', AUTO_INCREMENT=7;
+  MODIFY `his_id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'ID del historial', AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `salidas_diarias`
 --
 ALTER TABLE `salidas_diarias`
-  MODIFY `saldias_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `saldias_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restricciones para tablas volcadas
@@ -862,6 +934,12 @@ ALTER TABLE `articulo_tecnico`
   ADD CONSTRAINT `articulo_tecnico_ibfk_2` FOREIGN KEY (`art_id`) REFERENCES `articulo` (`art_id`);
 
 --
+-- Filtros para la tabla `ausentes`
+--
+ALTER TABLE `ausentes`
+  ADD CONSTRAINT `ausentes_ibfk_1` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`);
+
+--
 -- Filtros para la tabla `consumo_serializable`
 --
 ALTER TABLE `consumo_serializable`
@@ -874,25 +952,31 @@ ALTER TABLE `denuncias`
   ADD CONSTRAINT `denuncias_ibfk_1` FOREIGN KEY (`mov_id`) REFERENCES `movil` (`mov_id`);
 
 --
+-- Filtros para la tabla `descuentos`
+--
+ALTER TABLE `descuentos`
+  ADD CONSTRAINT `descuentos_ibfk_1` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`);
+
+--
 -- Filtros para la tabla `detalle_denuncia_empleados`
 --
 ALTER TABLE `detalle_denuncia_empleados`
-  ADD CONSTRAINT `detalle_denuncia_empleados_ibfk_1` FOREIGN KEY (`den_id`) REFERENCES `denuncias` (`den_id`),
-  ADD CONSTRAINT `detalle_denuncia_empleados_ibfk_2` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`);
+  ADD CONSTRAINT `detalle_denuncia_empleados_ibfk_2` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`),
+  ADD CONSTRAINT `detalle_denuncia_empleados_ibfk_3` FOREIGN KEY (`den_id`) REFERENCES `denuncias` (`den_id`);
 
 --
 -- Filtros para la tabla `detalle_denuncia_materiales`
 --
 ALTER TABLE `detalle_denuncia_materiales`
-  ADD CONSTRAINT `detalle_denuncia_materiales_ibfk_1` FOREIGN KEY (`den_id`) REFERENCES `denuncias` (`den_id`),
-  ADD CONSTRAINT `detalle_denuncia_materiales_ibfk_2` FOREIGN KEY (`art_id`) REFERENCES `articulo` (`art_id`);
+  ADD CONSTRAINT `detalle_denuncia_materiales_ibfk_2` FOREIGN KEY (`art_id`) REFERENCES `articulo` (`art_id`),
+  ADD CONSTRAINT `detalle_denuncia_materiales_ibfk_3` FOREIGN KEY (`den_id`) REFERENCES `denuncias` (`den_id`);
 
 --
 -- Filtros para la tabla `detalle_denuncia_serializables`
 --
 ALTER TABLE `detalle_denuncia_serializables`
-  ADD CONSTRAINT `detalle_denuncia_serializables_ibfk_1` FOREIGN KEY (`den_id`) REFERENCES `denuncias` (`den_id`),
-  ADD CONSTRAINT `detalle_denuncia_serializables_ibfk_2` FOREIGN KEY (`ser_mac`) REFERENCES `serializable` (`ser_mac`);
+  ADD CONSTRAINT `detalle_denuncia_serializables_ibfk_2` FOREIGN KEY (`ser_mac`) REFERENCES `serializable` (`ser_mac`),
+  ADD CONSTRAINT `detalle_denuncia_serializables_ibfk_3` FOREIGN KEY (`den_id`) REFERENCES `denuncias` (`den_id`);
 
 --
 -- Filtros para la tabla `dupla_movil`
@@ -900,6 +984,12 @@ ALTER TABLE `detalle_denuncia_serializables`
 ALTER TABLE `dupla_movil`
   ADD CONSTRAINT `dupla_movil_ibfk_2` FOREIGN KEY (`mov_id`) REFERENCES `movil` (`mov_id`),
   ADD CONSTRAINT `dupla_movil_ibfk_3` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`);
+
+--
+-- Filtros para la tabla `entradas_salidas`
+--
+ALTER TABLE `entradas_salidas`
+  ADD CONSTRAINT `entradas_salidas_ibfk_1` FOREIGN KEY (`emp_legajo`) REFERENCES `empleados` (`emp_legajo`);
 
 --
 -- Filtros para la tabla `finalizacion_trabajo`
@@ -960,10 +1050,23 @@ ALTER TABLE `serializable_movil`
   ADD CONSTRAINT `serializable_movil_ibfk_2` FOREIGN KEY (`ser_mac`) REFERENCES `serializable` (`ser_mac`);
 
 --
+-- Filtros para la tabla `trabajos_controlados`
+--
+ALTER TABLE `trabajos_controlados`
+  ADD CONSTRAINT `trabajos_controlados_ibfk_1` FOREIGN KEY (`nro_orden`) REFERENCES `trabajos_realizados` (`nro_orden`);
+
+--
 -- Filtros para la tabla `trabajos_realizados`
 --
 ALTER TABLE `trabajos_realizados`
   ADD CONSTRAINT `trabajos_realizados_ibfk_1` FOREIGN KEY (`mov_id`) REFERENCES `movil` (`mov_id`);
+
+--
+-- Filtros para la tabla `trabajo_materiales`
+--
+ALTER TABLE `trabajo_materiales`
+  ADD CONSTRAINT `trabajo_materiales_ibfk_1` FOREIGN KEY (`nro_orden`) REFERENCES `trabajos_realizados` (`nro_orden`),
+  ADD CONSTRAINT `trabajo_materiales_ibfk_2` FOREIGN KEY (`art_id`) REFERENCES `articulo` (`art_id`);
 
 --
 -- Filtros para la tabla `trabajo_serializable`

@@ -26,6 +26,11 @@ class Ui_Form(object):
         self.label.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
 "text-align:center;")
         self.label.setObjectName("label")
+        self.label_3 = QtWidgets.QLabel(Form)
+        self.label_3.setGeometry(QtCore.QRect(80, 150, 400, 31))
+        self.label_3.setStyleSheet("font: 8pt \"MS Shell Dlg 2\";\n"
+                                 "text-align:center;")
+        self.label_3.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(150, 20, 231, 41))
         self.label_2.setStyleSheet("font-size:20px;\n"
@@ -56,6 +61,7 @@ class Ui_Form(object):
         self.su_btn_cancelar.setText(_translate("Form", "Cancelar"))
         self.label.setText(_translate("Form", "Ingrese Nº de Legajo"))
         self.label_2.setText(_translate("Form", "Baja de Personal"))
+        self.label_3.setText(_translate("Form", "Nota: Solo se podrán eliminar técnicos que no hayan realizado ningún trabajo"))
         self.su_btn_confirmar.setText(_translate("Form", "Confirmar"))
 
 

@@ -186,6 +186,10 @@ class ABM_materiales:
 
     def baja_materiales(self, identificador):
         self.identificador=identificador
+        self.sql = 'DELETE FROM articulo_tecnico WHERE art_id = ' + str(identificador)
+        self.cursor.execute(self.sql)
+        self.sql = 'DELETE FROM articulo_movil WHERE art_id = ' + str(identificador)
+        self.cursor.execute(self.sql)
         self.sql = 'DELETE FROM articulo WHERE art_id = ' + identificador +' AND tip_id = 2'
         self.cursor.execute (self.sql)
         self.conexion.commit()
@@ -218,6 +222,23 @@ class ABM_materiales:
         self.sql = 'INSERT INTO articulo VALUES (' + ",".join(map(str, self.valores)) + ')'
         # Ejecutamos la query
         self.cursor.execute(self.sql)
+        #insertamos los articulos en tecnicos y moviles
+        self.sql = 'SELECT emp_legajo FROM empleados'
+        self.cursor.execute(self.sql)
+        legs = self.cursor.fetchall()
+        if legs:
+            for i in range(0, len(legs)):
+                legssql = ''.join(e for e in str(legs[i]) if e.isalnum())
+                self.sql = 'INSERT INTO articulo_tecnico VALUES (' + legssql + ', ' + str(art_info) + ', 0)'
+                self.cursor.execute(self.sql)
+        self.sql = 'SELECT mov_id FROM movil'
+        self.cursor.execute(self.sql)
+        mov = self.cursor.fetchall()
+        if mov:
+            for i in range(0, len(mov)):
+                movql = ''.join(e for e in str(mov[i]) if e.isalnum())
+                self.sql = 'INSERT INTO articulo_movil VALUES (' +movql + ', ' + str(art_info) + ', 0)'
+                self.cursor.execute(self.sql)
         self.conexion.commit()
 
     def consulta_materiales(self, valor):
@@ -296,9 +317,50 @@ class ABM_supervisor:
         self.cursor.execute (self.sql)
         self.sql = 'DELETE from usuarios where usu_legajo= ' + str(self.identificador)
         self.cursor.execute(self.sql)
+        self.sql = 'DELETE from articulo_tecnico where emp_legajo= ' + str(self.identificador)
+        self.cursor.execute(self.sql)
         self.sql = 'DELETE from empleados where emp_legajo= ' + str(self.identificador)
         self.cursor.execute(self.sql)
         self.conexion.commit()
+
+    def consulta_empleado_en_ot(self, valor):
+        verificador=True
+        self.sql='SELECT * FROM movil WHERE emp_legajo='+str(valor)
+        self.cursor.execute(self.sql)
+        movil=self.cursor.fetchall()
+        if movil:
+            verificador=False
+        self.sql = 'SELECT * FROM dupla_movil WHERE emp_legajo=' + str(valor)
+        self.cursor.execute(self.sql)
+        dupla_movil = self.cursor.fetchall()
+        if dupla_movil:
+            verificador=True
+        self.sql = 'SELECT * FROM entradas_salidas WHERE emp_legajo=' + str(valor)
+        self.cursor.execute(self.sql)
+        entradas_salidas = self.cursor.fetchall()
+        if entradas_salidas:
+            verificador=False
+        self.sql = 'SELECT * FROM ausentes WHERE emp_legajo=' + str(valor)
+        self.cursor.execute(self.sql)
+        ausentes = self.cursor.fetchall()
+        if ausentes:
+            verificador=False
+        self.sql = 'SELECT * FROM salidas_diarias WHERE emp_legajo=' + str(valor)
+        self.cursor.execute(self.sql)
+        salidas_diarias = self.cursor.fetchall()
+        if salidas_diarias:
+            verificador=False
+        self.sql = 'SELECT * FROM descuentos WHERE emp_legajo=' + str(valor)
+        self.cursor.execute(self.sql)
+        descuentos = self.cursor.fetchall()
+        if descuentos:
+            verificador=False
+        self.sql = 'SELECT * FROM detalle_denuncia_empleados WHERE emp_legajo=' + str(valor)
+        self.cursor.execute(self.sql)
+        detalle_denuncia_empleados = self.cursor.fetchall()
+        if detalle_denuncia_empleados:
+            verificador=False
+        return verificador
 
     def alta_personal(self, valores):
         from datetime import date
@@ -331,6 +393,17 @@ class ABM_supervisor:
         self.sql = 'INSERT INTO empleados VALUES (' + ",".join(map(str, self.valores)) + ')'
         # Ejecutamos la query
         self.cursor.execute(self.sql)
+        # inertamos el movil en la tabla articulos por movil
+        self.sql = 'SELECT art_id FROM articulo'
+        self.cursor.execute(self.sql)
+        ids = self.cursor.fetchall()
+        if ids:
+            for i in range(0, len(ids)):
+                idsql=''.join(e for e in str(ids[i]) if e.isalnum())
+                self.sql ='INSERT INTO articulo_tecnico VALUES ('+ str(emp_info)+', '+ idsql+', 0)'
+                self.cursor.execute(self.sql)
+
+        self.conexion.commit()
 
         # modoficamos sector
         hoy = datetime.datetime.today()
@@ -357,7 +430,6 @@ class ABM_supervisor:
             emp_info = int(emp_info)
             emp_info += 1
         return (emp_info)
-        self.cursor.execute(self.sql)
         self.conexion.commit()
 
     def modificacion_sector(self, valor):
@@ -444,3 +516,5 @@ class ABM_supervisor:
         consul_personal = self.cursor.fetchall()
         return consul_personal
 
+# a=ABM_supervisor()
+# b=a.consulta_empleado_en_ot(str(100))

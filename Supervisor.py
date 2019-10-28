@@ -255,7 +255,7 @@ class BajaPersonal(QtWidgets.QDialog):
             return
 
         codigo = int(self.ui.su_input_1.text())
-        if (codigo < 0) | (codigo > 99999999):
+        if (codigo < 0) | (codigo > 9999):
             QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
             return
         con = ABM_supervisor()
@@ -263,10 +263,9 @@ class BajaPersonal(QtWidgets.QDialog):
         if not valor:
             QMessageBox.about(self, "Error", "Ingrese un legajo válido")
             return
-
-
-        if (self.legajo < 0) | (self.legajo > 9999):
-            QMessageBox.about(self, "Error!!", "\nValor incorrecto!!\n")
+        emp=con.consulta_empleado_en_ot(str(valor[0][0]))
+        if emp==False:
+            QMessageBox.about(self, "Error", "No se puede eliminar ese empleado\nTiene registros que no se pueden borrar")
             return
         war = QMessageBox.warning(self, "Advertencia",
                                   '''El empleado será eliminado.\n
@@ -469,19 +468,14 @@ class ConsultadePersonal(QtWidgets.QDialog):
             QMessageBox.about(self, "Error!!", "\nPersonal inexistente!!\n")
             return
         _translate = QtCore.QCoreApplication.translate
-        for i in resultados:
-            if posicion == 3:
-                posicion = posicion + 1
-            self.ui.su_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
-            posicion += 1
-        consultar = ABM_supervisor()
-        resultado = consultar.consulta_personal_gral()
-        _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
-        for i in range(1, len_resultado):
+        QtWidgets.QTreeWidgetItem(self.ui.su_tabla)
+        self.ui.su_tabla.clear()
+        for i in range(0, len_resultado):
             posicion = 0
+            QtWidgets.QTreeWidgetItem(self.ui.su_tabla)
             for a in range(0, len(resultado[i])):
-                test = ''
+                test = resultado[i][a]
                 self.ui.su_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
                 posicion += 1
 

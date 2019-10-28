@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
         self.input_pass.setText("")
         self.input_pass.setEchoMode(QtWidgets.QLineEdit.Password)
         self.label_bienvenido = QtWidgets.QLabel(self.centralwidget)
-        self.label_bienvenido.setGeometry(QtCore.QRect(260, 90, 321, 71))
+        self.label_bienvenido.setGeometry(QtCore.QRect(320, 90, 321, 71))
         self.label_bienvenido.setObjectName("label_bienvenido")
         self.label_legajo = QtWidgets.QLabel(self.centralwidget)
         self.label_legajo.setGeometry(QtCore.QRect(190, 210, 111, 31))
@@ -56,7 +56,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "ScaBox"))
         self.btn_inicio.setText(_translate("MainWindow", "INICIAR"))
-        self.label_bienvenido.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:36pt; font-weight:600;\">Bienvenido</span></p></body></html>"))
+        self.label_bienvenido.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:36pt; font-weight:600;\">ScaBox</span></p></body></html>"))
         self.label_legajo.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Legajo</span></p></body></html>"))
         self.label_pass.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Contraseña</span></p></body></html>"))
 

@@ -11,7 +11,7 @@ import Supervisor
 
 
 class InicioSesion(QtWidgets.QMainWindow):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):    
         super(InicioSesion, self).__init__(*args, **kwargs)
         self.ui = inicio.Ui_MainWindow()
         self.ui.setupUi(self)

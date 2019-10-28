@@ -196,7 +196,7 @@ class registrar_trabajo(QtWidgets.QDialog):
             return
 
         verificador2 = con.consulta_existe_mac_ot(macs)
-        if verificador2 == False:
+        if verificador2 == True:
             QMessageBox.about(self, "Error", "Mac ya consumida")
             return
 
@@ -795,7 +795,6 @@ class altaMovilCal(QtWidgets.QDialog):
             str(self.ui.ca_input_2.text()), str(self.ui.ca_input_3.text()), str(self.ui.ca_input_4.text()),
             str(self.ui.ca_input_5.text()),str(self.ui.ca_input_6.currentText())]
         con.alta_movil(valores)
-
         QMessageBox.about(self, "Confirmación", "\nConfirmado!!\n")
         self.close()
 
@@ -986,7 +985,11 @@ class consultarSalidasDIarias(QtWidgets.QDialog):
         self.ui = salidadiaria.Ui_Form()
         self.ui.setupUi(self)
         consultar = Calidad()
-        resultado = consultar.consulta_diaria()
+        # resultado = consultar.consulta_diaria()
+        try:
+            resultado = consultar.consulta_diaria()
+        except mysql.connector.Error:
+            return
         _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
         for i in range(0, len_resultado):
@@ -1011,7 +1014,11 @@ class consultarSalidasDIarias(QtWidgets.QDialog):
             return
         valorfecha=(valorfecha.toString('yyMMdd'))
         consultar = Calidad()
-        resultado = consultar.busqueda_salida_diaria(valorfecha)
+        # resultado = consultar.busqueda_salida_diaria(valorfecha)
+        try:
+            resultado = consultar.busqueda_salida_diaria(valorfecha)
+        except mysql.connector.Error:
+            return
         _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
         QtWidgets.QTreeWidgetItem(self.ui.ca_tabla)
@@ -1059,7 +1066,7 @@ class modificar_tecnico_lugar(QtWidgets.QDialog):
             return
         if self.ui.ca_input_2.currentText() == "Seleccione un movil o estado":
             QMessageBox.about(self, "Error!!",
-                              "\nSeleccione movil")
+                              "\nSeleccione movil o estado")
             return
         war = QMessageBox.warning(self, "Advertencia",
                                   '''Se modificará el lugar del técnico.\n
@@ -1077,18 +1084,23 @@ class modificar_tecnico_lugar(QtWidgets.QDialog):
             cambio.append(movil)
             cal= Calidad()
             consultarcambio = cal.consulta_tecnico_en_movil(cambio)
-            if consultarcambio==2:
-                QMessageBox.about(self, "Error!!",
-                                  "\nEl técnico ya se encuentra en ese movil")
-                return
-            else:
-                consultaTecEnSalida = cal.consulta_diaria_tec(cambio[1])
-                if consultaTecEnSalida:
+            if consultarcambio or consultarcambio==0:
+                if consultarcambio==2:
                     QMessageBox.about(self, "Error!!",
-                                      "\nEl técnico ya se encuentra en la \n planilla del dia de la fecha")
+                                      "\nEl técnico ya se encuentra en ese movil")
                     return
                 else:
-                    cal.regritra_cambio_salida(cambio)
+                    consultaTecEnSalida = cal.consulta_diaria_tec(cambio[1])
+                    if consultaTecEnSalida:
+                        QMessageBox.about(self, "Error!!",
+                                          "\nEl técnico ya se encuentra en la \n planilla del dia de la fecha")
+                        return
+                    else:
+                        cal.regritra_cambio_salida(cambio)
+                        cal.actualizacion_duplas()
+            else:
+                cal.regritra_cambio_salida(cambio)
+                cal.actualizacion_duplas()
         else:
             return
 
@@ -1415,19 +1427,14 @@ class consultarPersonal(QtWidgets.QDialog):
             QMessageBox.about(self, "Error!!", "\nPersonal inexistente!!\n")
             return
         _translate = QtCore.QCoreApplication.translate
-        for i in resultados:
-            if posicion == 3:
-                posicion = posicion + 1
-            self.ui.ca_tabla.topLevelItem(0).setText(posicion, _translate("Form", str(i)))
-            posicion += 1
-        consultar = ABM_supervisor()
-        resultado = consultar.consulta_personal_gral()
-        _translate = QtCore.QCoreApplication.translate
         len_resultado = (len(resultado))
-        for i in range(1, len_resultado):
+        QtWidgets.QTreeWidgetItem(self.ui.ca_tabla)
+        self.ui.ca_tabla.clear()
+        for i in range(0, len_resultado):
             posicion = 0
+            QtWidgets.QTreeWidgetItem(self.ui.ca_tabla)
             for a in range(0, len(resultado[i])):
-                test = ''
+                test = resultado[i][a]
                 self.ui.ca_tabla.topLevelItem(i).setText(posicion, _translate("Form", str(test)))
                 posicion += 1
 

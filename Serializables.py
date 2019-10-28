@@ -86,7 +86,6 @@ class VentanaSerializables(QtWidgets.QMainWindow):
 
 class ConsultarStockSerializables(QtWidgets.QWidget, consultarStockSerializables.Ui_Form):
     ser_all = []
-
     def __init__(self, *args, **kwargs):
         QtWidgets.QWidget.__init__(self, *args, **kwargs)
         self.setupUi(self)
