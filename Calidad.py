@@ -696,9 +696,10 @@ class Calidad:
         return consul_art
 
     def separar_cantidad(self,valor,acta):
-        self.sql='SELECT den_id from denuncias WHERE den_numero_acta='+acta
+        self.sql='SELECT MAX(den_id) from denuncias WHERE den_numero_acta='+acta
         self.cursor.execute(self.sql)
         idDenuncia=self.cursor.fetchall()
+        print(idDenuncia)
         #dividimos al label obtenido por espacios
         labelDividido=(valor.split( ))
         codCant=[]
@@ -727,11 +728,12 @@ class Calidad:
                         codCantIndividual=[]
         for i in range (0, len(codCant)):
             self.sql='INSERT INTO detalle_denuncia_materiales VALUES ('+ ",".join(map(str, codCant[i])) + ')'
+            print(self.sql)
             self.cursor.execute(self.sql)
         self.conexion.commit()
 
     def agergar_denuncia_emp(self, valor, tec1, tec2):
-        self.sql = 'SELECT den_id from denuncias WHERE den_numero_acta=' + valor
+        self.sql = 'SELECT MAX(den_id) from denuncias WHERE den_numero_acta=' + valor
         self.cursor.execute(self.sql)
         idDenuncia = self.cursor.fetchall()
         emp1=[]
@@ -750,7 +752,7 @@ class Calidad:
         self.conexion.commit()
 
     def agregar_denuncia_mac(self, valor, mac):
-        self.sql = 'SELECT den_id from denuncias WHERE den_numero_acta=' + valor
+        self.sql = 'SELECT MAX(den_id) from denuncias WHERE den_numero_acta=' + valor
         self.cursor.execute(self.sql)
         idDenuncia = self.cursor.fetchall()
         labelDividido = (mac.split())
@@ -1019,7 +1021,7 @@ class Calidad:
         salidas = []
         for i in range(0, len(ausentes)):
             if (len(ausentes[i][1]) > 4):
-                if (ausentes[i][1] != 'Supervisor') and (ausentes[i][1] != 'Materiales') and (ausentes[i][1] != 'Herramientas') and (ausentes[i][1] != 'Calidad') and (ausentes[i][1] != 'Serializables') and (ausentes[i][1] != 'En Base'):
+                if (ausentes[i][1] != 'Supervisor') and (ausentes[i][1] != 'Materiales') and (ausentes[i][1] != 'Herramientas') and (ausentes[i][1] != 'Calidad') and (ausentes[i][1] != 'Serializable') and (ausentes[i][1] != 'En Base'):
                     salidas.append(ausentes[i])
         for i in range (0, len(salidas)):
             self.sql = 'INSERT INTO ausentes (emp_legajo, aus_fecha) VALUES (' + str(salidas[i][0])+', '+ str(fecha)+ ')'
@@ -1186,4 +1188,5 @@ a=Calidad()
 # import datetime
 # ayer = datetime.date.today() - timedelta(1)
 # ayer = ('{:%Y%m%d}'.format(ayer))
-b=a.actualizacion_duplas()
+a=a.consulta_trabajos()
+#consultar denuncia

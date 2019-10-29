@@ -262,9 +262,6 @@ class consultar_trabajo(QtWidgets.QDialog):
         self.cursor = self.conexion.cursor()
         self.ui.ca_btn_buscar.pressed.connect(self.buscar)
         self.ui.ca_btn_volver.pressed.connect(self.cancelar)
-        self.sql='SELECT * FROM trabajos_realizados'
-        self.cursor.execute(self.sql)
-        consulta_trabajos = self.cursor.fetchall()
         cal=Calidad()
         trabajos=cal.consulta_trabajos()
         len_resultado = (len(trabajos))
@@ -1049,7 +1046,7 @@ class modificar_tecnico_lugar(QtWidgets.QDialog):
         lugar.append('Materiales')
         lugar.append('Herramientas')
         lugar.append('Calidad')
-        lugar.append('Serializables')
+        lugar.append('Serializable')
         lugar.append('En Base')
         lugar.append('Enfermedad')
         lugar.append('Vacaciones')
@@ -1126,6 +1123,9 @@ class modificar_tecnico_lugar(QtWidgets.QDialog):
                                     Desea seguir?''', QMessageBox.Ok, QMessageBox.Cancel)
                 if war == QMessageBox.Ok:
                     cal.registra_salida_modificada()
+                    QMessageBox.about(self, "Exito",
+                                      "\nPlanilla del día cargada correctamente")
+                    return
         self.close()
 
 class registarSalidaIgualaAnterior(QtWidgets.QDialog):
@@ -1143,6 +1143,9 @@ class registarSalidaIgualaAnterior(QtWidgets.QDialog):
                                 Desea seguir?''', QMessageBox.Ok, QMessageBox.Cancel)
             if war == QMessageBox.Ok:
                 cal.registra_salida_igual_anterior()
+                QMessageBox.about(self, "Exito",
+                                  "\nPlanilla del día cargada correctamente")
+                return
             if war == QMessageBox.Cancel:
                 return
 
@@ -1244,7 +1247,7 @@ class consulta_descuento(QtWidgets.QDialog):
             self.ui.ca_input_buscar.addItem(str(legs[i]))
 
     def buscar(self):
-        if self.ui.ca_input_buscar.currentText()=='Seleccione Técnico':
+        if self.ui.ca_input_buscar.currentText()=='Seleccione técnico':
             QMessageBox.about(self, "Error", "Seleccione técnico")
             return
         cal=Calidad()
@@ -1301,6 +1304,9 @@ class regustrarTrabajoControlado(QtWidgets.QDialog):
 
     def confirmar(self):
         cal = Calidad()
+        if self.ui.ca_input_1.currentText()=='Seleccione OT':
+            QMessageBox.about(self, "Error", "Seleccionar trabajo")
+            return
         verificador=cal.consulta_existe_controlado(self.ui.ca_input_1.currentText())
         if verificador:
             QMessageBox.about(self, "Error", "El trabajo ya se controló")
@@ -1329,11 +1335,13 @@ class consultarTrabControlado(QtWidgets.QDialog):
         super(consultarTrabControlado, self).__init__(*args, **kwargs)
         self.ui = consultarTrabajoControlado.Ui_Form()
         self.ui.setupUi(self)
+        print('sdcsavd')
         self.ui.ca_btn_buscar.pressed.connect(self.buscar)
         self.ui.ca_btn_volver.pressed.connect(self.cancelar)
         cal = Calidad()
         control = cal.consulta_control()
         len_resultado = (len(control))
+        print(control)
         for i in range(0, len_resultado):
             posicion = 0
             QtWidgets.QTreeWidgetItem(self.ui.ca_tabla)
