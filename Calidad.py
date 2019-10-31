@@ -699,7 +699,6 @@ class Calidad:
         self.sql='SELECT MAX(den_id) from denuncias WHERE den_numero_acta='+acta
         self.cursor.execute(self.sql)
         idDenuncia=self.cursor.fetchall()
-        print(idDenuncia)
         #dividimos al label obtenido por espacios
         labelDividido=(valor.split( ))
         codCant=[]
@@ -728,7 +727,6 @@ class Calidad:
                         codCantIndividual=[]
         for i in range (0, len(codCant)):
             self.sql='INSERT INTO detalle_denuncia_materiales VALUES ('+ ",".join(map(str, codCant[i])) + ')'
-            print(self.sql)
             self.cursor.execute(self.sql)
         self.conexion.commit()
 
