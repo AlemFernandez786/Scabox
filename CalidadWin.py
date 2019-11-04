@@ -982,7 +982,6 @@ class consultarSalidasDIarias(QtWidgets.QDialog):
         self.ui = salidadiaria.Ui_Form()
         self.ui.setupUi(self)
         consultar = Calidad()
-        # resultado = consultar.consulta_diaria()
         try:
             resultado = consultar.consulta_diaria()
         except mysql.connector.Error:
@@ -1089,9 +1088,19 @@ class modificar_tecnico_lugar(QtWidgets.QDialog):
                 else:
                     consultaTecEnSalida = cal.consulta_diaria_tec(cambio[1])
                     if consultaTecEnSalida:
-                        QMessageBox.about(self, "Error!!",
-                                          "\nEl técnico ya se encuentra en la \n planilla del dia de la fecha")
-                        return
+                        war = QMessageBox.warning(self, "Error!!",
+                                              '''\nEl técnico ya se encuentra en la \n planilla del dia de la fecha    
+                                              Desea modificar?''', QMessageBox.Ok, QMessageBox.Cancel)
+                        if war == QMessageBox.Ok:
+                            cal.regritra_cambio_salida_registrada(cambio)
+                            cal.actualizacion_duplas()
+                            QMessageBox.about(self, "Exito",
+                                              "\nSe registro cambio en la planilla del dia")
+                            self.close()
+                            return
+                        if war == MessageBox.Cancel:
+                            return
+
                     else:
                         cal.regritra_cambio_salida(cambio)
                         cal.actualizacion_duplas()

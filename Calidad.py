@@ -508,8 +508,8 @@ class Calidad:
         self.sql = 'SELECT MAX(Fecha) from salidas_diarias'
         self.cursor.execute(self.sql)
         ultimo_dia = self.cursor.fetchall()
+        ultimo_dia=ultimo_dia[0][0]
         ultimo_dia=(''.join(e for e in str(ultimo_dia) if e.isalnum()))
-        ultimo_dia=ultimo_dia[12:20]
         #buscamos los datos con la fecha obtenida
         self.sql = 'SELECT e.emp_apellido, s.emp_legajo, s.estado_tecnico, s.Fecha from salidas_diarias s ' \
                    'JOIN empleados e using(emp_legajo) WHERE Fecha= ' + str(ultimo_dia)+' GROUP BY emp_legajo ORDER BY estado_tecnico '
@@ -545,7 +545,16 @@ class Calidad:
         registracambio.append('"'+str(self.valor[2])+'"')
         self.sql = 'INSERT INTO salidas_diarias (Fecha, emp_legajo, estado_tecnico) VALUES (' + ",".join(map(str, registracambio)) + ')'
         self.cursor.execute(self.sql)
-        print(self.sql)
+        self.conexion.commit()
+
+    def regritra_cambio_salida_registrada(self,valor):
+        self.valor = valor
+        fecha=(''.join(e for e in str(self.valor[0]) if e.isalnum()))
+        registracambio = []
+        registracambio.append(str(self.valor[1]))
+        registracambio.append('"'+str(self.valor[2])+'"')
+        self.sql = 'UPDATE salidas_diarias SET estado_tecnico = ' + str(registracambio[1]) +' WHERE Fecha='+fecha+' AND emp_Legajo ='  + str(registracambio[0])
+        self.cursor.execute(self.sql)
         self.conexion.commit()
 
     def actualizacion_duplas(self):
@@ -1186,5 +1195,4 @@ a=Calidad()
 # import datetime
 # ayer = datetime.date.today() - timedelta(1)
 # ayer = ('{:%Y%m%d}'.format(ayer))
-a=a.consulta_trabajos()
-#consultar denuncia
+a=a.consulta_diaria()
