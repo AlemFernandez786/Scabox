@@ -49,7 +49,7 @@ class VentanaSerializables(QtWidgets.QMainWindow):
 
     def consulta_stock_tipo(self):
         self.window_Stock_Tipo = ConsultarStockTipoSerializables()
-        self.window_Stock_Tipo.exec_()
+        self.window_Stock_Tipo.show()
 
     def alta_baja_stock(self):
         self.window = altaBaja()
